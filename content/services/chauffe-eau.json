@@ -1,0 +1,25 @@
+{
+  "slug": "chauffe-eau",
+  "title": "Chauffe-eau",
+  "description": "Installation, entretien et dépannage de chauffe-eau. Ballon, instantané, thermodynamique.",
+  "problems": [
+    "Plus d'eau chaude",
+    "Fuite au chauffe-eau",
+    "Bruit anormal (claquements, sifflements)",
+    "Eau pas assez chaude",
+    "Entretien ou détartrage nécessaire"
+  ],
+  "intervention": "Nous diagnostiquons la panne (résistance, thermostat, groupe de sécurité, tartre) et privilégions la réparation et l'entretien : détartrage, remplacement de la résistance ou du groupe de sécurité. Si le ballon est réparable, nous intervenons sans le remplacer. En cas de remplacement nécessaire, nous vous proposons une solution adaptée.",
+  "priceKeys": ["chauffe-eau-pas-eau-chaude", "chauffe-eau-fuite", "chauffe-eau-bruit", "chauffe-eau-entretien", "chauffe-eau-autre"],
+  "conseilCategories": ["Chauffe-eau"],
+  "faq": [
+    {
+      "question": "Pourquoi je n'ai plus d'eau chaude ?",
+      "answer": "Les causes fréquentes sont une résistance entartrée ou hors service, un thermostat défaillant ou un problème électrique. Un détartrage ou le remplacement de la résistance suffit souvent à rétablir l'eau chaude sans changer tout le ballon."
+    },
+    {
+      "question": "Combien coûte un entretien ou un détartrage de chauffe-eau ?",
+      "answer": "Un entretien ou détartrage se situe en général entre 120€ et 180€. Le prix exact dépend du type de ballon et du diagnostic sur place."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Ne pas versionner les photos (poids), garder uniquement la structure
+/input/*
+!/input/.gitkeep
+/filtered/*
+!/filtered/.gitkeep
+/review/*
+!/review/.gitkeep
+/optimized/*
+!/optimized/.gitkeep

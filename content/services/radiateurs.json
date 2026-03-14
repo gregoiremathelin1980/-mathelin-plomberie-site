@@ -1,0 +1,25 @@
+{
+  "slug": "radiateurs",
+  "title": "Radiateurs",
+  "description": "Pose et entretien de radiateurs. Raccordement, purge, équilibrage et remplacement.",
+  "problems": [
+    "Radiateur froid ou tiède",
+    "Bruit (coups, sifflements)",
+    "Fuite au radiateur",
+    "Radiateur à purger ou désembouer",
+    "Chauffage inégal entre les pièces"
+  ],
+  "intervention": "Nous intervenons pour purger les radiateurs, remplacer un robinet thermostatique ou une tête, réparer une fuite, ou réaliser un désembouage du circuit. Nous privilégions l'entretien et la réparation ; en cas de remplacement, nous vous proposons une solution adaptée à votre installation.",
+  "priceKeys": ["radiateur-froid", "radiateur-bruit", "radiateur-fuite", "radiateur-purge", "radiateur-autre"],
+  "conseilCategories": ["Radiateurs"],
+  "faq": [
+    {
+      "question": "Pourquoi mon radiateur fait du bruit ?",
+      "answer": "Les bruits sont souvent dus à de l'air dans le circuit ou à des boues. Une purge des radiateurs ou un désembouage du circuit par un professionnel règle généralement le problème."
+    },
+    {
+      "question": "Combien coûte une purge ou un désembouage ?",
+      "answer": "Une purge peut être facturée dans le cadre d'une intervention globale. Un désembouage se situe en général entre 100€ et 180€ selon le nombre de radiateurs. Le prix exact dépend du diagnostic sur place."
+    }
+  ]
+}

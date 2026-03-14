@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1e40af;
+  --primary-light: #3b82f6;
+  --accent: #f97316;
+  --gray-text: #6b7280;
+}
+
+body {
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Évite le flash "texte qui disparaît puis revient" au refresh : couleur de base dès le premier paint */
+main {
+  color: #111827;
+}
+main .text-primary {
+  color: #1e40af;
+}
+main .text-gray-text {
+  color: #6b7280;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+/* Section spacing for consistent layout */
+.section-spacing {
+  @apply px-4 py-16 sm:px-6;
+}
+
+.container-narrow {
+  @apply mx-auto max-w-6xl;
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "debouchage-canalisation",
+  "title": "Débouchage canalisation",
+  "description": "Débouchage et entretien des canalisations. Intervention rapide pour évacuation et diagnostic.",
+  "problems": [
+    "Évier bouché",
+    "WC bouché",
+    "Odeurs dans les canalisations",
+    "Douche ou baignoire qui ne s'évacue plus",
+    "Canalisation lente ou bloquée"
+  ],
+  "intervention": "Nous intervenons avec du matériel professionnel (furet, pompe, caméra) pour localiser et éliminer le bouchon sans abîmer les canalisations. Un diagnostic rapide permet de choisir la meilleure méthode (débouchage mécanique, hydrocurage si besoin). Nous vous conseillons aussi pour limiter les récidives.",
+  "priceKeys": ["canalisation-evier", "canalisation-toilette", "canalisation-douche", "canalisation-autre"],
+  "conseilCategories": ["Canalisation"],
+  "faq": [
+    {
+      "question": "Pourquoi mon évier se bouche souvent ?",
+      "answer": "Les bouchons récurrents viennent souvent des graisses et restes alimentaires dans les canalisations, ou d'un siphon encrassé. Éviter de jeter graisses et déchets dans l'évier, et faire entretenir le siphon régulièrement. Nous pouvons déboucher et vous donner des conseils adaptés."
+    },
+    {
+      "question": "Combien coûte un débouchage de canalisation ?",
+      "answer": "Le prix dépend du type d'intervention : débouchage évier environ 90€ à 140€, toilettes 120€ à 180€, douche ou baignoire 100€ à 160€. Le prix exact dépend du diagnostic sur place."
+    },
+    {
+      "question": "Faut-il utiliser des déboucheurs chimiques ?",
+      "answer": "Nous déconseillons les déboucheurs chimiques agressifs : ils peuvent abîmer les canalisations et les joints. Un débouchage mécanique par un professionnel est plus sûr et souvent plus efficace."
+    }
+  ]
+}

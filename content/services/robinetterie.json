@@ -1,0 +1,25 @@
+{
+  "slug": "robinetterie",
+  "title": "Robinetterie",
+  "description": "Remplacement et réparation de robinetterie. Cuisine, salle de bain, WC.",
+  "problems": [
+    "Fuite au robinet",
+    "Pression faible au robinet ou à la douche",
+    "Robinet à remplacer",
+    "Mousseur bouché ou entartré",
+    "Mitigeur qui fuit ou ne règle plus la température"
+  ],
+  "intervention": "Nous réparons en priorité : remplacement de joint, de cartouche ou de mousseur. Si le robinet est réparable, nous ne le remplaçons pas. En cas de remplacement nécessaire, nous posons la robinetterie adaptée à votre équipement.",
+  "priceKeys": ["robinet-fuite", "robinet-pression", "robinet-remplacement", "robinet-autre"],
+  "conseilCategories": ["Robinetterie"],
+  "faq": [
+    {
+      "question": "Fuite au robinet : réparation ou remplacement ?",
+      "answer": "Une fuite au robinet se répare souvent en changeant un joint ou une cartouche. Nous privilégions la réparation, moins coûteuse et plus durable. Le remplacement n'est proposé que si le robinet est trop abîmé."
+    },
+    {
+      "question": "Combien coûte une réparation de robinet ?",
+      "answer": "Une réparation de robinet (joint, cartouche) se situe en général entre 80€ et 150€. Le remplacement d'un robinet entre 100€ et 200€ selon le modèle. Le prix exact dépend du diagnostic sur place."
+    }
+  ]
+}

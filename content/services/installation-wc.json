@@ -1,0 +1,19 @@
+{
+  "slug": "installation-wc",
+  "title": "Installation WC",
+  "description": "Pose et remplacement de WC. Modèles à poser, suspendus, sortie horizontale ou verticale.",
+  "problems": [
+    "Remplacement d'un WC",
+    "Pose d'un WC neuf",
+    "WC qui fuit ou qui bouche souvent"
+  ],
+  "intervention": "Nous installons ou remplaçons votre WC : à poser, suspendu, sortie horizontale ou verticale. Nous assurons les raccordements et le réglage pour un fonctionnement optimal.",
+  "priceKeys": ["canalisation-toilette", "autre-autre"],
+  "conseilCategories": ["Canalisation"],
+  "faq": [
+    {
+      "question": "Combien coûte l'installation d'un WC ?",
+      "answer": "Le prix dépend du modèle (à poser, suspendu) et des travaux de raccordement. Nous pouvons vous donner une fourchette après description de votre projet."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "reparation-fuite",
+  "title": "Réparation fuite",
+  "description": "Recherche de fuites et réparation. Équipement de détection pour localiser et traiter les fuites.",
+  "problems": [
+    "Fuite au robinet",
+    "Fuite sous l'évier ou derrière un meuble",
+    "Fuite visible sur un tuyau",
+    "Fuite chauffe-eau ou radiateur",
+    "Tache d'humidité ou odeur sans fuite visible"
+  ],
+  "intervention": "Nous localisons la fuite (visuelle, détection acoustique ou test de pression si besoin) puis nous effectuons la réparation ciblée : remplacement de joint, de cartouche, réparation d'un tronçon de tuyau. Pour les fuites cachées, nous utilisons les moyens adaptés pour intervenir sans tout casser.",
+  "priceKeys": ["fuite-robinet", "fuite-tuyau", "fuite-chauffe-eau", "fuite-radiateur", "fuite-autre"],
+  "conseilCategories": ["Fuite"],
+  "faq": [
+    {
+      "question": "Comment détecter une fuite cachée ?",
+      "answer": "Une fuite cachée peut se manifester par une facture qui augmente, une tache d'humidité ou une odeur. Nous pouvons utiliser une détection acoustique ou un test de pression pour localiser la fuite avant de réparer."
+    },
+    {
+      "question": "Combien coûte une réparation de fuite ?",
+      "answer": "Une réparation de fuite (robinet, tuyau) se situe en général entre 80€ et 150€. Le coût exact dépend de la localisation et du type de réparation après diagnostic sur place."
+    }
+  ]
+}

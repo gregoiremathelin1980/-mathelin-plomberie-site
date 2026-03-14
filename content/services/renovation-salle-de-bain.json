@@ -1,0 +1,20 @@
+{
+  "slug": "renovation-salle-de-bain",
+  "title": "Rénovation salle de bain",
+  "description": "Rénovation complète ou partielle de salle de bain. Carrelage, sanitaires, plomberie.",
+  "problems": [
+    "Salle de bain à refaire",
+    "Remplacement baignoire ou douche",
+    "Nouveaux sanitaires",
+    "Fuites ou carrelage abîmé"
+  ],
+  "intervention": "Nous prenons en charge la partie plomberie de votre rénovation : dépose et pose de sanitaires, raccordements, installation douche ou baignoire. Nous travaillons en coordination avec vous ou avec votre carreleur pour une rénovation dans les règles.",
+  "priceKeys": ["autre-autre"],
+  "conseilCategories": ["Robinetterie", "Plomberie"],
+  "faq": [
+    {
+      "question": "Combien coûte une rénovation de salle de bain ?",
+      "answer": "Le coût dépend de l'ampleur des travaux (sanitaires, plomberie, nombre de points d'eau). Nous établissons un devis après visite pour une estimation précise."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "base": {
+    "debouchage": 90,
+    "fuite": 110,
+    "chauffe_eau": 130,
+    "radiateur": 120,
+    "robinetterie": 115,
+    "autre": 110
+  },
+  "precision": {
+    "pas_eau_chaude": 0,
+    "bruit_anormal": 20,
+    "fuite_chauffe_eau": 50,
+    "entretien": -20,
+    "evier": 0,
+    "toilette": 10,
+    "douche": 0,
+    "robinet": 0,
+    "tuyau": 0,
+    "radiateur": 0,
+    "froid": 0,
+    "bruit": 0,
+    "purge": 10,
+    "pression": 0,
+    "remplacement": 20,
+    "autre": 0
+  },
+  "urgence": {
+    "diagnostic": 0,
+    "genant": 30,
+    "urgence": 90
+  },
+  "distance": {
+    "perouges": 0,
+    "meximieux": 0,
+    "villieu_loyes_mollon": 10,
+    "bourg_saint_christophe": 10,
+    "lagnieu": 20,
+    "saint_vulbas": 20,
+    "amberieu_en_bugey": 30,
+    "blyes": 10,
+    "leyment": 10
+  }
+}

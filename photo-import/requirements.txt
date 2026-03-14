@@ -1,0 +1,6 @@
+# Dépendances pour les scripts photo-import (temporaire)
+Pillow>=10.0.0
+
+# Pour classify_plumbing_photos.py (CLIP)
+torch>=2.0.0
+open-clip-torch>=2.20.0
