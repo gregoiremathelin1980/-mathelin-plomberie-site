@@ -365,42 +365,11 @@ export function getPricingFromSiteData(): PricingJSON | null {
   }
 }
 
-/** Réglages d'affichage des sections du site (admin). */
-export interface DisplaySettings {
-  showReviews?: boolean;
-  showAdvice?: boolean;
-  showAdviceImages?: boolean;
-  showEstimator?: boolean;
-  showRecentInterventions?: boolean;
-}
+import type { SiteDataSettings } from "./site-data-types";
 
-const defaultDisplaySettings: Required<DisplaySettings> = {
-  showReviews: true,
-  showAdvice: true,
-  showAdviceImages: true,
-  showEstimator: true,
-  showRecentInterventions: true,
-};
-
-export function getDefaultDisplaySettings(): Required<DisplaySettings> {
-  return { ...defaultDisplaySettings };
-}
-
-export interface SiteDataSettings {
-  entreprise?: string;
-  /** Nom prénom du contact (affiché au-dessus du header) */
-  nom_contact?: string;
-  telephone?: string;
-  email?: string;
-  zone?: string;
-  messageUrgence?: string;
-  /** Afficher les images sur les cartes conseils (page /conseils) */
-  showAdviceImages?: boolean;
-  /** Afficher les photos chantiers (réalisations) sur le site */
-  showChantierPhotos?: boolean;
-  /** Affichage des sections du site (avis, conseils, estimateur, interventions récentes) */
-  displaySettings?: DisplaySettings;
-}
+export type { DisplaySettings } from "./display-settings";
+export type { SiteDataSettings } from "./site-data-types";
+export { getDefaultDisplaySettings } from "./display-settings";
 
 export function getSiteDataSettings(): SiteDataSettings | null {
   const filePath = path.join(SITE_DATA_DIR, "site-settings.json");

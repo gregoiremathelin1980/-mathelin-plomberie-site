@@ -16,7 +16,7 @@ export default function PlombierMeximieux() {
 
       <p className="mt-6 text-gray-text">
         Mathelin Plomberie intervient à Meximieux pour tous vos travaux de
-        plomberie et chauffage : dépannage urgent, réparation de fuite d'eau,
+        plomberie et chauffage : dépannage urgent, réparation de fuite d&apos;eau,
         débouchage de canalisation et remplacement de chauffe-eau.
       </p>
 
@@ -26,12 +26,12 @@ export default function PlombierMeximieux() {
 
       <p className="mt-2 text-gray-text">
         Nous intervenons rapidement pour les urgences plomberie :
-        fuite d'eau, canalisation bouchée, problème de chauffe-eau ou panne
+        fuite d&apos;eau, canalisation bouchée, problème de chauffe-eau ou panne
         de chauffage.
       </p>
 
       <ul className="mt-4 list-disc pl-6 text-gray-text">
-        <li>réparation fuite d'eau</li>
+        <li>réparation fuite d&apos;eau</li>
         <li>débouchage canalisation</li>
         <li>dépannage chauffe-eau</li>
         <li>installation sanitaire</li>
@@ -39,7 +39,7 @@ export default function PlombierMeximieux() {
       </ul>
 
       <h2 className="mt-8 text-xl font-semibold text-primary">
-        Zone d'intervention autour de Meximieux
+        Zone d&apos;intervention autour de Meximieux
       </h2>
 
       <p className="mt-2 text-gray-text">

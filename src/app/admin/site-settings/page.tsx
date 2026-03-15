@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import type { SiteDataSettings, DisplaySettings } from "@/lib/site-data";
-import { getDefaultDisplaySettings } from "@/lib/site-data";
+import type { SiteDataSettings, DisplaySettings } from "@/lib/site-data-types";
+import { getDefaultDisplaySettings } from "@/lib/display-settings";
 
 const defaultDisplaySettings = getDefaultDisplaySettings();
 

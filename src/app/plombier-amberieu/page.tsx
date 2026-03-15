@@ -17,7 +17,7 @@ export default function PlombierAmberieu() {
       <p className="mt-6 text-gray-text">
         Mathelin Plomberie intervient à Ambérieu-en-Bugey pour vos travaux
         de plomberie et chauffage : dépannage urgent, réparation de fuite
-        d'eau, remplacement de chauffe-eau et rénovation de salle de bain.
+        d&apos;eau, remplacement de chauffe-eau et rénovation de salle de bain.
       </p>
 
       <h2 className="mt-8 text-xl font-semibold text-primary">
@@ -26,14 +26,14 @@ export default function PlombierAmberieu() {
 
       <ul className="mt-4 list-disc pl-6 text-gray-text">
         <li>dépannage plomberie urgence</li>
-        <li>réparation fuite d'eau</li>
+        <li>réparation fuite d&apos;eau</li>
         <li>débouchage évier et canalisation</li>
         <li>entretien chauffe-eau</li>
         <li>installation sanitaire</li>
       </ul>
 
       <h2 className="mt-8 text-xl font-semibold text-primary">
-        Intervention autour d'Ambérieu
+        Intervention autour d&apos;Ambérieu
       </h2>
 
       <p className="mt-2 text-gray-text">
