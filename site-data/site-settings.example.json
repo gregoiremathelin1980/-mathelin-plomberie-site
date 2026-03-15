@@ -5,5 +5,13 @@
   "email": "contact@mathelin-plomberie.fr",
   "zone": "Bugey et Côtière",
   "messageUrgence": "Intervention rapide dans le Bugey et la Côtière",
-  "showAdviceImages": true
+  "showAdviceImages": true,
+  "showChantierPhotos": true,
+  "displaySettings": {
+    "showReviews": true,
+    "showAdvice": true,
+    "showAdviceImages": true,
+    "showEstimator": true,
+    "showRecentInterventions": true
+  }
 }

@@ -3,7 +3,9 @@ import crypto from "node:crypto";
 import {
   getSiteDataSettings,
   writeSiteDataSettings,
+  getDefaultDisplaySettings,
   type SiteDataSettings,
+  type DisplaySettings,
 } from "@/lib/site-data";
 import { clearSiteSettingsCache } from "@/lib/content";
 
@@ -38,15 +40,31 @@ export async function POST(request: NextRequest) {
   }
   try {
     const body = await request.json();
+    const existing = getSiteDataSettings() ?? {};
+    const defaults = getDefaultDisplaySettings();
+    const ds = body.displaySettings && typeof body.displaySettings === "object" ? body.displaySettings : undefined;
+    const displaySettings: DisplaySettings | undefined =
+      ds && (typeof ds.showReviews === "boolean" || typeof ds.showAdvice === "boolean" || typeof ds.showAdviceImages === "boolean" || typeof ds.showEstimator === "boolean" || typeof ds.showRecentInterventions === "boolean")
+        ? {
+            showReviews: typeof ds.showReviews === "boolean" ? ds.showReviews : defaults.showReviews,
+            showAdvice: typeof ds.showAdvice === "boolean" ? ds.showAdvice : defaults.showAdvice,
+            showAdviceImages: typeof ds.showAdviceImages === "boolean" ? ds.showAdviceImages : defaults.showAdviceImages,
+            showEstimator: typeof ds.showEstimator === "boolean" ? ds.showEstimator : defaults.showEstimator,
+            showRecentInterventions: typeof ds.showRecentInterventions === "boolean" ? ds.showRecentInterventions : defaults.showRecentInterventions,
+          }
+        : existing?.displaySettings;
+
     const settings: SiteDataSettings = {
-      entreprise: typeof body.entreprise === "string" ? body.entreprise : undefined,
-      nom_contact: typeof body.nom_contact === "string" ? body.nom_contact : undefined,
-      telephone: typeof body.telephone === "string" ? body.telephone : undefined,
-      email: typeof body.email === "string" ? body.email : undefined,
-      zone: typeof body.zone === "string" ? body.zone : undefined,
-      messageUrgence: typeof body.messageUrgence === "string" ? body.messageUrgence : undefined,
-      showAdviceImages: typeof body.showAdviceImages === "boolean" ? body.showAdviceImages : undefined,
-      showChantierPhotos: typeof body.showChantierPhotos === "boolean" ? body.showChantierPhotos : undefined,
+      ...existing,
+      entreprise: typeof body.entreprise === "string" ? body.entreprise : existing?.entreprise,
+      nom_contact: typeof body.nom_contact === "string" ? body.nom_contact : existing?.nom_contact,
+      telephone: typeof body.telephone === "string" ? body.telephone : existing?.telephone,
+      email: typeof body.email === "string" ? body.email : existing?.email,
+      zone: typeof body.zone === "string" ? body.zone : existing?.zone,
+      messageUrgence: typeof body.messageUrgence === "string" ? body.messageUrgence : existing?.messageUrgence,
+      showAdviceImages: typeof body.showAdviceImages === "boolean" ? body.showAdviceImages : existing?.showAdviceImages,
+      showChantierPhotos: typeof body.showChantierPhotos === "boolean" ? body.showChantierPhotos : existing?.showChantierPhotos,
+      displaySettings: displaySettings ?? undefined,
     };
     writeSiteDataSettings(settings);
     clearSiteSettingsCache();

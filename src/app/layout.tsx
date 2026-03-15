@@ -26,6 +26,9 @@ const inter = Inter({
   display: "optional",
 });
 
+/** Réglages (images conseils, photos chantiers) lus depuis site-data à chaque requête. */
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",

@@ -39,23 +39,34 @@ export default async function HomePage() {
   const recentInterventions = getRecentInterventions();
   const reviews = getRandomReviews(3);
   const settings = getSiteSettings();
+  const ds = settings.displaySettings ?? {
+    showReviews: true,
+    showAdvice: true,
+    showAdviceImages: true,
+    showEstimator: true,
+    showRecentInterventions: true,
+  };
 
   return (
     <>
-      {reviews.length > 0 && <ReviewsSchema settings={settings} reviews={reviews} />}
+      {ds.showReviews && reviews.length > 0 && <ReviewsSchema settings={settings} reviews={reviews} />}
       <Hero />
-      {recentInterventions.length > 0 && (
+      {ds.showRecentInterventions && recentInterventions.length > 0 && (
         <HomeRecentInterventions interventions={recentInterventions} />
       )}
-      <GoogleReviewsBlock reviews={reviews} />
+      {ds.showReviews && <GoogleReviewsBlock reviews={reviews} />}
       <UrgencyBlock />
-      <EstimateForm pricing={pricing} simulateur={simulateur} />
-      <p className="mx-auto max-w-2xl px-4 pb-8 text-center text-sm text-gray-600">
-        Diagnostic sur place et devis clair avant toute intervention.
-      </p>
-      <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm text-gray-600">
-        Pour les situations urgentes (fuite d&apos;eau, chauffe-eau en panne, radiateur froid, canalisation bouchée), contactez directement votre plombier local.
-      </p>
+      {ds.showEstimator && (
+        <>
+          <EstimateForm pricing={pricing} simulateur={simulateur} />
+          <p className="mx-auto max-w-2xl px-4 pb-8 text-center text-sm text-gray-600">
+            Diagnostic sur place et devis clair avant toute intervention.
+          </p>
+          <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm text-gray-600">
+            Pour les situations urgentes (fuite d&apos;eau, chauffe-eau en panne, radiateur froid, canalisation bouchée), contactez directement votre plombier local.
+          </p>
+        </>
+      )}
       <section id="services" className="px-4 py-12 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
@@ -83,7 +94,7 @@ export default async function HomePage() {
         </div>
       </section>
       <ProjectGallery realisations={realisations} />
-      <AdvicePreview conseils={randomConseils} />
+      {ds.showAdvice && <AdvicePreview conseils={randomConseils} />}
       <ContactForm />
     </>
   );

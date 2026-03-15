@@ -7,9 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import type { SiteDataSettings } from "@/lib/site-data";
+import type { SiteDataSettings, DisplaySettings } from "@/lib/site-data";
+import { getDefaultDisplaySettings } from "@/lib/site-data";
 
-const defaultSettings: SiteDataSettings = {
+const defaultDisplaySettings = getDefaultDisplaySettings();
+
+const defaultSettings: SiteDataSettings & { displaySettings: DisplaySettings } = {
   entreprise: "",
   nom_contact: "",
   telephone: "",
@@ -18,10 +21,11 @@ const defaultSettings: SiteDataSettings = {
   messageUrgence: "",
   showAdviceImages: true,
   showChantierPhotos: true,
+  displaySettings: defaultDisplaySettings,
 };
 
 export default function SiteSettingsPage() {
-  const [settings, setSettings] = useState<SiteDataSettings>(defaultSettings);
+  const [settings, setSettings] = useState<SiteDataSettings & { displaySettings: DisplaySettings }>(defaultSettings);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<"saved" | "error" | null>(null);
@@ -33,6 +37,7 @@ export default function SiteSettingsPage() {
         return res.json();
       })
       .then((data) => {
+        const ds = data.displaySettings && typeof data.displaySettings === "object" ? data.displaySettings : {};
         setSettings({
           entreprise: data.entreprise ?? "",
           nom_contact: data.nom_contact ?? "",
@@ -42,6 +47,13 @@ export default function SiteSettingsPage() {
           messageUrgence: data.messageUrgence ?? "",
           showAdviceImages: typeof data.showAdviceImages === "boolean" ? data.showAdviceImages : true,
           showChantierPhotos: typeof data.showChantierPhotos === "boolean" ? data.showChantierPhotos : true,
+          displaySettings: {
+            showReviews: typeof ds.showReviews === "boolean" ? ds.showReviews : defaultDisplaySettings.showReviews,
+            showAdvice: typeof ds.showAdvice === "boolean" ? ds.showAdvice : defaultDisplaySettings.showAdvice,
+            showAdviceImages: typeof ds.showAdviceImages === "boolean" ? ds.showAdviceImages : defaultDisplaySettings.showAdviceImages,
+            showEstimator: typeof ds.showEstimator === "boolean" ? ds.showEstimator : defaultDisplaySettings.showEstimator,
+            showRecentInterventions: typeof ds.showRecentInterventions === "boolean" ? ds.showRecentInterventions : defaultDisplaySettings.showRecentInterventions,
+          },
         });
       })
       .catch(() => setSettings(defaultSettings))
@@ -175,20 +187,6 @@ export default function SiteSettingsPage() {
         <div className="flex items-center gap-3">
           <input
             type="checkbox"
-            id="showAdviceImages"
-            checked={settings.showAdviceImages !== false}
-            onChange={(e) =>
-              setSettings((s) => ({ ...s, showAdviceImages: e.target.checked }))
-            }
-            className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-          />
-          <Label htmlFor="showAdviceImages" className="cursor-pointer font-normal">
-            Afficher les images dans les conseils
-          </Label>
-        </div>
-        <div className="flex items-center gap-3">
-          <input
-            type="checkbox"
             id="showChantierPhotos"
             checked={settings.showChantierPhotos !== false}
             onChange={(e) =>
@@ -199,6 +197,100 @@ export default function SiteSettingsPage() {
           <Label htmlFor="showChantierPhotos" className="cursor-pointer font-normal">
             Afficher photos chantiers
           </Label>
+        </div>
+
+        <h2 className="font-heading text-xl font-semibold text-primary pt-8 border-t mt-8">
+          Affichage du site
+        </h2>
+        <p className="text-gray-600 text-sm -mt-2">
+          Activer ou désactiver des sections du site sans modifier le code.
+        </p>
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="showReviews"
+              checked={settings.displaySettings.showReviews !== false}
+              onChange={(e) =>
+                setSettings((s) => ({
+                  ...s,
+                  displaySettings: { ...s.displaySettings, showReviews: e.target.checked },
+                }))
+              }
+              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <Label htmlFor="showReviews" className="cursor-pointer font-normal">
+              Afficher les avis clients
+            </Label>
+          </div>
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="showAdvice"
+              checked={settings.displaySettings.showAdvice !== false}
+              onChange={(e) =>
+                setSettings((s) => ({
+                  ...s,
+                  displaySettings: { ...s.displaySettings, showAdvice: e.target.checked },
+                }))
+              }
+              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <Label htmlFor="showAdvice" className="cursor-pointer font-normal">
+              Afficher les conseils plomberie
+            </Label>
+          </div>
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="showAdviceImages"
+              checked={settings.displaySettings.showAdviceImages !== false}
+              onChange={(e) =>
+                setSettings((s) => ({
+                  ...s,
+                  displaySettings: { ...s.displaySettings, showAdviceImages: e.target.checked },
+                }))
+              }
+              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <Label htmlFor="showAdviceImages" className="cursor-pointer font-normal">
+              Afficher les images dans les conseils
+            </Label>
+          </div>
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="showEstimator"
+              checked={settings.displaySettings.showEstimator !== false}
+              onChange={(e) =>
+                setSettings((s) => ({
+                  ...s,
+                  displaySettings: { ...s.displaySettings, showEstimator: e.target.checked },
+                }))
+              }
+              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <Label htmlFor="showEstimator" className="cursor-pointer font-normal">
+              Afficher l&apos;estimateur de prix
+            </Label>
+          </div>
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="showRecentInterventions"
+              checked={settings.displaySettings.showRecentInterventions !== false}
+              onChange={(e) =>
+                setSettings((s) => ({
+                  ...s,
+                  displaySettings: { ...s.displaySettings, showRecentInterventions: e.target.checked },
+                }))
+              }
+              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <Label htmlFor="showRecentInterventions" className="cursor-pointer font-normal">
+              Afficher les interventions récentes
+            </Label>
+          </div>
         </div>
 
         {message === "saved" && (

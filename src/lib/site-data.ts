@@ -365,6 +365,27 @@ export function getPricingFromSiteData(): PricingJSON | null {
   }
 }
 
+/** Réglages d'affichage des sections du site (admin). */
+export interface DisplaySettings {
+  showReviews?: boolean;
+  showAdvice?: boolean;
+  showAdviceImages?: boolean;
+  showEstimator?: boolean;
+  showRecentInterventions?: boolean;
+}
+
+const defaultDisplaySettings: Required<DisplaySettings> = {
+  showReviews: true,
+  showAdvice: true,
+  showAdviceImages: true,
+  showEstimator: true,
+  showRecentInterventions: true,
+};
+
+export function getDefaultDisplaySettings(): Required<DisplaySettings> {
+  return { ...defaultDisplaySettings };
+}
+
 export interface SiteDataSettings {
   entreprise?: string;
   /** Nom prénom du contact (affiché au-dessus du header) */
@@ -377,6 +398,8 @@ export interface SiteDataSettings {
   showAdviceImages?: boolean;
   /** Afficher les photos chantiers (réalisations) sur le site */
   showChantierPhotos?: boolean;
+  /** Affichage des sections du site (avis, conseils, estimateur, interventions récentes) */
+  displaySettings?: DisplaySettings;
 }
 
 export function getSiteDataSettings(): SiteDataSettings | null {

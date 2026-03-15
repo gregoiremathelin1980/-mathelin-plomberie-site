@@ -13,6 +13,23 @@ import {
 const CONTENT_DIR = path.join(process.cwd(), "content");
 const DATA_DIR = path.join(process.cwd(), "data");
 
+/** Réglages d'affichage des sections (fusionné depuis site-data, avec valeurs par défaut). */
+export interface DisplaySettings {
+  showReviews: boolean;
+  showAdvice: boolean;
+  showAdviceImages: boolean;
+  showEstimator: boolean;
+  showRecentInterventions: boolean;
+}
+
+const defaultDisplaySettings: DisplaySettings = {
+  showReviews: true,
+  showAdvice: true,
+  showAdviceImages: true,
+  showEstimator: true,
+  showRecentInterventions: true,
+};
+
 export interface SiteSettings {
   company: string;
   /** Nom du contact / artisan affiché au-dessus du header */
@@ -27,6 +44,8 @@ export interface SiteSettings {
   show_advice_images?: boolean;
   /** Afficher les photos chantiers (réalisations) hébergées sur le NAS */
   show_chantier_photos?: boolean;
+  /** Affichage des sections (avis, conseils, images conseils, estimateur, interventions récentes) */
+  displaySettings: DisplaySettings;
   cities: string[];
 }
 
@@ -106,6 +125,7 @@ const defaultSiteSettings: SiteSettings = {
   business_hours: undefined,
   show_advice_images: true,
   show_chantier_photos: true,
+  displaySettings: defaultDisplaySettings,
   cities: [
     "Pérouges",
     "Meximieux",
@@ -130,6 +150,14 @@ export function getSiteSettings(): SiteSettings {
   }
   const fromSiteData = getSiteDataSettings();
   if (fromSiteData) {
+    const ds = fromSiteData.displaySettings;
+    const displaySettings: DisplaySettings = {
+      showReviews: ds?.showReviews ?? defaultDisplaySettings.showReviews,
+      showAdvice: ds?.showAdvice ?? defaultDisplaySettings.showAdvice,
+      showAdviceImages: ds?.showAdviceImages ?? defaultDisplaySettings.showAdviceImages,
+      showEstimator: ds?.showEstimator ?? defaultDisplaySettings.showEstimator,
+      showRecentInterventions: ds?.showRecentInterventions ?? defaultDisplaySettings.showRecentInterventions,
+    };
     base = {
       ...base,
       company: fromSiteData.entreprise ?? base.company,
@@ -138,9 +166,15 @@ export function getSiteSettings(): SiteSettings {
       email: fromSiteData.email ?? base.email,
       service_radius: fromSiteData.zone ?? base.service_radius,
       homepage_message: fromSiteData.messageUrgence ?? base.homepage_message,
-      show_advice_images: fromSiteData.showAdviceImages ?? base.show_advice_images,
+      show_advice_images: displaySettings.showAdviceImages ?? fromSiteData.showAdviceImages ?? base.show_advice_images,
       show_chantier_photos: fromSiteData.showChantierPhotos ?? base.show_chantier_photos,
+      displaySettings,
     };
+  } else {
+    base = { ...base, displaySettings: defaultDisplaySettings };
+  }
+  if (!base.displaySettings) {
+    base = { ...base, displaySettings: defaultDisplaySettings };
   }
   siteSettingsCache = base;
   return siteSettingsCache;

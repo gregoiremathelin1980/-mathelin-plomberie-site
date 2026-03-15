@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useMemo } from "react";
-import type { SiteSettings } from "@/lib/content";
+import type { SiteSettings, DisplaySettings } from "@/lib/content";
 
 const SettingsContext = createContext<SiteSettings | null>(null);
 
@@ -22,6 +22,13 @@ export function SettingsProvider({
 
 export function useSettings(): SiteSettings {
   const ctx = useContext(SettingsContext);
+  const defaultDisplay: DisplaySettings = {
+    showReviews: true,
+    showAdvice: true,
+    showAdviceImages: true,
+    showEstimator: true,
+    showRecentInterventions: true,
+  };
   if (!ctx) {
     return {
       company: "Mathelin Plomberie Chauffage",
@@ -32,6 +39,7 @@ export function useSettings(): SiteSettings {
       business_hours: undefined,
       show_advice_images: true,
       show_chantier_photos: true,
+      displaySettings: defaultDisplay,
       cities: [
         "Pérouges",
         "Meximieux",
@@ -43,6 +51,9 @@ export function useSettings(): SiteSettings {
         "Leyment",
       ],
     };
+  }
+  if (!ctx.displaySettings) {
+    return { ...ctx, displaySettings: defaultDisplay };
   }
   return ctx;
 }
