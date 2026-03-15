@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Save, Loader2, FileEdit, Send, Share2, Settings } from "lucide-react";
+import { Save, Loader2, FileEdit, Send, Share2, Settings, Layout } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { SiteSettings } from "@/lib/content";
+import type { SiteDataSettings, DisplaySettings } from "@/lib/site-data-types";
+import { getDefaultDisplaySettings } from "@/lib/display-settings";
 
 interface DraftItem {
   slug: string;
@@ -23,8 +25,11 @@ interface DraftsData {
   conseils: DraftItem[];
 }
 
+const defaultDisplay = getDefaultDisplaySettings();
+
 export default function AdminPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [siteDataSettings, setSiteDataSettings] = useState<SiteDataSettings & { displaySettings: DisplaySettings } | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<"saved" | "error" | null>(null);
@@ -32,14 +37,42 @@ export default function AdminPage() {
   const [publishing, setPublishing] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/admin/settings")
-      .then((res) => res.json())
-      .then((data) => {
-        setSettings(data);
-        setLoading(false);
+    Promise.all([
+      fetch("/api/admin/settings").then((res) => res.json()),
+      fetch("/api/admin/site-settings", { credentials: "include" }).then((res) => (res.ok ? res.json() : {})),
+    ])
+      .then(([settingsData, siteData]: [SiteSettings | null, Record<string, unknown>]) => {
+        setSettings(settingsData);
+        const fromSite = siteData?.displaySettings && typeof siteData.displaySettings === "object" ? (siteData.displaySettings as Partial<DisplaySettings>) : {};
+        const fromMerged = (settingsData?.displaySettings && typeof settingsData.displaySettings === "object" ? settingsData.displaySettings : {}) as Partial<DisplaySettings>;
+        const ds: Partial<DisplaySettings> = { ...fromMerged, ...fromSite };
+        setSiteDataSettings({
+          ...siteData,
+          showChantierPhotos: typeof siteData?.showChantierPhotos === "boolean" ? siteData.showChantierPhotos : true,
+          displaySettings: {
+            showReviews: typeof ds.showReviews === "boolean" ? ds.showReviews : defaultDisplay.showReviews,
+            showAdvice: typeof ds.showAdvice === "boolean" ? ds.showAdvice : defaultDisplay.showAdvice,
+            showAdviceImages: typeof ds.showAdviceImages === "boolean" ? ds.showAdviceImages : defaultDisplay.showAdviceImages,
+            showEstimator: typeof ds.showEstimator === "boolean" ? ds.showEstimator : defaultDisplay.showEstimator,
+            showRecentInterventions: typeof ds.showRecentInterventions === "boolean" ? ds.showRecentInterventions : defaultDisplay.showRecentInterventions,
+          },
+        });
       })
-      .catch(() => setLoading(false));
+      .catch(() => setSettings(null))
+      .finally(() => setLoading(false));
   }, []);
+
+  /** Réglages d'affichage : site-settings en priorité, sinon depuis settings fusionnés (pour afficher la section même si site-settings a échoué). */
+  const displayState = siteDataSettings ?? (settings && {
+    displaySettings: {
+      showReviews: settings.displaySettings?.showReviews ?? defaultDisplay.showReviews,
+      showAdvice: settings.displaySettings?.showAdvice ?? defaultDisplay.showAdvice,
+      showAdviceImages: settings.displaySettings?.showAdviceImages ?? defaultDisplay.showAdviceImages,
+      showEstimator: settings.displaySettings?.showEstimator ?? defaultDisplay.showEstimator,
+      showRecentInterventions: settings.displaySettings?.showRecentInterventions ?? defaultDisplay.showRecentInterventions,
+    },
+    showChantierPhotos: settings.show_chantier_photos !== false,
+  });
 
   useEffect(() => {
     fetch("/api/admin/drafts")
@@ -54,16 +87,23 @@ export default function AdminPage() {
     setSaving(true);
     setMessage(null);
     try {
-      const res = await fetch("/api/admin/settings", {
+      const resSettings = await fetch("/api/admin/settings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(settings),
       });
-      if (res.ok) {
-        setMessage("saved");
-      } else {
-        setMessage("error");
+      let ok = resSettings.ok;
+      const toSend = siteDataSettings ?? (displayState ? { displaySettings: displayState.displaySettings, showChantierPhotos: displayState.showChantierPhotos } : null);
+      if (toSend) {
+        const resSiteData = await fetch("/api/admin/site-settings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(toSend),
+        });
+        ok = ok && resSiteData.ok;
       }
+      setMessage(ok ? "saved" : "error");
     } catch {
       setMessage("error");
     }
@@ -133,6 +173,109 @@ export default function AdminPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+        {/* Affichage du site — toujours affiché, juste après l'encadré bleu */}
+        <div className="rounded-xl border-2 border-primary/30 bg-primary/10 p-4 space-y-3">
+          <h2 className="font-heading text-lg font-semibold text-primary flex items-center gap-2">
+            <Layout className="h-5 w-5" />
+            Affichage du site
+          </h2>
+          <p className="text-sm text-gray-600">
+            Activer ou désactiver des sections sans modifier le code (avis, conseils, images, estimateur, interventions récentes, photos chantiers).
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={(displayState?.displaySettings?.showReviews ?? true) !== false}
+                onChange={(e) =>
+                  setSiteDataSettings((s) => {
+                    const d = displayState ?? { displaySettings: { ...defaultDisplay }, showChantierPhotos: true };
+                    const next = s ?? { displaySettings: { ...d.displaySettings }, showChantierPhotos: d.showChantierPhotos };
+                    return { ...next, displaySettings: { ...next.displaySettings, showReviews: e.target.checked } };
+                  })
+                }
+                className="h-4 w-4 rounded border-gray-300 text-primary"
+              />
+              <span className="text-sm">Afficher les avis clients</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={(displayState?.displaySettings?.showAdvice ?? true) !== false}
+                onChange={(e) =>
+                  setSiteDataSettings((s) => {
+                    const d = displayState ?? { displaySettings: { ...defaultDisplay }, showChantierPhotos: true };
+                    const next = s ?? { displaySettings: { ...d.displaySettings }, showChantierPhotos: d.showChantierPhotos };
+                    return { ...next, displaySettings: { ...next.displaySettings, showAdvice: e.target.checked } };
+                  })
+                }
+                className="h-4 w-4 rounded border-gray-300 text-primary"
+              />
+              <span className="text-sm">Afficher les conseils plomberie</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={(displayState?.displaySettings?.showAdviceImages ?? true) !== false}
+                onChange={(e) =>
+                  setSiteDataSettings((s) => {
+                    const d = displayState ?? { displaySettings: { ...defaultDisplay }, showChantierPhotos: true };
+                    const next = s ?? { displaySettings: { ...d.displaySettings }, showChantierPhotos: d.showChantierPhotos };
+                    return { ...next, displaySettings: { ...next.displaySettings, showAdviceImages: e.target.checked } };
+                  })
+                }
+                className="h-4 w-4 rounded border-gray-300 text-primary"
+              />
+              <span className="text-sm">Afficher les images dans les conseils</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={(displayState?.displaySettings?.showEstimator ?? true) !== false}
+                onChange={(e) =>
+                  setSiteDataSettings((s) => {
+                    const d = displayState ?? { displaySettings: { ...defaultDisplay }, showChantierPhotos: true };
+                    const next = s ?? { displaySettings: { ...d.displaySettings }, showChantierPhotos: d.showChantierPhotos };
+                    return { ...next, displaySettings: { ...next.displaySettings, showEstimator: e.target.checked } };
+                  })
+                }
+                className="h-4 w-4 rounded border-gray-300 text-primary"
+              />
+              <span className="text-sm">Afficher l&apos;estimateur de prix</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={(displayState?.displaySettings?.showRecentInterventions ?? true) !== false}
+                onChange={(e) =>
+                  setSiteDataSettings((s) => {
+                    const d = displayState ?? { displaySettings: { ...defaultDisplay }, showChantierPhotos: true };
+                    const next = s ?? { displaySettings: { ...d.displaySettings }, showChantierPhotos: d.showChantierPhotos };
+                    return { ...next, displaySettings: { ...next.displaySettings, showRecentInterventions: e.target.checked } };
+                  })
+                }
+                className="h-4 w-4 rounded border-gray-300 text-primary"
+              />
+              <span className="text-sm">Afficher les interventions récentes</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={(displayState?.showChantierPhotos ?? true) !== false}
+                onChange={(e) =>
+                  setSiteDataSettings((s) => {
+                    const d = displayState ?? { displaySettings: { ...defaultDisplay }, showChantierPhotos: true };
+                    const next = s ?? { displaySettings: { ...d.displaySettings }, showChantierPhotos: d.showChantierPhotos };
+                    return { ...next, showChantierPhotos: e.target.checked };
+                  })
+                }
+                className="h-4 w-4 rounded border-gray-300 text-primary"
+              />
+              <span className="text-sm">Afficher photos chantiers</span>
+            </label>
+          </div>
+        </div>
+
         <div>
           <Label htmlFor="phone">Téléphone</Label>
           <Input
