@@ -16,16 +16,6 @@ const nextConfig = {
         hostname: "photos.mathelin-plomberie.fr",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "**",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "**",
-        pathname: "/**",
-      },
     ],
   },
 };
