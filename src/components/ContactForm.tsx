@@ -115,6 +115,9 @@ export default function ContactForm() {
             </a>
           </div>
         </div>
+        <p className="mt-6 text-center text-sm font-medium text-primary">
+          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+        </p>
       </div>
     </section>
   );

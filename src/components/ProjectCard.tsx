@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSettings } from "@/contexts/SettingsContext";
+import { getSeoImageAlt } from "@/lib/seoImage";
 
 export interface ProjectCardData {
   id: string;
@@ -29,7 +30,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className="relative aspect-[4/3] w-full bg-gray-100">
           <Image
             src={project.image}
-            alt={project.title}
+            alt={getSeoImageAlt(project.title, project.city)}
             fill
             className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

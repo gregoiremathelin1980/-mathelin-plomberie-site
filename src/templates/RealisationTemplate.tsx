@@ -4,6 +4,7 @@ import { ArrowLeft, Wrench, MapPin, Lightbulb } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { getSeoImageAlt } from "@/lib/seoImage";
 import LocalProofBlock from "@/components/LocalProofBlock";
 import type { RecentInterventionEntry } from "@/lib/site-data";
 
@@ -66,7 +67,7 @@ export default function RealisationTemplate({
               >
                 <Image
                   src={src}
-                  alt={`${title} - image ${i + 1}`}
+                  alt={getSeoImageAlt(title, city)}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 672px"
@@ -137,7 +138,11 @@ export default function RealisationTemplate({
           </div>
         )}
 
-        <Card className="mt-10">
+        <p className="mt-10 text-sm font-medium text-primary">
+          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+        </p>
+
+        <Card className="mt-6">
           <CardContent className="pt-6">
             <p className="font-medium text-primary">
               Un projet similaire ? Demandez une estimation ou contactez-nous.

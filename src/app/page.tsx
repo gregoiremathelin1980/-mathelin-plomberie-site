@@ -62,8 +62,11 @@ export default async function HomePage() {
           <p className="mx-auto max-w-2xl px-4 pb-8 text-center text-sm text-gray-600">
             Diagnostic sur place et devis clair avant toute intervention.
           </p>
-          <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm text-gray-600">
+          <p className="mx-auto max-w-2xl px-4 pb-4 text-center text-sm text-gray-600">
             Pour les situations urgentes (fuite d&apos;eau, chauffe-eau en panne, radiateur froid, canalisation bouchée), contactez directement votre plombier local.
+          </p>
+          <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm font-medium text-primary">
+            Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
           </p>
         </>
       )}

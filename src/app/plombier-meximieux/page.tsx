@@ -89,9 +89,12 @@ export default async function PlombierMeximieux() {
           Chazey-sur-Ain, Saint-Maurice-de-Gourdans et Blyes.
         </p>
 
+        <p className="mt-8 text-sm font-medium text-primary">
+          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+        </p>
         <Link
           href="/contact"
-          className={buttonVariants({ variant: "accent", className: "mt-8 inline-block" })}
+          className={buttonVariants({ variant: "accent", className: "mt-6 inline-block" })}
         >
           Demander un devis
         </Link>

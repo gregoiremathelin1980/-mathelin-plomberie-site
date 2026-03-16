@@ -116,6 +116,10 @@ Options pour l’estimateur (étape 1 = type de problème, étape 2 = détail pa
 }
 ```
 
+## Photos chantiers (nom de fichier SEO)
+
+Pour le référencement Google Images, nommer les fichiers selon : **`[type-de-travaux]-mathelin-plomberie-[ville].jpg`** (ex. Dépannage fuite à Ambérieu → `depannage-fuite-mathelin-plomberie-amberieu.jpg`). Le site génère les balises `alt` automatiquement à partir du titre et de la ville.
+
 ## Alias du dossier
 
 En développement ou build, le dossier peut pointer vers un emplacement externe via la variable d’environnement **`SITE_DATA_DIR`** (ex. `C:\Users\Grégoire\SiteMathelinData`). Sinon le site utilise le sous-dossier `site-data` du projet.

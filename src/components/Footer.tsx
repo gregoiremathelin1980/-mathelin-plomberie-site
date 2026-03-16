@@ -16,7 +16,10 @@ export default function Footer() {
             <h3 className="font-heading mb-3 text-lg font-semibold">
               {settings.company}
             </h3>
-            <p className="text-sm text-blue-100">
+            <p className="text-sm font-medium text-white">
+              Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+            </p>
+            <p className="mt-2 text-sm text-blue-100">
               Plombier chauffagiste à {settings.cities.slice(0, 4).join(", ")} et environs.
             </p>
             <p className="mt-2 text-sm text-blue-200">
@@ -81,7 +84,10 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="mt-10 border-t border-blue-800 pt-8 text-center text-sm text-blue-200">
+        <p className="mt-10 border-t border-blue-800 pt-8 text-center text-sm text-blue-100">
+          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+        </p>
+        <div className="mt-2 text-center text-sm text-blue-200">
           © {currentYear} {settings.company}. Tous droits réservés.
         </div>
       </div>
