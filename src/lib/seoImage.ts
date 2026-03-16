@@ -5,13 +5,15 @@
 
 const SLUG_BRAND = "mathelin-plomberie";
 
+const ACCENTS: Record<string, string> = {
+  à: "a", â: "a", ä: "a", é: "e", è: "e", ê: "e", ë: "e", î: "i", ï: "i", ô: "o", ù: "u", û: "u", ü: "u", ÿ: "y", ç: "c",
+};
 function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  let s = text.toLowerCase();
+  for (const [accent, plain] of Object.entries(ACCENTS)) {
+    s = s.replace(new RegExp(accent, "g"), plain);
+  }
+  return s.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 /**
