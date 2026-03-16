@@ -6,7 +6,8 @@ import { SITE_URL } from "@/lib/config";
 import type { SiteSettings } from "@/lib/content";
 
 const FOUNDING_DATE = "2013-02-01";
-const OWNER_NAME = "Mathelin Grégoire";
+const OFFICIAL_NAME = "Mathelin Grégoire - Plomberie Chauffage";
+const LOGO_IMAGE_URL = "https://www.mathelin-plomberie.fr/images/carte-visite.jpg";
 const DEFAULT_CITY = "Pérouges";
 const AREA_SERVED = [
   "Ambérieu-en-Bugey",
@@ -32,17 +33,19 @@ export default function LocalBusinessSchema({
   const schema = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "Plumber", "HomeAndConstructionBusiness"],
-    name: settings.company,
-    alternateName: "Mathelin Plomberie Chauffage",
+    name: OFFICIAL_NAME,
+    alternateName: [settings.company, "Mathelin Plomberie Chauffage"].filter(Boolean),
+    image: LOGO_IMAGE_URL,
+    logo: LOGO_IMAGE_URL,
+    foundingDate: FOUNDING_DATE,
     description:
       "Plombier chauffagiste : dépannage plomberie, urgence fuite d'eau, canalisation bouchée, débouchage évier, radiateur froid, chauffe-eau. Intervention à Pérouges, Meximieux, Ambérieu-en-Bugey, Lagnieu.",
     url: SITE_URL,
     telephone: phoneToInternational(settings.phone),
     email: settings.email || undefined,
-    foundingDate: FOUNDING_DATE,
     founder: {
       "@type": "Person",
-      name: OWNER_NAME,
+      name: "Mathelin Grégoire",
     },
     address: {
       "@type": "PostalAddress",
