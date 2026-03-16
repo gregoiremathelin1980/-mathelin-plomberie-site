@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
-import LocalBusinessSchema from "@/components/LocalBusinessSchema";
+import LocalBusinessSchema from "@/components/SEO/LocalBusinessSchema";
 import { SettingsProvider } from "@/contexts/SettingsContext";
 import { getSiteSettings } from "@/lib/content";
 import { SITE_URL } from "@/lib/config";
@@ -61,8 +61,10 @@ export default async function RootLayout({
   const settings = getSiteSettings();
   return (
     <html lang="fr" className={`${poppins.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
+      <head>
         <LocalBusinessSchema settings={settings} />
+      </head>
+      <body className="min-h-screen bg-white text-gray-900 antialiased">
         <SettingsProvider initialSettings={settings}>
           <ChunkLoadErrorHandler />
           <Header />
