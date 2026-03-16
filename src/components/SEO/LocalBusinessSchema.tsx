@@ -2,13 +2,19 @@
  * Schéma JSON-LD PlumbingBusiness / LocalBusiness pour le SEO.
  * Données structurées lues par Google (recherche locale, Knowledge Panel).
  */
-import { SITE_URL } from "@/lib/config";
 import type { SiteSettings } from "@/lib/content";
 
 const FOUNDING_DATE = "2013-02-01";
 const OFFICIAL_NAME = "Mathelin Grégoire - Plomberie Chauffage";
-const LOGO_IMAGE_URL = "https://www.mathelin-plomberie.fr/images/carte-visite.jpg";
+const MAIN_URL = "https://www.mathelin-plomberie.fr";
+const LOGO_IMAGE_URL = `${MAIN_URL}/images/carte-visite.jpg`;
 const DEFAULT_CITY = "Pérouges";
+/** Domaines satellites (redirection vers le site principal) = preuves d'identité pour Google */
+const SAME_AS = [
+  "https://www.plombier-amberieu.fr",
+  "https://www.plombier-meximieux.fr",
+];
+/** Fallback si settings.cities vide ; doit inclure Ambérieu-en-Bugey et Saint-Vulbas pour SEO local */
 const AREA_SERVED = [
   "Ambérieu-en-Bugey",
   "Meximieux",
@@ -40,7 +46,8 @@ export default function LocalBusinessSchema({
     foundingDate: FOUNDING_DATE,
     description:
       "Plombier chauffagiste : dépannage plomberie, urgence fuite d'eau, canalisation bouchée, débouchage évier, radiateur froid, chauffe-eau. Intervention à Pérouges, Meximieux, Ambérieu-en-Bugey, Lagnieu.",
-    url: SITE_URL,
+    url: MAIN_URL,
+    sameAs: SAME_AS,
     telephone: phoneToInternational(settings.phone),
     email: settings.email || undefined,
     founder: {
