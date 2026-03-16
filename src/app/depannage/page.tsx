@@ -31,6 +31,11 @@ export default function DepannageListPage() {
             </p>
           </div>
         </div>
+        <p className="mb-8 text-gray-text">
+          <Link href="/urgence-depannage" className="font-medium text-primary underline hover:no-underline">
+            Urgence plomberie à Ambérieu, Meximieux, Pérouges — intervention sous 2h
+          </Link>
+        </p>
         {items.length === 0 ? (
           <p className="text-gray-text">Aucune page dépannage pour le moment.</p>
         ) : (

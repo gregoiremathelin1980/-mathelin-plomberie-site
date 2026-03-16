@@ -21,7 +21,7 @@ export default function HomeRecentInterventions({ interventions }: HomeRecentInt
           Interventions récentes
         </h2>
         <p className="mt-1 text-gray-600">
-          Dernières interventions réalisées dans votre secteur.
+          Dernières interventions réalisées entre Meximieux, Ambérieu-en-Bugey, Saint-Vulbas et Lagnieu.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((item, i) => (
