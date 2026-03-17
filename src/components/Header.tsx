@@ -77,13 +77,6 @@ export default function Header() {
                 {label}
               </Link>
             ))}
-            <a
-              href={`tel:${phoneRaw}`}
-              className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-accent py-3 font-semibold text-white"
-            >
-              <Phone className="h-4 w-4" />
-              Appeler maintenant
-            </a>
           </nav>
         </div>
       )}
