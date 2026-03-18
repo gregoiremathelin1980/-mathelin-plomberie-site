@@ -15,10 +15,12 @@ const CONTACT_SUBJECTS = [
 export default function ContactForm() {
   const [subject, setSubject] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [commune, setCommune] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const settings = useSettings();
   const phoneRaw = usePhoneRaw();
@@ -37,7 +39,9 @@ export default function ContactForm() {
       formData.set("access_key", accessKey);
       formData.set("subject", subject);
       formData.set("name", name);
+      formData.set("email", email);
       formData.set("phone", phone);
+      if (commune.trim()) formData.set("commune", commune.trim());
       formData.set("message", message);
       const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
@@ -45,11 +49,13 @@ export default function ContactForm() {
       });
       const data = (await res.json()) as { success: boolean; message?: string };
       if (data.success) {
-        setSent(true);
         setSubject("");
         setName("");
+        setEmail("");
         setPhone("");
+        setCommune("");
         setMessage("");
+        setShowSuccessPopup(true);
       } else {
         setError(data.message ?? "L'envoi a échoué. Réessayez ou appelez-nous.");
       }
@@ -61,7 +67,32 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="px-4 py-16 sm:px-6">
+    <>
+      {showSuccessPopup && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="success-title"
+        >
+          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
+            <p id="success-title" className="text-center text-lg font-semibold text-green-700">
+              Message envoyé
+            </p>
+            <p className="mt-2 text-center text-sm text-gray-600">
+              Nous vous recontacterons rapidement.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowSuccessPopup(false)}
+              className="mt-6 w-full rounded-xl bg-primary py-3 font-semibold text-white transition hover:bg-primary-light"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+      <section id="contact" className="px-4 py-16 sm:px-6">
       <div className="mx-auto max-w-4xl">
         <div className="mb-8">
           <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
@@ -112,6 +143,21 @@ export default function ContactForm() {
               />
             </div>
             <div>
+              <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                id="contact-email"
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                placeholder="votre@email.fr"
+                required
+              />
+            </div>
+            <div>
               <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700">
                 Téléphone
               </label>
@@ -124,6 +170,20 @@ export default function ContactForm() {
                 className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/20"
                 placeholder="06 00 00 00 00"
                 required
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-commune" className="block text-sm font-medium text-gray-700">
+                Commune de résidence
+              </label>
+              <input
+                id="contact-commune"
+                type="text"
+                name="commune"
+                value={commune}
+                onChange={(e) => setCommune(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                placeholder="Votre commune"
               />
             </div>
             <div>
@@ -141,11 +201,6 @@ export default function ContactForm() {
                 required
               />
             </div>
-            {sent && (
-              <p className="rounded-xl bg-green-50 p-3 text-sm font-medium text-green-800">
-                Message envoyé. Nous vous recontacterons rapidement.
-              </p>
-            )}
             {error && (
               <p className="rounded-xl bg-red-50 p-3 text-sm font-medium text-red-800" role="alert">
                 {error}
@@ -179,5 +234,6 @@ export default function ContactForm() {
         </p>
       </div>
     </section>
+    </>
   );
 }
