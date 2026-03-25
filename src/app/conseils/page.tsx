@@ -2,12 +2,14 @@ import { Lightbulb } from "lucide-react";
 import ConseilsList from "@/components/ConseilsList";
 import { getConseils } from "@/lib/content";
 import { getAdviceImage, getAdviceImageAlt } from "@/lib/getAdviceImage";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Conseils plomberie & chauffage | Mathelin Plomberie Chauffage",
   description:
     "Conseils d'entretien et bonnes pratiques. Privilégier la maintenance et la réparation avant le remplacement. Pérouges, Meximieux, Ambérieu, Lagnieu.",
-};
+  path: "/conseils",
+});
 
 export default async function ConseilsPage() {
   const conseils = getConseils();

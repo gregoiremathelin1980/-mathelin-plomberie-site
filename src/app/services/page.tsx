@@ -2,12 +2,14 @@ import Link from "next/link";
 import { Wrench } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import { SERVICES } from "@/lib/services-data";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Services | Mathelin Plomberie Chauffage",
   description:
     "Débouchage canalisation, réparation fuite, robinetterie, chauffe-eau, radiateurs, plancher chauffant, chaudière, WC. Plombier à Pérouges, Meximieux, Ambérieu.",
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

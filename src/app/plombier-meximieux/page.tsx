@@ -3,12 +3,14 @@ import { Phone, FileText } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
 import ReassuranceBlock from "@/components/ReassuranceBlock";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Plombier Chauffagiste à Meximieux (01800) | Dépannage et chauffage",
   description:
     "Plombier chauffagiste à Meximieux : BP Génie Climatique, installation depuis 2013. Intervention rapide à Meximieux, Pérouges, Villieu-Loyes-Mollon et Rignieux-le-Franc.",
-};
+  path: "/plombier-meximieux",
+});
 
 export default async function PlombierMeximieux() {
   const settings = getSiteSettings();

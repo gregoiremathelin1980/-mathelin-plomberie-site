@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { Wrench } from "lucide-react";
 import { getDepannageSlugs, getDepannageBySlug } from "@/lib/site-data";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Dépannage plomberie | Mathelin Plomberie Chauffage",
   description:
     "Pages dépannage par problème et ville. Fuite chauffe-eau, débouchage, réparation. Pérouges, Meximieux, Ambérieu, Lagnieu.",
-};
+  path: "/depannage",
+});
 
 export default function DepannageListPage() {
   const slugs = getDepannageSlugs();

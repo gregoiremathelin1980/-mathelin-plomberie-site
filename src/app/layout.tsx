@@ -50,7 +50,6 @@ export const metadata: Metadata = {
     type: "website",
   },
   robots: "index, follow",
-  alternates: { canonical: SITE_URL },
 };
 
 export default async function RootLayout({

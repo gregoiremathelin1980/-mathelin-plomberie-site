@@ -1,14 +1,15 @@
 import { SITE_URL } from "@/lib/config";
-import type { SiteSettings } from "@/lib/content";
 import type { ReviewEntry } from "@/lib/site-data";
 
 interface ReviewsSchemaProps {
-  settings: SiteSettings;
   reviews: ReviewEntry[];
 }
 
-/** Schéma schema.org AggregateRating + Review pour le SEO. */
-export default function ReviewsSchema({ settings, reviews }: ReviewsSchemaProps) {
+/**
+ * Complète l’entité LocalBusiness globale (layout) : même @id, sans dupliquer NAP.
+ * Les avis structurés ne sont émis que si le bloc avis est affiché sur la page.
+ */
+export default function ReviewsSchema({ reviews }: ReviewsSchemaProps) {
   if (!reviews?.length) return null;
 
   const ratingSum = reviews.reduce((s, r) => s + r.rating, 0);
@@ -18,8 +19,7 @@ export default function ReviewsSchema({ settings, reviews }: ReviewsSchemaProps)
   const aggregateSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": `${SITE_URL}/#organization`,
-    name: settings.company,
+    "@id": `${SITE_URL}/#localbusiness`,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue,

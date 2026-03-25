@@ -2,12 +2,14 @@ import Link from "next/link";
 import { Phone } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Urgence dépannage plomberie | Ambérieu, Meximieux, Pérouges | Sous 2h",
   description:
     "Plombier disponible pour urgences à Ambérieu, Meximieux et Pérouges. Intervention sous 2h. Fuite d'eau, débouchage, chauffe-eau en panne.",
-};
+  path: "/urgence-depannage",
+});
 
 export default async function UrgenceDepannagePage() {
   const settings = getSiteSettings();

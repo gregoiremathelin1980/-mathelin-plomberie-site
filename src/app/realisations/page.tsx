@@ -3,12 +3,14 @@ import ProjectGallery from "@/components/ProjectGallery";
 import { getRealisations } from "@/lib/content";
 import { getRealisationsFromSiteData } from "@/lib/site-data";
 import { getPhotoUrl } from "@/lib/config";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Réalisations | Mathelin Plomberie Chauffage",
   description:
     "Découvrez nos réalisations en plomberie et chauffage à Pérouges, Meximieux, Ambérieu, Lagnieu.",
-};
+  path: "/realisations",
+});
 
 function toGalleryItem(r: { slug: string; title: string; city?: string; description?: string; images?: string[] }) {
   return {

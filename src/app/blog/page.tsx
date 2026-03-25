@@ -1,12 +1,14 @@
 import { BookOpen } from "lucide-react";
 import BlogList from "@/components/BlogList";
 import { getBlogPosts } from "@/lib/content";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Blog | Mathelin Plomberie Chauffage",
   description:
     "Conseils plomberie, chauffage et actualités. Artisan local à Pérouges, Meximieux, Ambérieu, Lagnieu.",
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   const posts = getBlogPosts();

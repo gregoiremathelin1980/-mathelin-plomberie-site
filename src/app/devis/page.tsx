@@ -1,11 +1,13 @@
 import EstimateForm from "@/components/EstimateForm";
 import { getPricing, getSiteSettings } from "@/lib/content";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Devis | Mathelin Plomberie Chauffage",
   description:
     "Demandez une estimation pour votre intervention plomberie ou chauffage. Pérouges, Meximieux, Ambérieu, Saint-Vulbas, Lagnieu.",
-};
+  path: "/devis",
+});
 
 export default function DevisPage() {
   const pricing = getPricing();

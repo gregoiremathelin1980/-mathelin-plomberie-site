@@ -3,12 +3,14 @@ import { Phone, FileText } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
 import ReassuranceBlock from "@/components/ReassuranceBlock";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Plombier Chauffagiste à Ambérieu-en-Bugey | Dépannage et chauffage",
   description:
     "Plombier chauffagiste à Ambérieu-en-Bugey : BP Génie Climatique, 13 ans d'expérience. Dépannage plomberie de Meximieux à Ambérieu, Saint-Vulbas et Lagnieu. Intervention rapide.",
-};
+  path: "/plombier-amberieu",
+});
 
 export default async function PlombierAmberieu() {
   const settings = getSiteSettings();

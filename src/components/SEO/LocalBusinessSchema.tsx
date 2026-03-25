@@ -3,10 +3,12 @@
  * Données structurées lues par Google (recherche locale, Knowledge Panel).
  */
 import type { SiteSettings } from "@/lib/content";
+import { SITE_URL } from "@/lib/config";
 
 const FOUNDING_DATE = "2013-02-01";
 const OFFICIAL_NAME = "Mathelin Grégoire - Plomberie Chauffage";
-const MAIN_URL = "https://www.mathelin-plomberie.fr";
+/** Canonique sans www — aligné sur layout metadata et sitemap */
+const MAIN_URL = SITE_URL;
 const LOGO_IMAGE_URL = `${MAIN_URL}/images/carte-visite.jpg`;
 const DEFAULT_CITY = "Pérouges";
 /** Domaines satellites (redirection vers le site principal) = preuves d'identité pour Google */
@@ -38,6 +40,7 @@ export default function LocalBusinessSchema({
 }) {
   const schema = {
     "@context": "https://schema.org",
+    "@id": `${MAIN_URL}/#localbusiness`,
     "@type": ["LocalBusiness", "Plumber", "HomeAndConstructionBusiness"],
     name: OFFICIAL_NAME,
     alternateName: [settings.company, "Mathelin Plomberie Chauffage"].filter(Boolean),
