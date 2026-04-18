@@ -46,6 +46,8 @@ export interface SiteSettings {
   show_chantier_photos?: boolean;
   /** Affichage des sections (avis, conseils, images conseils, estimateur, interventions récentes) */
   displaySettings: DisplaySettings;
+  /** Lien « voir les avis sur Google » (Maps / GMB) — peut venir de `content/settings/site.json` */
+  googleReviewsUrl?: string;
   cities: string[];
 }
 
@@ -175,6 +177,13 @@ export function getSiteSettings(): SiteSettings {
   }
   if (!base.displaySettings) {
     base = { ...base, displaySettings: defaultDisplaySettings };
+  }
+  const googleReviewsUrl =
+    process.env.NEXT_PUBLIC_GMB_REVIEWS_URL?.trim() ||
+    fromSiteData?.googleReviewsUrl?.trim() ||
+    base.googleReviewsUrl?.trim();
+  if (googleReviewsUrl) {
+    base = { ...base, googleReviewsUrl };
   }
   siteSettingsCache = base;
   return siteSettingsCache;

@@ -14,6 +14,8 @@ export interface SiteDataSettings {
   email?: string;
   zone?: string;
   messageUrgence?: string;
+  /** Lien public « avis Google » (fiche Maps / GMB) si l’API GéoCompta ne renvoie pas encore d’avis. */
+  googleReviewsUrl?: string;
   showAdviceImages?: boolean;
   showChantierPhotos?: boolean;
   displaySettings?: DisplaySettings;

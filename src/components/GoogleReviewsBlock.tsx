@@ -1,5 +1,6 @@
 import { Star, Quote } from "lucide-react";
 import type { ReviewEntry } from "@/lib/site-data";
+import { buttonVariants } from "@/components/ui/button";
 
 function StarRating({ rating }: { rating: number }) {
   const n = Math.min(5, Math.max(0, Math.round(rating)));
@@ -69,17 +70,49 @@ interface GoogleReviewsBlockProps {
   geocomptaReviewsLoadError?: string;
   /** Remplace le texte « Aucun avis pour le moment » quand la liste est vide (ex. prod sans GéoCompta). */
   reviewsEmptyHint?: string;
+  /** Fiche Google (Maps) : lien « Voir les avis sur Google » si pas d’avis dans le site / API. */
+  googleReviewsPageUrl?: string;
 }
 
 /** Bloc avis : données API ou repli fichier uniquement ; pas de faux avis en mode GéoComptaAE. */
+function GoogleMapsReviewsCta({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={buttonVariants({ variant: "outline", className: "mt-6 inline-flex" })}
+    >
+      Voir les avis sur Google
+    </a>
+  );
+}
+
 export default async function GoogleReviewsBlock({
   reviews,
   geocomptaApiMode = false,
   geocomptaReviewsLoadError,
   reviewsEmptyHint,
+  googleReviewsPageUrl,
 }: GoogleReviewsBlockProps) {
   if (!reviews?.length) {
-    if (!geocomptaApiMode) return null;
+    if (!geocomptaApiMode) {
+      if (!googleReviewsPageUrl) return null;
+      return (
+        <section className="bg-gray-50 px-4 py-16 sm:px-6" aria-label="Avis clients">
+          <div className="mx-auto max-w-6xl">
+            <div className="flex items-center gap-2 text-primary">
+              <Quote className="h-8 w-8" aria-hidden />
+              <h2 className="font-heading text-2xl font-bold sm:text-3xl">Avis clients</h2>
+            </div>
+            <p className="mt-4 text-gray-600">
+              Les avis sont disponibles sur la fiche Google de l’entreprise.
+            </p>
+            <GoogleMapsReviewsCta href={googleReviewsPageUrl} />
+          </div>
+        </section>
+      );
+    }
     const isDev = process.env.NODE_ENV === "development";
     const errorDetail =
       geocomptaReviewsLoadError &&
@@ -110,6 +143,13 @@ export default async function GoogleReviewsBlock({
               {reviewsEmptyHint ?? "Aucun avis pour le moment."}
             </p>
           )}
+          {googleReviewsPageUrl ? (
+            <p className="mt-2 text-sm text-gray-500">
+              Les avis publiés sur Google ne sont pas encore synchronisés ici — vous pouvez les consulter
+              directement sur la fiche de l’entreprise.
+            </p>
+          ) : null}
+          {googleReviewsPageUrl ? <GoogleMapsReviewsCta href={googleReviewsPageUrl} /> : null}
         </div>
       </section>
     );
@@ -130,6 +170,11 @@ export default async function GoogleReviewsBlock({
         <div className="mt-8">
           <LayoutA reviews={reviews} />
         </div>
+        {googleReviewsPageUrl ? (
+          <div className="mt-8 text-center">
+            <GoogleMapsReviewsCta href={googleReviewsPageUrl} />
+          </div>
+        ) : null}
       </div>
     </section>
   );

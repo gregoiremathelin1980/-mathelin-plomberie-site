@@ -163,6 +163,7 @@ export default async function HomePage() {
             reviews={reviews}
             geocomptaApiMode
             geocomptaReviewsLoadError={reviews.length === 0 ? reviewsLoadError : undefined}
+            googleReviewsPageUrl={settings.googleReviewsUrl}
           />
         )}
         <UrgencyBlock />
@@ -266,6 +267,7 @@ export default async function HomePage() {
         <GoogleReviewsBlock
           reviews={reviews}
           geocomptaApiMode={!allowFileHomeReviews}
+          googleReviewsPageUrl={settings.googleReviewsUrl}
           reviewsEmptyHint={
             !allowFileHomeReviews
               ? "Les avis Google (fiche GMB) s’affichent ici via GéoComptaAE : définissez GEOCOMPTA_API_BASE_URL (ou l’alias GEOCOMPTA_API_URL) et GEOCOMPTA_API_KEY si besoin dans Vercel — variables disponibles au **runtime et au build** — puis redéployez."
