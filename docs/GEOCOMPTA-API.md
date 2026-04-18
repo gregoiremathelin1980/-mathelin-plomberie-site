@@ -59,6 +59,7 @@ Copier `.env.example` vers `.env.local` pour le développement.
 ## Fichiers clés
 
 - `docs/GEOCOMPTA-CURSOR.md` — cadrage agents Cursor + **prompt à coller dans le dépôt GéoCompta** (règle `.cursor/rules` optionnelle).
+- `docs/VERCEL-DEPLOY.md` — variables d’environnement et checklist **déploiement Vercel**.
 - `src/lib/api/geocomptaClient.ts` — client HTTP (timeout 5 s, 2 retries, validation Zod).
 - `src/lib/api/geocomptaSchemas.ts` — schémas Zod / types.
 - `src/lib/api/geocomptaCached.ts` — `unstable_cache` (ISR) + slugs sitemap / réalisations.
