@@ -100,9 +100,10 @@ function testHomePolicy() {
 }
 
 async function optionalLiveFetch(): Promise<void> {
-  const base = process.env.GEOCOMPTA_API_BASE_URL?.trim();
+  const base =
+    process.env.GEOCOMPTA_API_BASE_URL?.trim() || process.env.GEOCOMPTA_API_URL?.trim();
   if (!base) {
-    console.log("[test] live : ignoré (GEOCOMPTA_API_BASE_URL absent)");
+    console.log("[test] live : ignoré (GEOCOMPTA_API_BASE_URL / GEOCOMPTA_API_URL absent)");
     return;
   }
   const url = `${base.replace(/\/$/, "")}/api/public/reviews`;

@@ -25,13 +25,20 @@ import {
 const DEFAULT_TIMEOUT_MS = 5000;
 const MAX_RETRIES = 2;
 
+/** URL canonique ; `GEOCOMPTA_API_URL` = alias legacy (anciennes docs / Vercel mal nommé). */
+function getGeocomptaApiBaseFromEnv(): string | undefined {
+  const primary = process.env.GEOCOMPTA_API_BASE_URL?.trim();
+  if (primary) return primary;
+  return process.env.GEOCOMPTA_API_URL?.trim() || undefined;
+}
+
 export function isGeocomptaConfigured(): boolean {
-  return Boolean(process.env.GEOCOMPTA_API_BASE_URL?.trim());
+  return Boolean(getGeocomptaApiBaseFromEnv());
 }
 
 function getBaseUrl(): string {
-  const raw = process.env.GEOCOMPTA_API_BASE_URL?.trim();
-  if (!raw) throw new Error("GEOCOMPTA_API_BASE_URL is not set");
+  const raw = getGeocomptaApiBaseFromEnv();
+  if (!raw) throw new Error("GEOCOMPTA_API_BASE_URL (ou alias GEOCOMPTA_API_URL) is not set");
   return raw.replace(/\/$/, "");
 }
 

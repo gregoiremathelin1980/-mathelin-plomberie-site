@@ -1,4 +1,5 @@
 import { unstable_noStore } from "next/cache";
+import { headers } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -60,7 +61,11 @@ export const metadata = buildPageMetadata({
 
 const HOME_SERVICES = SERVICES.slice(0, 3);
 
-const GEO = isGeocomptaConfigured();
+function hasGeocomptaBaseUrlEnv(): boolean {
+  return Boolean(
+    process.env.GEOCOMPTA_API_BASE_URL?.trim() || process.env.GEOCOMPTA_API_URL?.trim()
+  );
+}
 
 function getHomeReviewsDisplayCount(): number {
   const raw = process.env.GEOCOMPTA_HOME_REVIEWS_DISPLAY_COUNT;
@@ -70,10 +75,13 @@ function getHomeReviewsDisplayCount(): number {
 }
 
 /** ISR aligné sur le cache homepage GéoCompta (≤ au créneau de sync API, ex. 1800 s pour 30 min). */
-export const revalidate = GEO ? getGeocomptaHomeRevalidateSeconds() : 0;
+export const revalidate = hasGeocomptaBaseUrlEnv() ? getGeocomptaHomeRevalidateSeconds() : 0;
 
 export default async function HomePage() {
-  if (!GEO) unstable_noStore();
+  /** Lit l’env à chaque requête (évite un module figé sans GEO sur certains workers). */
+  headers();
+  const geo = isGeocomptaConfigured();
+  if (!geo) unstable_noStore();
 
   const pricing = getPricing();
   const simulateur = getSimulateur();
@@ -86,7 +94,7 @@ export default async function HomePage() {
     showRecentInterventions: true,
   };
 
-  if (GEO) {
+  if (geo) {
     const displayCount = getHomeReviewsDisplayCount();
     const rotationSeed = Date.now();
     const hp = await getCachedGeocomptaHomepage();
@@ -260,7 +268,7 @@ export default async function HomePage() {
           geocomptaApiMode={!allowFileHomeReviews}
           reviewsEmptyHint={
             !allowFileHomeReviews
-              ? "Les avis Google (fiche GMB) s’affichent ici via GéoComptaAE : définissez GEOCOMPTA_API_BASE_URL (et GEOCOMPTA_API_KEY si votre serveur l’exige) dans Vercel, puis redéployez. Tant que ce n’est pas fait, aucun avis n’est affiché pour éviter les textes d’exemple."
+              ? "Les avis Google (fiche GMB) s’affichent ici via GéoComptaAE : définissez GEOCOMPTA_API_BASE_URL (ou l’alias GEOCOMPTA_API_URL) et GEOCOMPTA_API_KEY si besoin dans Vercel — variables disponibles au **runtime et au build** — puis redéployez."
               : undefined
           }
         />
