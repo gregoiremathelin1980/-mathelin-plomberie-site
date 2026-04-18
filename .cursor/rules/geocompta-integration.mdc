@@ -9,5 +9,5 @@ alwaysApply: false
 - **Contenu, SEO, avis, homepage, médias** : consommation uniquement via **`GET /api/public/...`** (`geocomptaClient.ts`, caches `geocomptaCached.ts`). Pas d’appel **Google Business Profile** ni de duplication métier dans ce dépôt.
 - **Avis** : avec `GEOCOMPTA_API_BASE_URL` défini, **pas** d’avis fictifs depuis `site-data` ; listes vides → état sobre (`GoogleReviewsBlock` + `geocomptaApiMode`). Repli fichier **uniquement** sans API configurée.
 - **Schémas JSON** : aligner **`geocomptaSchemas.ts`** sur l’API ; toute évolution côté GéoCompta = coordination + mise à jour Zod.
-- **Cadrage produit / prompt pour le dépôt GéoCompta** : voir **`docs/GEOCOMPTA-CURSOR.md`** (prompt à coller + règle `.cursor/rules` optionnelle côté GéoCompta).
+- **Cadrage produit / prompt pour le dépôt GéoCompta** : **`docs/GEOCOMPTA-CURSOR.md`**. **Prompt strict agent site ↔ API** : **`docs/PROMPT_AGENT_SITE_VITRINE_GEOCOMPTAE.md`**.
 - **Contrat technique** (endpoints, env, cache ISR) : **`docs/GEOCOMPTA-API.md`**.

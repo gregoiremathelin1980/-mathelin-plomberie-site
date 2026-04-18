@@ -58,6 +58,7 @@ Le flux retenu ici :
 
 ## Fichiers clés
 
+- `docs/PROMPT_AGENT_SITE_VITRINE_GEOCOMPTAE.md` — **prompt agent Cursor pour ce dépôt** (contrat strict site ↔ GéoComptaAE).
 - `docs/GEOCOMPTA-CURSOR.md` — cadrage agents Cursor + **prompt à coller dans le dépôt GéoCompta** (règle `.cursor/rules` optionnelle).
 - `docs/VERCEL-DEPLOY.md` — variables d’environnement et checklist **déploiement Vercel**.
 - `src/lib/api/geocomptaClient.ts` — client HTTP (timeout 5 s, 2 retries, validation Zod).
