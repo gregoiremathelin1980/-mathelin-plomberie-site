@@ -126,7 +126,7 @@ export default async function HomePage() {
       date: i.date,
     }));
 
-    const conseilsForPreview = hp.featuredAdvice.map((a) => ({
+    const conseilsFromApi = hp.featuredAdvice.map((a) => ({
       slug: a.slug,
       title: a.title,
       excerpt: a.excerpt,
@@ -137,6 +137,9 @@ export default async function HomePage() {
       content: "",
       heroImage: a.image,
     }));
+    /** Même logique que les avis : si l’API ne renvoie rien, on reprend les conseils du dépôt (`getConseils`), comme `/conseils`. */
+    const conseilsForPreview =
+      conseilsFromApi.length > 0 ? conseilsFromApi : getRandomConseils(3);
 
     return (
       <>
