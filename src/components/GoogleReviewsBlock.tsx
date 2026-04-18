@@ -1,4 +1,3 @@
-import { unstable_noStore } from "next/cache";
 import { Star, Quote } from "lucide-react";
 import type { ReviewEntry } from "@/lib/site-data";
 
@@ -54,47 +53,13 @@ function LayoutA({ reviews }: { reviews: ReviewEntry[] }) {
   );
 }
 
-/** Layout B : 1 avis mis en avant + 2 plus petits */
-function LayoutB({ reviews }: { reviews: ReviewEntry[] }) {
-  const [first, ...rest] = reviews;
-  return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      {first && (
-        <div className="sm:col-span-2 lg:col-span-1">
-          <ReviewCard review={first} highlighted />
-        </div>
-      )}
-      <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
-        {rest.map((r, i) => (
-          <ReviewCard key={i} review={r} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/** Layout C : 3 avis empilés */
-function LayoutC({ reviews }: { reviews: ReviewEntry[] }) {
-  return (
-    <div className="space-y-4">
-      {reviews.map((r, i) => (
-        <ReviewCard key={i} review={r} />
-      ))}
-    </div>
-  );
-}
-
 interface GoogleReviewsBlockProps {
   reviews: ReviewEntry[];
 }
 
-/** Bloc avis Google : 3 avis, layout A/B/C choisi aléatoirement à chaque chargement. */
+/** Bloc avis : grille 3 colonnes, ordre figé par les données (pas d’aléatoire → pas d’erreur d’hydratation). */
 export default async function GoogleReviewsBlock({ reviews }: GoogleReviewsBlockProps) {
-  unstable_noStore();
   if (!reviews?.length) return null;
-
-  const layoutIndex = Math.floor(Math.random() * 3);
-  const Layout = [LayoutA, LayoutB, LayoutC][layoutIndex];
 
   return (
     <section className="bg-gray-50 px-4 py-16 sm:px-6" aria-label="Avis clients">
@@ -109,7 +74,7 @@ export default async function GoogleReviewsBlock({ reviews }: GoogleReviewsBlock
           Ce que disent nos clients après une intervention.
         </p>
         <div className="mt-8">
-          <Layout reviews={reviews} />
+          <LayoutA reviews={reviews} />
         </div>
       </div>
     </section>

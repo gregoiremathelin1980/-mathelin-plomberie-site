@@ -1,16 +1,14 @@
 import { unstable_noStore } from "next/cache";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
-import EstimateForm from "@/components/EstimateForm";
-import ProjectGallery from "@/components/ProjectGallery";
-import AdvicePreview from "@/components/AdvicePreview";
-import ContactForm from "@/components/ContactForm";
+import HomeBelowFoldFallback from "@/components/home/HomeBelowFoldFallback";
 import UrgencyBlock from "@/components/UrgencyBlock";
 import HomeRecentInterventions from "@/components/HomeRecentInterventions";
 import { getRealisations, getRandomConseils, getPricing } from "@/lib/content";
-import { getRecentInterventions, getSimulateur, getRandomReviews } from "@/lib/site-data";
+import { getRecentInterventions, getSimulateur } from "@/lib/site-data";
 import { getSiteSettings } from "@/lib/content";
 import { getPhotoUrl } from "@/lib/config";
 import { SERVICES } from "@/lib/services-data";
@@ -18,9 +16,39 @@ import { buttonVariants } from "@/components/ui/button";
 import GoogleReviewsBlock from "@/components/GoogleReviewsBlock";
 import ReviewsSchema from "@/components/ReviewsSchema";
 import { isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
-import { getCachedGeocomptaHomepage } from "@/lib/api/geocomptaCached";
+import {
+  getCachedGeocomptaHomepage,
+  getCachedGeocomptaReviewPool,
+  getGeocomptaHomeRevalidateSeconds,
+} from "@/lib/api/geocomptaCached";
+import { pickRotatingReviews } from "@/lib/reviewsRotation";
 import type { ReviewEntry } from "@/lib/site-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+
+const EstimateForm = dynamic(() => import("@/components/EstimateForm"), {
+  ssr: true,
+  loading: () => (
+    <HomeBelowFoldFallback minHeightClass="min-h-[380px]" label="Chargement de l'estimateur de prix" />
+  ),
+});
+const ContactForm = dynamic(() => import("@/components/ContactForm"), {
+  ssr: true,
+  loading: () => (
+    <HomeBelowFoldFallback minHeightClass="min-h-[360px]" label="Chargement du formulaire de contact" />
+  ),
+});
+const ProjectGallery = dynamic(() => import("@/components/ProjectGallery"), {
+  ssr: true,
+  loading: () => (
+    <HomeBelowFoldFallback minHeightClass="min-h-[260px]" label="Chargement des réalisations" />
+  ),
+});
+const AdvicePreview = dynamic(() => import("@/components/AdvicePreview"), {
+  ssr: true,
+  loading: () => (
+    <HomeBelowFoldFallback minHeightClass="min-h-[320px]" label="Chargement des conseils" />
+  ),
+});
 
 export const metadata = buildPageMetadata({
   title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",
@@ -33,8 +61,15 @@ const HOME_SERVICES = SERVICES.slice(0, 3);
 
 const GEO = isGeocomptaConfigured();
 
-/** ISR 1 h quand GéoCompta est configuré ; sinon pages dynamiques (avis / conseils aléatoires fichiers). */
-export const revalidate = GEO ? 3600 : 0;
+function getHomeReviewsDisplayCount(): number {
+  const raw = process.env.GEOCOMPTA_HOME_REVIEWS_DISPLAY_COUNT;
+  const n = raw != null && raw.trim() !== "" ? Number(raw) : NaN;
+  if (Number.isFinite(n) && n >= 1 && n <= 24) return Math.floor(n);
+  return 6;
+}
+
+/** ISR aligné sur le cache homepage GéoCompta (≤ au créneau de sync API, ex. 1800 s pour 30 min). */
+export const revalidate = GEO ? getGeocomptaHomeRevalidateSeconds() : 0;
 
 export default async function HomePage() {
   if (!GEO) unstable_noStore();
@@ -51,7 +86,12 @@ export default async function HomePage() {
   };
 
   if (GEO) {
-    const hp = await getCachedGeocomptaHomepage();
+    const displayCount = getHomeReviewsDisplayCount();
+    const rotationSeed = Date.now();
+    const [hp, reviewPool] = await Promise.all([
+      getCachedGeocomptaHomepage(),
+      getCachedGeocomptaReviewPool(),
+    ]);
 
     const realisations = hp.featuredRealisations.map((r) => ({
       id: r.slug,
@@ -62,12 +102,19 @@ export default async function HomePage() {
       description: r.description,
     }));
 
-    const reviews: ReviewEntry[] = hp.featuredReviews.map((r) => ({
+    const reviewsFromHomeFeatured: ReviewEntry[] = hp.featuredReviews.map((r) => ({
       author: r.author ?? r.name,
       rating: r.rating,
       text: r.text,
       date: r.date,
     }));
+    /** Liste complète GMB via GéoCompta `GET /api/public/reviews` ; sous-ensemble mélangé à chaque rendu ISR. */
+    const reviews: ReviewEntry[] =
+      reviewPool.length > 0
+        ? pickRotatingReviews(reviewPool, displayCount, rotationSeed)
+        : reviewsFromHomeFeatured.length > 0
+          ? pickRotatingReviews(reviewsFromHomeFeatured, displayCount, rotationSeed)
+          : [];
 
     const interventions = hp.featuredInterventions.map((i) => ({
       city: i.city,
@@ -95,7 +142,7 @@ export default async function HomePage() {
         {ds.showRecentInterventions && interventions.length > 0 && (
           <HomeRecentInterventions interventions={interventions} maxItems={20} />
         )}
-        {ds.showReviews && <GoogleReviewsBlock reviews={reviews} layoutMode="stable" />}
+        {ds.showReviews && <GoogleReviewsBlock reviews={reviews} />}
         <UrgencyBlock />
         {hp.featuredPhotos.length > 0 && (
           <section className="border-y border-primary/10 bg-gray-50/80 px-4 py-10 sm:px-6" aria-label="Photos">
@@ -182,7 +229,7 @@ export default async function HomePage() {
   }));
 
   const recentInterventions = getRecentInterventions();
-  const reviews = getRandomReviews(3);
+  const reviews: ReviewEntry[] = [];
 
   return (
     <>
