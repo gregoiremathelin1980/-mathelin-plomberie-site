@@ -8,7 +8,7 @@ import HomeBelowFoldFallback from "@/components/home/HomeBelowFoldFallback";
 import UrgencyBlock from "@/components/UrgencyBlock";
 import HomeRecentInterventions from "@/components/HomeRecentInterventions";
 import { getRealisations, getRandomConseils, getPricing } from "@/lib/content";
-import { getRecentInterventions, getSimulateur } from "@/lib/site-data";
+import { getRecentInterventions, getSimulateur, getRandomReviews } from "@/lib/site-data";
 import { getSiteSettings } from "@/lib/content";
 import { getPhotoUrl } from "@/lib/config";
 import { SERVICES } from "@/lib/services-data";
@@ -108,13 +108,16 @@ export default async function HomePage() {
       text: r.text,
       date: r.date,
     }));
-    /** Liste complète GMB via GéoCompta `GET /api/public/reviews` ; sous-ensemble mélangé à chaque rendu ISR. */
+    /** API d’abord (`/reviews` puis featured homepage) ; si vide : `site-data/google-reviews.json` optionnel. */
+    const fromFile = getRandomReviews(displayCount);
     const reviews: ReviewEntry[] =
       reviewPool.length > 0
         ? pickRotatingReviews(reviewPool, displayCount, rotationSeed)
         : reviewsFromHomeFeatured.length > 0
           ? pickRotatingReviews(reviewsFromHomeFeatured, displayCount, rotationSeed)
-          : [];
+          : fromFile.length > 0
+            ? fromFile
+            : [];
 
     const interventions = hp.featuredInterventions.map((i) => ({
       city: i.city,
@@ -229,7 +232,7 @@ export default async function HomePage() {
   }));
 
   const recentInterventions = getRecentInterventions();
-  const reviews: ReviewEntry[] = [];
+  const reviews = getRandomReviews(3);
 
   return (
     <>
