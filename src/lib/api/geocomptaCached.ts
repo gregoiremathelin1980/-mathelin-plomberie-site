@@ -14,9 +14,12 @@ import {
   isGeocomptaConfigured,
 } from "@/lib/api/geocomptaClient";
 import { buildHomepagePayloadFromFiles } from "@/lib/api/geocomptaHomepageFallback";
-import type { GeocomptaConseilDetail } from "@/lib/api/geocomptaSchemas";
-import type { GeocomptaRealisationDetail } from "@/lib/api/geocomptaSchemas";
-import type { GeocomptaSeoPage } from "@/lib/api/geocomptaSchemas";
+import type {
+  GeocomptaConseilDetail,
+  GeocomptaRealisationDetail,
+  GeocomptaSeoPage,
+  GeocomptaSitemapData,
+} from "@/lib/api/geocomptaSchemas";
 import type { ReviewEntry } from "@/lib/site-data";
 
 const DEFAULT_REVIEWS_CACHE_SECONDS = 900;
@@ -58,7 +61,8 @@ export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
           text: r.text,
           date: r.date,
         }));
-      } catch {
+      } catch (e) {
+        console.warn("[geocompta] GET /api/public/reviews indisponible ou invalide:", e);
         return [];
       }
     },
@@ -137,22 +141,21 @@ export async function getCachedGeocomptaRealisationSlugs(): Promise<string[]> {
   }
 }
 
-export async function getCachedGeocomptaPPageSlugs(): Promise<string[]> {
-  if (!isGeocomptaConfigured()) return [];
+/** Données `GET /api/public/sitemap` (pages, réalisations, conseils + dates). */
+export async function getCachedGeocomptaSitemapData(): Promise<GeocomptaSitemapData | null> {
+  if (!isGeocomptaConfigured()) return null;
   try {
-    const { paths } = await unstable_cache(
+    return await unstable_cache(
       async () => fetchGeocomptaSitemap(),
-      ["geocompta-sitemap-v1"],
+      ["geocompta-sitemap-data-v2"],
       { revalidate: 3600, tags: ["geocompta-sitemap"] }
     )();
-    return paths
-      .map((p) => {
-        const normalized = p.replace(/^https?:\/\/[^/]+/i, "");
-        const m = normalized.match(/\/p\/([^/?#]+)\/?$/);
-        return m ? decodeURIComponent(m[1]) : null;
-      })
-      .filter((x): x is string => Boolean(x));
   } catch {
-    return [];
+    return null;
   }
+}
+
+export async function getCachedGeocomptaPPageSlugs(): Promise<string[]> {
+  const data = await getCachedGeocomptaSitemapData();
+  return data?.pages.map((p) => p.slug).filter(Boolean) ?? [];
 }

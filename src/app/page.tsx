@@ -108,16 +108,13 @@ export default async function HomePage() {
       text: r.text,
       date: r.date,
     }));
-    /** API d’abord (`/reviews` puis featured homepage) ; si vide : `site-data/google-reviews.json` optionnel. */
-    const fromFile = getRandomReviews(displayCount);
+    /** GéoComptaAE uniquement : `GET /api/public/reviews` puis `featuredReviews` du homepage — pas de fichier démo. */
     const reviews: ReviewEntry[] =
       reviewPool.length > 0
         ? pickRotatingReviews(reviewPool, displayCount, rotationSeed)
         : reviewsFromHomeFeatured.length > 0
           ? pickRotatingReviews(reviewsFromHomeFeatured, displayCount, rotationSeed)
-          : fromFile.length > 0
-            ? fromFile
-            : [];
+          : [];
 
     const interventions = hp.featuredInterventions.map((i) => ({
       city: i.city,
@@ -126,7 +123,7 @@ export default async function HomePage() {
       date: i.date,
     }));
 
-    const conseilsFromApi = hp.featuredAdvice.map((a) => ({
+    const conseilsForPreview = hp.featuredAdvice.map((a) => ({
       slug: a.slug,
       title: a.title,
       excerpt: a.excerpt,
@@ -137,9 +134,6 @@ export default async function HomePage() {
       content: "",
       heroImage: a.image,
     }));
-    /** Même logique que les avis : si l’API ne renvoie rien, on reprend les conseils du dépôt (`getConseils`), comme `/conseils`. */
-    const conseilsForPreview =
-      conseilsFromApi.length > 0 ? conseilsFromApi : getRandomConseils(3);
 
     return (
       <>
@@ -148,7 +142,9 @@ export default async function HomePage() {
         {ds.showRecentInterventions && interventions.length > 0 && (
           <HomeRecentInterventions interventions={interventions} maxItems={20} />
         )}
-        {ds.showReviews && <GoogleReviewsBlock reviews={reviews} />}
+        {ds.showReviews && (
+          <GoogleReviewsBlock reviews={reviews} geocomptaApiMode />
+        )}
         <UrgencyBlock />
         {hp.featuredPhotos.length > 0 && (
           <section className="border-y border-primary/10 bg-gray-50/80 px-4 py-10 sm:px-6" aria-label="Photos">

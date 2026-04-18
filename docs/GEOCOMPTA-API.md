@@ -49,12 +49,12 @@ Google **n’autorise pas** un appel direct simple depuis un site vitrine vers l
 Le flux retenu ici :
 
 1. **GéoCompta** synchronise les avis depuis GMB (ou équivalent) et les expose sur **`GET /api/public/reviews`** (liste complète, format validé côté Next par `GeocomptaReviewsListSchema`).
-2. Le **site Next.js** ne stocke pas les avis en JSON local pour l’accueil : il lit ce endpoint, met en cache le pool (`GEOCOMPTA_REVIEWS_CACHE_SECONDS`), puis affiche **`GEOCOMPTA_HOME_REVIEWS_DISPLAY_COUNT`** avis tirés du pool avec un **mélange déterministe** à chaque régénération **ISR** de `/` (`GEOCOMPTA_HOME_REVALIDATE_SECONDS`, aligné sur le même créneau que le cache `homepage`).
-3. Si `GET /api/public/reviews` est vide ou en erreur, repli sur **`featuredReviews`** du `GET /api/public/homepage` (souvent le même backend, sous-ensemble figé).
+2. Le **site Next.js** lit ce endpoint, met en cache le pool (`GEOCOMPTA_REVIEWS_CACHE_SECONDS`), puis affiche jusqu’à **`GEOCOMPTA_HOME_REVIEWS_DISPLAY_COUNT`** avis avec un **mélange déterministe** à chaque régénération **ISR** de `/` (`GEOCOMPTA_HOME_REVALIDATE_SECONDS`).
+3. Si `GET /api/public/reviews` est vide, repli sur **`featuredReviews`** du `GET /api/public/homepage`. Si les deux sont vides : **aucun avis fictif** — le bloc affiche un état sobre (« Aucun avis pour le moment ») tant que `showReviews` est activé ; pas de `site-data/*.json` de démo lorsque **`GEOCOMPTA_API_BASE_URL`** est défini.
 
-**Côté GéoCompta (données)** : les avis doivent exister en base (ex. **GoogleReview** importés ou saisis, statut **≠ ARCHIVE**). Sinon l’API ne peut rien renvoyer de Google ; côté site le bloc avis reste vide ou s’appuie uniquement sur `featuredReviews` si présent.
+**Côté GéoComptaAE (données)** : les avis doivent exister en base (ex. **GoogleReview** importés ou saisis, statut **≠ ARCHIVE**). Sinon l’API renvoie des listes vides.
 
-Copier `.env.example` vers `.env.local` pour le développement.
+**Référence déploiement** : variables Vercel / Bearer dans le dépôt GéoComptaAE (`docs/DEPLOIEMENT_VERCEL_SITE_VITRINE.md` si présent). Côté site vitrine : **`.env.example`** à la racine — copier vers **`.env.local`** pour le développement.
 
 ## Fichiers clés
 

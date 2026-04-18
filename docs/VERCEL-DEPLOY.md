@@ -16,6 +16,8 @@ Valide le premier déploiement (même sans toutes les variables : le build peut 
 
 ## 2. Variables d’environnement
 
+Les **noms** et un modèle vide sont dans **`.env.example`** à la racine du dépôt (ne pas y mettre de secrets).
+
 **Settings → Environment Variables**
 
 ### Exemple sync avis ~30 min (GéoCompta)

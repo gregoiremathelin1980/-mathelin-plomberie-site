@@ -1,7 +1,7 @@
 # Données exportées (GéoCompta)
 
-Ce dossier contient **uniquement** les fichiers exportés par GéoCompta.  
-Le site ne se connecte jamais directement à GéoCompta.
+Ce dossier contient **uniquement** les fichiers exportés par GéoCompta (mode fichiers).  
+Si **`GEOCOMPTA_API_BASE_URL`** est défini (voir `docs/GEOCOMPTA-API.md`), le site consomme en priorité **l’API** pour l’accueil, `/p/[slug]`, et les fiches API ; les fichiers ci-dessous servent de **secours** ou pour les zones non encore branchées sur l’API.
 
 ## Structure
 
@@ -12,8 +12,13 @@ Le site ne se connecte jamais directement à GéoCompta.
   Si présent, utilisé en priorité pour les pages `/realisations/[slug]`.  
   Sinon le site utilise `content/realisations/*.md`.
 
-- **`recent-interventions.json`** — Liste des interventions récentes pour le bloc « Interventions récentes autour de vous » (preuve locale).  
+- **`recent-interventions.json`** — Liste de base / historique des interventions pour le bloc « Interventions récentes » (preuve locale).  
   Affiché sur la page d’accueil, services et dépannage. Optionnel : `slug` pour lier vers `/realisations/[slug]`.
+
+- **`interventions-du-jour.json`** — **Export GéoCompta quotidien** : interventions réalisées **aujourd’hui** (ou la journée exportée).  
+  Le site **fusionne** ce fichier avec `recent-interventions.json` : les lignes du jour passent **en premier**, puis la liste de base.  
+  Même format que ci-dessous. Si `date` est absente, le site utilise la **date du jour** (fuseau Europe/Paris) pour l’affichage et le tri.  
+  Recommandation : faire **écraser** ce fichier chaque jour par l’export (pas d’historique dans ce fichier — l’historique reste dans `recent-interventions.json` ou les réalisations).
 
 - **`local-activity.json`** — Activité par ville (ex. « 12 interventions à Meximieux ces derniers mois »).
 
@@ -59,16 +64,24 @@ conseils: [slug-conseil-1, slug-conseil-2]
 Description de l'intervention.
 ```
 
-## Format `recent-interventions.json`
+## Format `recent-interventions.json` et `interventions-du-jour.json`
+
+Même structure pour les deux fichiers.
 
 ```json
 [
-  { "city": "Meximieux", "label": "débouchage évier", "slug": "debouchage-evier-meximieux" },
+  { "city": "Meximieux", "label": "débouchage évier", "slug": "debouchage-evier-meximieux", "date": "2026-03-15" },
   { "city": "Ambérieu-en-Bugey", "label": "fuite chauffe-eau" }
 ]
 ```
 
-Ou avec une clé : `{ "interventions": [ ... ] }`. Le champ `slug` optionnel lie l’item à la page `/realisations/[slug]`.
+Ou avec une clé : `{ "interventions": [ ... ] }`. Le champ `slug` optionnel lie l’item à la page `/realisations/[slug]`. Le champ **`date`** (YYYY-MM-DD ou YYYY-MM) est recommandé pour l’export du jour afin d’éviter toute ambiguïté.
+
+### Côté GéoCompta
+
+1. Créer un export (CSV → JSON, requête, script maison, etc.) qui produit **`interventions-du-jour.json`** dans le dossier `site-data` (ou celui pointé par **`SITE_DATA_DIR`**).
+2. Planifier l’export **une fois par jour** (fin de journée ou lendemain matin) : le fichier contient **uniquement** les interventions de la période visée ; le site remplace l’affichage « du jour » à chaque déploiement ou rebuild.
+3. Après export : **commit + push** (si le JSON est versionné) ou copie vers le NAS / dossier de build selon votre flux, puis **redéploiement Vercel** si les données ne sont pas lues depuis un volume au build — sur Vercel le JSON doit être présent **au moment du build** ou vous utilisez un webhook qui déclenche un nouveau déploiement après mise à jour du repo.
 
 ## Format `local-activity.json`
 
@@ -81,6 +94,8 @@ Ou avec une clé : `{ "interventions": [ ... ] }`. Le champ `slug` optionnel lie
 Ou `{ "activities": [ ... ] }`. `period` est optionnel (défaut : « ces derniers mois »).
 
 ## Format `reviews.json` ou `google-reviews.json`
+
+**Uniquement si `GEOCOMPTA_API_BASE_URL` n’est pas défini** (pas d’API GéoComptaAE) : l’accueil peut afficher des avis issus de ces fichiers via `getRandomReviews()`. Dès que l’API est configurée, les avis viennent **exclusivement** de GéoComptaAE (`/reviews` + `featuredReviews`) — pas de contenu démo depuis ce dossier.
 
 Le site lit d’abord `google-reviews.json`, sinon `reviews.json`. Structure :
 

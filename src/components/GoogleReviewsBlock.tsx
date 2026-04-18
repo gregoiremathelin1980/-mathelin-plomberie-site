@@ -55,11 +55,32 @@ function LayoutA({ reviews }: { reviews: ReviewEntry[] }) {
 
 interface GoogleReviewsBlockProps {
   reviews: ReviewEntry[];
+  /**
+   * GéoComptaAE : si true et liste vide, section sobre sans contenu inventé.
+   * Hors API (pas de `GEOCOMPTA_API_BASE_URL`) : laisser false — pas de bloc si aucun avis en `site-data`.
+   */
+  geocomptaApiMode?: boolean;
 }
 
-/** Bloc avis : grille 3 colonnes, ordre figé par les données (pas d’aléatoire → pas d’erreur d’hydratation). */
-export default async function GoogleReviewsBlock({ reviews }: GoogleReviewsBlockProps) {
-  if (!reviews?.length) return null;
+/** Bloc avis : données API ou repli fichier uniquement ; pas de faux avis en mode GéoComptaAE. */
+export default async function GoogleReviewsBlock({
+  reviews,
+  geocomptaApiMode = false,
+}: GoogleReviewsBlockProps) {
+  if (!reviews?.length) {
+    if (!geocomptaApiMode) return null;
+    return (
+      <section className="bg-gray-50 px-4 py-16 sm:px-6" aria-label="Avis clients">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex items-center gap-2 text-primary">
+            <Quote className="h-8 w-8" aria-hidden />
+            <h2 className="font-heading text-2xl font-bold sm:text-3xl">Avis clients</h2>
+          </div>
+          <p className="mt-4 text-gray-600">Aucun avis pour le moment.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-gray-50 px-4 py-16 sm:px-6" aria-label="Avis clients">
