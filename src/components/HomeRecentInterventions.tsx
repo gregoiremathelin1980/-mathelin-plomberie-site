@@ -6,11 +6,16 @@ import { buttonVariants } from "@/components/ui/button";
 
 interface HomeRecentInterventionsProps {
   interventions: RecentInterventionEntry[];
+  /** Limite d’affichage (défaut 5 ; GéoCompta peut en fournir davantage, ex. 8–20). */
+  maxItems?: number;
 }
 
-/** Section accueil : cartes "Intervention récente à [ville]" — 3 à 5 max, lien vers réalisations. */
-export default function HomeRecentInterventions({ interventions }: HomeRecentInterventionsProps) {
-  const list = interventions.slice(0, 5);
+/** Section accueil : cartes "Intervention récente à [ville]" — lien vers réalisations si slug. */
+export default function HomeRecentInterventions({
+  interventions,
+  maxItems = 5,
+}: HomeRecentInterventionsProps) {
+  const list = interventions.slice(0, Math.max(1, maxItems));
   if (!list.length) return null;
 
   return (
