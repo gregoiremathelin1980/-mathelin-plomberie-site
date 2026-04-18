@@ -1,0 +1,12 @@
+---
+description: Intégration GéoCompta — API publique uniquement, pas de GMB direct dans le site
+globs: src/lib/api/geocompta*.ts
+alwaysApply: false
+---
+
+# GéoCompta (site Next)
+
+- **Contenu, SEO, avis, homepage, médias** : consommation uniquement via **`GET /api/public/...`** (`geocomptaClient.ts`, caches `geocomptaCached.ts`). Pas d’appel **Google Business Profile** ni de duplication métier dans ce dépôt.
+- **Schémas JSON** : aligner **`geocomptaSchemas.ts`** sur l’API ; toute évolution côté GéoCompta = coordination + mise à jour Zod.
+- **Cadrage produit / prompt pour le dépôt GéoCompta** : voir **`docs/GEOCOMPTA-CURSOR.md`** (prompt à coller + règle `.cursor/rules` optionnelle côté GéoCompta).
+- **Contrat technique** (endpoints, env, cache ISR) : **`docs/GEOCOMPTA-API.md`**.
