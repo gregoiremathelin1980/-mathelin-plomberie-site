@@ -12,10 +12,10 @@ export default function UrgencyBlock() {
         <h2 className="font-heading text-xl font-bold sm:text-2xl">
           Urgence plomberie ou chauffage dans le Bugey et la Côtière
         </h2>
-        <p className="mt-3 text-primary-50">
+        <p className="mt-3 text-white/95">
           Fuite d&apos;eau, chauffe-eau en panne, radiateur qui ne chauffe plus ou canalisation bouchée : intervention rapide autour de Meximieux, Ambérieu, Lagnieu et Pérouges.
         </p>
-        <p className="mt-2 text-sm text-primary-100">
+        <p className="mt-2 text-sm text-white/90">
           Urgences selon disponibilité.
         </p>
         <a

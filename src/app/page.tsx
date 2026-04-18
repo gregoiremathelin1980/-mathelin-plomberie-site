@@ -22,6 +22,7 @@ import {
   getGeocomptaHomeRevalidateSeconds,
 } from "@/lib/api/geocomptaCached";
 import { pickRotatingReviews } from "@/lib/reviewsRotation";
+import { allowSiteDataHomeReviews } from "@/lib/reviewsHomePolicy";
 import type { ReviewEntry } from "@/lib/site-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
@@ -88,10 +89,16 @@ export default async function HomePage() {
   if (GEO) {
     const displayCount = getHomeReviewsDisplayCount();
     const rotationSeed = Date.now();
-    const [hp, reviewPool] = await Promise.all([
-      getCachedGeocomptaHomepage(),
-      getCachedGeocomptaReviewPool(),
-    ]);
+    const hp = await getCachedGeocomptaHomepage();
+    let reviewPool: ReviewEntry[] = [];
+    let reviewsLoadError: string | undefined;
+    try {
+      reviewPool = await getCachedGeocomptaReviewPool();
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn("[geocompta] pool avis (/api/public/reviews) indisponible:", e);
+      reviewsLoadError = msg;
+    }
 
     const realisations = hp.featuredRealisations.map((r) => ({
       id: r.slug,
@@ -103,10 +110,11 @@ export default async function HomePage() {
     }));
 
     const reviewsFromHomeFeatured: ReviewEntry[] = hp.featuredReviews.map((r) => ({
-      author: r.author ?? r.name,
+      author: r.author,
       rating: r.rating,
       text: r.text,
       date: r.date,
+      source: r.source,
     }));
     /** GéoComptaAE uniquement : `GET /api/public/reviews` puis `featuredReviews` du homepage — pas de fichier démo. */
     const reviews: ReviewEntry[] =
@@ -140,10 +148,14 @@ export default async function HomePage() {
         {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
         <Hero />
         {ds.showRecentInterventions && interventions.length > 0 && (
-          <HomeRecentInterventions interventions={interventions} maxItems={20} />
+          <HomeRecentInterventions interventions={interventions} />
         )}
         {ds.showReviews && (
-          <GoogleReviewsBlock reviews={reviews} geocomptaApiMode />
+          <GoogleReviewsBlock
+            reviews={reviews}
+            geocomptaApiMode
+            geocomptaReviewsLoadError={reviews.length === 0 ? reviewsLoadError : undefined}
+          />
         )}
         <UrgencyBlock />
         {hp.featuredPhotos.length > 0 && (
@@ -231,16 +243,28 @@ export default async function HomePage() {
   }));
 
   const recentInterventions = getRecentInterventions();
-  const reviews = getRandomReviews(3);
+  /** Voir `reviewsHomePolicy` + tests `npm run test`. */
+  const allowFileHomeReviews = allowSiteDataHomeReviews();
+  const reviews = allowFileHomeReviews ? getRandomReviews(3) : [];
 
   return (
     <>
       {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
       <Hero />
       {ds.showRecentInterventions && recentInterventions.length > 0 && (
-        <HomeRecentInterventions interventions={recentInterventions} />
+        <HomeRecentInterventions interventions={recentInterventions} maxItems={5} />
       )}
-      {ds.showReviews && <GoogleReviewsBlock reviews={reviews} />}
+      {ds.showReviews && (
+        <GoogleReviewsBlock
+          reviews={reviews}
+          geocomptaApiMode={!allowFileHomeReviews}
+          reviewsEmptyHint={
+            !allowFileHomeReviews
+              ? "Les avis Google (fiche GMB) s’affichent ici via GéoComptaAE : définissez GEOCOMPTA_API_BASE_URL (et GEOCOMPTA_API_KEY si votre serveur l’exige) dans Vercel, puis redéployez. Tant que ce n’est pas fait, aucun avis n’est affiché pour éviter les textes d’exemple."
+              : undefined
+          }
+        />
+      )}
       <UrgencyBlock />
       {ds.showEstimator && (
         <>

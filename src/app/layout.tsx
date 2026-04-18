@@ -26,8 +26,11 @@ const inter = Inter({
   display: "optional",
 });
 
-/** Réglages (images conseils, photos chantiers) lus depuis site-data à chaque requête. */
-export const dynamic = "force-dynamic";
+/**
+ * ISR layout : HTML mis en cache (TTFB meilleur). Données site-data / site.json rafraîchies à l’intervalle ci-dessous.
+ * Après sauvegarde admin, `revalidatePath` est appelé sur l’API site-settings.
+ */
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[480px] overflow-hidden bg-primary sm:min-h-[560px]">
       <Image
-        src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1920&q=80"
+        src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1920&q=75"
         alt=""
         fill
         className="object-cover"
@@ -31,10 +31,10 @@ export default function Hero() {
         <h1 className="font-heading text-3xl font-bold leading-tight drop-shadow sm:text-4xl md:text-5xl">
           Plombier chauffagiste à Pérouges
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-blue-100 sm:text-xl">
+        <p className="mt-4 max-w-2xl text-lg text-white/95 sm:text-xl">
           Dépannage plomberie et chauffage autour de Meximieux, Ambérieu et dans le Bugey et la Côtière : fuite d&apos;eau, chauffe-eau en panne, radiateur froid ou canalisation bouchée.
         </p>
-        <p className="mt-3 text-sm text-blue-200 sm:text-base">
+        <p className="mt-3 text-sm text-white/90 sm:text-base">
           {HERO_SERVICES}
         </p>
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
@@ -55,7 +55,7 @@ export default function Hero() {
         </div>
         <ul className="mt-14 flex flex-wrap justify-center gap-8 sm:gap-12">
           {TRUST_ITEMS.map(({ icon: Icon, label }) => (
-            <li key={label} className="flex items-center gap-2 text-blue-100">
+            <li key={label} className="flex items-center gap-2 text-white/95">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
                 <Icon className="h-5 w-5" />
               </span>

@@ -402,11 +402,18 @@ export function getConseilBySlug(slug: string): ConseilsItem | null {
   };
 }
 
-/** Returns N random conseils (different each time for variety). */
+/**
+ * Retourne N conseils pour mise en avant (tri stable : date puis slug).
+ * Pas de Math.random() : évite les erreurs d’hydratation React (serveur vs client).
+ */
 export function getRandomConseils(count: number): ConseilsItem[] {
   const all = getConseils();
-  const shuffled = [...all].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+  const sorted = [...all].sort((a, b) => {
+    const byDate = String(b.date ?? "").localeCompare(String(a.date ?? ""));
+    if (byDate !== 0) return byDate;
+    return a.slug.localeCompare(b.slug);
+  });
+  return sorted.slice(0, count);
 }
 
 /** Price ranges: read from content/prix/prix.json (fallback to empty object). */

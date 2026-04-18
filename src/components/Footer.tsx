@@ -19,16 +19,13 @@ export default function Footer() {
             <p className="text-sm font-medium text-white">
               Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
             </p>
-            <p className="mt-2 text-sm text-blue-100">
-              Plombier chauffagiste à {settings.cities.slice(0, 4).join(", ")} et environs.
-            </p>
-            <p className="mt-2 text-sm text-blue-200">
+            <p className="mt-3 text-sm text-white/90">
               {settings.address}
             </p>
           </div>
           <div>
             <h3 className="font-heading mb-3 text-lg font-semibold">Liens</h3>
-            <ul className="space-y-2 text-sm text-blue-100">
+            <ul className="space-y-2 text-sm text-white/90">
               <li>
                 <Link href="/services" className="transition hover:text-white">
                   Services
@@ -70,12 +67,12 @@ export default function Footer() {
             <h3 className="font-heading mb-3 text-lg font-semibold">
               Zone d&apos;intervention
             </h3>
-            <p className="text-sm text-blue-100">
+            <p className="text-sm text-white/90">
               Rayon {settings.service_radius} autour de Pérouges : {settings.cities.join(", ")}
             </p>
           </div>
           <div>
-            <h3 className="font-heading mb-3 text-lg font-semibold">Contact</h3>
+            <h3 className="font-heading mb-3 text-lg font-semibold">Téléphone</h3>
             <a
               href={`tel:${phoneRaw}`}
               className="text-lg font-semibold text-accent transition hover:text-orange-300"
@@ -84,10 +81,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <p className="mt-10 border-t border-blue-800 pt-8 text-center text-sm text-blue-100">
-          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
-        </p>
-        <div className="mt-2 text-center text-sm text-blue-200">
+        <div className="mt-10 border-t border-blue-800 pt-8 text-center text-sm text-white/85">
           © {currentYear} {settings.company}. Tous droits réservés.
         </div>
       </div>

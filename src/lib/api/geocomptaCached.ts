@@ -48,25 +48,25 @@ function getReviewsCacheRevalidate(): number {
  * Pool d’avis synchronisés côté GéoCompta (ex. depuis Google Business Profile).
  * Liste complète ; la page d’accueil en extrait un sous-ensemble avec rotation (voir `pickRotatingReviews`).
  */
+/**
+ * Pool complet `/api/public/reviews`.
+ * En cas d’échec (HTTP, timeout, schéma), la promesse **rejette** : pas de mise en cache d’un tableau vide qui masquerait l’erreur.
+ */
 export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
   if (!isGeocomptaConfigured()) return [];
   const revalidate = getReviewsCacheRevalidate();
   return unstable_cache(
     async () => {
-      try {
-        const list = await fetchGeocomptaReviews();
-        return list.map((r) => ({
-          author: r.author ?? r.name,
-          rating: r.rating,
-          text: r.text,
-          date: r.date,
-        }));
-      } catch (e) {
-        console.warn("[geocompta] GET /api/public/reviews indisponible ou invalide:", e);
-        return [];
-      }
+      const list = await fetchGeocomptaReviews();
+      return list.map((r) => ({
+        author: r.author,
+        rating: r.rating,
+        text: r.text,
+        date: r.date,
+        source: r.source,
+      }));
     },
-    ["geocompta-reviews-pool-v1"],
+    ["geocompta-reviews-pool-v2"],
     { revalidate, tags: ["geocompta-reviews"] }
   )();
 }

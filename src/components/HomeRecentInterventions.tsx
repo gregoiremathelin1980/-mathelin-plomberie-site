@@ -4,16 +4,16 @@ import type { RecentInterventionEntry } from "@/lib/site-data";
 import { formatMonthYearFR } from "@/lib/date";
 import { buttonVariants } from "@/components/ui/button";
 
-interface HomeRecentInterventionsProps {
+export interface HomeRecentInterventionsProps {
   interventions: RecentInterventionEntry[];
-  /** Limite d’affichage (défaut 5 ; GéoCompta peut en fournir davantage, ex. 8–20). */
+  /** Limite d’affichage (défaut 20 pour l’accueil GéoCompta ; rétrocompatible si absent du JSX). */
   maxItems?: number;
 }
 
 /** Section accueil : cartes "Intervention récente à [ville]" — lien vers réalisations si slug. */
 export default function HomeRecentInterventions({
   interventions,
-  maxItems = 5,
+  maxItems = 20,
 }: HomeRecentInterventionsProps) {
   const list = interventions.slice(0, Math.max(1, maxItems));
   if (!list.length) return null;

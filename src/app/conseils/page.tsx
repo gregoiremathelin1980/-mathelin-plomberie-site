@@ -1,7 +1,7 @@
 import { Lightbulb } from "lucide-react";
 import ConseilsList from "@/components/ConseilsList";
 import { getConseils } from "@/lib/content";
-import { getAdviceImage, getAdviceImageAlt } from "@/lib/getAdviceImage";
+import { getAdviceImage } from "@/lib/getAdviceImage";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
@@ -22,7 +22,6 @@ export default async function ConseilsPage() {
     slug: c.slug,
     category: c.category,
     image: getAdviceImage(c.slug),
-    imageAlt: getAdviceImageAlt(c.slug, c.title),
   }));
 
   return (

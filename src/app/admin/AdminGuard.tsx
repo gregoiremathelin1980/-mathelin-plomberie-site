@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Loader2, Lock } from "lucide-react";
+import { Loader2, Lock, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +13,7 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -44,6 +46,17 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
       setError("Erreur de connexion");
     }
     setSubmitting(false);
+  };
+
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      setStatus("unauth");
+      router.refresh();
+    } finally {
+      setLoggingOut(false);
+    }
   };
 
   if (status === "loading") {
@@ -86,5 +99,29 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
     );
   }
 
-  return <>{children}</>;
+  return (
+    <div className="min-h-screen">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 bg-gray-50 px-4 py-2 text-sm">
+        <Link href="/" className="text-primary underline-offset-4 hover:underline">
+          Retour au site
+        </Link>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          disabled={loggingOut}
+          onClick={handleLogout}
+          className="gap-1.5"
+        >
+          {loggingOut ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <LogOut className="h-4 w-4" />
+          )}
+          Déconnexion
+        </Button>
+      </div>
+      {children}
+    </div>
+  );
 }

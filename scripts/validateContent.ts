@@ -115,13 +115,19 @@ function main(): void {
   let pricingRaw: unknown = null;
   let simulateurRaw: unknown = null;
   try {
-    const recentPath = path.join(SITE_DATA_DIR, "recent-interventions.json");
-    if (fs.existsSync(recentPath)) {
-      recentRaw = JSON.parse(fs.readFileSync(recentPath, "utf-8"));
-      if (recentRaw && typeof recentRaw === "object" && !Array.isArray(recentRaw)) {
-        recentRaw = (recentRaw as { interventions?: unknown }).interventions ?? [];
+    const extractArray = (parsed: unknown): unknown[] => {
+      if (Array.isArray(parsed)) return parsed;
+      if (parsed && typeof parsed === "object" && "interventions" in parsed) {
+        const i = (parsed as { interventions?: unknown }).interventions;
+        return Array.isArray(i) ? i : [];
       }
-    }
+      return [];
+    };
+    const dayPath = path.join(SITE_DATA_DIR, "interventions-du-jour.json");
+    const basePath = path.join(SITE_DATA_DIR, "recent-interventions.json");
+    const dayArr = fs.existsSync(dayPath) ? extractArray(JSON.parse(fs.readFileSync(dayPath, "utf-8"))) : [];
+    const baseArr = fs.existsSync(basePath) ? extractArray(JSON.parse(fs.readFileSync(basePath, "utf-8"))) : [];
+    recentRaw = [...dayArr, ...baseArr];
   } catch {
     recentRaw = [];
   }

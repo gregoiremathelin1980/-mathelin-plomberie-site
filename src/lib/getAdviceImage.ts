@@ -1,7 +1,7 @@
 /**
  * Advice image: single source /public/images/conseils.
  * 1. Detect category from article slug (priority: chauffe-eau, radiateur, chauffage, evier, robinet, canalisation, plomberie)
- * 2. Select a random image from the matching folder (width >= 600px)
+ * 2. Choisir une image dans le dossier (déterministe par slug, width >= 600px)
  * 3. Fallback: /images/conseils/plomberie (never placeholder)
  */
 
@@ -33,6 +33,16 @@ export type AdviceImageCategory = (typeof ADVICE_IMAGE_CATEGORIES)[number];
 
 function isAdviceCategory(cat: string): cat is AdviceImageCategory {
   return (ADVICE_IMAGE_CATEGORIES as readonly string[]).includes(cat);
+}
+
+/** Indice stable à partir d’une chaîne (même résultat serveur / client — pas d’hydratation cassée). */
+function pickIndex(length: number, seed: string): number {
+  if (length <= 0) return 0;
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) {
+    h = (Math.imul(31, h) + seed.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h) % length;
 }
 
 const U = (id: string) => `https://images.unsplash.com/photo-${id}?w=800&q=80`;
@@ -130,40 +140,40 @@ function listImagesInDir(dir: string, urlPrefix: string): string[] {
 
 /**
  * Returns one image URL for an advice article.
- * 1. Category from slug → images in /images/conseils/{category}, pick random.
+ * 1. Category from slug → images in /images/conseils/{category}, choix stable par slug.
  * 2. If category has no images → fallback /images/conseils/plomberie.
  * Never returns placeholder; ensure plomberie has at least one image.
  */
 export function getAdviceImage(slug: string): string {
   const category = getAdviceImageCategory(slug);
-  if (!isAdviceCategory(category)) return getAdviceImageFromCategory("plomberie");
+  if (!isAdviceCategory(category)) return getAdviceImageFromCategory("plomberie", slug);
 
   const dir = path.join(CONSEILS_BASE, category);
   const list = listImagesInDir(dir, `/images/conseils/${category}`);
-  if (list.length > 0) return list[Math.floor(Math.random() * list.length)];
+  if (list.length > 0) return list[pickIndex(list.length, slug)];
 
-  const fallback = getAdviceImageFromCategory("plomberie");
+  const fallback = getAdviceImageFromCategory("plomberie", slug);
   if (fallback === DEFAULT_PLOMBERIE_PATH) {
     return ADVICE_IMAGE_UNSPLASH[category] ?? ADVICE_IMAGE_UNSPLASH_FALLBACK;
   }
   return fallback;
 }
 
-/** Get one random image from a category folder. Fallback: plomberie, then any category. Never returns empty (use plomberie default path if no files). */
-function getAdviceImageFromCategory(category: AdviceImageCategory): string {
+/** Fallback par catégorie ; choix déterministe selon le slug. */
+function getAdviceImageFromCategory(category: AdviceImageCategory, slug: string): string {
   const dir = path.join(CONSEILS_BASE, category);
   const list = listImagesInDir(dir, `/images/conseils/${category}`);
-  if (list.length > 0) return list[Math.floor(Math.random() * list.length)];
+  if (list.length > 0) return list[pickIndex(list.length, `${slug}:${category}`)];
 
   const plomberieDir = path.join(CONSEILS_BASE, "plomberie");
   const plomberie = listImagesInDir(plomberieDir, "/images/conseils/plomberie");
-  if (plomberie.length > 0) return plomberie[Math.floor(Math.random() * plomberie.length)];
+  if (plomberie.length > 0) return plomberie[pickIndex(plomberie.length, `${slug}:plomberie`)];
 
   for (const cat of ADVICE_IMAGE_CATEGORIES) {
     if (cat === category) continue;
     const d = path.join(CONSEILS_BASE, cat);
     const L = listImagesInDir(d, `/images/conseils/${cat}`);
-    if (L.length > 0) return L[Math.floor(Math.random() * L.length)];
+    if (L.length > 0) return L[pickIndex(L.length, `${slug}:${cat}`)];
   }
 
   return DEFAULT_PLOMBERIE_PATH;

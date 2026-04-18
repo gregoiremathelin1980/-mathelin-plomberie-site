@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useSettings } from "@/contexts/SettingsContext";
 import { getSeoImageAlt } from "@/lib/seoImage";
 
@@ -23,17 +24,20 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const settings = useSettings();
   const showChantierPhotos = settings?.show_chantier_photos !== false;
+  const [imageError, setImageError] = useState(false);
   const href = project.slug ? `/realisations/${project.slug}` : undefined;
+  const showImage = Boolean(showChantierPhotos && project.image && !imageError);
   const content = (
     <>
-      {showChantierPhotos && project.image ? (
+      {showImage ? (
         <div className="relative aspect-[4/3] w-full bg-gray-100">
           <Image
-            src={project.image}
+            src={project.image!}
             alt={getSeoImageAlt(project.title, project.city)}
             fill
             className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            onError={() => setImageError(true)}
           />
         </div>
       ) : (

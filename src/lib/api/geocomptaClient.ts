@@ -9,17 +9,17 @@ import {
   GeocomptaConseilDetailSchema,
   type GeocomptaConseilDetail,
   GeocomptaFeaturedInterventionSchema,
-  GeocomptaFeaturedReviewSchema,
   GeocomptaHomepageSchema,
   type GeocomptaHomepagePayload,
+  type GeocomptaFeaturedReview,
   GeocomptaRealisationDetailSchema,
   type GeocomptaRealisationDetail,
   GeocomptaRealisationListItemSchema,
-  GeocomptaReviewsListSchema,
+  parseGeocomptaReviewList,
   GeocomptaSeoPageSchema,
   type GeocomptaSeoPage,
-  GeocomptaSitemapSchema,
-  type GeocomptaSitemapPayload,
+  GeocomptaSitemapDataSchema,
+  type GeocomptaSitemapData,
 } from "@/lib/api/geocomptaSchemas";
 
 const DEFAULT_TIMEOUT_MS = 5000;
@@ -126,7 +126,14 @@ export async function geocomptaGetJson<S extends z.ZodTypeAny>(
 // ——— Endpoints publics (chemins selon spec) ———
 
 export async function fetchGeocomptaHomepage(): Promise<GeocomptaHomepagePayload> {
-  return geocomptaGetJson("/api/public/homepage", GeocomptaHomepageSchema);
+  const data = await geocomptaGetJson("/api/public/homepage", GeocomptaHomepageSchema);
+  if (process.env.NODE_ENV === "development") {
+    console.info(
+      "[geocompta] GET /api/public/homepage → featuredReviews parsed count:",
+      data.featuredReviews.length
+    );
+  }
+  return data;
 }
 
 export async function fetchGeocomptaRealisationList(): Promise<z.infer<typeof GeocomptaRealisationListItemSchema>[]> {
@@ -158,13 +165,32 @@ export async function fetchGeocomptaSeoPageBySlug(slug: string): Promise<Geocomp
   return geocomptaGetJson(`/api/public/pages/${encoded}`, GeocomptaSeoPageSchema);
 }
 
-export async function fetchGeocomptaReviews(): Promise<z.infer<typeof GeocomptaFeaturedReviewSchema>[]> {
-  const data = await geocomptaGetJson("/api/public/reviews", z.unknown());
-  if (Array.isArray(data)) return GeocomptaReviewsListSchema.parse(data);
-  if (data && typeof data === "object" && Array.isArray((data as { reviews?: unknown }).reviews)) {
-    return GeocomptaReviewsListSchema.parse((data as { reviews: unknown[] }).reviews);
+/** Extrait le tableau d’avis depuis la réponse JSON brute (tests + `fetchGeocomptaReviews`). */
+export function extractReviewsArrayFromPayload(data: unknown): unknown[] {
+  if (Array.isArray(data)) return data;
+  if (data && typeof data === "object") {
+    const o = data as Record<string, unknown>;
+    if (Array.isArray(o.reviews)) return o.reviews;
+    if (Array.isArray(o.items)) return o.items;
+    if (Array.isArray(o.data)) return o.data;
   }
-  throw new GeocomptaApiError("GéoCompta /reviews: format inattendu");
+  throw new GeocomptaApiError("GéoCompta /reviews: format inattendu (attendu: tableau racine ou { reviews })");
+}
+
+export async function fetchGeocomptaReviews(): Promise<GeocomptaFeaturedReview[]> {
+  const data = await geocomptaGetJson("/api/public/reviews", z.unknown());
+  const raw = extractReviewsArrayFromPayload(data);
+  const list = parseGeocomptaReviewList(raw);
+  if (process.env.NODE_ENV === "development") {
+    console.info(
+      "[geocompta] GET /api/public/reviews → parsed count:",
+      list.length,
+      "(raw items:",
+      raw.length,
+      ")"
+    );
+  }
+  return list;
 }
 
 export async function fetchGeocomptaInterventions(): Promise<
@@ -180,7 +206,7 @@ export async function fetchGeocomptaInterventions(): Promise<
   throw new GeocomptaApiError("GéoCompta /interventions: format inattendu");
 }
 
-export async function fetchGeocomptaSitemap(): Promise<GeocomptaSitemapPayload> {
+export async function fetchGeocomptaSitemap(): Promise<GeocomptaSitemapData> {
   const raw = await geocomptaGetJson("/api/public/sitemap", z.unknown());
-  return GeocomptaSitemapSchema.parse(raw);
+  return GeocomptaSitemapDataSchema.parse(raw);
 }

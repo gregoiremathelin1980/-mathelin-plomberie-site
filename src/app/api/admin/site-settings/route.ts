@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import crypto from "node:crypto";
 import {
   getSiteDataSettings,
@@ -68,6 +69,8 @@ export async function POST(request: NextRequest) {
     };
     writeSiteDataSettings(settings);
     clearSiteSettingsCache();
+    revalidatePath("/", "layout");
+    revalidatePath("/");
     return NextResponse.json(settings);
   } catch {
     return NextResponse.json(

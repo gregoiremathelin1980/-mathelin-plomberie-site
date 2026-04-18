@@ -2,6 +2,7 @@
  * Lecture des exports GéoCompta (site-data).
  * Aucune connexion directe à GéoCompta.
  * Contenu : depannage/*.md, realisations/*.md, conseils/*.md, recent-interventions.json,
+ * interventions-du-jour.json (export GéoCompta quotidien, fusionné en tête),
  * local-activity.json, reviews.json, simulateur.json
  *
  * Alias : SITE_DATA_DIR pointe vers site-data (ou env SITE_DATA_DIR, ex. C:\Users\Grégoire\SiteMathelinData).
@@ -91,12 +92,11 @@ export interface RecentInterventionEntry {
   date?: string;
 }
 
-/** Interventions récentes (preuve locale) depuis site-data/recent-interventions.json */
-export function getRecentInterventions(): RecentInterventionEntry[] {
-  const filePath = path.join(SITE_DATA_DIR, "recent-interventions.json");
+/** Fichier optionnel : interventions du jour écrasées quotidiennement par l’export GéoCompta. */
+export const INTERVENTIONS_DU_JOUR_FILENAME = "interventions-du-jour.json";
+
+function parseRecentInterventionsRaw(raw: string): RecentInterventionEntry[] {
   try {
-    if (!fs.existsSync(filePath)) return [];
-    const raw = fs.readFileSync(filePath, "utf-8");
     const data = JSON.parse(raw) as { interventions?: RecentInterventionEntry[] } | RecentInterventionEntry[];
     if (Array.isArray(data)) return data;
     if (data.interventions && Array.isArray(data.interventions)) return data.interventions;
@@ -104,6 +104,76 @@ export function getRecentInterventions(): RecentInterventionEntry[] {
   } catch {
     return [];
   }
+}
+
+function readRecentInterventionsFile(filename: string): RecentInterventionEntry[] {
+  const filePath = path.join(SITE_DATA_DIR, filename);
+  try {
+    if (!fs.existsSync(filePath)) return [];
+    const raw = fs.readFileSync(filePath, "utf-8");
+    return parseRecentInterventionsRaw(raw);
+  } catch {
+    return [];
+  }
+}
+
+/** Date du jour (Europe/Paris) au format YYYY-MM-DD — pour tri / affichage des exports sans champ date. */
+function todayYMDParis(): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Paris",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const y = parts.find((p) => p.type === "year")?.value;
+  const m = parts.find((p) => p.type === "month")?.value;
+  const d = parts.find((p) => p.type === "day")?.value;
+  return y && m && d ? `${y}-${m}-${d}` : new Date().toISOString().slice(0, 10);
+}
+
+function normalizeRecentEntries(entries: RecentInterventionEntry[]): RecentInterventionEntry[] {
+  return entries.filter(
+    (e) => typeof e.city === "string" && e.city.trim() !== "" && typeof e.label === "string" && e.label.trim() !== ""
+  );
+}
+
+function interventionDedupeKey(e: RecentInterventionEntry): string {
+  const city = e.city.trim().toLowerCase();
+  const label = e.label.trim().toLowerCase();
+  const date = (e.date ?? "").trim();
+  return `${city}|${label}|${date}`;
+}
+
+/**
+ * Interventions récentes : fusion de
+ * 1) `interventions-du-jour.json` (export GéoCompta du jour, prioritaire),
+ * 2) `recent-interventions.json` (liste de base / historique manuel).
+ * Sans date sur le fichier du jour → date du jour (Paris) pour le tri.
+ * Déduplication par ville + libellé + date ; tri par date décroissante.
+ */
+export function getRecentInterventions(): RecentInterventionEntry[] {
+  const dayList = normalizeRecentEntries(readRecentInterventionsFile(INTERVENTIONS_DU_JOUR_FILENAME)).map((e) => ({
+    ...e,
+    date: e.date?.trim() ? e.date.trim() : todayYMDParis(),
+  }));
+  const baseList = normalizeRecentEntries(readRecentInterventionsFile("recent-interventions.json"));
+
+  const merged: RecentInterventionEntry[] = [];
+  const seen = new Set<string>();
+  for (const e of [...dayList, ...baseList]) {
+    const key = interventionDedupeKey(e);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(e);
+  }
+
+  merged.sort((a, b) => {
+    const da = a.date ?? "";
+    const db = b.date ?? "";
+    return db.localeCompare(da);
+  });
+
+  return merged;
 }
 
 /** Réalisations depuis site-data/realisations/*.md (export GéoCompta). Même structure que content. */
@@ -289,6 +359,8 @@ export interface ReviewEntry {
   rating: number;
   text: string;
   date?: string;
+  /** Ex. `google` — fourni par GéoComptaAE / GMB */
+  source?: string;
 }
 
 function parseReviews(raw: string): ReviewEntry[] {
@@ -319,11 +391,18 @@ export function getReviews(): ReviewEntry[] {
   return [];
 }
 
-/** Mélange et retourne N avis aléatoires (pour affichage à chaque chargement). */
+/**
+ * Retourne N avis pour affichage (ordre stable : texte + auteur).
+ * Pas de mélange aléatoire : évite les erreurs d’hydratation React.
+ */
 export function getRandomReviews(count: number): ReviewEntry[] {
   const all = getReviews();
-  const shuffled = [...all].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+  const sorted = [...all].sort((a, b) => {
+    const ka = `${a.text ?? ""}\0${a.author ?? ""}`;
+    const kb = `${b.text ?? ""}\0${b.author ?? ""}`;
+    return ka.localeCompare(kb);
+  });
+  return sorted.slice(0, count);
 }
 
 // ——— simulateur.json (sélecteur de problème dynamique) ———

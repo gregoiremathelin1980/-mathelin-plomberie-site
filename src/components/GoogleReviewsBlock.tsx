@@ -35,8 +35,13 @@ function ReviewCard({
       <p className="mt-2 text-gray-700 text-sm leading-relaxed">
         &ldquo;{review.text}&rdquo;
       </p>
-      {review.author && (
-        <footer className="mt-3 text-sm text-gray-500">— {review.author}</footer>
+      {(review.author || review.source) && (
+        <footer className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-500">
+          {review.author ? <span>— {review.author}</span> : null}
+          {review.source ? (
+            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">{review.source}</span>
+          ) : null}
+        </footer>
       )}
     </blockquote>
   );
@@ -60,15 +65,34 @@ interface GoogleReviewsBlockProps {
    * Hors API (pas de `GEOCOMPTA_API_BASE_URL`) : laisser false — pas de bloc si aucun avis en `site-data`.
    */
   geocomptaApiMode?: boolean;
+  /** Erreur fetch `/api/public/reviews` (affichée seulement si la liste affichée est vide). */
+  geocomptaReviewsLoadError?: string;
+  /** Remplace le texte « Aucun avis pour le moment » quand la liste est vide (ex. prod sans GéoCompta). */
+  reviewsEmptyHint?: string;
 }
 
 /** Bloc avis : données API ou repli fichier uniquement ; pas de faux avis en mode GéoComptaAE. */
 export default async function GoogleReviewsBlock({
   reviews,
   geocomptaApiMode = false,
+  geocomptaReviewsLoadError,
+  reviewsEmptyHint,
 }: GoogleReviewsBlockProps) {
   if (!reviews?.length) {
     if (!geocomptaApiMode) return null;
+    const isDev = process.env.NODE_ENV === "development";
+    const errorDetail =
+      geocomptaReviewsLoadError &&
+      (isDev ? (
+        <pre className="mt-3 max-h-40 overflow-auto rounded-lg bg-red-50 p-3 text-left text-xs text-red-900 whitespace-pre-wrap break-words">
+          {geocomptaReviewsLoadError}
+        </pre>
+      ) : (
+        <p className="mt-2 text-sm text-amber-800">
+          Impossible de charger les avis pour le moment. Vérifiez la connexion GéoComptaAE et les variables
+          d’environnement (URL, clé Bearer).
+        </p>
+      ));
     return (
       <section className="bg-gray-50 px-4 py-16 sm:px-6" aria-label="Avis clients">
         <div className="mx-auto max-w-6xl">
@@ -76,7 +100,16 @@ export default async function GoogleReviewsBlock({
             <Quote className="h-8 w-8" aria-hidden />
             <h2 className="font-heading text-2xl font-bold sm:text-3xl">Avis clients</h2>
           </div>
-          <p className="mt-4 text-gray-600">Aucun avis pour le moment.</p>
+          {geocomptaReviewsLoadError ? (
+            <>
+              <p className="mt-4 font-medium text-gray-800">Les avis n’ont pas pu être récupérés depuis GéoComptaAE.</p>
+              {errorDetail}
+            </>
+          ) : (
+            <p className="mt-4 text-gray-600">
+              {reviewsEmptyHint ?? "Aucun avis pour le moment."}
+            </p>
+          )}
         </div>
       </section>
     );

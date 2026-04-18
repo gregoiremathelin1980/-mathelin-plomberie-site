@@ -8,6 +8,7 @@ import { getPhotoUrl } from "@/lib/config";
 import { tryGetCachedGeocomptaSeoPage, getCachedGeocomptaPPageSlugs } from "@/lib/api/geocomptaCached";
 import { isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import { renderPublicSeoContent } from "@/lib/renderPublicSeoContent";
 
 export const revalidate = 86400;
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!page) return {};
   const path = `/p/${slug}`;
   return buildPageMetadata({
-    title: page.title,
+    title: page.metaTitle?.trim() || page.title,
     description: page.metaDescription,
     path,
     image: getPhotoUrl(page.image ?? undefined) ?? undefined,
@@ -80,9 +81,9 @@ export default async function GeocomptaSeoPageRoute({ params }: { params: Promis
                 className="text-gray-text [&_a]:text-primary [&_a]:underline"
                 dangerouslySetInnerHTML={{ __html: page.contentHtml }}
               />
-            ) : page.content ? (
-              <div className="whitespace-pre-wrap text-gray-text">{page.content}</div>
-            ) : null}
+            ) : (
+              renderPublicSeoContent(page.content)
+            )}
           </div>
           <GeocomptaRelatedSection
             relatedPages={page.relatedPages}

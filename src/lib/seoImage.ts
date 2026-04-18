@@ -32,8 +32,14 @@ export function getSeoImageFilename(typeTravaux: string, ville: string, ext = "j
  */
 export function getSeoImageAlt(title: string, city?: string): string {
   const base = title?.trim() || "Réalisation plomberie";
-  if (city?.trim()) {
-    return `${base} à ${city.trim()} - Mathelin Plomberie`;
+  const c = city?.trim();
+  if (c) {
+    const lower = base.toLowerCase();
+    const cityLower = c.toLowerCase();
+    if (lower.includes(cityLower) || lower.includes(`à ${cityLower}`)) {
+      return `${base} - Mathelin Plomberie`;
+    }
+    return `${base} à ${c} - Mathelin Plomberie`;
   }
   return `${base} - Mathelin Plomberie`;
 }
