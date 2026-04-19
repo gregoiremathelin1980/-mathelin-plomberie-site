@@ -80,6 +80,19 @@ function testHomepageFeaturedReviewsPartialBad() {
   assert.equal(hp.featuredReviews[1]!.text, "Aussi valide");
 }
 
+/** GéoCompta peut envoyer le même wrapping que sur `GET /reviews` au lieu d’un tableau racine. */
+function testHomepageFeaturedReviewsWrappedObject() {
+  const hp = GeocomptaHomepageSchema.parse({
+    featuredRealisations: [],
+    featuredAdvice: [],
+    featuredReviews: { reviews: [{ rating: 5, text: "Avis dans un objet reviews" }] },
+    featuredInterventions: [],
+    featuredPhotos: [],
+  });
+  assert.equal(hp.featuredReviews.length, 1);
+  assert.equal(hp.featuredReviews[0]!.text, "Avis dans un objet reviews");
+}
+
 function testPickRotating() {
   const pool = [
     { rating: 5, text: "a", author: "1" },
@@ -150,6 +163,7 @@ async function main() {
   testParseSkipsInvalid();
   testExtractPayload();
   testHomepageFeaturedReviewsPartialBad();
+  testHomepageFeaturedReviewsWrappedObject();
   testPickRotating();
   testBuildGeocomptaUrl();
   testHomePolicy();

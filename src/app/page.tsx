@@ -158,6 +158,11 @@ export default async function HomePage() {
             geocomptaApiMode
             geocomptaReviewsLoadError={reviews.length === 0 ? reviewsLoadError : undefined}
             googleReviewsPageUrl={settings.googleReviewsUrl}
+            reviewsEmptyHint={
+              reviews.length === 0
+                ? "Aucun avis synchronisé pour l’instant sur cette page. Les avis Google restent disponibles sur la fiche de l’entreprise (lien ci-dessous)."
+                : undefined
+            }
           />
         )}
         <UrgencyBlock />

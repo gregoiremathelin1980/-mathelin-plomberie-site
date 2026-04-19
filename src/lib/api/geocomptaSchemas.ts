@@ -116,6 +116,22 @@ export function parseGeocomptaReviewList(input: unknown): GeocomptaFeaturedRevie
   return out;
 }
 
+/**
+ * Déballage tolérant (homepage GéoCompta) : même formes que `GET /api/public/reviews`
+ * (tableau racine ou `{ reviews | items | data | featuredReviews }`), sans throw.
+ */
+export function unwrapReviewListInput(input: unknown): unknown[] {
+  if (Array.isArray(input)) return input;
+  if (input && typeof input === "object") {
+    const o = input as Record<string, unknown>;
+    if (Array.isArray(o.reviews)) return o.reviews;
+    if (Array.isArray(o.items)) return o.items;
+    if (Array.isArray(o.data)) return o.data;
+    if (Array.isArray(o.featuredReviews)) return o.featuredReviews;
+  }
+  return [];
+}
+
 export const GeocomptaFeaturedInterventionSchema = z.object({
   city: z.string(),
   label: z.string(),
@@ -136,7 +152,7 @@ export const GeocomptaHomepageSchema = z.object({
   featuredReviews: z
     .unknown()
     .optional()
-    .transform((v) => parseGeocomptaReviewList(Array.isArray(v) ? v : [])),
+    .transform((v) => parseGeocomptaReviewList(unwrapReviewListInput(v))),
   featuredInterventions: z.array(GeocomptaFeaturedInterventionSchema).default([]),
   featuredPhotos: z.array(GeocomptaFeaturedPhotoSchema).default([]),
 });
