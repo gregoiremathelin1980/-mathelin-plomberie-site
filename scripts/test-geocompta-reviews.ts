@@ -6,7 +6,12 @@
 
 import assert from "node:assert/strict";
 import { parseGeocomptaReviewList, GeocomptaHomepageSchema } from "../src/lib/api/geocomptaSchemas";
-import { extractReviewsArrayFromPayload, GeocomptaApiError } from "../src/lib/api/geocomptaClient";
+import {
+  buildGeocomptaUrl,
+  extractReviewsArrayFromPayload,
+  GeocomptaApiError,
+  getGeocomptaApiBaseUrl,
+} from "../src/lib/api/geocomptaClient";
 import { pickRotatingReviews } from "../src/lib/reviewsRotation";
 import { allowSiteDataHomeReviewsEnv } from "../src/lib/reviewsHomePolicy";
 
@@ -90,6 +95,19 @@ function testPickRotating() {
   assert.equal(all.length, 4);
 }
 
+function testBuildGeocomptaUrl() {
+  const prevBase = process.env.GEOCOMPTA_BASE_URL;
+  const prevApi = process.env.GEOCOMPTA_API_BASE_URL;
+  delete process.env.GEOCOMPTA_BASE_URL;
+  delete process.env.GEOCOMPTA_API_BASE_URL;
+  process.env.GEOCOMPTA_BASE_URL = "https://trigkey.example.ts.net:8443";
+  assert.equal(buildGeocomptaUrl("/api/public/reviews"), "https://trigkey.example.ts.net:8443/api/public/reviews");
+  if (prevBase !== undefined) process.env.GEOCOMPTA_BASE_URL = prevBase;
+  else delete process.env.GEOCOMPTA_BASE_URL;
+  if (prevApi !== undefined) process.env.GEOCOMPTA_API_BASE_URL = prevApi;
+  else delete process.env.GEOCOMPTA_API_BASE_URL;
+}
+
 function testHomePolicy() {
   assert.equal(allowSiteDataHomeReviewsEnv("production", undefined), false);
   assert.equal(allowSiteDataHomeReviewsEnv("production", "false"), false);
@@ -100,10 +118,9 @@ function testHomePolicy() {
 }
 
 async function optionalLiveFetch(): Promise<void> {
-  const base =
-    process.env.GEOCOMPTA_API_BASE_URL?.trim() || process.env.GEOCOMPTA_API_URL?.trim();
+  const base = getGeocomptaApiBaseUrl();
   if (!base) {
-    console.log("[test] live : ignoré (GEOCOMPTA_API_BASE_URL / GEOCOMPTA_API_URL absent)");
+    console.log("[test] live : ignoré (GEOCOMPTA_BASE_URL / GEOCOMPTA_API_BASE_URL absent)");
     return;
   }
   const url = `${base.replace(/\/$/, "")}/api/public/reviews`;
@@ -134,6 +151,7 @@ async function main() {
   testExtractPayload();
   testHomepageFeaturedReviewsPartialBad();
   testPickRotating();
+  testBuildGeocomptaUrl();
   testHomePolicy();
   await optionalLiveFetch();
   console.log("[test] geocompta-reviews : OK (tous les tests unitaires passés)");

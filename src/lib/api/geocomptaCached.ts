@@ -45,12 +45,8 @@ function getReviewsCacheRevalidate(): number {
 }
 
 /**
- * Pool d’avis synchronisés côté GéoCompta (ex. depuis Google Business Profile).
- * Liste complète ; la page d’accueil en extrait un sous-ensemble avec rotation (voir `pickRotatingReviews`).
- */
-/**
  * Pool complet `/api/public/reviews`.
- * En cas d’échec (HTTP, timeout, schéma), la promesse **rejette** : pas de mise en cache d’un tableau vide qui masquerait l’erreur.
+ * `fetchGeocomptaReviews` renvoie `[]` sur erreur (401, timeout, etc.) : le cache peut contenir une liste vide.
  */
 export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
   if (!isGeocomptaConfigured()) return [];
