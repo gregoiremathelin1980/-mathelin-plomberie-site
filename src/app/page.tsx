@@ -16,7 +16,7 @@ import { SERVICES } from "@/lib/services-data";
 import { buttonVariants } from "@/components/ui/button";
 import GoogleReviewsBlock from "@/components/GoogleReviewsBlock";
 import ReviewsSchema from "@/components/ReviewsSchema";
-import { isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
+import { fetchGeocomptaHomepage, isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
 import {
   getCachedGeocomptaHomepage,
   getCachedGeocomptaReviewPool,
@@ -68,6 +68,19 @@ function getHomeReviewsDisplayCount(): number {
   return 6;
 }
 
+/** Pool `/reviews` + `featuredReviews` homepage : déduplication avant rotation. */
+function dedupeReviewEntriesForHome(items: ReviewEntry[]): ReviewEntry[] {
+  const seen = new Set<string>();
+  const out: ReviewEntry[] = [];
+  for (const r of items) {
+    const key = `${r.rating}\0${r.text.trim()}\0${r.author ?? ""}\0${r.date ?? ""}\0${r.source ?? ""}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(r);
+  }
+  return out;
+}
+
 /** ISR aligné sur le cache homepage GéoCompta (≤ au créneau de sync API, ex. 1800 s pour 30 min). */
 export const revalidate = isGeocomptaConfigured() ? getGeocomptaHomeRevalidateSeconds() : 0;
 
@@ -93,7 +106,7 @@ export default async function HomePage() {
   if (geo) {
     const displayCount = getHomeReviewsDisplayCount();
     const rotationSeed = Date.now();
-    const hp = await getCachedGeocomptaHomepage();
+    let hp = await getCachedGeocomptaHomepage();
     let reviewPool: ReviewEntry[] = [];
     let reviewsLoadError: string | undefined;
     try {
@@ -102,6 +115,16 @@ export default async function HomePage() {
       const msg = e instanceof Error ? e.message : String(e);
       console.warn("[geocompta] pool avis (/api/public/reviews) indisponible:", e);
       reviewsLoadError = msg;
+    }
+
+    /** Si cache + pool sont vides alors que l’API peut répondre (cache obsolète / premier échec). */
+    if (reviewPool.length === 0 && hp.featuredReviews.length === 0) {
+      try {
+        const live = await fetchGeocomptaHomepage();
+        if (live.featuredReviews.length > 0) hp = live;
+      } catch (e) {
+        console.warn("[geocompta] homepage live (avis) sans cache — échec:", e);
+      }
     }
 
     const realisations = hp.featuredRealisations.map((r) => ({
@@ -120,13 +143,12 @@ export default async function HomePage() {
       date: r.date,
       source: r.source,
     }));
-    /** GéoComptaAE uniquement : `GET /api/public/reviews` puis `featuredReviews` du homepage — pas de fichier démo. */
+    /** Pool `/reviews` + avis homepage, fusionnés (évite de n’en prendre qu’une seule source si l’autre est vide). */
+    const mergedForRotation = dedupeReviewEntriesForHome([...reviewPool, ...reviewsFromHomeFeatured]);
     const reviews: ReviewEntry[] =
-      reviewPool.length > 0
-        ? pickRotatingReviews(reviewPool, displayCount, rotationSeed)
-        : reviewsFromHomeFeatured.length > 0
-          ? pickRotatingReviews(reviewsFromHomeFeatured, displayCount, rotationSeed)
-          : [];
+      mergedForRotation.length > 0
+        ? pickRotatingReviews(mergedForRotation, displayCount, rotationSeed)
+        : [];
 
     const interventions = hp.featuredInterventions.map((i) => ({
       city: i.city,
