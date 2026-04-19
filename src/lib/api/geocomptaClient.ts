@@ -42,6 +42,7 @@ function getBaseUrl(): string {
   return raw.replace(/\/$/, "");
 }
 
+/** Bearer optionnel (public API key GéoCompta). GeoVault / autres auth → à brancher séparément si besoin. */
 function getAuthHeaders(): Record<string, string> {
   const key = process.env.GEOCOMPTA_API_KEY?.trim();
   if (!key) return {};
