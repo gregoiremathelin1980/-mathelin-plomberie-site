@@ -76,6 +76,8 @@ export default async function HomePage() {
   headers();
   const geo = isGeocomptaConfigured();
   if (!geo) unstable_noStore();
+  /** GéoCompta : pas de snapshot route figé — chaque visite recalcule la permutation des avis (graine ci-dessous). */
+  if (geo) unstable_noStore();
 
   const pricing = getPricing();
   const simulateur = getSimulateur();

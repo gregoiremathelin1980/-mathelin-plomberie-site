@@ -18,7 +18,18 @@ function mulberry32(seed: number) {
  */
 export function pickRotatingReviews(pool: ReviewEntry[], displayCount: number, seed: number): ReviewEntry[] {
   if (pool.length === 0) return [];
-  if (pool.length <= displayCount) return [...pool];
+  /** Toujours mélanger selon la graine (même petit pool : ordre différent à chaque graine / requête). */
+  if (pool.length <= displayCount) {
+    const rand = mulberry32(seed);
+    const idx = pool.map((_, i) => i);
+    for (let i = idx.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      const tmp = idx[i]!;
+      idx[i] = idx[j]!;
+      idx[j] = tmp;
+    }
+    return idx.map((i) => pool[i]!);
+  }
   const rand = mulberry32(seed);
   const idx = pool.map((_, i) => i);
   for (let i = idx.length - 1; i > 0; i--) {

@@ -48,13 +48,24 @@ function ReviewCard({
   );
 }
 
-/** Layout A : grille 3 colonnes */
-function LayoutA({ reviews }: { reviews: ReviewEntry[] }) {
+/** Deux rangées de 3 colonnes (symétrie 3+3 dès `sm`). */
+function LayoutTwoRowsOfThree({ reviews }: { reviews: ReviewEntry[] }) {
+  const row1 = reviews.slice(0, 3);
+  const row2 = reviews.slice(3, 6);
   return (
-    <div className="grid gap-4 sm:grid-cols-3">
-      {reviews.map((r, i) => (
-        <ReviewCard key={i} review={r} />
-      ))}
+    <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {row1.map((r, i) => (
+          <ReviewCard key={`r1-${i}-${r.author ?? ""}-${r.date ?? ""}-${r.text.slice(0, 20)}`} review={r} />
+        ))}
+      </div>
+      {row2.length > 0 ? (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {row2.map((r, i) => (
+            <ReviewCard key={`r2-${i}-${r.author ?? ""}-${r.date ?? ""}-${r.text.slice(0, 20)}`} review={r} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -168,7 +179,7 @@ export default async function GoogleReviewsBlock({
           Ce que disent nos clients après une intervention.
         </p>
         <div className="mt-8">
-          <LayoutA reviews={reviews} />
+          <LayoutTwoRowsOfThree reviews={reviews} />
         </div>
         {googleReviewsPageUrl ? (
           <div className="mt-8 text-center">

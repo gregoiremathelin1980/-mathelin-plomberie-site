@@ -106,6 +106,17 @@ function testPickRotating() {
   assert.deepEqual(a, b);
   const all = pickRotatingReviews(pool, 10, 99);
   assert.equal(all.length, 4);
+  /** Petit pool : mélange selon la graine (pas l’ordre d’origine figé). */
+  const small = [
+    { rating: 5, text: "x", author: "A" },
+    { rating: 5, text: "y", author: "B" },
+    { rating: 5, text: "z", author: "C" },
+  ];
+  const s1 = pickRotatingReviews(small, 6, 111).map((r) => r.text).join("");
+  const s2 = pickRotatingReviews(small, 6, 999_999).map((r) => r.text).join("");
+  assert.equal(s1.length, 3);
+  assert.equal(s2.length, 3);
+  assert.notEqual(s1, s2);
 }
 
 function testBuildGeocomptaUrl() {
