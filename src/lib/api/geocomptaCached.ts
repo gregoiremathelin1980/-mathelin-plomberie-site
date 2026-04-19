@@ -44,27 +44,34 @@ function getReviewsCacheRevalidate(): number {
   return DEFAULT_REVIEWS_CACHE_SECONDS;
 }
 
+function mapGeocomptaReviewsToEntries(
+  list: Awaited<ReturnType<typeof fetchGeocomptaReviews>>
+): ReviewEntry[] {
+  return list.map((r) => ({
+    author: r.author,
+    rating: r.rating,
+    text: r.text,
+    date: r.date,
+    source: r.source,
+  }));
+}
+
 /**
  * Pool complet `/api/public/reviews`.
- * `fetchGeocomptaReviews` renvoie `[]` sur erreur (401, timeout, etc.) : le cache peut contenir une liste vide.
+ * Si le cache Next contient encore `[]` (première requête en erreur puis API OK), on retente **sans** passer par le cache
+ * pour ne pas laisser l’accueil vide jusqu’à l’expiration du `revalidate`.
  */
 export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
   if (!isGeocomptaConfigured()) return [];
   const revalidate = getReviewsCacheRevalidate();
-  return unstable_cache(
-    async () => {
-      const list = await fetchGeocomptaReviews();
-      return list.map((r) => ({
-        author: r.author,
-        rating: r.rating,
-        text: r.text,
-        date: r.date,
-        source: r.source,
-      }));
-    },
-    ["geocompta-reviews-pool-v2"],
+  const cached = await unstable_cache(
+    async () => mapGeocomptaReviewsToEntries(await fetchGeocomptaReviews()),
+    ["geocompta-reviews-pool-v3"],
     { revalidate, tags: ["geocompta-reviews"] }
   )();
+
+  if (cached.length > 0) return cached;
+  return mapGeocomptaReviewsToEntries(await fetchGeocomptaReviews());
 }
 
 export async function getCachedGeocomptaHomepage() {
@@ -79,7 +86,7 @@ export async function getCachedGeocomptaHomepage() {
           return buildHomepagePayloadFromFiles();
         }
       },
-      ["geocompta-homepage-v2"],
+      ["geocompta-homepage-v3"],
       { revalidate, tags: ["geocompta-homepage"] }
     )();
   } catch (e) {
