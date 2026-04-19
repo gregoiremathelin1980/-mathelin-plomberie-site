@@ -49,11 +49,23 @@ export function buildHomepagePayloadFromFiles(): GeocomptaHomepagePayload {
     if (featuredPhotos.length >= 8) break;
   }
 
-  return GeocomptaHomepageSchema.parse({
+  const raw = {
     featuredRealisations,
     featuredAdvice,
     featuredReviews,
     featuredInterventions,
     featuredPhotos,
-  });
+  };
+  const parsed = GeocomptaHomepageSchema.safeParse(raw);
+  if (!parsed.success) {
+    console.warn("[geocompta] fallback homepage — schéma invalide, contenu minimal:", parsed.error.message);
+    return GeocomptaHomepageSchema.parse({
+      featuredRealisations: [],
+      featuredAdvice: [],
+      featuredReviews: [],
+      featuredInterventions: [],
+      featuredPhotos: [],
+    });
+  }
+  return parsed.data;
 }

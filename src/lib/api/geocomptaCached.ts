@@ -69,17 +69,23 @@ export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
 
 export async function getCachedGeocomptaHomepage() {
   const revalidate = getGeocomptaHomeRevalidateSeconds();
-  return unstable_cache(
-    async () => {
-      try {
-        return await fetchGeocomptaHomepage();
-      } catch {
-        return buildHomepagePayloadFromFiles();
-      }
-    },
-    ["geocompta-homepage-v2"],
-    { revalidate, tags: ["geocompta-homepage"] }
-  )();
+  try {
+    return await unstable_cache(
+      async () => {
+        try {
+          return await fetchGeocomptaHomepage();
+        } catch (e) {
+          console.warn("[geocompta] GET /api/public/homepage échoué → fallback fichiers:", e);
+          return buildHomepagePayloadFromFiles();
+        }
+      },
+      ["geocompta-homepage-v2"],
+      { revalidate, tags: ["geocompta-homepage"] }
+    )();
+  } catch (e) {
+    console.warn("[geocompta] cache homepage (unstable_cache) échoué → fallback fichiers:", e);
+    return buildHomepagePayloadFromFiles();
+  }
 }
 
 export async function tryGetCachedGeocomptaRealisation(slug: string): Promise<GeocomptaRealisationDetail | null> {

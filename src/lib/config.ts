@@ -19,6 +19,29 @@ export function getPhotoUrl(pathOrUrl: string | undefined): string | undefined {
   return s.startsWith("/") ? base + s : base + "/" + s;
 }
 
+/**
+ * Hôtes autorisés pour `<Image src={url absolu} />` — doit rester aligné avec `next.config.js` (`remotePatterns`).
+ * Si l’URL est hors liste, utiliser `<img>` pour éviter un 500 au rendu (hostname not configured).
+ */
+export function isNextImageRemoteHostAllowed(absoluteUrl: string): boolean {
+  try {
+    const u = new URL(absoluteUrl);
+    if (u.protocol !== "https:" && u.protocol !== "http:") return false;
+    const geocomptaHosts = (process.env.GEOCOMPTA_IMAGE_HOSTS ?? "")
+      .split(",")
+      .map((h) => h.trim())
+      .filter(Boolean);
+    const allowed = new Set<string>([
+      "photos.mathelin-plomberie.fr",
+      "images.unsplash.com",
+      ...geocomptaHosts,
+    ]);
+    return allowed.has(u.hostname);
+  } catch {
+    return false;
+  }
+}
+
 /** Adresse de l'entreprise */
 export const SITE_ADDRESS = {
   street: "57 impasse des Verchères",

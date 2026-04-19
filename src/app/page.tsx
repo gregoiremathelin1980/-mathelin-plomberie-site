@@ -11,7 +11,7 @@ import HomeRecentInterventions from "@/components/HomeRecentInterventions";
 import { getRealisations, getRandomConseils, getPricing } from "@/lib/content";
 import { getRecentInterventions, getSimulateur, getRandomReviews } from "@/lib/site-data";
 import { getSiteSettings } from "@/lib/content";
-import { getPhotoUrl } from "@/lib/config";
+import { getPhotoUrl, isNextImageRemoteHostAllowed } from "@/lib/config";
 import { SERVICES } from "@/lib/services-data";
 import { buttonVariants } from "@/components/ui/button";
 import GoogleReviewsBlock from "@/components/GoogleReviewsBlock";
@@ -169,15 +169,22 @@ export default async function HomePage() {
                 {hp.featuredPhotos.slice(0, 8).map((ph, i) => {
                   const src = getPhotoUrl(ph.url);
                   if (!src) return null;
+                  const alt = ph.alt ?? ph.caption ?? "Réalisation plomberie";
                   return (
                     <div key={i} className="relative aspect-square overflow-hidden rounded-xl bg-gray-200">
-                      <Image
-                        src={src}
-                        alt={ph.alt ?? ph.caption ?? "Réalisation plomberie"}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 50vw, 25vw"
-                      />
+                      {isNextImageRemoteHostAllowed(src) ? (
+                        <Image
+                          src={src}
+                          alt={alt}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 50vw, 25vw"
+                        />
+                      ) : (
+                        // Évite Error: hostname not configured (next/image) si hôte absent de remotePatterns
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                      )}
                     </div>
                   );
                 })}
