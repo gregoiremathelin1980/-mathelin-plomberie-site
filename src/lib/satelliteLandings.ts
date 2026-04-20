@@ -14,6 +14,8 @@ export interface SatelliteAggregateRating {
 }
 
 export interface SatelliteLandingsFile {
+  /** Fiche Google Business (Partager) — prioritaire pour `sameAs` et liens avis sur les landings satellites. */
+  googleReviewsUrl?: string;
   googleAggregateRating: SatelliteAggregateRating;
   areaServed_meximieux: string[];
   areaServed_amberieu: string[];
@@ -25,6 +27,7 @@ const DEFAULT_AGGREGATE: SatelliteAggregateRating = { ratingValue: 5, reviewCoun
 
 function defaultFile(): SatelliteLandingsFile {
   return {
+    googleReviewsUrl: undefined,
     googleAggregateRating: DEFAULT_AGGREGATE,
     areaServed_meximieux: ["Meximieux", "Pérouges", "Villieu-Loyes-Mollon"],
     areaServed_amberieu: ["Ambérieu-en-Bugey", "Lagnieu", "Saint-Vulbas"],
@@ -42,6 +45,7 @@ export function getSatelliteLandingsData(): SatelliteLandingsFile {
     const raw = fs.readFileSync(filePath, "utf-8");
     const parsed = JSON.parse(raw) as SatelliteLandingsFile;
     cache = {
+      googleReviewsUrl: typeof parsed.googleReviewsUrl === "string" ? parsed.googleReviewsUrl.trim() || undefined : undefined,
       googleAggregateRating: parsed.googleAggregateRating ?? DEFAULT_AGGREGATE,
       areaServed_meximieux: Array.isArray(parsed.areaServed_meximieux) ? parsed.areaServed_meximieux : defaultFile().areaServed_meximieux,
       areaServed_amberieu: Array.isArray(parsed.areaServed_amberieu) ? parsed.areaServed_amberieu : defaultFile().areaServed_amberieu,
@@ -76,6 +80,16 @@ export function getGmbSameAsUrl(settings: SiteSettings): string | undefined {
   if (u) return u;
   const env = process.env.NEXT_PUBLIC_GMB_REVIEWS_URL?.trim();
   return env || undefined;
+}
+
+/**
+ * Pages satellites : URL fiche Google — d’abord `satellite-landings.json`, sinon réglages site / env
+ * (même chaîne que pour `sameAs` dans le JSON-LD).
+ */
+export function getGmbUrlForSatellitePages(settings: SiteSettings): string | undefined {
+  const fromLanding = getSatelliteLandingsData().googleReviewsUrl?.trim();
+  if (fromLanding) return fromLanding;
+  return getGmbSameAsUrl(settings);
 }
 
 /** Découpe « rue, CP Ville, Pays » pour PostalAddress schema. */

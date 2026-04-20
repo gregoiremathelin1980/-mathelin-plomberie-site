@@ -9,7 +9,7 @@ import SatellitePlumbingJsonLd from "@/components/satellite/SatellitePlumbingJso
 import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestimonialsSection";
 import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
 import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
-import { getSatelliteLandingsData, phoneToTelHref } from "@/lib/satelliteLandings";
+import { getGmbUrlForSatellitePages, getSatelliteLandingsData, phoneToTelHref } from "@/lib/satelliteLandings";
 import { getSatelliteTestimonialsFromGeocomptaOrFallback } from "@/lib/satelliteReviews";
 
 export const metadata = buildPageMetadata({
@@ -125,7 +125,7 @@ export default async function PlombierMeximieux() {
         title="Avis clients (extraits)"
         items={testimonialItems}
         aggregate={landing.googleAggregateRating}
-        googleMapsUrl={settings.googleReviewsUrl}
+        googleMapsUrl={getGmbUrlForSatellitePages(settings)}
         sourceHint={
           fromGeocompta
             ? "Extraits d’avis synchronisés via GéoCompta — même flux que le site principal mathelin-plomberie.fr."

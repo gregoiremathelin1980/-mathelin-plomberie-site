@@ -1,6 +1,6 @@
 import type { SiteSettings } from "@/lib/content";
 import {
-  getGmbSameAsUrl,
+  getGmbUrlForSatellitePages,
   getSatelliteLandingsData,
   phoneToInternationalSchema,
   postalAddressParts,
@@ -16,7 +16,7 @@ function buildSchema(
   includeAggregateRating: boolean
 ): Record<string, unknown> {
   const addr = postalAddressParts(settings.address);
-  const sameAs = getGmbSameAsUrl(settings);
+  const sameAs = getGmbUrlForSatellitePages(settings);
   const areas = variant === "meximieux" ? landing.areaServed_meximieux : landing.areaServed_amberieu;
   const description =
     variant === "meximieux"

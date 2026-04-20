@@ -14,7 +14,9 @@ import {
 } from "../src/lib/api/geocomptaClient";
 import { pickRotatingReviews } from "../src/lib/reviewsRotation";
 import { allowSiteDataHomeReviewsEnv } from "../src/lib/reviewsHomePolicy";
+import type { SiteSettings } from "../src/lib/content";
 import {
+  getGmbUrlForSatellitePages,
   phoneToInternationalSchema,
   phoneToTelHref,
   postalAddressParts,
@@ -138,6 +140,26 @@ function testBuildGeocomptaUrl() {
   else delete process.env.GEOCOMPTA_API_BASE_URL;
 }
 
+function testSatelliteGmbUrlPriority() {
+  const minimal = {
+    company: "T",
+    phone: "0600000000",
+    email: "t@t.fr",
+    address: "1 rue, 01000 Ville, France",
+    service_radius: "",
+    displaySettings: {
+      showReviews: true,
+      showAdvice: true,
+      showAdviceImages: true,
+      showEstimator: true,
+      showRecentInterventions: true,
+    },
+    cities: [],
+  } as SiteSettings;
+  const u = getGmbUrlForSatellitePages(minimal);
+  assert.ok(u && u.includes("share.google/EoCX35WiMTVFXIfpT"), "satellite-landings.json doit exposer googleReviewsUrl");
+}
+
 function testSatelliteHelpers() {
   assert.equal(phoneToTelHref("06 61 42 24 07"), "tel:+33661422407");
   assert.equal(phoneToInternationalSchema("06 61 42 24 07"), "+33661422407");
@@ -200,6 +222,7 @@ async function main() {
   testBuildGeocomptaUrl();
   testHomePolicy();
   testSatelliteHelpers();
+  testSatelliteGmbUrlPriority();
   await optionalLiveFetch();
   console.log("[test] geocompta-reviews : OK (tous les tests unitaires passés)");
 }

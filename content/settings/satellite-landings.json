@@ -1,5 +1,6 @@
 {
-  "_readme": "Mettre ratingValue/reviewCount à l’identique de votre fiche Google. Remplacer les textes des témoignages par de courts extraits réels (prénoms). sameAs utilise googleReviewsUrl du site si défini, sinon NEXT_PUBLIC_GMB_REVIEWS_URL.",
+  "_readme": "googleReviewsUrl : fiche Google officielle (sameAs JSON-LD satellites + lien « avis »). ratingValue/reviewCount : aligner sur GMB si pas encore fourni par l’API. Témoignages : extraits réels optionnels (repli si GéoCompta fournit les avis).",
+  "googleReviewsUrl": "https://share.google/EoCX35WiMTVFXIfpT",
   "googleAggregateRating": {
     "ratingValue": 5,
     "reviewCount": 12

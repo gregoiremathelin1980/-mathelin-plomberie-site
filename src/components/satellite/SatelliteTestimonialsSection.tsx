@@ -72,7 +72,7 @@ export default function SatelliteTestimonialsSection({
               rel="noopener noreferrer"
               className="text-sm font-semibold text-primary underline-offset-2 hover:underline"
             >
-              Voir tous les avis sur Google
+              Voir tous nos avis sur Google
             </Link>
           </p>
         ) : null}
