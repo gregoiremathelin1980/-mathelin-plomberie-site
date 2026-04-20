@@ -19,6 +19,7 @@ import {
   phoneToTelHref,
   postalAddressParts,
 } from "../src/lib/satelliteLandings";
+import { reviewEntriesToSatelliteTestimonials } from "../src/lib/satelliteReviews";
 
 function testParseCanonical() {
   const list = parseGeocomptaReviewList([
@@ -145,6 +146,11 @@ function testSatelliteHelpers() {
   assert.equal(addr.postalCode, "01800");
   assert.equal(addr.addressLocality, "Pérouges");
   assert.equal(addr.addressCountry, "FR");
+  const mapped = reviewEntriesToSatelliteTestimonials([{ author: "Jean", rating: 5, text: "Super" }]);
+  assert.equal(mapped[0]!.firstName, "Jean");
+  assert.equal(mapped[0]!.text, "Super");
+  const anon = reviewEntriesToSatelliteTestimonials([{ rating: 4, text: "Ok" }]);
+  assert.equal(anon[0]!.firstName, "Client");
 }
 
 function testHomePolicy() {

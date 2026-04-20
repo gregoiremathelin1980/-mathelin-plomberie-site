@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { Phone, FileText } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestim
 import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
 import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
 import { getSatelliteLandingsData, phoneToTelHref } from "@/lib/satelliteLandings";
+import { getSatelliteTestimonialsFromGeocomptaOrFallback } from "@/lib/satelliteReviews";
 
 export const metadata = buildPageMetadata({
   title: "Plombier Meximieux & Côtière de l'Ain | Mathelin Plomberie Chauffage",
@@ -18,16 +20,21 @@ export const metadata = buildPageMetadata({
 });
 
 export default async function PlombierMeximieux() {
+  headers();
   const settings = getSiteSettings();
   const landing = getSatelliteLandingsData();
   const telHref = phoneToTelHref(settings.phone);
+  const { items: testimonialItems, fromGeocompta } = await getSatelliteTestimonialsFromGeocomptaOrFallback(
+    landing.testimonials_meximieux,
+    3
+  );
 
   return (
     <>
       <SatellitePlumbingJsonLd
         variant="meximieux"
         settings={settings}
-        includeAggregateRating={landing.testimonials_meximieux.length > 0}
+        includeAggregateRating={testimonialItems.length > 0}
       />
       <section className="bg-primary px-4 py-12 text-white sm:px-6 sm:py-16">
         <div className="mx-auto max-w-3xl text-center">
@@ -116,9 +123,14 @@ export default async function PlombierMeximieux() {
 
       <SatelliteTestimonialsSection
         title="Avis clients (extraits)"
-        items={landing.testimonials_meximieux}
+        items={testimonialItems}
         aggregate={landing.googleAggregateRating}
         googleMapsUrl={settings.googleReviewsUrl}
+        sourceHint={
+          fromGeocompta
+            ? "Extraits d’avis synchronisés via GéoCompta — même flux que le site principal mathelin-plomberie.fr."
+            : undefined
+        }
       />
 
       <SatelliteLocalFooter variant="meximieux" settings={settings} />

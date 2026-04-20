@@ -18,11 +18,14 @@ export default function SatelliteTestimonialsSection({
   items,
   aggregate,
   googleMapsUrl,
+  sourceHint,
 }: {
   title: string;
   items: SatelliteTestimonial[];
   aggregate: SatelliteAggregateRating;
   googleMapsUrl?: string;
+  /** Ex. source GéoCompta (même flux que le site principal). */
+  sourceHint?: string;
 }) {
   return (
     <section className="border-y border-primary/10 bg-gray-50 px-4 py-12 sm:px-6" aria-labelledby="satellite-avis-heading">
@@ -33,9 +36,10 @@ export default function SatelliteTestimonialsSection({
             {title}
           </h2>
         </div>
+        {sourceHint ? <p className="mt-2 text-xs text-gray-500">{sourceHint}</p> : null}
         {items.length > 0 ? (
           <p className="mt-2 text-sm text-gray-600">
-            Note moyenne (alignée sur la fiche Google)&nbsp;:{" "}
+            Note moyenne (fiche Google)&nbsp;:{" "}
             <strong>
               {Number.isInteger(aggregate.ratingValue)
                 ? String(aggregate.ratingValue)
