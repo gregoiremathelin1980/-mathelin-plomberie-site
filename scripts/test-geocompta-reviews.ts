@@ -14,6 +14,11 @@ import {
 } from "../src/lib/api/geocomptaClient";
 import { pickRotatingReviews } from "../src/lib/reviewsRotation";
 import { allowSiteDataHomeReviewsEnv } from "../src/lib/reviewsHomePolicy";
+import {
+  phoneToInternationalSchema,
+  phoneToTelHref,
+  postalAddressParts,
+} from "../src/lib/satelliteLandings";
 
 function testParseCanonical() {
   const list = parseGeocomptaReviewList([
@@ -132,6 +137,16 @@ function testBuildGeocomptaUrl() {
   else delete process.env.GEOCOMPTA_API_BASE_URL;
 }
 
+function testSatelliteHelpers() {
+  assert.equal(phoneToTelHref("06 61 42 24 07"), "tel:+33661422407");
+  assert.equal(phoneToInternationalSchema("06 61 42 24 07"), "+33661422407");
+  const addr = postalAddressParts("57 impasse des Verchères, 01800 Pérouges, France");
+  assert.equal(addr.streetAddress, "57 impasse des Verchères");
+  assert.equal(addr.postalCode, "01800");
+  assert.equal(addr.addressLocality, "Pérouges");
+  assert.equal(addr.addressCountry, "FR");
+}
+
 function testHomePolicy() {
   assert.equal(allowSiteDataHomeReviewsEnv("production", undefined), false);
   assert.equal(allowSiteDataHomeReviewsEnv("production", "false"), false);
@@ -178,6 +193,7 @@ async function main() {
   testPickRotating();
   testBuildGeocomptaUrl();
   testHomePolicy();
+  testSatelliteHelpers();
   await optionalLiveFetch();
   console.log("[test] geocompta-reviews : OK (tous les tests unitaires passés)");
 }

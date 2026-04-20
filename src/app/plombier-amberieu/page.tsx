@@ -4,32 +4,45 @@ import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
 import ReassuranceBlock from "@/components/ReassuranceBlock";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import SatellitePlumbingJsonLd from "@/components/satellite/SatellitePlumbingJsonLd";
+import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestimonialsSection";
+import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
+import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
+import { getSatelliteLandingsData, phoneToTelHref } from "@/lib/satelliteLandings";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Chauffagiste à Ambérieu-en-Bugey | Dépannage et chauffage",
+  title: "Plombier Ambérieu-en-Bugey & Plaine de l'Ain | Mathelin Plomberie Chauffage",
   description:
-    "Plombier chauffagiste à Ambérieu-en-Bugey : BP Génie Climatique, 13 ans d'expérience. Dépannage plomberie de Meximieux à Ambérieu, Saint-Vulbas et Lagnieu. Intervention rapide.",
+    "Plombier chauffagiste BP Génie Climatique : Ambérieu, Lagnieu, Saint-Vulbas, Bugey. Dépannage urgence, fuites, chauffage. Siège à Pérouges depuis 2013.",
   path: "/plombier-amberieu",
 });
 
 export default async function PlombierAmberieu() {
   const settings = getSiteSettings();
-  const phoneRaw = settings.phone.replace(/\s/g, "");
+  const landing = getSatelliteLandingsData();
+  const telHref = phoneToTelHref(settings.phone);
 
   return (
     <>
+      <SatellitePlumbingJsonLd
+        variant="amberieu"
+        settings={settings}
+        includeAggregateRating={landing.testimonials_amberieu.length > 0}
+      />
       <section className="bg-primary px-4 py-12 text-white sm:px-6 sm:py-16">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-            Plombier Chauffagiste à Ambérieu-en-Bugey
+            Plombier Ambérieu-en-Bugey — Plaine de l&apos;Ain &amp; Bugey
           </h1>
           <p className="mt-4 text-lg text-primary-50">
-            Brevet Professionnel Génie Climatique et 13 ans d&apos;expérience.
-            Intervention rapide sur Ambérieu, Saint-Denis-en-Bugey et Bettant.
+            Artisan <strong>BP Génie Climatique</strong> basé à <strong>Pérouges</strong>. Nous concentrons nos
+            déplacements côté <strong>Ambérieu</strong>, <strong>Lagnieu</strong>, <strong>Saint-Vulbas</strong> et
+            vallées du <strong>Bugey</strong> : urgence plomberie, chauffage et eau sanitaire, sans confondre avec le
+            discours d&apos;un site « générique ».
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href={`tel:${phoneRaw}`}
+              href={telHref}
               className={buttonVariants({
                 variant: "accent",
                 size: "lg",
@@ -57,32 +70,37 @@ export default async function PlombierAmberieu() {
       <ReassuranceBlock />
 
       <main className="container px-4 py-12">
-        <p className="text-gray-text">
-          Dépannage plomberie de Meximieux à Ambérieu-en-Bugey, en passant par
-          Saint-Vulbas et Lagnieu. Mathelin Plomberie intervient à Ambérieu pour
-          vos travaux de plomberie et chauffage : dépannage urgent, réparation
-          de fuite d&apos;eau, remplacement de chauffe-eau et rénovation de salle
-          de bain.
+        <p className="text-gray-text leading-relaxed">
+          Entre <strong>Plaine de l&apos;Ain</strong> et relief du <strong>Bugey</strong>, les installations vieillissent
+          autrement (pentes, extensions, anciens réseaux). Nous intervenons à <strong>Ambérieu-en-Bugey</strong> pour des
+          situations concrètes : fuite après gel, radiateur qui ne monte plus en pression, remplacement de groupe de
+          sécurité, débouchage principal.
         </p>
 
-        <h2 className="mt-8 text-xl font-semibold text-primary">
-          Dépannage plomberie à Ambérieu
-        </h2>
+        <h2 className="mt-10 text-xl font-semibold text-primary">Secteur Lagnieu &amp; Saint-Vulbas</h2>
+        <p className="mt-2 text-gray-text leading-relaxed">
+          <strong>Lagnieu</strong> et <strong>Saint-Vulbas</strong> sont des points d&apos;ancrage fréquents : trajets
+          routiers maîtrisés depuis Pérouges, créneaux d&apos;urgence selon disponibilité. Nous coordonnons avec vous
+          l&apos;accès logement ou local pro pour limiter l&apos;arrêt d&apos;activité.
+        </p>
         <ul className="mt-4 list-disc pl-6 text-gray-text">
-          <li>dépannage plomberie urgence</li>
-          <li>réparation fuite d&apos;eau</li>
-          <li>débouchage évier et canalisation</li>
-          <li>entretien chauffe-eau</li>
-          <li>installation sanitaire</li>
+          <li>dépannage chauffage et plomberie d&apos;urgence</li>
+          <li>diagnostic fuite et réparation ciblée</li>
+          <li>débouchage et entretien sanitaire</li>
+          <li>chauffe-eau et robinetterie</li>
         </ul>
 
-        <h2 className="mt-8 text-xl font-semibold text-primary">
-          Intervention autour d&apos;Ambérieu
-        </h2>
-        <p className="mt-2 text-gray-text">
-          Nous intervenons à Ambérieu-en-Bugey et dans les communes proches :
-          Château-Gaillard, Saint-Denis-en-Bugey, Bettant, Lagnieu, Leyment et
-          Meximieux.
+        <h2 className="mt-10 text-xl font-semibold text-primary">Lien avec la Côtière (Meximieux)</h2>
+        <p className="mt-2 text-gray-text leading-relaxed">
+          Certaines interventions restent plus logiques depuis notre organisation côté{" "}
+          <strong>Meximieux / Côtière</strong> selon l&apos;heure et le secteur — voir{" "}
+          <a
+            href="https://www.plombier-meximieux.fr/"
+            className="font-medium text-primary underline-offset-2 hover:underline"
+          >
+            plombier Meximieux
+          </a>
+          . Le numéro et l&apos;adresse artisan restent les mêmes que sur notre fiche Google (cohérence NAP).
         </p>
 
         <p className="mt-8 text-sm font-medium text-primary">
@@ -95,6 +113,16 @@ export default async function PlombierAmberieu() {
           Demander un devis
         </Link>
       </main>
+
+      <SatelliteTestimonialsSection
+        title="Avis clients (extraits)"
+        items={landing.testimonials_amberieu}
+        aggregate={landing.googleAggregateRating}
+        googleMapsUrl={settings.googleReviewsUrl}
+      />
+
+      <SatelliteLocalFooter variant="amberieu" settings={settings} />
+      <SatelliteStickyCall phoneLabel={settings.phone} telHref={telHref} />
     </>
   );
 }

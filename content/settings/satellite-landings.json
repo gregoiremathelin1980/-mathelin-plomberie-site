@@ -1,0 +1,57 @@
+{
+  "_readme": "Mettre ratingValue/reviewCount à l’identique de votre fiche Google. Remplacer les textes des témoignages par de courts extraits réels (prénoms). sameAs utilise googleReviewsUrl du site si défini, sinon NEXT_PUBLIC_GMB_REVIEWS_URL.",
+  "googleAggregateRating": {
+    "ratingValue": 5,
+    "reviewCount": 12
+  },
+  "areaServed_meximieux": [
+    "Meximieux",
+    "Pérouges",
+    "Villieu-Loyes-Mollon",
+    "Rignieux-le-Franc",
+    "Chazey-sur-Ain",
+    "Saint-Maurice-de-Gourdans"
+  ],
+  "areaServed_amberieu": [
+    "Ambérieu-en-Bugey",
+    "Lagnieu",
+    "Saint-Vulbas",
+    "Leyment",
+    "Meximieux",
+    "Saint-Denis-en-Bugey"
+  ],
+  "testimonials_meximieux": [
+    {
+      "firstName": "Sophie",
+      "rating": 5,
+      "text": "Fuite colmatée le jour même, explications claires et tarif annoncé avant l’intervention."
+    },
+    {
+      "firstName": "Marc",
+      "rating": 5,
+      "text": "Chauffe-eau remplacé proprement sur la Côtière, délais tenus, je recommande."
+    },
+    {
+      "firstName": "Julie",
+      "rating": 5,
+      "text": "Canalisation débouchée sans casse, artisan ponctuel autour de Meximieux."
+    }
+  ],
+  "testimonials_amberieu": [
+    {
+      "firstName": "Thomas",
+      "rating": 5,
+      "text": "Dépannage urgent à Ambérieu : arrivée rapide, problème résolu du premier coup."
+    },
+    {
+      "firstName": "Émilie",
+      "rating": 5,
+      "text": "Travaux de plomberie sérieux côté Lagnieu, chantier laissé propre."
+    },
+    {
+      "firstName": "David",
+      "rating": 5,
+      "text": "Radiateur froid sur le Bugey : diagnostic honnête, pas de travaux inutiles."
+    }
+  ]
+}

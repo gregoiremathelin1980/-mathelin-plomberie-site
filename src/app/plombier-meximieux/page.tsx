@@ -4,33 +4,44 @@ import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
 import ReassuranceBlock from "@/components/ReassuranceBlock";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import SatellitePlumbingJsonLd from "@/components/satellite/SatellitePlumbingJsonLd";
+import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestimonialsSection";
+import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
+import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
+import { getSatelliteLandingsData, phoneToTelHref } from "@/lib/satelliteLandings";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Chauffagiste à Meximieux (01800) | Dépannage et chauffage",
+  title: "Plombier Meximieux & Côtière de l'Ain | Mathelin Plomberie Chauffage",
   description:
-    "Plombier chauffagiste à Meximieux : BP Génie Climatique, installation depuis 2013. Intervention rapide à Meximieux, Pérouges, Villieu-Loyes-Mollon et Rignieux-le-Franc.",
+    "Plombier chauffagiste BP Génie Climatique : Meximieux, Pérouges, Côtière de l'Ain. Dépannage fuite, débouchage, chauffe-eau. Artisan à Pérouges depuis 2013.",
   path: "/plombier-meximieux",
 });
 
 export default async function PlombierMeximieux() {
   const settings = getSiteSettings();
-  const phoneRaw = settings.phone.replace(/\s/g, "");
+  const landing = getSatelliteLandingsData();
+  const telHref = phoneToTelHref(settings.phone);
 
   return (
     <>
+      <SatellitePlumbingJsonLd
+        variant="meximieux"
+        settings={settings}
+        includeAggregateRating={landing.testimonials_meximieux.length > 0}
+      />
       <section className="bg-primary px-4 py-12 text-white sm:px-6 sm:py-16">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-            Plombier Chauffagiste à Meximieux (01800)
+            Plombier à Meximieux — Côtière de l&apos;Ain &amp; Pérouges
           </h1>
           <p className="mt-4 text-lg text-primary-50">
-            Brevet Professionnel Génie Climatique, installation depuis 2013.
-            Intervention rapide à Meximieux, Pérouges, Villieu-Loyes-Mollon et
-            Rignieux-le-Franc.
+            Brevet Professionnel Génie Climatique, artisan installé à <strong>Pérouges</strong>. Nous couvrons la{" "}
+            <strong>Côtière</strong> (Meximieux, Chazey-sur-Ain, Saint-Maurice-de-Gourdans) et le bassin de{" "}
+            <strong>Pérouges</strong> pour l&apos;urgence plomberie et le chauffage.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href={`tel:${phoneRaw}`}
+              href={telHref}
               className={buttonVariants({
                 variant: "accent",
                 size: "lg",
@@ -58,37 +69,38 @@ export default async function PlombierMeximieux() {
       <ReassuranceBlock />
 
       <main className="container px-4 py-12">
-        <p className="text-gray-text">
-          Dépannage plomberie de Meximieux à Ambérieu-en-Bugey, en passant par
-          Saint-Vulbas et Lagnieu. Mathelin Plomberie intervient à Meximieux pour
-          tous vos travaux de plomberie et chauffage : dépannage urgent,
-          réparation de fuite d&apos;eau, débouchage de canalisation et
-          remplacement de chauffe-eau.
+        <p className="text-gray-text leading-relaxed">
+          Sur la <strong>Plaine de l&apos;Ain côté Côtière</strong>, les fuites et canalisation bouchée ne préviennent
+          pas. Nous privilégions un diagnostic clair avant toute pièce changée : dépannage à <strong>Meximieux</strong>,
+          interventions vers <strong>Pérouges</strong>, <strong>Villieu-Loyes-Mollon</strong> ou{" "}
+          <strong>Rignieux-le-Franc</strong> avec le même exigence de propreté sur le chantier.
         </p>
 
-        <h2 className="mt-8 text-xl font-semibold text-primary">
-          Dépannage plomberie à Meximieux
-        </h2>
-        <p className="mt-2 text-gray-text">
-          Nous intervenons rapidement pour les urgences plomberie : fuite
-          d&apos;eau, canalisation bouchée, problème de chauffe-eau ou panne de
-          chauffage.
+        <h2 className="mt-10 text-xl font-semibold text-primary">Dépannage plomberie &amp; chauffage</h2>
+        <p className="mt-2 text-gray-text leading-relaxed">
+          Fuites d&apos;eau, évier ou WC bouché, chauffe-eau en panne, radiateur froid : nous intervenons en priorité
+          sur les secteurs où l&apos;eau et le chauffage conditionnent votre quotidien (maisons, commerces, copropriétés
+          proches de Meximieux).
         </p>
         <ul className="mt-4 list-disc pl-6 text-gray-text">
-          <li>réparation fuite d&apos;eau</li>
-          <li>débouchage canalisation</li>
-          <li>dépannage chauffe-eau</li>
-          <li>installation sanitaire</li>
-          <li>remplacement chauffe-eau</li>
+          <li>recherche et réparation de fuite</li>
+          <li>débouchage canalisation et sanitaires</li>
+          <li>remplacement ou réparation de chauffe-eau</li>
+          <li>petite robinetterie et réglage de chauffage</li>
         </ul>
 
-        <h2 className="mt-8 text-xl font-semibold text-primary">
-          Zone d&apos;intervention autour de Meximieux
-        </h2>
-        <p className="mt-2 text-gray-text">
-          Nous intervenons à Meximieux et dans les communes voisines :
-          Pérouges, Villieu-Loyes-Mollon, Rignieux-le-Franc, Faramans,
-          Chazey-sur-Ain, Saint-Maurice-de-Gourdans et Blyes.
+        <h2 className="mt-10 text-xl font-semibold text-primary">Pourquoi nous appeler depuis Meximieux&nbsp;?</h2>
+        <p className="mt-2 text-gray-text leading-relaxed">
+          Base artisanale à <strong>Pérouges (01800)</strong>, déplacements maîtrisés vers la Côtière : trajets courts,
+          matériel adapté, et compte-rendu honnête si une intervention complémentaire est nécessaire. Pour le{" "}
+          <strong>Bugey</strong> et <strong>Ambérieu</strong>, consultez aussi notre{" "}
+          <a
+            href="https://www.plombier-amberieu.fr/"
+            className="font-medium text-primary underline-offset-2 hover:underline"
+          >
+            plombier Ambérieu-en-Bugey
+          </a>
+          .
         </p>
 
         <p className="mt-8 text-sm font-medium text-primary">
@@ -101,6 +113,16 @@ export default async function PlombierMeximieux() {
           Demander un devis
         </Link>
       </main>
+
+      <SatelliteTestimonialsSection
+        title="Avis clients (extraits)"
+        items={landing.testimonials_meximieux}
+        aggregate={landing.googleAggregateRating}
+        googleMapsUrl={settings.googleReviewsUrl}
+      />
+
+      <SatelliteLocalFooter variant="meximieux" settings={settings} />
+      <SatelliteStickyCall phoneLabel={settings.phone} telHref={telHref} />
     </>
   );
 }
