@@ -1,10 +1,6 @@
 {
-  "_readme": "googleReviewsUrl : fiche Google officielle (sameAs JSON-LD satellites + lien « avis »). ratingValue/reviewCount : aligner sur GMB si pas encore fourni par l’API. Témoignages : extraits réels optionnels (repli si GéoCompta fournit les avis).",
+  "_readme": "googleReviewsUrl : fiche Google officielle (sameAs JSON-LD satellites + lien « avis »). Note moyenne / total avis GMB : via API GéoCompta (`googleBusinessProfile` sur /reviews ou /homepage), pas de champs manuels ici. Témoignages : extraits optionnels (repli si le pool /reviews est vide).",
   "googleReviewsUrl": "https://share.google/EoCX35WiMTVFXIfpT",
-  "googleAggregateRating": {
-    "ratingValue": 5,
-    "reviewCount": 12
-  },
   "areaServed_meximieux": [
     "Meximieux",
     "Pérouges",

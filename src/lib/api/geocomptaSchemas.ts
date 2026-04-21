@@ -105,6 +105,38 @@ export const GeocomptaFeaturedReviewSchema = GeocomptaFeaturedReviewRawSchema.tr
 
 export type GeocomptaFeaturedReview = z.output<typeof GeocomptaFeaturedReviewSchema>;
 
+/** Agrégat fiche Google (GéoCompta v2) — `totalReviewCount` = total GMB, distinct du nombre d’avis renvoyés dans la page. */
+export type GeocomptaGoogleBusinessProfile = {
+  averageRating: number;
+  totalReviewCount: number;
+  /** `null` si pas encore synchronisé côté API. */
+  lastSyncedAt: string | null;
+};
+
+export function parseGoogleBusinessProfile(raw: unknown): GeocomptaGoogleBusinessProfile | null {
+  if (raw == null || typeof raw !== "object") return null;
+  const o = raw as Record<string, unknown>;
+  const toNum = (v: unknown): number => {
+    if (typeof v === "number" && Number.isFinite(v)) return v;
+    if (typeof v === "string" && v.trim() !== "") {
+      const n = Number(v.replace(",", ".").trim());
+      return Number.isFinite(n) ? n : NaN;
+    }
+    return NaN;
+  };
+  const ratingNum = toNum(o.averageRating);
+  const countNum = toNum(o.totalReviewCount);
+  if (!Number.isFinite(ratingNum) || !Number.isFinite(countNum) || countNum < 0) return null;
+  let lastSyncedAt: string | null = null;
+  if (o.lastSyncedAt === null || o.lastSyncedAt === undefined) lastSyncedAt = null;
+  else if (typeof o.lastSyncedAt === "string" && o.lastSyncedAt.trim()) lastSyncedAt = o.lastSyncedAt.trim();
+  return {
+    averageRating: ratingNum,
+    totalReviewCount: Math.floor(countNum),
+    lastSyncedAt,
+  };
+}
+
 /** Parse une liste d’avis : ignore les entrées invalides (n’empêche pas le reste du homepage). */
 export function parseGeocomptaReviewList(input: unknown): GeocomptaFeaturedReview[] {
   if (!Array.isArray(input)) return [];
@@ -155,6 +187,10 @@ export const GeocomptaHomepageSchema = z.object({
     .transform((v) => parseGeocomptaReviewList(unwrapReviewListInput(v))),
   featuredInterventions: z.array(GeocomptaFeaturedInterventionSchema).default([]),
   featuredPhotos: z.array(GeocomptaFeaturedPhotoSchema).default([]),
+  googleBusinessProfile: z
+    .unknown()
+    .optional()
+    .transform((raw) => (raw === undefined ? null : parseGoogleBusinessProfile(raw))),
 });
 
 export type GeocomptaHomepagePayload = z.output<typeof GeocomptaHomepageSchema>;

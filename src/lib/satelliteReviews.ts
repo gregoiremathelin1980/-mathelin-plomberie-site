@@ -1,5 +1,6 @@
+import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 import { isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
-import { getCachedGeocomptaReviewPool } from "@/lib/api/geocomptaCached";
+import { getCachedGeocomptaReviewBundle } from "@/lib/api/geocomptaCached";
 import { pickRotatingReviews } from "@/lib/reviewsRotation";
 import type { ReviewEntry } from "@/lib/site-data";
 import type { SatelliteTestimonial } from "@/lib/satelliteLandings";
@@ -13,27 +14,32 @@ export function reviewEntriesToSatelliteTestimonials(entries: ReviewEntry[]): Sa
 }
 
 /**
- * Même source que l’accueil : `getCachedGeocomptaReviewPool` + rotation.
- * Si GéoCompta est absent ou le pool vide → témoignages manuels (`satellite-landings.json`).
+ * Même source que l’accueil : cache bundle `/api/public/reviews` + rotation.
+ * Si le pool est vide → témoignages manuels ; l’agrégat fiche Google peut quand même venir de l’API.
  */
 export async function getSatelliteTestimonialsFromGeocomptaOrFallback(
   fallback: SatelliteTestimonial[],
   displayCount = 3
-): Promise<{ items: SatelliteTestimonial[]; fromGeocompta: boolean }> {
+): Promise<{
+  items: SatelliteTestimonial[];
+  fromGeocompta: boolean;
+  googleBusinessProfile: GeocomptaGoogleBusinessProfile | null;
+}> {
   if (!isGeocomptaConfigured()) {
-    return { items: fallback, fromGeocompta: false };
+    return { items: fallback, fromGeocompta: false, googleBusinessProfile: null };
   }
   try {
-    const pool = await getCachedGeocomptaReviewPool();
+    const { pool, googleBusinessProfile } = await getCachedGeocomptaReviewBundle();
     if (pool.length === 0) {
-      return { items: fallback, fromGeocompta: false };
+      return { items: fallback, fromGeocompta: false, googleBusinessProfile };
     }
     const picked = pickRotatingReviews(pool, displayCount, Date.now());
     return {
       items: reviewEntriesToSatelliteTestimonials(picked),
       fromGeocompta: true,
+      googleBusinessProfile,
     };
   } catch {
-    return { items: fallback, fromGeocompta: false };
+    return { items: fallback, fromGeocompta: false, googleBusinessProfile: null };
   }
 }

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { SiteSettings } from "@/lib/content";
+import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 
 export interface SatelliteTestimonial {
   firstName: string;
@@ -13,22 +14,26 @@ export interface SatelliteAggregateRating {
   reviewCount: number;
 }
 
+/** Ligne « note moyenne » / JSON-LD : `reviewCount` = total GMB (`totalReviewCount`), pas le nombre d’extraits affichés. */
+export function satelliteAggregateFromGbp(
+  gbp: GeocomptaGoogleBusinessProfile | null
+): SatelliteAggregateRating | null {
+  if (!gbp) return null;
+  return { ratingValue: gbp.averageRating, reviewCount: gbp.totalReviewCount };
+}
+
 export interface SatelliteLandingsFile {
   /** Fiche Google Business (Partager) — prioritaire pour `sameAs` et liens avis sur les landings satellites. */
   googleReviewsUrl?: string;
-  googleAggregateRating: SatelliteAggregateRating;
   areaServed_meximieux: string[];
   areaServed_amberieu: string[];
   testimonials_meximieux: SatelliteTestimonial[];
   testimonials_amberieu: SatelliteTestimonial[];
 }
 
-const DEFAULT_AGGREGATE: SatelliteAggregateRating = { ratingValue: 5, reviewCount: 12 };
-
 function defaultFile(): SatelliteLandingsFile {
   return {
     googleReviewsUrl: undefined,
-    googleAggregateRating: DEFAULT_AGGREGATE,
     areaServed_meximieux: ["Meximieux", "Pérouges", "Villieu-Loyes-Mollon"],
     areaServed_amberieu: ["Ambérieu-en-Bugey", "Lagnieu", "Saint-Vulbas"],
     testimonials_meximieux: [],
@@ -46,7 +51,6 @@ export function getSatelliteLandingsData(): SatelliteLandingsFile {
     const parsed = JSON.parse(raw) as SatelliteLandingsFile;
     cache = {
       googleReviewsUrl: typeof parsed.googleReviewsUrl === "string" ? parsed.googleReviewsUrl.trim() || undefined : undefined,
-      googleAggregateRating: parsed.googleAggregateRating ?? DEFAULT_AGGREGATE,
       areaServed_meximieux: Array.isArray(parsed.areaServed_meximieux) ? parsed.areaServed_meximieux : defaultFile().areaServed_meximieux,
       areaServed_amberieu: Array.isArray(parsed.areaServed_amberieu) ? parsed.areaServed_amberieu : defaultFile().areaServed_amberieu,
       testimonials_meximieux: Array.isArray(parsed.testimonials_meximieux) ? parsed.testimonials_meximieux : [],

@@ -1,20 +1,34 @@
+import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 import { SITE_URL } from "@/lib/config";
 import type { ReviewEntry } from "@/lib/site-data";
 
 interface ReviewsSchemaProps {
   reviews: ReviewEntry[];
+  /** Si présent : `reviewCount` = total fiche GMB, pas le nombre d’avis affichés sur la page. */
+  googleBusinessProfile?: GeocomptaGoogleBusinessProfile | null;
 }
 
 /**
  * Complète l’entité LocalBusiness globale (layout) : même @id, sans dupliquer NAP.
  * Les avis structurés ne sont émis que si le bloc avis est affiché sur la page.
  */
-export default function ReviewsSchema({ reviews }: ReviewsSchemaProps) {
+export default function ReviewsSchema({ reviews, googleBusinessProfile }: ReviewsSchemaProps) {
   if (!reviews?.length) return null;
 
   const ratingSum = reviews.reduce((s, r) => s + r.rating, 0);
-  const ratingValue = Math.round((ratingSum / reviews.length) * 10) / 10;
-  const reviewCount = reviews.length;
+  let ratingValue: number;
+  let reviewCount: number;
+  if (
+    googleBusinessProfile &&
+    Number.isFinite(googleBusinessProfile.averageRating) &&
+    Number.isFinite(googleBusinessProfile.totalReviewCount)
+  ) {
+    ratingValue = Math.round(googleBusinessProfile.averageRating * 10) / 10;
+    reviewCount = Math.floor(googleBusinessProfile.totalReviewCount);
+  } else {
+    ratingValue = Math.round((ratingSum / reviews.length) * 10) / 10;
+    reviewCount = reviews.length;
+  }
 
   const aggregateSchema = {
     "@context": "https://schema.org",

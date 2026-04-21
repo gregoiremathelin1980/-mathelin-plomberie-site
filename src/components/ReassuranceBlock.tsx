@@ -1,4 +1,5 @@
 import { GraduationCap, Calendar, MapPin } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const ITEMS = [
   {
@@ -15,9 +16,12 @@ const ITEMS = [
   },
 ] as const;
 
-export default function ReassuranceBlock() {
+export default function ReassuranceBlock({ className }: { className?: string }) {
   return (
-    <section className="border-b border-primary/10 bg-primary/5 px-4 py-8 sm:px-6" aria-label="Réassurance">
+    <section
+      className={cn("border-b border-primary/10 bg-primary/5 px-4 py-8 sm:px-6", className)}
+      aria-label="Réassurance"
+    >
       <div className="mx-auto max-w-5xl">
         <div className="grid gap-6 sm:grid-cols-3">
           {ITEMS.map(({ icon: Icon, label }) => (

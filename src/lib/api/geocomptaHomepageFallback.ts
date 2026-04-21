@@ -65,6 +65,7 @@ export function buildHomepagePayloadFromFiles(): GeocomptaHomepagePayload {
       featuredReviews: [],
       featuredInterventions: [],
       featuredPhotos: [],
+      googleBusinessProfile: null,
     });
   }
   return parsed.data;

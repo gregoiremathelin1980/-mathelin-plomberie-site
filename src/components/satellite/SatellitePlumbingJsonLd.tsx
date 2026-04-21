@@ -1,3 +1,4 @@
+import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 import type { SiteSettings } from "@/lib/content";
 import {
   getGmbUrlForSatellitePages,
@@ -13,7 +14,7 @@ function buildSchema(
   variant: Variant,
   settings: SiteSettings,
   landing: SatelliteLandingsFile,
-  includeAggregateRating: boolean
+  googleBusinessProfile: GeocomptaGoogleBusinessProfile | null
 ): Record<string, unknown> {
   const addr = postalAddressParts(settings.address);
   const sameAs = getGmbUrlForSatellitePages(settings);
@@ -44,12 +45,15 @@ function buildSchema(
     areaServed: areas.map((name) => ({ "@type": "City", name })),
   };
 
-  if (includeAggregateRating) {
-    const { ratingValue, reviewCount } = landing.googleAggregateRating;
+  if (
+    googleBusinessProfile &&
+    Number.isFinite(googleBusinessProfile.averageRating) &&
+    Number.isFinite(googleBusinessProfile.totalReviewCount)
+  ) {
     base.aggregateRating = {
       "@type": "AggregateRating",
-      ratingValue: String(ratingValue),
-      reviewCount: String(reviewCount),
+      ratingValue: String(googleBusinessProfile.averageRating),
+      reviewCount: String(Math.floor(googleBusinessProfile.totalReviewCount)),
       bestRating: "5",
       worstRating: "1",
     };
@@ -65,15 +69,14 @@ function buildSchema(
 export default function SatellitePlumbingJsonLd({
   variant,
   settings,
-  includeAggregateRating = true,
+  googleBusinessProfile,
 }: {
   variant: Variant;
   settings: SiteSettings;
-  /** Désactiver si aucun témoignage visible sur la page (règles Google). */
-  includeAggregateRating?: boolean;
+  googleBusinessProfile: GeocomptaGoogleBusinessProfile | null;
 }) {
   const landing = getSatelliteLandingsData();
-  const schema = buildSchema(variant, settings, landing, includeAggregateRating);
+  const schema = buildSchema(variant, settings, landing, googleBusinessProfile);
   return (
     <script
       type="application/ld+json"

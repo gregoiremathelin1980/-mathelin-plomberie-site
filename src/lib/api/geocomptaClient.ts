@@ -17,6 +17,8 @@ import {
   type GeocomptaRealisationDetail,
   GeocomptaRealisationListItemSchema,
   parseGeocomptaReviewList,
+  parseGoogleBusinessProfile,
+  type GeocomptaGoogleBusinessProfile,
   GeocomptaSeoPageSchema,
   type GeocomptaSeoPage,
   GeocomptaSitemapDataSchema,
@@ -225,7 +227,7 @@ export async function fetchGeocomptaSeoPageBySlug(slug: string): Promise<Geocomp
   return geocomptaGetJson(`/api/public/pages/${encoded}`, GeocomptaSeoPageSchema);
 }
 
-/** Extrait le tableau d’avis depuis la réponse JSON brute (tests + `fetchGeocomptaReviews`). */
+/** Extrait le tableau d’avis depuis la réponse JSON brute (tests + `fetchGeocomptaReviewsFull`). */
 export function extractReviewsArrayFromPayload(data: unknown): unknown[] {
   if (Array.isArray(data)) return data;
   if (data && typeof data === "object") {
@@ -233,35 +235,66 @@ export function extractReviewsArrayFromPayload(data: unknown): unknown[] {
     if (Array.isArray(o.reviews)) return o.reviews;
     if (Array.isArray(o.items)) return o.items;
     if (Array.isArray(o.data)) return o.data;
+    if (Array.isArray(o.featuredReviews)) return o.featuredReviews;
+    return [];
   }
-  throw new GeocomptaApiError("GéoCompta /reviews: format inattendu (attendu: tableau racine ou { reviews })");
+  throw new GeocomptaApiError("GéoCompta /reviews: format inattendu (racine non-tableau ni objet)");
 }
 
+export type GeocomptaReviewsBundle = {
+  reviews: GeocomptaFeaturedReview[];
+  googleBusinessProfile: GeocomptaGoogleBusinessProfile | null;
+  /** Taille du tableau renvoyé par l’API (peut différer de `reviews.length` après filtrage Zod). */
+  reviewsReturnedCount: number;
+};
+
 /**
- * Liste d’avis : ne fait pas planter le rendu — `[]` sur 401, 404, 5xx, timeout ou schéma invalide.
+ * Réponse v2 possible : `{ reviews, googleBusinessProfile, reviewsReturnedCount }` ; rétrocompat tableau racine.
+ * Ne fait pas planter le rendu — bundle vide sur 401, 404, 5xx, timeout ou JSON invalide.
  */
-export async function fetchGeocomptaReviews(): Promise<GeocomptaFeaturedReview[]> {
+export async function fetchGeocomptaReviewsFull(): Promise<GeocomptaReviewsBundle> {
   try {
     const data = await geocomptaGetJson("/api/public/reviews", z.unknown(), { timeoutMs: DEFAULT_TIMEOUT_MS });
     const raw = extractReviewsArrayFromPayload(data);
     const list = parseGeocomptaReviewList(raw);
+    let reviewsReturnedCount = list.length;
+    let googleBusinessProfile: GeocomptaGoogleBusinessProfile | null = null;
+    if (data && typeof data === "object") {
+      const o = data as Record<string, unknown>;
+      const rrc = o.reviewsReturnedCount;
+      if (typeof rrc === "number" && Number.isFinite(rrc)) {
+        reviewsReturnedCount = Math.max(0, Math.floor(rrc));
+      } else if (typeof rrc === "string" && /^\d+$/.test(rrc.trim())) {
+        reviewsReturnedCount = parseInt(rrc.trim(), 10);
+      }
+      googleBusinessProfile = parseGoogleBusinessProfile(o.googleBusinessProfile);
+    }
     if (process.env.NODE_ENV === "development") {
       console.info(
-        "[geocompta] GET /api/public/reviews → parsed count:",
+        "[geocompta] GET /api/public/reviews → parsed:",
         list.length,
-        "(raw items:",
-        raw.length,
-        ")"
+        "returnedCount:",
+        reviewsReturnedCount,
+        "gbp:",
+        googleBusinessProfile ? "yes" : "no"
       );
     }
-    return list;
+    return { reviews: list, googleBusinessProfile, reviewsReturnedCount };
   } catch (e) {
     const status = e instanceof GeocomptaApiError ? e.status : undefined;
     if (status !== 401 && status !== 404) {
-      console.warn("[geocompta] GET /api/public/reviews — liste vide (erreur):", e instanceof Error ? e.message : e);
+      console.warn("[geocompta] GET /api/public/reviews — bundle vide (erreur):", e instanceof Error ? e.message : e);
     }
-    return [];
+    return { reviews: [], googleBusinessProfile: null, reviewsReturnedCount: 0 };
   }
+}
+
+/**
+ * Liste d’avis seulement — même sémantique qu’avant (dérivé de `fetchGeocomptaReviewsFull`).
+ */
+export async function fetchGeocomptaReviews(): Promise<GeocomptaFeaturedReview[]> {
+  const b = await fetchGeocomptaReviewsFull();
+  return b.reviews;
 }
 
 export async function fetchGeocomptaInterventions(): Promise<

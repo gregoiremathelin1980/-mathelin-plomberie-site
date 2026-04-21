@@ -5,13 +5,12 @@
  */
 
 import assert from "node:assert/strict";
-import { parseGeocomptaReviewList, GeocomptaHomepageSchema } from "../src/lib/api/geocomptaSchemas";
 import {
-  buildGeocomptaUrl,
-  extractReviewsArrayFromPayload,
-  GeocomptaApiError,
-  getGeocomptaApiBaseUrl,
-} from "../src/lib/api/geocomptaClient";
+  parseGeocomptaReviewList,
+  GeocomptaHomepageSchema,
+  parseGoogleBusinessProfile,
+} from "../src/lib/api/geocomptaSchemas";
+import { buildGeocomptaUrl, extractReviewsArrayFromPayload, getGeocomptaApiBaseUrl } from "../src/lib/api/geocomptaClient";
 import { pickRotatingReviews } from "../src/lib/reviewsRotation";
 import { allowSiteDataHomeReviewsEnv } from "../src/lib/reviewsHomePolicy";
 import type { SiteSettings } from "../src/lib/content";
@@ -68,7 +67,51 @@ function testExtractPayload() {
   assert.deepEqual(extractReviewsArrayFromPayload([{ rating: 1, text: "a" }]), [{ rating: 1, text: "a" }]);
   assert.deepEqual(extractReviewsArrayFromPayload({ reviews: [{ rating: 1, text: "b" }] }), [{ rating: 1, text: "b" }]);
   assert.deepEqual(extractReviewsArrayFromPayload({ items: [{ rating: 1, text: "c" }] }), [{ rating: 1, text: "c" }]);
-  assert.throws(() => extractReviewsArrayFromPayload({}), GeocomptaApiError);
+  assert.deepEqual(extractReviewsArrayFromPayload({}), []);
+  assert.deepEqual(
+    extractReviewsArrayFromPayload({
+      reviews: [],
+      googleBusinessProfile: { averageRating: 4.5, totalReviewCount: 10, lastSyncedAt: null },
+      reviewsReturnedCount: 0,
+    }),
+    []
+  );
+}
+
+function testParseGoogleBusinessProfile() {
+  assert.equal(parseGoogleBusinessProfile(null), null);
+  assert.equal(parseGoogleBusinessProfile({ averageRating: 5 }), null);
+  const g = parseGoogleBusinessProfile({
+    averageRating: "4,7",
+    totalReviewCount: "42",
+    lastSyncedAt: "2025-01-01T00:00:00Z",
+  });
+  assert.ok(g);
+  assert.equal(g!.averageRating, 4.7);
+  assert.equal(g!.totalReviewCount, 42);
+  assert.equal(g!.lastSyncedAt, "2025-01-01T00:00:00Z");
+}
+
+function testHomepageGoogleBusinessProfile() {
+  const hp = GeocomptaHomepageSchema.parse({
+    featuredRealisations: [],
+    featuredAdvice: [],
+    featuredReviews: [],
+    featuredInterventions: [],
+    featuredPhotos: [],
+    googleBusinessProfile: { averageRating: 5, totalReviewCount: 3, lastSyncedAt: "2025-01-01" },
+  });
+  assert.equal(hp.googleBusinessProfile?.averageRating, 5);
+  assert.equal(hp.googleBusinessProfile?.totalReviewCount, 3);
+  assert.equal(hp.googleBusinessProfile?.lastSyncedAt, "2025-01-01");
+  const hp2 = GeocomptaHomepageSchema.parse({
+    featuredRealisations: [],
+    featuredAdvice: [],
+    featuredReviews: [],
+    featuredInterventions: [],
+    featuredPhotos: [],
+  });
+  assert.equal(hp2.googleBusinessProfile, null);
 }
 
 function testHomepageFeaturedReviewsPartialBad() {
@@ -205,7 +248,18 @@ async function optionalLiveFetch(): Promise<void> {
   }
   const raw = extractReviewsArrayFromPayload(json);
   const list = parseGeocomptaReviewList(raw);
-  console.log("[test] live : HTTP", res.status, "→ items bruts", raw.length, "→ parsés", list.length);
+  const gbp =
+    json && typeof json === "object" ? parseGoogleBusinessProfile((json as Record<string, unknown>).googleBusinessProfile) : null;
+  console.log(
+    "[test] live : HTTP",
+    res.status,
+    "→ items bruts",
+    raw.length,
+    "→ parsés",
+    list.length,
+    "→ gbp",
+    gbp ? `${gbp.averageRating}/${gbp.totalReviewCount}` : "—"
+  );
   if (!res.ok) {
     console.log("[test] live : échec HTTP (vérifier URL / clé). Pas d’échec du script de test.");
   }
@@ -216,6 +270,8 @@ async function main() {
   testParseAliases();
   testParseSkipsInvalid();
   testExtractPayload();
+  testParseGoogleBusinessProfile();
+  testHomepageGoogleBusinessProfile();
   testHomepageFeaturedReviewsPartialBad();
   testHomepageFeaturedReviewsWrappedObject();
   testPickRotating();

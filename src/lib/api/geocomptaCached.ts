@@ -8,7 +8,7 @@ import {
   fetchGeocomptaHomepage,
   fetchGeocomptaRealisationBySlug,
   fetchGeocomptaRealisationList,
-  fetchGeocomptaReviews,
+  fetchGeocomptaReviewsFull,
   fetchGeocomptaSeoPageBySlug,
   fetchGeocomptaSitemap,
   isGeocomptaConfigured,
@@ -16,6 +16,7 @@ import {
 import { buildHomepagePayloadFromFiles } from "@/lib/api/geocomptaHomepageFallback";
 import type {
   GeocomptaConseilDetail,
+  GeocomptaGoogleBusinessProfile,
   GeocomptaRealisationDetail,
   GeocomptaSeoPage,
   GeocomptaSitemapData,
@@ -45,7 +46,7 @@ function getReviewsCacheRevalidate(): number {
 }
 
 function mapGeocomptaReviewsToEntries(
-  list: Awaited<ReturnType<typeof fetchGeocomptaReviews>>
+  list: Awaited<ReturnType<typeof fetchGeocomptaReviewsFull>>["reviews"]
 ): ReviewEntry[] {
   return list.map((r) => ({
     author: r.author,
@@ -56,22 +57,39 @@ function mapGeocomptaReviewsToEntries(
   }));
 }
 
+export type GeocomptaReviewCacheBundle = {
+  pool: ReviewEntry[];
+  googleBusinessProfile: GeocomptaGoogleBusinessProfile | null;
+};
+
+async function loadReviewBundleFromApi(): Promise<GeocomptaReviewCacheBundle> {
+  const full = await fetchGeocomptaReviewsFull();
+  return {
+    pool: mapGeocomptaReviewsToEntries(full.reviews),
+    googleBusinessProfile: full.googleBusinessProfile,
+  };
+}
+
 /**
- * Pool complet `/api/public/reviews`.
- * Si le cache Next contient encore `[]` (première requête en erreur puis API OK), on retente **sans** passer par le cache
- * pour ne pas laisser l’accueil vide jusqu’à l’expiration du `revalidate`.
+ * Pool `/api/public/reviews` + agrégat fiche Google (même cache ISR).
+ * Si le cache contient un pool vide alors que l’API peut répondre, on retente sans `unstable_cache`.
  */
-export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
-  if (!isGeocomptaConfigured()) return [];
+export async function getCachedGeocomptaReviewBundle(): Promise<GeocomptaReviewCacheBundle> {
+  if (!isGeocomptaConfigured()) return { pool: [], googleBusinessProfile: null };
   const revalidate = getReviewsCacheRevalidate();
   const cached = await unstable_cache(
-    async () => mapGeocomptaReviewsToEntries(await fetchGeocomptaReviews()),
-    ["geocompta-reviews-pool-v3"],
+    async () => loadReviewBundleFromApi(),
+    ["geocompta-reviews-bundle-v1"],
     { revalidate, tags: ["geocompta-reviews"] }
   )();
 
-  if (cached.length > 0) return cached;
-  return mapGeocomptaReviewsToEntries(await fetchGeocomptaReviews());
+  if (cached.pool.length > 0) return cached;
+  return loadReviewBundleFromApi();
+}
+
+export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
+  const { pool } = await getCachedGeocomptaReviewBundle();
+  return pool;
 }
 
 export async function getCachedGeocomptaHomepage() {

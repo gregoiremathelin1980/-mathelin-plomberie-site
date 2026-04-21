@@ -22,13 +22,17 @@ export default function SatelliteTestimonialsSection({
 }: {
   title: string;
   items: SatelliteTestimonial[];
-  aggregate: SatelliteAggregateRating;
+  /** Agrégat fiche Google (API) ; absent si données GMB non disponibles. */
+  aggregate: SatelliteAggregateRating | null;
   googleMapsUrl?: string;
   /** Ex. source GéoCompta (même flux que le site principal). */
   sourceHint?: string;
 }) {
   return (
-    <section className="border-y border-primary/10 bg-gray-50 px-4 py-12 sm:px-6" aria-labelledby="satellite-avis-heading">
+    <section
+      className="border-y border-primary/10 bg-gray-50 px-4 py-14 sm:px-6 sm:py-16"
+      aria-labelledby="satellite-avis-heading"
+    >
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center gap-2 text-primary">
           <Quote className="h-7 w-7 shrink-0" aria-hidden />
@@ -37,7 +41,7 @@ export default function SatelliteTestimonialsSection({
           </h2>
         </div>
         {sourceHint ? <p className="mt-2 text-xs text-gray-500">{sourceHint}</p> : null}
-        {items.length > 0 ? (
+        {aggregate ? (
           <p className="mt-2 text-sm text-gray-600">
             Note moyenne (fiche Google)&nbsp;:{" "}
             <strong>

@@ -17,7 +17,7 @@ export default function Hero() {
   const phoneRaw = usePhoneRaw();
 
   return (
-    <section className="relative min-h-[480px] overflow-hidden bg-primary sm:min-h-[560px]">
+    <section className="relative min-h-[420px] overflow-hidden bg-primary sm:min-h-[500px]">
       <Image
         src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1920&q=75"
         alt=""
@@ -27,7 +27,7 @@ export default function Hero() {
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-primary/85" />
-      <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 py-16 text-center text-white sm:py-24">
+      <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 py-14 text-center text-white sm:py-20">
         <h1 className="font-heading text-3xl font-bold leading-tight drop-shadow sm:text-4xl md:text-5xl">
           Plombier chauffagiste à Pérouges
         </h1>
