@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",
   description:
-    "Plombier chauffagiste à Pérouges, Meximieux, Ambérieu-en-Bugey et Lagnieu. Dépannage plomberie, chauffe-eau, radiateurs, débouchage. Devis gratuit.",
+    "Mathelin Plomberie : Artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.",
   keywords: [
     "plombier Pérouges",
     "plombier Meximieux",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",
     description:
-      "Plombier chauffagiste à Pérouges, Meximieux, Ambérieu-en-Bugey et Lagnieu. Devis gratuit.",
+      "Mathelin Plomberie : Artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.",
     type: "website",
   },
   robots: "index, follow",

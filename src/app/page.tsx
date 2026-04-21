@@ -16,7 +16,6 @@ import { SERVICES } from "@/lib/services-data";
 import { buttonVariants } from "@/components/ui/button";
 import GoogleReviewsBlock from "@/components/GoogleReviewsBlock";
 import ReviewsSchema from "@/components/ReviewsSchema";
-import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 import { fetchGeocomptaHomepage, isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
 import {
   getCachedGeocomptaHomepage,
@@ -53,10 +52,12 @@ const AdvicePreview = dynamic(() => import("@/components/AdvicePreview"), {
   ),
 });
 
+const HOME_META_DESCRIPTION =
+  "Mathelin Plomberie : Artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.";
+
 export const metadata = buildPageMetadata({
   title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",
-  description:
-    "Plombier chauffagiste à Pérouges, Meximieux, Ambérieu-en-Bugey et Lagnieu. Dépannage plomberie, chauffe-eau, radiateurs, débouchage. Devis gratuit.",
+  description: HOME_META_DESCRIPTION,
   path: "/",
 });
 
@@ -109,12 +110,10 @@ export default async function HomePage() {
     const rotationSeed = Date.now();
     let hp = await getCachedGeocomptaHomepage();
     let reviewPool: ReviewEntry[] = [];
-    let reviewsBundleGbp: GeocomptaGoogleBusinessProfile | null = null;
     let reviewsLoadError: string | undefined;
     try {
       const bundle = await getCachedGeocomptaReviewBundle();
       reviewPool = bundle.pool;
-      reviewsBundleGbp = bundle.googleBusinessProfile;
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       console.warn("[geocompta] pool avis (/api/public/reviews) indisponible:", e);
@@ -154,8 +153,6 @@ export default async function HomePage() {
         ? pickRotatingReviews(mergedForRotation, displayCount, rotationSeed)
         : [];
 
-    const googleBusinessProfileForSeo = hp.googleBusinessProfile ?? reviewsBundleGbp ?? null;
-
     const interventions = hp.featuredInterventions.map((i) => ({
       city: i.city,
       label: i.label,
@@ -177,23 +174,19 @@ export default async function HomePage() {
 
     return (
       <>
-        {ds.showReviews && reviews.length > 0 && (
-          <ReviewsSchema reviews={reviews} googleBusinessProfile={googleBusinessProfileForSeo} />
-        )}
+        {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
         <Hero />
         <section
-          className="border-b border-gray-100 bg-white px-4 py-14 sm:px-6 sm:py-16"
+          className="border-b border-gray-100 bg-white px-4 py-14 text-center sm:px-6 sm:py-16"
           aria-labelledby="home-artisan-heading"
         >
-          <div className="mx-auto max-w-[600px] text-center">
-            <h2 id="home-artisan-heading" className="font-heading text-2xl font-bold text-primary sm:text-3xl">
-              Artisan plombier à Pérouges
+          <div className="mx-auto max-w-[640px] text-center">
+            <h2 id="home-artisan-heading" className="sr-only">
+              Présentation
             </h2>
-            <p className="mt-4 text-gray-text leading-relaxed">
-              <strong>Grégoire Mathelin</strong>, plombier chauffagiste diplômé (BP Génie Climatique), intervient depuis
-              2013 pour le dépannage et les travaux d&apos;eau et de chauffage. Basé à <strong>Pérouges (01800)</strong>,
-              nous couvrons la Côtière, la Plaine de l&apos;Ain et le Bugey — dont Meximieux, Ambérieu-en-Bugey et
-              Lagnieu — avec une priorité à la réactivité sur les urgences (fuites, débouchages, chauffe-eau, radiateurs).
+            <p className="text-lg leading-relaxed text-gray-text sm:text-xl">
+              Artisan plombier-chauffagiste diplômé à Pérouges, j&apos;interviens dans toute la Plaine de l&apos;Ain pour
+              vos dépannages et installations. Travail soigné, réactivité et devis transparents.
             </p>
           </div>
         </section>
@@ -315,18 +308,16 @@ export default async function HomePage() {
       {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
       <Hero />
       <section
-        className="border-b border-gray-100 bg-white px-4 py-14 sm:px-6 sm:py-16"
+        className="border-b border-gray-100 bg-white px-4 py-14 text-center sm:px-6 sm:py-16"
         aria-labelledby="home-artisan-heading-offgeo"
       >
-        <div className="mx-auto max-w-[600px] text-center">
-          <h2 id="home-artisan-heading-offgeo" className="font-heading text-2xl font-bold text-primary sm:text-3xl">
-            Artisan plombier à Pérouges
+        <div className="mx-auto max-w-[640px] text-center">
+          <h2 id="home-artisan-heading-offgeo" className="sr-only">
+            Présentation
           </h2>
-          <p className="mt-4 text-gray-text leading-relaxed">
-            <strong>Grégoire Mathelin</strong>, plombier chauffagiste diplômé (BP Génie Climatique), intervient depuis
-            2013 pour le dépannage et les travaux d&apos;eau et de chauffage. Basé à <strong>Pérouges (01800)</strong>,
-            nous couvrons la Côtière, la Plaine de l&apos;Ain et le Bugey — dont Meximieux, Ambérieu-en-Bugey et
-            Lagnieu — avec une priorité à la réactivité sur les urgences (fuites, débouchages, chauffe-eau, radiateurs).
+          <p className="text-lg leading-relaxed text-gray-text sm:text-xl">
+            Artisan plombier-chauffagiste diplômé à Pérouges, j&apos;interviens dans toute la Plaine de l&apos;Ain pour
+            vos dépannages et installations. Travail soigné, réactivité et devis transparents.
           </p>
         </div>
       </section>

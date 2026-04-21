@@ -1,5 +1,6 @@
 import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 import type { SiteSettings } from "@/lib/content";
+import { GMB_SHARE_URL, resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
 import {
   getGmbUrlForSatellitePages,
   getSatelliteLandingsData,
@@ -17,7 +18,9 @@ function buildSchema(
   googleBusinessProfile: GeocomptaGoogleBusinessProfile | null
 ): Record<string, unknown> {
   const addr = postalAddressParts(settings.address);
-  const sameAs = getGmbUrlForSatellitePages(settings);
+  const gmbFromSettings = getGmbUrlForSatellitePages(settings)?.trim();
+  const sameAsList = Array.from(new Set([GMB_SHARE_URL, gmbFromSettings].filter(Boolean) as string[]));
+  const gbp = resolveGmbProfileForStructuredData(googleBusinessProfile);
   const areas = variant === "meximieux" ? landing.areaServed_meximieux : landing.areaServed_amberieu;
   const description =
     variant === "meximieux"
@@ -45,22 +48,16 @@ function buildSchema(
     areaServed: areas.map((name) => ({ "@type": "City", name })),
   };
 
-  if (
-    googleBusinessProfile &&
-    Number.isFinite(googleBusinessProfile.averageRating) &&
-    Number.isFinite(googleBusinessProfile.totalReviewCount)
-  ) {
-    base.aggregateRating = {
-      "@type": "AggregateRating",
-      ratingValue: String(googleBusinessProfile.averageRating),
-      reviewCount: String(Math.floor(googleBusinessProfile.totalReviewCount)),
-      bestRating: "5",
-      worstRating: "1",
-    };
-  }
+  base.aggregateRating = {
+    "@type": "AggregateRating",
+    ratingValue: String(gbp.averageRating),
+    reviewCount: String(Math.floor(gbp.totalReviewCount)),
+    bestRating: "5",
+    worstRating: "1",
+  };
 
-  if (sameAs) {
-    base.sameAs = [sameAs];
+  if (sameAsList.length > 0) {
+    base.sameAs = sameAsList;
   }
 
   return base;

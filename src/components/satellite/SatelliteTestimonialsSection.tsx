@@ -30,11 +30,11 @@ export default function SatelliteTestimonialsSection({
 }) {
   return (
     <section
-      className="border-y border-primary/10 bg-gray-50 px-4 py-14 sm:px-6 sm:py-16"
+      className="border-y border-primary/10 bg-gray-50 px-4 py-14 text-center sm:px-6 sm:py-16"
       aria-labelledby="satellite-avis-heading"
     >
       <div className="mx-auto max-w-3xl">
-        <div className="flex items-center gap-2 text-primary">
+        <div className="flex flex-col items-center gap-2 text-primary sm:flex-row sm:justify-center">
           <Quote className="h-7 w-7 shrink-0" aria-hidden />
           <h2 id="satellite-avis-heading" className="font-heading text-2xl font-bold text-primary">
             {title}
@@ -61,8 +61,10 @@ export default function SatelliteTestimonialsSection({
         ) : null}
         <ul className="mt-8 space-y-6">
           {items.map((t, i) => (
-            <li key={i} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-              <Stars n={t.rating} />
+            <li key={i} className="rounded-2xl border border-gray-200 bg-white p-5 text-center shadow-sm">
+              <div className="flex justify-center">
+                <Stars n={t.rating} />
+              </div>
               <blockquote className="mt-2 text-gray-800">&ldquo;{t.text}&rdquo;</blockquote>
               <p className="mt-3 text-sm font-medium text-gray-600">— {t.firstName}</p>
             </li>

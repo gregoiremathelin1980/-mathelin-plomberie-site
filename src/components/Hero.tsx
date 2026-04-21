@@ -31,29 +31,27 @@ export default function Hero() {
         <h1 className="font-heading text-3xl font-bold leading-tight drop-shadow sm:text-4xl md:text-5xl">
           Plombier chauffagiste à Pérouges
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-white/95 sm:text-xl">
-          Dépannage plomberie et chauffage autour de Meximieux, Ambérieu et dans le Bugey et la Côtière : fuite d&apos;eau, chauffe-eau en panne, radiateur froid ou canalisation bouchée.
+        <p className="mt-3 max-w-xl text-base text-white/95 sm:text-lg">
+          Urgence plomberie &amp; chauffage — Plaine de l&apos;Ain &amp; Bugey.
         </p>
-        <p className="mt-3 text-sm text-white/90 sm:text-base">
-          {HERO_SERVICES}
-        </p>
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
             href={`tel:${phoneRaw}`}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 font-semibold text-white shadow-lg transition hover:bg-orange-600 sm:w-auto"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 text-lg font-semibold text-white shadow-lg ring-2 ring-white/30 transition hover:bg-orange-600 sm:w-auto sm:min-w-[220px]"
           >
             <Phone className="h-5 w-5" />
             Appeler maintenant
           </a>
           <Link
             href="/devis"
-            className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white bg-white/10 px-8 py-4 font-semibold backdrop-blur sm:w-auto hover:bg-white/20"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white bg-white/10 px-6 py-3 text-base font-semibold backdrop-blur sm:w-auto hover:bg-white/20"
           >
             <FileText className="h-5 w-5" />
             Demander un devis
           </Link>
         </div>
-        <ul className="mt-14 flex flex-wrap justify-center gap-8 sm:gap-12">
+        <p className="mt-8 text-sm text-white/85 sm:text-base">{HERO_SERVICES}</p>
+        <ul className="mt-8 flex flex-wrap justify-center gap-8 sm:mt-10 sm:gap-12">
           {TRUST_ITEMS.map(({ icon: Icon, label }) => (
             <li key={label} className="flex items-center gap-2 text-white/95">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">

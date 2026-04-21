@@ -4,6 +4,8 @@
  */
 import type { SiteSettings } from "@/lib/content";
 import { SITE_URL } from "@/lib/config";
+import { GMB_FALLBACK_PROFILE, GMB_SHARE_URL } from "@/lib/gmbSeoDefaults";
+import { getGmbSameAsUrl } from "@/lib/satelliteLandings";
 
 const FOUNDING_DATE = "2013-02-01";
 const OFFICIAL_NAME = "Mathelin Grégoire - Plomberie Chauffage";
@@ -38,6 +40,9 @@ export default function LocalBusinessSchema({
 }: {
   settings: SiteSettings;
 }) {
+  const gmbUrl = getGmbSameAsUrl(settings)?.trim() || GMB_SHARE_URL;
+  const sameAs = Array.from(new Set([gmbUrl, ...SAME_AS]));
+
   const schema = {
     "@context": "https://schema.org",
     "@id": `${MAIN_URL}/#localbusiness`,
@@ -48,7 +53,7 @@ export default function LocalBusinessSchema({
     logo: LOGO_IMAGE_URL,
     foundingDate: FOUNDING_DATE,
     description:
-      "Plombier chauffagiste : dépannage plomberie, urgence fuite d'eau, canalisation bouchée, débouchage évier, radiateur froid, chauffe-eau. Intervention à Pérouges, Meximieux, Ambérieu-en-Bugey, Lagnieu.",
+      "Mathelin Plomberie : artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.",
     url: MAIN_URL,
     sameAs: SAME_AS,
     telephone: phoneToInternational(settings.phone),
@@ -85,6 +90,13 @@ export default function LocalBusinessSchema({
       "Chauffe-eau",
       "Radiateur",
     ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: String(GMB_FALLBACK_PROFILE.averageRating),
+      reviewCount: String(GMB_FALLBACK_PROFILE.totalReviewCount),
+      bestRating: 5,
+      worstRating: 1,
+    },
     ...(settings.service_radius && {
       serviceArea: {
         "@type": "GeoCircle",

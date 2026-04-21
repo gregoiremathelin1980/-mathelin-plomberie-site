@@ -1,51 +1,23 @@
-import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 import { SITE_URL } from "@/lib/config";
 import type { ReviewEntry } from "@/lib/site-data";
 
 interface ReviewsSchemaProps {
   reviews: ReviewEntry[];
-  /** Si présent : `reviewCount` = total fiche GMB, pas le nombre d’avis affichés sur la page. */
-  googleBusinessProfile?: GeocomptaGoogleBusinessProfile | null;
 }
 
 /**
- * Complète l’entité LocalBusiness globale (layout) : même @id, sans dupliquer NAP.
- * Les avis structurés ne sont émis que si le bloc avis est affiché sur la page.
+ * Avis structurés liés au LocalBusiness global (`@id` …/#localbusiness, défini dans le layout).
+ * L’agrégat note / nombre d’avis GMB est porté par `LocalBusinessSchema` pour éviter les doublons.
  */
-export default function ReviewsSchema({ reviews, googleBusinessProfile }: ReviewsSchemaProps) {
+export default function ReviewsSchema({ reviews }: ReviewsSchemaProps) {
   if (!reviews?.length) return null;
 
-  const ratingSum = reviews.reduce((s, r) => s + r.rating, 0);
-  let ratingValue: number;
-  let reviewCount: number;
-  if (
-    googleBusinessProfile &&
-    Number.isFinite(googleBusinessProfile.averageRating) &&
-    Number.isFinite(googleBusinessProfile.totalReviewCount)
-  ) {
-    ratingValue = Math.round(googleBusinessProfile.averageRating * 10) / 10;
-    reviewCount = Math.floor(googleBusinessProfile.totalReviewCount);
-  } else {
-    ratingValue = Math.round((ratingSum / reviews.length) * 10) / 10;
-    reviewCount = reviews.length;
-  }
-
-  const aggregateSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${SITE_URL}/#localbusiness`,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue,
-      reviewCount,
-      bestRating: 5,
-      worstRating: 1,
-    },
-  };
+  const businessId = `${SITE_URL}/#localbusiness`;
 
   const reviewSchemas = reviews.map((r) => ({
     "@context": "https://schema.org",
     "@type": "Review",
+    itemReviewed: { "@id": businessId },
     author: { "@type": "Person", name: r.author ?? "Client" },
     reviewRating: {
       "@type": "Rating",
@@ -59,10 +31,6 @@ export default function ReviewsSchema({ reviews, googleBusinessProfile }: Review
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateSchema) }}
-      />
       {reviewSchemas.map((schema, i) => (
         <script
           key={i}
