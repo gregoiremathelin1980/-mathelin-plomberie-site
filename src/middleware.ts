@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const MAIN_SITE_URL = "https://mathelin-plomberie.fr";
+const MAIN_SITE_URL = "https://www.mathelin-plomberie.fr";
 
 const SATELLITE_DOMAINS: Record<string, string> = {
   "plombier-amberieu.fr": "/plombier-amberieu",

@@ -53,15 +53,46 @@ const AdvicePreview = dynamic(() => import("@/components/AdvicePreview"), {
 });
 
 const HOME_META_DESCRIPTION =
-  "Mathelin Plomberie : Artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.";
+  "Mathelin Plomberie Chauffage : votre plombier à Pérouges, dépannage et urgences 7j/7 dans l'Ain (chauffage, fuites, rénovation). Devis gratuit. Appelez le 06 61 42 24 07 pour une prise en charge rapide.";
 
 export const metadata = buildPageMetadata({
-  title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",
+  title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
   description: HOME_META_DESCRIPTION,
   path: "/",
 });
 
 const HOME_SERVICES = SERVICES.slice(0, 3);
+
+function HomeArtisanPresentation() {
+  return (
+    <section
+      className="border-b border-gray-100 bg-white px-4 py-14 sm:px-6 sm:py-16"
+      aria-labelledby="home-artisan-heading"
+    >
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-8 md:flex-row md:items-center md:gap-10">
+        <div className="w-full max-w-[min(100%,400px)] shrink-0">
+          <Image
+            src="/images/installation-plomberie-ain.jpg"
+            alt="Installation de plomberie dans l'Ain"
+            width={400}
+            height={300}
+            className="mx-auto h-auto w-full rounded-xl object-cover shadow-md md:mx-0"
+            sizes="(max-width: 768px) 90vw, 400px"
+          />
+        </div>
+        <div className="max-w-xl text-center md:text-left">
+          <h2 id="home-artisan-heading" className="sr-only">
+            Présentation
+          </h2>
+          <p className="text-lg leading-relaxed text-gray-text sm:text-xl">
+            Artisan plombier-chauffagiste diplômé à Pérouges, j&apos;interviens dans toute la Plaine de l&apos;Ain pour
+            vos dépannages et installations. Travail soigné, réactivité et devis transparents.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function getHomeReviewsDisplayCount(): number {
   const raw = process.env.GEOCOMPTA_HOME_REVIEWS_DISPLAY_COUNT;
@@ -176,20 +207,7 @@ export default async function HomePage() {
       <>
         {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
         <Hero />
-        <section
-          className="border-b border-gray-100 bg-white px-4 py-14 text-center sm:px-6 sm:py-16"
-          aria-labelledby="home-artisan-heading"
-        >
-          <div className="mx-auto max-w-[640px] text-center">
-            <h2 id="home-artisan-heading" className="sr-only">
-              Présentation
-            </h2>
-            <p className="text-lg leading-relaxed text-gray-text sm:text-xl">
-              Artisan plombier-chauffagiste diplômé à Pérouges, j&apos;interviens dans toute la Plaine de l&apos;Ain pour
-              vos dépannages et installations. Travail soigné, réactivité et devis transparents.
-            </p>
-          </div>
-        </section>
+        <HomeArtisanPresentation />
         {ds.showRecentInterventions && interventions.length > 0 && (
           <HomeRecentInterventions interventions={interventions} />
         )}
@@ -307,20 +325,7 @@ export default async function HomePage() {
     <>
       {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
       <Hero />
-      <section
-        className="border-b border-gray-100 bg-white px-4 py-14 text-center sm:px-6 sm:py-16"
-        aria-labelledby="home-artisan-heading-offgeo"
-      >
-        <div className="mx-auto max-w-[640px] text-center">
-          <h2 id="home-artisan-heading-offgeo" className="sr-only">
-            Présentation
-          </h2>
-          <p className="text-lg leading-relaxed text-gray-text sm:text-xl">
-            Artisan plombier-chauffagiste diplômé à Pérouges, j&apos;interviens dans toute la Plaine de l&apos;Ain pour
-            vos dépannages et installations. Travail soigné, réactivité et devis transparents.
-          </p>
-        </div>
-      </section>
+      <HomeArtisanPresentation />
       {ds.showRecentInterventions && recentInterventions.length > 0 && (
         <HomeRecentInterventions interventions={recentInterventions} maxItems={5} />
       )}

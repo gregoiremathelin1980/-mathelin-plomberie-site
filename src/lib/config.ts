@@ -1,6 +1,6 @@
 export const SITE_PHONE = "04 74 00 00 00";
 export const SITE_PHONE_RAW = "0474000000";
-export const SITE_URL = "https://mathelin-plomberie.fr";
+export const SITE_URL = "https://www.mathelin-plomberie.fr";
 
 /** Base URL des photos chantiers (NAS). Les images sont servies par cette URL, pas stockées localement. */
 export const PHOTO_BASE_URL =

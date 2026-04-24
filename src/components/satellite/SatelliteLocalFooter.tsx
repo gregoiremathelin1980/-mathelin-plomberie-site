@@ -23,7 +23,7 @@ export default function SatelliteLocalFooter({
 }) {
   const other = OTHER_SATELLITE[variant];
   return (
-    <footer className="border-t border-gray-200 bg-white px-4 py-10 pb-28 text-sm text-gray-700 sm:px-6 md:pb-10">
+    <footer className="border-t border-gray-200 bg-white px-4 py-10 pb-28 text-center text-sm text-gray-700 sm:px-6 md:pb-10">
       <div className="mx-auto max-w-3xl space-y-6">
         <div>
           <p className="font-semibold text-primary">{settings.company}</p>
@@ -42,13 +42,15 @@ export default function SatelliteLocalFooter({
           </a>
           .
         </p>
-        <p>
+        <p className="text-xs text-gray-500">
+          Une entreprise{" "}
           <Link
-            href="https://mathelin-plomberie.fr/"
+            href="https://www.mathelin-plomberie.fr/"
             className="font-medium text-primary underline-offset-2 hover:underline"
           >
-            Artisan Plombier Pérouges - Mathelin Plomberie
-          </Link>
+            Mathelin Plomberie Chauffage
+          </Link>{" "}
+          — plombier à Pérouges, site principal.
         </p>
       </div>
     </footer>

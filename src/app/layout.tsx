@@ -34,9 +34,9 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",
+  title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
   description:
-    "Mathelin Plomberie : Artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.",
+    "Mathelin Plomberie Chauffage : votre plombier à Pérouges, dépannage et urgences 7j/7 dans l'Ain (chauffage, fuites, rénovation). Devis gratuit. Appelez le 06 61 42 24 07 pour une prise en charge rapide.",
   keywords: [
     "plombier Pérouges",
     "plombier Meximieux",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     "dépannage plomberie",
   ],
   openGraph: {
-    title: "Mathelin Plomberie Chauffage | Plombier Pérouges, Meximieux, Ambérieu",
+    title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
     description:
-      "Mathelin Plomberie : Artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.",
+      "Mathelin Plomberie Chauffage : votre plombier à Pérouges, dépannage et urgences 7j/7 dans l'Ain (chauffage, fuites, rénovation). Devis gratuit. Appelez le 06 61 42 24 07 pour une prise en charge rapide.",
     type: "website",
   },
   robots: "index, follow",
