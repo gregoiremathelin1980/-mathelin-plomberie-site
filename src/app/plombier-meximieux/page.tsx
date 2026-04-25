@@ -23,7 +23,7 @@ export const metadata = buildPageMetadata({
   description:
     "Plombier à Meximieux et sur la Côtière : urgence fuite, débouchage, chauffe-eau, chauffage. BP Génie Climatique à Pérouges. Devis gratuit, intervention rapide.",
   path: "/plombier-meximieux",
-  canonicalAbsolute: "https://www.plombier-meximieux.fr/",
+  canonicalAbsolute: "https://plombier-meximieux.fr/",
 });
 
 export default async function PlombierMeximieux() {

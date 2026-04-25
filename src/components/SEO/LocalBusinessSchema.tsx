@@ -55,7 +55,7 @@ export default function LocalBusinessSchema({
     description:
       "Mathelin Plomberie : artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.",
     url: MAIN_URL,
-    sameAs: SAME_AS,
+    sameAs,
     telephone: phoneToInternational(settings.phone),
     email: settings.email || undefined,
     founder: {

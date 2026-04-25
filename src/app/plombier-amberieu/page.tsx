@@ -23,7 +23,7 @@ export const metadata = buildPageMetadata({
   description:
     "Plombier à Ambérieu-en-Bugey et sur la Plaine de l'Ain : urgence plomberie, chauffage, fuites. BP Génie Climatique à Pérouges. Devis gratuit, dépannage rapide.",
   path: "/plombier-amberieu",
-  canonicalAbsolute: "https://www.plombier-amberieu.fr/",
+  canonicalAbsolute: "https://plombier-amberieu.fr/",
 });
 
 export default async function PlombierAmberieu() {
