@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import { Phone, FileText } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
@@ -27,7 +26,6 @@ export const metadata = buildPageMetadata({
 });
 
 export default async function PlombierAmberieu() {
-  headers();
   const settings = getSiteSettings();
   const landing = getSatelliteLandingsData();
   const telHref = phoneToTelHref(settings.phone);

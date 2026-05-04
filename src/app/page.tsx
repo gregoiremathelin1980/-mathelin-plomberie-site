@@ -1,5 +1,3 @@
-import { unstable_noStore } from "next/cache";
-import { headers } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -9,21 +7,21 @@ import HomeBelowFoldFallback from "@/components/home/HomeBelowFoldFallback";
 import UrgencyBlock from "@/components/UrgencyBlock";
 import HomeRecentInterventions from "@/components/HomeRecentInterventions";
 import { getRealisations, getRandomConseils, getPricing } from "@/lib/content";
-import { getRecentInterventions, getSimulateur, getRandomReviews } from "@/lib/site-data";
+import { getRecentInterventions, getSimulateur, getRandomReviews, getReviews } from "@/lib/site-data";
 import { getSiteSettings } from "@/lib/content";
 import { getPhotoUrl, isNextImageRemoteHostAllowed } from "@/lib/config";
 import { SERVICES } from "@/lib/services-data";
 import { buttonVariants } from "@/components/ui/button";
 import GoogleReviewsBlock from "@/components/GoogleReviewsBlock";
 import ReviewsSchema from "@/components/ReviewsSchema";
-import { fetchGeocomptaHomepage, isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
+import { isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
 import {
   getCachedGeocomptaHomepage,
   getCachedGeocomptaReviewBundle,
   getGeocomptaHomeRevalidateSeconds,
 } from "@/lib/api/geocomptaCached";
 import { pickRotatingReviews } from "@/lib/reviewsRotation";
-import { allowSiteDataHomeReviews } from "@/lib/reviewsHomePolicy";
+import { allowHomeReviewsSiteDataFallback, allowSiteDataHomeReviews } from "@/lib/reviewsHomePolicy";
 import type { ReviewEntry } from "@/lib/site-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
@@ -135,16 +133,14 @@ function dedupeReviewEntriesForHome(items: ReviewEntry[]): ReviewEntry[] {
   return out;
 }
 
-/** ISR aligné sur le cache homepage GéoCompta (≤ au créneau de sync API, ex. 1800 s pour 30 min). */
-export const revalidate = isGeocomptaConfigured() ? getGeocomptaHomeRevalidateSeconds() : 0;
+/**
+ * ISR page d’accueil : **ne pas** dépendre de `isGeocomptaConfigured()` au moment du build Vercel
+ * (souvent les vars GEO ne sont présentes qu’au runtime → avant : `revalidate = 0` et SSR lent à chaque visite).
+ */
+export const revalidate = getGeocomptaHomeRevalidateSeconds();
 
 export default async function HomePage() {
-  /** Lit l’env à chaque requête (évite un module figé sans GEO sur certains workers). */
-  headers();
   const geo = isGeocomptaConfigured();
-  if (!geo) unstable_noStore();
-  /** GéoCompta : pas de snapshot route figé — chaque visite recalcule la permutation des avis (graine ci-dessous). */
-  if (geo) unstable_noStore();
 
   const pricing = getPricing();
   const simulateur = getSimulateur();
@@ -159,28 +155,13 @@ export default async function HomePage() {
 
   if (geo) {
     const displayCount = getHomeReviewsDisplayCount();
-    const rotationSeed = Date.now();
-    let hp = await getCachedGeocomptaHomepage();
-    let reviewPool: ReviewEntry[] = [];
-    let reviewsLoadError: string | undefined;
-    try {
-      const bundle = await getCachedGeocomptaReviewBundle();
-      reviewPool = bundle.pool;
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      console.warn("[geocompta] pool avis (/api/public/reviews) indisponible:", e);
-      reviewsLoadError = msg;
-    }
-
-    /** Si cache + pool sont vides alors que l’API peut répondre (cache obsolète / premier échec). */
-    if (reviewPool.length === 0 && hp.featuredReviews.length === 0) {
-      try {
-        const live = await fetchGeocomptaHomepage();
-        if (live.featuredReviews.length > 0) hp = live;
-      } catch (e) {
-        console.warn("[geocompta] homepage live (avis) sans cache — échec:", e);
-      }
-    }
+    /** Graine stable pendant la fenêtre ISR (`revalidate`) — évite `noStore` qui cassait le cache et explosait le TTFB. */
+    const rotationSeed = Math.floor(Date.now() / 60_000);
+    const [hp, bundle] = await Promise.all([
+      getCachedGeocomptaHomepage(),
+      getCachedGeocomptaReviewBundle(),
+    ]);
+    const reviewPool = bundle.pool;
 
     const realisations = hp.featuredRealisations.map((r) => ({
       id: r.slug,
@@ -200,10 +181,18 @@ export default async function HomePage() {
     }));
     /** Pool `/reviews` + avis homepage, fusionnés (évite de n’en prendre qu’une seule source si l’autre est vide). */
     const mergedForRotation = dedupeReviewEntriesForHome([...reviewPool, ...reviewsFromHomeFeatured]);
-    const reviews: ReviewEntry[] =
+    let reviews: ReviewEntry[] =
       mergedForRotation.length > 0
         ? pickRotatingReviews(mergedForRotation, displayCount, rotationSeed)
         : [];
+
+    if (
+      reviews.length === 0 &&
+      allowHomeReviewsSiteDataFallback() &&
+      getReviews().length > 0
+    ) {
+      reviews = pickRotatingReviews(getReviews(), displayCount, rotationSeed);
+    }
 
     const interventions = hp.featuredInterventions.map((i) => ({
       city: i.city,
@@ -236,8 +225,8 @@ export default async function HomePage() {
         {ds.showReviews && (
           <GoogleReviewsBlock
             reviews={reviews}
-            geocomptaApiMode
-            geocomptaReviewsLoadError={reviews.length === 0 ? reviewsLoadError : undefined}
+            /** Sans URL Maps : message technique GéoCompta ; avec URL : bloc « voir sur Google » lisible même si sync vide. */
+            geocomptaApiMode={reviews.length === 0 && !settings.googleReviewsUrl}
             googleReviewsPageUrl={settings.googleReviewsUrl}
             reviewsEmptyHint={
               reviews.length === 0

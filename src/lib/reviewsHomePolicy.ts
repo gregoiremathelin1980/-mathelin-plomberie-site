@@ -14,3 +14,11 @@ export function allowSiteDataHomeReviewsEnv(
 export function allowSiteDataHomeReviews(): boolean {
   return allowSiteDataHomeReviewsEnv(process.env.NODE_ENV, process.env.SITE_DATA_HOME_REVIEWS);
 }
+
+/**
+ * Production / GéoCompta : si l’API ne renvoie aucun avis, autoriser un repli explicite depuis
+ * `site-data/google-reviews.json` ou `reviews.json` (contenu réel à maintenir côté déployeur).
+ */
+export function allowHomeReviewsSiteDataFallback(): boolean {
+  return process.env.HOME_REVIEWS_SITE_DATA_FALLBACK === "true";
+}

@@ -27,6 +27,16 @@ import {
 
 const DEFAULT_TIMEOUT_MS = 8000;
 const MAX_RETRIES = 2;
+
+/** Routes homepage / avis : timeouts courts par défaut pour éviter 12–24 s de blocage SSR sur Vercel. */
+export function getGeocomptaPublicFetchOptions(): { timeoutMs: number; maxAttempts: number } {
+  const t = Number(process.env.GEOCOMPTA_PUBLIC_TIMEOUT_MS);
+  const timeoutMs =
+    Number.isFinite(t) && t >= 1500 && t <= 30000 ? Math.floor(t) : 4500;
+  const a = Number(process.env.GEOCOMPTA_PUBLIC_MAX_ATTEMPTS);
+  const maxAttempts = Number.isFinite(a) && a >= 1 && a <= 5 ? Math.floor(a) : 2;
+  return { timeoutMs, maxAttempts };
+}
 const FETCH_REVALIDATE_SECONDS = 300;
 
 let warnedMissingGeocomptaApiKey = false;
@@ -115,9 +125,10 @@ function abortSignalForTimeout(ms: number): AbortSignal {
 export async function geocomptaGetJson<S extends z.ZodTypeAny>(
   path: string,
   schema: S,
-  options?: { timeoutMs?: number }
+  options?: { timeoutMs?: number; maxAttempts?: number }
 ): Promise<z.output<S>> {
   const timeoutMs = options?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  const maxAttempts = options?.maxAttempts ?? MAX_RETRIES + 1;
   const url = buildGeocomptaUrl(path);
   const headers: HeadersInit = {
     Accept: "application/json",
@@ -125,7 +136,7 @@ export async function geocomptaGetJson<S extends z.ZodTypeAny>(
   };
 
   let lastErr: unknown;
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
     const signal = abortSignalForTimeout(timeoutMs);
     try {
       const res = await fetch(url, {
@@ -168,7 +179,7 @@ export async function geocomptaGetJson<S extends z.ZodTypeAny>(
       return parsed.data as z.output<S>;
     } catch (e) {
       lastErr = e;
-      if (attempt < MAX_RETRIES) {
+      if (attempt < maxAttempts - 1) {
         await sleep(300 * (attempt + 1));
         continue;
       }
@@ -188,7 +199,8 @@ export async function geocomptaGetJson<S extends z.ZodTypeAny>(
 // ——— Endpoints publics (chemins selon spec) ———
 
 export async function fetchGeocomptaHomepage(): Promise<GeocomptaHomepagePayload> {
-  const data = await geocomptaGetJson("/api/public/homepage", GeocomptaHomepageSchema);
+  const opts = getGeocomptaPublicFetchOptions();
+  const data = await geocomptaGetJson("/api/public/homepage", GeocomptaHomepageSchema, opts);
   if (process.env.NODE_ENV === "development") {
     console.info(
       "[geocompta] GET /api/public/homepage → featuredReviews parsed count:",
@@ -254,7 +266,8 @@ export type GeocomptaReviewsBundle = {
  */
 export async function fetchGeocomptaReviewsFull(): Promise<GeocomptaReviewsBundle> {
   try {
-    const data = await geocomptaGetJson("/api/public/reviews", z.unknown(), { timeoutMs: DEFAULT_TIMEOUT_MS });
+    const opts = getGeocomptaPublicFetchOptions();
+    const data = await geocomptaGetJson("/api/public/reviews", z.unknown(), opts);
     const raw = extractReviewsArrayFromPayload(data);
     const list = parseGeocomptaReviewList(raw);
     let reviewsReturnedCount = list.length;

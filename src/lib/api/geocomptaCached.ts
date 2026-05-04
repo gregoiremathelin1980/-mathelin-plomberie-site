@@ -77,14 +77,12 @@ async function loadReviewBundleFromApi(): Promise<GeocomptaReviewCacheBundle> {
 export async function getCachedGeocomptaReviewBundle(): Promise<GeocomptaReviewCacheBundle> {
   if (!isGeocomptaConfigured()) return { pool: [], googleBusinessProfile: null };
   const revalidate = getReviewsCacheRevalidate();
-  const cached = await unstable_cache(
+  /** Un seul passage API par fenêtre de cache : évite un doublon coûteux quand le pool est vide. */
+  return unstable_cache(
     async () => loadReviewBundleFromApi(),
     ["geocompta-reviews-bundle-v1"],
     { revalidate, tags: ["geocompta-reviews"] }
   )();
-
-  if (cached.pool.length > 0) return cached;
-  return loadReviewBundleFromApi();
 }
 
 export async function getCachedGeocomptaReviewPool(): Promise<ReviewEntry[]> {
