@@ -25,19 +25,52 @@ import {
   type GeocomptaSitemapData,
 } from "@/lib/api/geocomptaSchemas";
 
-const DEFAULT_TIMEOUT_MS = 8000;
-const MAX_RETRIES = 2;
+const DEFAULT_TIMEOUT_MS = 3000;
+const MAX_RETRIES = 0;
 
-/** Routes homepage / avis : timeouts courts par défaut pour éviter 12–24 s de blocage SSR sur Vercel. */
+/** Routes homepage / avis : timeout court + 1 seule tentative pour ne pas bloquer le rendu ISR. */
 export function getGeocomptaPublicFetchOptions(): { timeoutMs: number; maxAttempts: number } {
   const t = Number(process.env.GEOCOMPTA_PUBLIC_TIMEOUT_MS);
   const timeoutMs =
-    Number.isFinite(t) && t >= 1500 && t <= 30000 ? Math.floor(t) : 4500;
+    Number.isFinite(t) && t >= 500 && t <= 30000 ? Math.floor(t) : 2500;
   const a = Number(process.env.GEOCOMPTA_PUBLIC_MAX_ATTEMPTS);
-  const maxAttempts = Number.isFinite(a) && a >= 1 && a <= 5 ? Math.floor(a) : 2;
+  const maxAttempts = Number.isFinite(a) && a >= 1 && a <= 5 ? Math.floor(a) : 1;
   return { timeoutMs, maxAttempts };
 }
 const FETCH_REVALIDATE_SECONDS = 300;
+
+/**
+ * Circuit-breaker : après N échecs consécutifs, on arrête d'appeler l'API pendant `OPEN_DURATION_MS`
+ * pour ne pas bloquer le rendu pendant 2,5–5 s à chaque visite.
+ */
+const CIRCUIT_BREAKER_THRESHOLD = 2;
+const CIRCUIT_BREAKER_OPEN_DURATION_MS = 120_000;
+let circuitFailCount = 0;
+let circuitOpenUntil = 0;
+
+export function isCircuitBreakerOpen(): boolean {
+  if (circuitOpenUntil > 0 && Date.now() < circuitOpenUntil) return true;
+  if (circuitOpenUntil > 0 && Date.now() >= circuitOpenUntil) {
+    circuitOpenUntil = 0;
+    circuitFailCount = 0;
+  }
+  return false;
+}
+
+function recordCircuitSuccess(): void {
+  circuitFailCount = 0;
+  circuitOpenUntil = 0;
+}
+
+function recordCircuitFailure(): void {
+  circuitFailCount++;
+  if (circuitFailCount >= CIRCUIT_BREAKER_THRESHOLD) {
+    circuitOpenUntil = Date.now() + CIRCUIT_BREAKER_OPEN_DURATION_MS;
+    console.warn(
+      `[geocompta] circuit-breaker OUVERT après ${circuitFailCount} échecs — pas d'appels API pendant ${CIRCUIT_BREAKER_OPEN_DURATION_MS / 1000}s`
+    );
+  }
+}
 
 let warnedMissingGeocomptaApiKey = false;
 
@@ -127,6 +160,10 @@ export async function geocomptaGetJson<S extends z.ZodTypeAny>(
   schema: S,
   options?: { timeoutMs?: number; maxAttempts?: number }
 ): Promise<z.output<S>> {
+  if (isCircuitBreakerOpen()) {
+    throw new GeocomptaApiError("circuit-breaker ouvert — appel GéoCompta ignoré", undefined);
+  }
+
   const timeoutMs = options?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const maxAttempts = options?.maxAttempts ?? MAX_RETRIES + 1;
   const url = buildGeocomptaUrl(path);
@@ -170,12 +207,14 @@ export async function geocomptaGetJson<S extends z.ZodTypeAny>(
       const json: unknown = await res.json();
       const parsed = schema.safeParse(json);
       if (!parsed.success) {
+        recordCircuitFailure();
         throw new GeocomptaApiError(
           `GéoCompta schema ${path}: ${parsed.error.message}`,
           res.status,
           parsed.error
         );
       }
+      recordCircuitSuccess();
       return parsed.data as z.output<S>;
     } catch (e) {
       lastErr = e;
@@ -185,6 +224,8 @@ export async function geocomptaGetJson<S extends z.ZodTypeAny>(
       }
     }
   }
+
+  recordCircuitFailure();
 
   if (lastErr instanceof GeocomptaApiError) throw lastErr;
   if (lastErr instanceof Error) {
