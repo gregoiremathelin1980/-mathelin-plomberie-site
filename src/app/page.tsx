@@ -174,10 +174,15 @@ export default async function HomePage() {
       source: r.source,
     }));
     const mergedForRotation = dedupeReviewEntriesForHome([...reviewPool, ...reviewsFromHomeFeatured]);
+    let reviewSource: "geocompta" | "fichier-local" | "aucun" = "aucun";
     let reviews: ReviewEntry[] =
       mergedForRotation.length > 0
         ? pickRotatingReviews(mergedForRotation, displayCount, rotationSeed)
         : [];
+
+    if (mergedForRotation.length > 0) {
+      reviewSource = "geocompta";
+    }
 
     if (
       reviews.length === 0 &&
@@ -185,7 +190,12 @@ export default async function HomePage() {
       getReviews().length > 0
     ) {
       reviews = pickRotatingReviews(getReviews(), displayCount, rotationSeed);
+      reviewSource = "fichier-local";
     }
+
+    console.info(
+      `[home-reviews] source=${reviewSource} | affichés=${reviews.length}/${mergedForRotation.length || getReviews().length} | pool-geo=${reviewPool.length} featured-geo=${reviewsFromHomeFeatured.length} fichier=${getReviews().length} | seed=${rotationSeed}`
+    );
 
     const interventions = hp.featuredInterventions.map((i) => ({
       city: i.city,
@@ -324,6 +334,10 @@ export default async function HomePage() {
   const reviews = allFileReviews.length > 0
     ? pickRotatingReviews(allFileReviews, 6, Date.now())
     : [];
+
+  console.info(
+    `[home-reviews] source=${reviews.length > 0 ? "fichier-local" : "aucun"} | affichés=${reviews.length}/${allFileReviews.length} | geocompta=non-configuré fichier=${allFileReviews.length}`
+  );
 
   return (
     <>
