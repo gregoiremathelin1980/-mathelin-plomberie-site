@@ -18,7 +18,6 @@ import { isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
 import {
   getCachedGeocomptaHomepage,
   getCachedGeocomptaReviewBundle,
-  getGeocomptaHomeRevalidateSeconds,
 } from "@/lib/api/geocomptaCached";
 import { pickRotatingReviews } from "@/lib/reviewsRotation";
 import { allowHomeReviewsSiteDataFallback, allowSiteDataHomeReviews } from "@/lib/reviewsHomePolicy";
@@ -120,7 +119,6 @@ function getHomeReviewsDisplayCount(): number {
   return 6;
 }
 
-/** Pool `/reviews` + `featuredReviews` homepage : déduplication avant rotation. */
 function dedupeReviewEntriesForHome(items: ReviewEntry[]): ReviewEntry[] {
   const seen = new Set<string>();
   const out: ReviewEntry[] = [];
@@ -133,12 +131,8 @@ function dedupeReviewEntriesForHome(items: ReviewEntry[]): ReviewEntry[] {
   return out;
 }
 
-/**
- * ISR page d’accueil : **ne pas** dépendre de `isGeocomptaConfigured()` au moment du build Vercel
- * (souvent les vars GEO ne sont présentes qu’au runtime → avant : `revalidate = 0` et SSR lent à chaque visite).
- */
-/** ISR 30 s : rotation des avis visible à chaque visite tout en gardant le cache CDN. */
-export const revalidate = 30;
+/** Rendu dynamique : rotation des avis différente à chaque visite. Le circuit-breaker GéoCompta garantit un TTFB court. */
+export const revalidate = 0;
 
 export default async function HomePage() {
   const geo = isGeocomptaConfigured();
@@ -179,7 +173,6 @@ export default async function HomePage() {
       date: r.date,
       source: r.source,
     }));
-    /** Pool `/reviews` + avis homepage, fusionnés (évite de n’en prendre qu’une seule source si l’autre est vide). */
     const mergedForRotation = dedupeReviewEntriesForHome([...reviewPool, ...reviewsFromHomeFeatured]);
     let reviews: ReviewEntry[] =
       mergedForRotation.length > 0
@@ -225,12 +218,11 @@ export default async function HomePage() {
         {ds.showReviews && (
           <GoogleReviewsBlock
             reviews={reviews}
-            /** Sans URL Maps : message technique GéoCompta ; avec URL : bloc « voir sur Google » lisible même si sync vide. */
             geocomptaApiMode={reviews.length === 0 && !settings.googleReviewsUrl}
             googleReviewsPageUrl={settings.googleReviewsUrl}
             reviewsEmptyHint={
               reviews.length === 0
-                ? "Aucun avis synchronisé pour l’instant sur cette page. Les avis Google restent disponibles sur la fiche de l’entreprise (lien ci-dessous)."
+                ? "Aucun avis synchronisé pour l'instant sur cette page. Les avis Google restent disponibles sur la fiche de l'entreprise (lien ci-dessous)."
                 : undefined
             }
           />
@@ -256,7 +248,6 @@ export default async function HomePage() {
                           sizes="(max-width: 640px) 50vw, 25vw"
                         />
                       ) : (
-                        // Évite Error: hostname not configured (next/image) si hôte absent de remotePatterns
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
                       )}
@@ -350,7 +341,7 @@ export default async function HomePage() {
           googleReviewsPageUrl={settings.googleReviewsUrl}
           reviewsEmptyHint={
             !allowFileHomeReviews
-              ? "Les avis Google s’affichent ici via GéoCompta : dans Vercel, renseignez GEOCOMPTA_BASE_URL (HTTPS, ex. …:8443), GEOCOMPTA_API_KEY (Bearer), sur Production + Preview + Development, puis **Redeploy**. Ne pas utiliser de nom NEXT_PUBLIC_ pour la clé."
+              ? "Les avis Google s'affichent ici via GéoCompta : dans Vercel, renseignez GEOCOMPTA_BASE_URL (HTTPS, ex. …:8443), GEOCOMPTA_API_KEY (Bearer), sur Production + Preview + Development, puis **Redeploy**. Ne pas utiliser de nom NEXT_PUBLIC_ pour la clé."
               : undefined
           }
         />
