@@ -219,12 +219,12 @@ function testSatelliteHelpers() {
 }
 
 function testHomePolicy() {
-  assert.equal(allowSiteDataHomeReviewsEnv("production", undefined), false);
+  assert.equal(allowSiteDataHomeReviewsEnv("production", undefined), true);
   assert.equal(allowSiteDataHomeReviewsEnv("production", "false"), false);
-  assert.equal(allowSiteDataHomeReviewsEnv("production", "true"), false);
-  assert.equal(allowSiteDataHomeReviewsEnv("development", undefined), false);
+  assert.equal(allowSiteDataHomeReviewsEnv("production", "true"), true);
+  assert.equal(allowSiteDataHomeReviewsEnv("development", undefined), true);
   assert.equal(allowSiteDataHomeReviewsEnv("development", "true"), true);
-  assert.equal(allowSiteDataHomeReviewsEnv(undefined, undefined), false);
+  assert.equal(allowSiteDataHomeReviewsEnv(undefined, undefined), true);
 }
 
 async function optionalLiveFetch(): Promise<void> {

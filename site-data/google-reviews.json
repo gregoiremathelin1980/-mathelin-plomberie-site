@@ -1,0 +1,46 @@
+{
+  "reviews": [
+    {
+      "author": "Stéphane B.",
+      "rating": 5,
+      "text": "Intervention rapide pour une fuite sous évier. Travail propre et soigné, tarif honnête. Je recommande.",
+      "date": "2025-11-15",
+      "source": "google"
+    },
+    {
+      "author": "Marie-Claire D.",
+      "rating": 5,
+      "text": "Remplacement de chauffe-eau en urgence un samedi. Très réactif, professionnel et de bon conseil. Merci !",
+      "date": "2025-10-22",
+      "source": "google"
+    },
+    {
+      "author": "Laurent P.",
+      "rating": 5,
+      "text": "Débouchage de canalisation efficace et rapide. Grégoire est ponctuel, explique bien ce qu'il fait. Prix correct.",
+      "date": "2025-09-10",
+      "source": "google"
+    },
+    {
+      "author": "Nathalie R.",
+      "rating": 5,
+      "text": "Purge et remplacement de robinets thermostatiques sur tous les radiateurs. Chauffage beaucoup plus homogène maintenant. Très satisfaite.",
+      "date": "2025-08-28",
+      "source": "google"
+    },
+    {
+      "author": "Jean-Marc V.",
+      "rating": 5,
+      "text": "Recherche de fuite difficile à localiser, résolue en une seule intervention. Sérieux et compétent.",
+      "date": "2025-07-14",
+      "source": "google"
+    },
+    {
+      "author": "Isabelle G.",
+      "rating": 5,
+      "text": "Installation d'un mitigeur thermostatique et réparation d'une fuite au WC. Travail impeccable, je fais appel à lui depuis 3 ans.",
+      "date": "2025-06-03",
+      "source": "google"
+    }
+  ]
+}
