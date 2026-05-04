@@ -7,7 +7,7 @@ import HomeBelowFoldFallback from "@/components/home/HomeBelowFoldFallback";
 import UrgencyBlock from "@/components/UrgencyBlock";
 import HomeRecentInterventions from "@/components/HomeRecentInterventions";
 import { getRealisations, getRandomConseils, getPricing } from "@/lib/content";
-import { getRecentInterventions, getSimulateur, getRandomReviews, getReviews } from "@/lib/site-data";
+import { getRecentInterventions, getSimulateur, getReviews } from "@/lib/site-data";
 import { getSiteSettings } from "@/lib/content";
 import { getPhotoUrl, isNextImageRemoteHostAllowed } from "@/lib/config";
 import { SERVICES } from "@/lib/services-data";
@@ -137,7 +137,8 @@ function dedupeReviewEntriesForHome(items: ReviewEntry[]): ReviewEntry[] {
  * ISR page d’accueil : **ne pas** dépendre de `isGeocomptaConfigured()` au moment du build Vercel
  * (souvent les vars GEO ne sont présentes qu’au runtime → avant : `revalidate = 0` et SSR lent à chaque visite).
  */
-export const revalidate = getGeocomptaHomeRevalidateSeconds();
+/** ISR 30 s : rotation des avis visible à chaque visite tout en gardant le cache CDN. */
+export const revalidate = 30;
 
 export default async function HomePage() {
   const geo = isGeocomptaConfigured();
@@ -155,8 +156,7 @@ export default async function HomePage() {
 
   if (geo) {
     const displayCount = getHomeReviewsDisplayCount();
-    /** Graine stable pendant la fenêtre ISR (`revalidate`) — évite `noStore` qui cassait le cache et explosait le TTFB. */
-    const rotationSeed = Math.floor(Date.now() / 60_000);
+    const rotationSeed = Date.now();
     const [hp, bundle] = await Promise.all([
       getCachedGeocomptaHomepage(),
       getCachedGeocomptaReviewBundle(),
@@ -328,9 +328,11 @@ export default async function HomePage() {
   }));
 
   const recentInterventions = getRecentInterventions();
-  /** Voir `reviewsHomePolicy` + tests `npm run test`. */
   const allowFileHomeReviews = allowSiteDataHomeReviews();
-  const reviews = allowFileHomeReviews ? getRandomReviews(3) : [];
+  const allFileReviews = allowFileHomeReviews ? getReviews() : [];
+  const reviews = allFileReviews.length > 0
+    ? pickRotatingReviews(allFileReviews, 6, Date.now())
+    : [];
 
   return (
     <>

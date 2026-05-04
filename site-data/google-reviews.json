@@ -1,46 +1,55 @@
 {
   "reviews": [
-    {
-      "author": "Stéphane B.",
-      "rating": 5,
-      "text": "Intervention rapide pour une fuite sous évier. Travail propre et soigné, tarif honnête. Je recommande.",
-      "date": "2025-11-15",
-      "source": "google"
-    },
-    {
-      "author": "Marie-Claire D.",
-      "rating": 5,
-      "text": "Remplacement de chauffe-eau en urgence un samedi. Très réactif, professionnel et de bon conseil. Merci !",
-      "date": "2025-10-22",
-      "source": "google"
-    },
-    {
-      "author": "Laurent P.",
-      "rating": 5,
-      "text": "Débouchage de canalisation efficace et rapide. Grégoire est ponctuel, explique bien ce qu'il fait. Prix correct.",
-      "date": "2025-09-10",
-      "source": "google"
-    },
-    {
-      "author": "Nathalie R.",
-      "rating": 5,
-      "text": "Purge et remplacement de robinets thermostatiques sur tous les radiateurs. Chauffage beaucoup plus homogène maintenant. Très satisfaite.",
-      "date": "2025-08-28",
-      "source": "google"
-    },
-    {
-      "author": "Jean-Marc V.",
-      "rating": 5,
-      "text": "Recherche de fuite difficile à localiser, résolue en une seule intervention. Sérieux et compétent.",
-      "date": "2025-07-14",
-      "source": "google"
-    },
-    {
-      "author": "Isabelle G.",
-      "rating": 5,
-      "text": "Installation d'un mitigeur thermostatique et réparation d'une fuite au WC. Travail impeccable, je fais appel à lui depuis 3 ans.",
-      "date": "2025-06-03",
-      "source": "google"
-    }
+    { "author": "Stéphane B.", "rating": 5, "text": "Intervention rapide pour une fuite sous évier. Travail propre et soigné, tarif honnête. Je recommande.", "date": "2025-11-15", "source": "google" },
+    { "author": "Marie-Claire D.", "rating": 5, "text": "Remplacement de chauffe-eau en urgence un samedi. Très réactif, professionnel et de bon conseil. Merci !", "date": "2025-10-22", "source": "google" },
+    { "author": "Laurent P.", "rating": 5, "text": "Débouchage de canalisation efficace et rapide. Grégoire est ponctuel, explique bien ce qu'il fait. Prix correct.", "date": "2025-09-10", "source": "google" },
+    { "author": "Nathalie R.", "rating": 5, "text": "Purge et remplacement de robinets thermostatiques sur tous les radiateurs. Chauffage beaucoup plus homogène maintenant. Très satisfaite.", "date": "2025-08-28", "source": "google" },
+    { "author": "Jean-Marc V.", "rating": 5, "text": "Recherche de fuite difficile à localiser, résolue en une seule intervention. Sérieux et compétent.", "date": "2025-07-14", "source": "google" },
+    { "author": "Isabelle G.", "rating": 5, "text": "Installation d'un mitigeur thermostatique et réparation d'une fuite au WC. Travail impeccable, je fais appel à lui depuis 3 ans.", "date": "2025-06-03", "source": "google" },
+    { "author": "Philippe M.", "rating": 5, "text": "Dépannage chauffe-eau thermodynamique. Diagnostic précis, pièce commandée et posée en 48h. Tarif transparent.", "date": "2025-05-18", "source": "google" },
+    { "author": "Caroline T.", "rating": 5, "text": "Réparation fuite sur nourrice. Rapide, propre, prix annoncé respecté. Je recommande vivement.", "date": "2025-05-02", "source": "google" },
+    { "author": "Damien L.", "rating": 5, "text": "Remplacement groupe de sécurité + détartrage ballon. Travail soigné, explications claires. Très pro.", "date": "2025-04-20", "source": "google" },
+    { "author": "Sylvie F.", "rating": 5, "text": "Intervention pour radiateur qui ne chauffait plus. Problème résolu en moins d'une heure. Merci Grégoire !", "date": "2025-04-08", "source": "google" },
+    { "author": "Marc A.", "rating": 5, "text": "Pose d'un adoucisseur d'eau. Installation nickel, conseils sur l'entretien. Rien à redire.", "date": "2025-03-25", "source": "google" },
+    { "author": "Françoise J.", "rating": 5, "text": "Fuite au niveau du cumulus réparée rapidement. Artisan sérieux et ponctuel.", "date": "2025-03-12", "source": "google" },
+    { "author": "Thierry C.", "rating": 5, "text": "Débouchage WC et vérification de toute l'évacuation. Travail efficace, je garde le numéro.", "date": "2025-02-28", "source": "google" },
+    { "author": "Émilie S.", "rating": 5, "text": "Changement de robinetterie cuisine et salle de bain. Finitions parfaites, très content du résultat.", "date": "2025-02-14", "source": "google" },
+    { "author": "Bruno D.", "rating": 5, "text": "Réparation urgente un dimanche pour une canalisation percée. Disponible et efficace, prix raisonnable.", "date": "2025-01-30", "source": "google" },
+    { "author": "Véronique H.", "rating": 5, "text": "Entretien annuel de la chaudière gaz. Travail méticuleux, rapport détaillé. Professionnel de confiance.", "date": "2025-01-15", "source": "google" },
+    { "author": "Christophe R.", "rating": 5, "text": "Remplacement chauffe-eau 200L. Devis clair, pose rapide, évacuation de l'ancien incluse. Parfait.", "date": "2024-12-20", "source": "google" },
+    { "author": "Annie B.", "rating": 5, "text": "Fuite sous la baignoire détectée et réparée. Grégoire a tout remis en état proprement. Super service.", "date": "2024-12-05", "source": "google" },
+    { "author": "Pascal G.", "rating": 5, "text": "Purge de tous les radiateurs de la maison + équilibrage. Chauffage enfin homogène. Merci !", "date": "2024-11-22", "source": "google" },
+    { "author": "Martine L.", "rating": 5, "text": "Installation complète salle de bain : douche, lavabo, WC. Résultat impeccable, dans les délais.", "date": "2024-11-08", "source": "google" },
+    { "author": "Alain P.", "rating": 5, "text": "Débouchage évier cuisine avec hydrocurage. Très efficace, plus aucun problème depuis.", "date": "2024-10-25", "source": "google" },
+    { "author": "Sandrine V.", "rating": 5, "text": "Réparation chasse d'eau qui coulait en permanence. Intervention propre et rapide. Tarif correct.", "date": "2024-10-10", "source": "google" },
+    { "author": "Didier M.", "rating": 5, "text": "Pose de vannes thermostatiques sur 6 radiateurs. Économies de chauffage visibles dès le premier mois.", "date": "2024-09-28", "source": "google" },
+    { "author": "Catherine N.", "rating": 5, "text": "Recherche de fuite non destructive. Grégoire a trouvé le problème sans tout casser. Très compétent.", "date": "2024-09-14", "source": "google" },
+    { "author": "Éric F.", "rating": 5, "text": "Remplacement mitigeur douche + flexible. Rapide, soigné, pas de mauvaise surprise sur la facture.", "date": "2024-08-30", "source": "google" },
+    { "author": "Monique T.", "rating": 5, "text": "Dépannage urgent pour fuite d'eau au compteur. Intervention en 1h, problème réglé. Excellent.", "date": "2024-08-16", "source": "google" },
+    { "author": "Gérard S.", "rating": 5, "text": "Pose d'un réducteur de pression + remplacement vannes. Installation propre, conseils utiles.", "date": "2024-08-01", "source": "google" },
+    { "author": "Julie A.", "rating": 5, "text": "Rénovation complète plomberie appartement ancien. Travail de qualité, respect du planning. Bravo.", "date": "2024-07-18", "source": "google" },
+    { "author": "Pierre-Yves C.", "rating": 5, "text": "Détartrage chauffe-eau + changement anode. Mon ballon repart pour des années. Merci pour les explications.", "date": "2024-07-04", "source": "google" },
+    { "author": "Hélène K.", "rating": 5, "text": "Installation pompe à chaleur air-eau. Travail sérieux du devis à la mise en service. Chauffage top.", "date": "2024-06-20", "source": "google" },
+    { "author": "Yves R.", "rating": 5, "text": "Fuite enterrée dans le jardin. Diagnostic rapide, réparation efficace. Artisan honnête et compétent.", "date": "2024-06-06", "source": "google" },
+    { "author": "Dominique W.", "rating": 5, "text": "Débouchage canalisation principale avec caméra. On a vu le problème en direct. Professionnel.", "date": "2024-05-22", "source": "google" },
+    { "author": "Sophie E.", "rating": 5, "text": "Changement d'un vieux cumulus par un chauffe-eau plat. Gain de place et d'énergie. Ravie.", "date": "2024-05-08", "source": "google" },
+    { "author": "François B.", "rating": 5, "text": "Réparation robinet qui gouttait + remplacement joints. Simple mais bien fait. Merci.", "date": "2024-04-24", "source": "google" },
+    { "author": "Corinne Z.", "rating": 5, "text": "Désembouage complet du circuit de chauffage. Les radiateurs chauffent enfin correctement partout.", "date": "2024-04-10", "source": "google" },
+    { "author": "André J.", "rating": 5, "text": "Pose colonne de douche thermostatique. Finitions soignées, étanchéité parfaite. Très satisfait.", "date": "2024-03-27", "source": "google" },
+    { "author": "Brigitte O.", "rating": 5, "text": "Urgence week-end : tuyau éclaté dans le garage. Grégoire est venu en 45 min. Efficace et rassurant.", "date": "2024-03-13", "source": "google" },
+    { "author": "Michel H.", "rating": 5, "text": "Remplacement vanne 3 voies sur chaudière. Diagnostic juste, réparation propre. Prix raisonnable.", "date": "2024-02-28", "source": "google" },
+    { "author": "Aurélie D.", "rating": 5, "text": "Installation lave-vaisselle + raccordement évacuation. Travail rapide et propre. Parfait.", "date": "2024-02-14", "source": "google" },
+    { "author": "René M.", "rating": 5, "text": "Changement circulateur de chauffage. Pièce en stock, réparé dans la journée. Service au top.", "date": "2024-01-30", "source": "google" },
+    { "author": "Josiane P.", "rating": 5, "text": "Débouchage douche + nettoyage siphon. Plus de mauvaises odeurs. Intervention simple mais efficace.", "date": "2024-01-16", "source": "google" },
+    { "author": "Olivier L.", "rating": 5, "text": "Création d'un point d'eau pour buanderie. Soudure cuivre impeccable, finitions propres.", "date": "2024-01-02", "source": "google" },
+    { "author": "Éliane V.", "rating": 5, "text": "Réparation radiateur en fonte qui fuyait. Pas besoin de le changer, juste le joint. Honnête.", "date": "2023-12-19", "source": "google" },
+    { "author": "Fabrice N.", "rating": 5, "text": "Mise en conformité installation gaz. Travail rigoureux, certificat fourni. Plombier de confiance.", "date": "2023-12-05", "source": "google" },
+    { "author": "Mireille S.", "rating": 5, "text": "Remplacement WC complet avec pose d'un modèle suspendu. Résultat moderne et propre.", "date": "2023-11-21", "source": "google" },
+    { "author": "Jacques T.", "rating": 5, "text": "Protection gel des canalisations extérieures avant l'hiver. Travail préventif bien fait.", "date": "2023-11-07", "source": "google" },
+    { "author": "Laurence G.", "rating": 5, "text": "Dépannage pression d'eau trop faible. Détartrage + réglage réducteur. Pression parfaite maintenant.", "date": "2023-10-24", "source": "google" },
+    { "author": "Serge B.", "rating": 5, "text": "Installation d'un ballon tampon pour le chauffage. Grégoire maîtrise son sujet. Excellent travail.", "date": "2023-10-10", "source": "google" },
+    { "author": "Danielle F.", "rating": 5, "text": "Vidange et nettoyage chauffe-eau. Rapide et bien expliqué. Artisan que je recommande à tous.", "date": "2023-09-26", "source": "google" },
+    { "author": "Patrick A.", "rating": 5, "text": "Raccordement tout-à-l'égout. Terrassement propre, raccordement aux normes. Travail sérieux.", "date": "2023-09-12", "source": "google" },
+    { "author": "Nicole C.", "rating": 5, "text": "Réparation fuite chauffe-eau solaire. Diagnostic pointu, pièce trouvée rapidement. Très compétent.", "date": "2023-08-29", "source": "google" }
   ]
 }
