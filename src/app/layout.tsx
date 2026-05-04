@@ -3,6 +3,7 @@ import nextDynamic from "next/dynamic";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import LocalBusinessSchema from "@/components/SEO/LocalBusinessSchema";
+import DeferredAnalytics from "@/components/DeferredAnalytics";
 import { SettingsProvider } from "@/contexts/SettingsContext";
 import { getSiteSettings } from "@/lib/content";
 import { SITE_URL } from "@/lib/config";
@@ -17,13 +18,13 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-poppins",
-  display: "optional",
+  display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "optional",
+  display: "swap",
 });
 
 /**
@@ -51,6 +52,8 @@ export const metadata: Metadata = {
     description:
       "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Dépannage urgence 7j/7, entretien chaudière et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
     type: "website",
+    siteName: "Mathelin Plomberie Chauffage",
+    url: "https://www.mathelin-plomberie.fr/",
   },
   robots: "index, follow",
 };
@@ -73,6 +76,7 @@ export default async function RootLayout({
           <main className="pb-20 md:pb-0">{children}</main>
           <Footer />
           <MobileCallButton />
+          <DeferredAnalytics />
         </SettingsProvider>
       </body>
     </html>

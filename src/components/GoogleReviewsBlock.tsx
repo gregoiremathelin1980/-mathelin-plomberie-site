@@ -99,7 +99,7 @@ function GoogleMapsReviewsCta({ href }: { href: string }) {
   );
 }
 
-export default async function GoogleReviewsBlock({
+export default function GoogleReviewsBlock({
   reviews,
   geocomptaApiMode = false,
   geocomptaReviewsLoadError,

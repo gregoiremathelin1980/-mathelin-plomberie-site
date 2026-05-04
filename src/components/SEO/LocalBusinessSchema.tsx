@@ -4,14 +4,15 @@
  */
 import type { SiteSettings } from "@/lib/content";
 import { SITE_URL } from "@/lib/config";
-import { GMB_FALLBACK_PROFILE, GMB_SHARE_URL } from "@/lib/gmbSeoDefaults";
+import { GMB_SHARE_URL } from "@/lib/gmbSeoDefaults";
 import { getGmbSameAsUrl } from "@/lib/satelliteLandings";
 
 const FOUNDING_DATE = "2013-02-01";
-const OFFICIAL_NAME = "Mathelin Grégoire - Plomberie Chauffage";
-/** Canonique sans www — aligné sur layout metadata et sitemap */
+/** Nom aligné fiche Google Business / balises titre & Open Graph */
+const BRAND_NAME = "Mathelin Plomberie Chauffage";
+const LEGAL_ALTERNATE_NAME = "Mathelin Grégoire - Plomberie Chauffage";
 const MAIN_URL = SITE_URL;
-const LOGO_IMAGE_URL = `${MAIN_URL}/images/carte-visite.jpg`;
+const LOGO_IMAGE_URL = `${MAIN_URL}/images/carte-visite.webp`;
 const DEFAULT_CITY = "Pérouges";
 /** Domaines satellites (redirection vers le site principal) = preuves d'identité pour Google */
 const SAME_AS = [
@@ -47,13 +48,13 @@ export default function LocalBusinessSchema({
     "@context": "https://schema.org",
     "@id": `${MAIN_URL}/#localbusiness`,
     "@type": ["LocalBusiness", "Plumber", "HomeAndConstructionBusiness"],
-    name: OFFICIAL_NAME,
-    alternateName: [settings.company, "Mathelin Plomberie Chauffage"].filter(Boolean),
+    name: BRAND_NAME,
+    alternateName: [LEGAL_ALTERNATE_NAME, settings.company].filter(Boolean),
     image: LOGO_IMAGE_URL,
     logo: LOGO_IMAGE_URL,
     foundingDate: FOUNDING_DATE,
     description:
-      "Mathelin Plomberie : artisan plombier-chauffagiste à Pérouges. Dépannage urgence, entretien chaudière et rénovation dans toute la Plaine de l'Ain. Devis gratuit et intervention rapide.",
+      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Dépannage urgence 7j/7, entretien chaudière et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
     url: MAIN_URL,
     sameAs,
     telephone: phoneToInternational(settings.phone),
@@ -92,8 +93,8 @@ export default function LocalBusinessSchema({
     ],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: String(GMB_FALLBACK_PROFILE.averageRating),
-      reviewCount: String(GMB_FALLBACK_PROFILE.totalReviewCount),
+      ratingValue: "5.0",
+      reviewCount: "51",
       bestRating: 5,
       worstRating: 1,
     },

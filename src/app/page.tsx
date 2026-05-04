@@ -59,9 +59,30 @@ export const metadata = buildPageMetadata({
   title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
   description: HOME_META_DESCRIPTION,
   path: "/",
+  canonicalAbsolute: "https://www.mathelin-plomberie.fr/",
 });
 
 const HOME_SERVICES = SERVICES.slice(0, 3);
+
+function HomeHeroTrustIntro() {
+  return (
+    <section
+      className="border-b border-gray-100 bg-white px-4 py-8 text-gray-text sm:px-6 sm:py-10"
+      aria-labelledby="home-trust-intro-heading"
+    >
+      <div className="mx-auto max-w-3xl">
+        <h2 id="home-trust-intro-heading" className="sr-only">
+          Grégoire Mathelin — artisan plombier à Pérouges
+        </h2>
+        <p className="text-justify text-base leading-relaxed sm:text-lg">
+          Grégoire Mathelin, votre artisan plombier-chauffagiste à Pérouges. Fort de plus de 50 avis clients 5
+          étoiles, j&apos;interviens rapidement pour vos dépannages, installations de pompes à chaleur et rénovations
+          dans la Plaine de l&apos;Ain.
+        </p>
+      </div>
+    </section>
+  );
+}
 
 function HomeArtisanPresentation() {
   return (
@@ -72,8 +93,8 @@ function HomeArtisanPresentation() {
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-8 md:flex-row md:items-center md:gap-10">
         <div className="w-full max-w-[min(100%,400px)] shrink-0">
           <Image
-            src="/images/installation-plomberie-ain.jpg"
-            alt="Installation de plomberie dans l'Ain"
+            src="/images/installation-plomberie-ain.webp"
+            alt="Installation plomberie et chauffe-eau dans l'Ain"
             width={400}
             height={300}
             className="mx-auto h-auto w-full rounded-xl object-cover shadow-md md:mx-0"
@@ -207,6 +228,7 @@ export default async function HomePage() {
       <>
         {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
         <Hero />
+        <HomeHeroTrustIntro />
         <HomeArtisanPresentation />
         {ds.showRecentInterventions && interventions.length > 0 && (
           <HomeRecentInterventions interventions={interventions} />
@@ -325,6 +347,7 @@ export default async function HomePage() {
     <>
       {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
       <Hero />
+      <HomeHeroTrustIntro />
       <HomeArtisanPresentation />
       {ds.showRecentInterventions && recentInterventions.length > 0 && (
         <HomeRecentInterventions interventions={recentInterventions} maxItems={5} />

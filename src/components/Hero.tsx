@@ -19,11 +19,12 @@ export default function Hero() {
   return (
     <section className="relative min-h-[420px] overflow-hidden bg-primary sm:min-h-[500px]">
       <Image
-        src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1920&q=75"
+        src="/images/hero-plombier.webp"
         alt=""
         fill
         className="object-cover"
         priority
+        fetchPriority="high"
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-primary/85" />

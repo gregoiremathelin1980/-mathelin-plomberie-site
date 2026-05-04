@@ -22,20 +22,19 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-        <div>
+      <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-4 sm:px-6 md:justify-between">
+        <div className="w-10 shrink-0 md:hidden" aria-hidden />
+
+        <div className="min-w-0 flex-1 text-center md:flex-none md:text-left">
           {settings.owner_name && (
             <p className="text-sm font-medium text-gray-600">{settings.owner_name}</p>
           )}
-          <Link
-            href="/"
-            className="font-heading text-xl font-bold text-primary sm:text-2xl"
-          >
+          <Link href="/" className="font-heading text-xl font-bold text-primary sm:text-2xl">
             {settings.company}
           </Link>
         </div>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden shrink-0 items-center gap-1 md:flex">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
@@ -56,7 +55,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="rounded-lg p-2 text-primary md:hidden"
+          className="shrink-0 rounded-lg p-2 text-primary md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
@@ -66,7 +65,7 @@ export default function Header() {
 
       {mobileOpen && (
         <div className="border-t border-gray-100 bg-white px-4 py-4 md:hidden">
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-col gap-1 text-center">
             {NAV_LINKS.map(({ href, label }) => (
               <Link
                 key={href}
@@ -78,6 +77,16 @@ export default function Header() {
               </Link>
             ))}
           </nav>
+          <div className="mt-4 flex justify-center">
+            <a
+              href={`tel:${phoneRaw}`}
+              className="inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-base font-semibold text-white shadow hover:bg-orange-600"
+              onClick={() => setMobileOpen(false)}
+            >
+              <Phone className="h-5 w-5" aria-hidden />
+              Appeler
+            </a>
+          </div>
         </div>
       )}
     </header>
