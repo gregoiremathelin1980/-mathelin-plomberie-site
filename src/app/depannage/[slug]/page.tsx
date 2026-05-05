@@ -13,6 +13,7 @@ import {
 import { getSiteSettings } from "@/lib/content";
 import DepannageTemplate from "@/templates/DepannageTemplate";
 import ServiceSchema from "@/components/ServiceSchema";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export async function generateStaticParams() {
   const slugs = getDepannageSlugs();
@@ -28,12 +29,13 @@ export async function generateMetadata({
   const depannage = getDepannageBySlug(slug);
   if (!depannage) return {};
   const cityPart = depannage.city ? ` à ${depannage.city}` : "";
-  return {
-    title: `${depannage.title} | Mathelin Plomberie Chauffage`,
+  return buildPageMetadata({
+    title: depannage.title,
     description:
       depannage.excerpt ??
       `Intervention dépannage plomberie${cityPart}. Diagnostic et réparation par un plombier chauffagiste local.`,
-  };
+    path: `/depannage/${slug}`,
+  });
 }
 
 export default async function DepannagePage({

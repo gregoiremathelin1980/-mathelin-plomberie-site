@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/content";
 import { getRecentInterventions } from "@/lib/site-data";
 import ArticleTemplate from "@/templates/ArticleTemplate";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export function generateStaticParams() {
   const posts = getBlogPosts();
@@ -16,10 +17,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) return {};
-  return {
-    title: `${post.title} | Mathelin Plomberie Chauffage`,
+  return buildPageMetadata({
+    title: post.title,
     description: post.excerpt ?? post.title,
-  };
+    path: `/blog/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function BlogArticlePage({

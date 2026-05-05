@@ -10,6 +10,7 @@ import { getPhotoUrl } from "@/lib/config";
 import RealisationTemplate from "@/templates/RealisationTemplate";
 import GeocomptaRelatedSection from "@/components/GeocomptaRelatedSection";
 import { tryGetCachedGeocomptaRealisation, getCachedGeocomptaRealisationSlugs } from "@/lib/api/geocomptaCached";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 function findServiceSlugForTitle(serviceTitle?: string): { slug: string; title: string } | null {
   if (!serviceTitle) return null;
@@ -34,18 +35,20 @@ export async function generateMetadata({
   const api = await tryGetCachedGeocomptaRealisation(slug);
   if (api) {
     const baseTitle = api.seoTitle ?? `${api.title}${api.city ? ` à ${api.city}` : ""}`;
-    return {
-      title: `${baseTitle} | Mathelin Plomberie Chauffage`,
+    return buildPageMetadata({
+      title: baseTitle,
       description: api.seoDescription ?? api.description ?? api.content?.slice(0, 160) ?? api.title,
-    };
+      path: `/realisations/${slug}`,
+    });
   }
   const realisation = getRealisationBySlugFromSiteData(slug) ?? getRealisationBySlug(slug);
   if (!realisation) return {};
   const cityPart = realisation.city ? ` à ${realisation.city}` : "";
-  return {
-    title: `${realisation.title}${cityPart} | Mathelin Plomberie Chauffage`,
+  return buildPageMetadata({
+    title: `${realisation.title}${cityPart}`,
     description: realisation.description ?? realisation.title,
-  };
+    path: `/realisations/${slug}`,
+  });
 }
 
 export async function generateStaticParams() {

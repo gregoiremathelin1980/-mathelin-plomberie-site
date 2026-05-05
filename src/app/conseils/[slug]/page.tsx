@@ -7,6 +7,7 @@ import ArticleTemplate from "@/templates/ArticleTemplate";
 import GeocomptaRelatedSection from "@/components/GeocomptaRelatedSection";
 import { tryGetCachedGeocomptaConseil, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
 import { renderPublicSeoContent } from "@/lib/renderPublicSeoContent";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const revalidate = 86400;
 
@@ -28,18 +29,22 @@ export async function generateMetadata({
   if (api) {
     const baseTitle =
       api.seoTitle ?? api.metaTitle ?? `${api.title}${api.city ? ` à ${api.city}` : ""}`;
-    return {
-      title: `${baseTitle} | Mathelin Plomberie Chauffage`,
+    return buildPageMetadata({
+      title: baseTitle,
       description: api.seoDescription ?? api.metaDescription ?? api.excerpt ?? api.title,
-    };
+      path: `/conseils/${slug}`,
+      type: "article",
+    });
   }
   const conseil = getConseilBySlug(slug);
   if (!conseil) return {};
   const cityPart = conseil.city ? ` à ${conseil.city}` : "";
-  return {
-    title: `${conseil.title}${cityPart} | Mathelin Plomberie Chauffage`,
+  return buildPageMetadata({
+    title: `${conseil.title}${cityPart}`,
     description: conseil.excerpt ?? conseil.title,
-  };
+    path: `/conseils/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function ConseilDetailPage({

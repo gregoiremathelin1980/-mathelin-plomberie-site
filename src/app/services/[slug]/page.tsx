@@ -13,6 +13,7 @@ import ServiceTemplate from "@/templates/ServiceTemplate";
 import ServiceSchema from "@/components/ServiceSchema";
 import FAQSchema from "@/components/FAQSchema";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export async function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -29,10 +30,11 @@ export async function generateMetadata({
   const title = content?.title ?? service?.title;
   const description = content?.description ?? service?.description;
   if (!title) return {};
-  return {
-    title: `${title} | Mathelin Plomberie Chauffage`,
+  return buildPageMetadata({
+    title,
     description,
-  };
+    path: `/services/${slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({
