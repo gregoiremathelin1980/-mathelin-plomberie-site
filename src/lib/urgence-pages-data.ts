@@ -293,4 +293,145 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       },
     ],
   },
+  // --- LAGNIEU ---
+  {
+    slug: "fuite-eau-lagnieu",
+    title: "Fuite d'eau à Lagnieu",
+    h1: "Fuite d'eau à Lagnieu – Plombier en urgence",
+    metaDescription:
+      "Fuite d'eau à Lagnieu ? Artisan plombier basé à Pérouges, intervention rapide. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie Chauffage.",
+    intro:
+      "À Lagnieu, les fuites d'eau touchent aussi bien les maisons de la route de Lyon que les appartements du centre bourg. Tuyaux en cuivre vieillissants, raccords PER mal serrés ou canalisations enterrées abîmées par les racines : chaque situation nécessite un diagnostic précis avant réparation.",
+    risques: [
+      "Dégât des eaux avec infiltration dans les murs en pierre (maisons anciennes de Lagnieu)",
+      "Moisissures et détérioration rapide des revêtements",
+      "Surconsommation d'eau importante si la fuite est invisible",
+      "Risque d'affaissement si la fuite touche une canalisation enterrée",
+    ],
+    solution:
+      "Depuis Pérouges, j'arrive en 15 minutes à Lagnieu. Détection par écoute ou caméra thermique, réparation immédiate quand c'est possible. Pièces courantes en stock dans le véhicule atelier. Devis clair avant tout travail important.",
+    cta: "Fuite d'eau à Lagnieu ? Coupez l'arrivée d'eau et appelez immédiatement.",
+    faq: [
+      {
+        question: "Quel est le délai d'intervention pour une fuite à Lagnieu ?",
+        answer:
+          "En urgence, j'arrive sous 30 minutes à Lagnieu depuis ma base de Pérouges (7 km). Pour les cas non urgents, rendez-vous sous 24-48 h.",
+      },
+      {
+        question: "Comment couper l'eau en attendant le plombier à Lagnieu ?",
+        answer:
+          "Fermez la vanne d'arrêt général, généralement située près du compteur d'eau (souvent dans un regard en limite de propriété ou dans le garage). En appartement, cherchez la vanne sous l'évier ou dans le placard technique.",
+      },
+      {
+        question: "Recherche de fuite à Lagnieu : quel tarif ?",
+        answer:
+          "Le déplacement + diagnostic visuel est inclus dans l'intervention (à partir de 80 € TTC). Si une détection par caméra ou gaz traceur est nécessaire, un devis complémentaire est établi avant.",
+      },
+    ],
+  },
+  {
+    slug: "wc-bouche-lagnieu",
+    title: "WC bouché à Lagnieu",
+    h1: "WC bouché à Lagnieu – Débouchage rapide",
+    metaDescription:
+      "WC bouché à Lagnieu ? Débouchage professionnel par plombier local. Furet, hydrocurage, intervention rapide. Mathelin Plomberie Chauffage – Devis gratuit.",
+    intro:
+      "Un WC bouché à Lagnieu, c'est une situation courante que nous rencontrons régulièrement, aussi bien dans les pavillons le long de la route de Lyon que dans les logements du centre bourg. Lingettes, calcaire ou défaut de pente : les causes sont variées mais la solution est toujours rapide avec le bon matériel.",
+    risques: [
+      "Refoulement et débordement dans les pièces adjacentes",
+      "Odeurs désagréables persistantes dans tout le logement",
+      "Risque sanitaire si les eaux usées stagnent",
+      "Bouchon aggravé si on utilise des produits chimiques inadaptés",
+    ],
+    solution:
+      "Débouchage mécanique au furet professionnel ou hydrocurage haute pression selon le type de bouchon. Inspection caméra si récidive pour vérifier l'état de la canalisation. Intervention propre, résultat immédiat.",
+    cta: "WC bouché à Lagnieu ? N'attendez pas le débordement — appelez maintenant.",
+    faq: [
+      {
+        question: "Combien coûte un débouchage WC à Lagnieu ?",
+        answer:
+          "Un débouchage classique au furet coûte entre 100 et 150 € TTC. Si un hydrocurage est nécessaire (bouchon profond), comptez 200-300 € TTC. Devis gratuit par téléphone.",
+      },
+      {
+        question: "Intervenez-vous le week-end à Lagnieu ?",
+        answer:
+          "Oui, j'interviens 7 jours sur 7, y compris samedi et dimanche matin. Les urgences sont traitées en priorité.",
+      },
+      {
+        question: "Mon WC se bouche régulièrement à Lagnieu, pourquoi ?",
+        answer:
+          "C'est souvent un problème de pente insuffisante, de canalisation rétrécie par le calcaire, ou d'habitudes (lingettes, cotons-tiges). Une inspection caméra permet de diagnostiquer la cause exacte.",
+      },
+    ],
+  },
+  {
+    slug: "chauffe-eau-panne-lagnieu",
+    title: "Chauffe-eau en panne à Lagnieu",
+    h1: "Chauffe-eau en panne à Lagnieu – Dépannage rapide",
+    metaDescription:
+      "Chauffe-eau en panne à Lagnieu ? Dépannage ou remplacement par plombier local. Ballon électrique, gaz, thermodynamique. Mathelin Plomberie – Intervention rapide.",
+    intro:
+      "Plus d'eau chaude à Lagnieu ? C'est un cas fréquent que nous rencontrons dans les maisons des années 80-90 de la route de Lyon, où les ballons électriques d'origine arrivent en fin de vie. Résistance entartrée, thermostat HS ou cuve percée : un diagnostic rapide permet de décider entre réparation et remplacement.",
+    risques: [
+      "Absence totale d'eau chaude pour la famille",
+      "Fuite au groupe de sécurité entraînant dégât des eaux",
+      "Surconsommation électrique si la résistance est entartrée",
+      "Risque de panne définitive si le ballon a plus de 10 ans",
+    ],
+    solution:
+      "Diagnostic complet du chauffe-eau : test du thermostat, vérification de la résistance, état du groupe de sécurité et de l'anode. Si réparable, intervention immédiate. Si remplacement nécessaire, devis transparent et pose sous 24-48 h (Atlantic, Thermor, De Dietrich en stock).",
+    cta: "Plus d'eau chaude à Lagnieu ? Appelez pour un diagnostic rapide.",
+    faq: [
+      {
+        question: "Combien coûte le remplacement d'un chauffe-eau à Lagnieu ?",
+        answer:
+          "Pour un ballon électrique 200L (le plus courant), comptez 550-750 € TTC fourni posé, incluant le remplacement du groupe de sécurité et l'évacuation de l'ancien. Devis gratuit et précis avant intervention.",
+      },
+      {
+        question: "Chauffe-eau électrique ou thermodynamique à Lagnieu ?",
+        answer:
+          "Le ballon classique reste le plus abordable. Le thermodynamique coûte plus cher à l'achat (1 500-2 500 €) mais divise la facture électrique par 3. Je vous conseille en fonction de votre configuration et de votre budget.",
+      },
+      {
+        question: "Mon chauffe-eau fait du bruit à Lagnieu, c'est normal ?",
+        answer:
+          "Des claquements ou sifflements pendant la chauffe signalent un entartrage de la résistance. Un détartrage (150-180 € TTC) résout le problème et prolonge la durée de vie du ballon de plusieurs années.",
+      },
+    ],
+  },
+  {
+    slug: "chaudiere-panne-lagnieu",
+    title: "Chaudière en panne à Lagnieu",
+    h1: "Chaudière en panne à Lagnieu – Chauffagiste en urgence",
+    metaDescription:
+      "Chaudière en panne à Lagnieu ? Chauffagiste qualifié (BP Génie Climatique), dépannage rapide toutes marques. Diagnostic, réparation, entretien. Mathelin Plomberie.",
+    intro:
+      "Une chaudière en panne à Lagnieu en plein hiver, c'est une urgence. Que ce soit une chaudière gaz murale Saunier Duval ou une chaudière au sol Frisquet, le diagnostic doit être rapide et fiable. Nous rencontrons fréquemment des pannes liées à la pression, au thermostat ou au brûleur dans les maisons du secteur.",
+    risques: [
+      "Gel des canalisations si la maison reste sans chauffage",
+      "Absence de chauffage et d'eau chaude sanitaire",
+      "Risque de monoxyde de carbone si la combustion est défectueuse",
+      "Facture de réparation plus élevée si la panne s'aggrave",
+    ],
+    solution:
+      "Diagnostic complet : lecture du code erreur, contrôle pression circuit, vérification brûleur et sécurités. Pièces courantes en stock (pressostat, sonde, vanne 3 voies, circulateur). Mise en sécurité immédiate si risque CO. Attestation d'entretien fournie si entretien annuel réalisé.",
+    cta: "Chaudière en panne à Lagnieu ? N'attendez pas le grand froid — appelez maintenant.",
+    faq: [
+      {
+        question: "Ma chaudière affiche un code erreur à Lagnieu, que faire ?",
+        answer:
+          "Notez le code erreur affiché et coupez la chaudière. Certains codes sont bénins (manque de pression = remettre de l'eau). Pour les autres, appelez un chauffagiste qualifié. Ne tentez pas de réinitialiser plus de 2 fois de suite.",
+      },
+      {
+        question: "Quel est le tarif d'un dépannage chaudière à Lagnieu ?",
+        answer:
+          "Un diagnostic + réparation courante (remplacement pressostat, purge, remise en pression) coûte entre 120 et 250 € TTC. Les pièces spécifiques font l'objet d'un devis séparé avant commande.",
+      },
+      {
+        question: "Faites-vous l'entretien annuel de chaudière à Lagnieu ?",
+        answer:
+          "Oui. Entretien annuel obligatoire : nettoyage brûleur, vérification tirage, contrôle sécurités, mesure CO. Attestation conforme remise à la fin. Tarif : 90-130 € TTC selon le modèle.",
+      },
+    ],
+  },
 ];

@@ -78,6 +78,10 @@ export default function LocalBusinessSchema({
       "Débouchage canalisation",
       "Chauffe-eau",
       "Radiateurs",
+      "Pompe à chaleur",
+      "Climatisation",
+      "VMC",
+      "Rénovation salle de bain",
     ],
     knowsAbout: [
       "Plomberie",
@@ -86,6 +90,10 @@ export default function LocalBusinessSchema({
       "Fuite d'eau",
       "Chauffe-eau",
       "Radiateur",
+      "Pompe à chaleur air-eau",
+      "Climatisation réversible",
+      "VMC double flux",
+      "Rénovation salle de bain",
     ],
     aggregateRating: {
       "@type": "AggregateRating",
@@ -125,6 +133,10 @@ export default function LocalBusinessSchema({
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Dépannage chauffage", description: "Radiateur froid, chaudière en panne, purge, désembouage" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entretien chaudière", description: "Entretien annuel obligatoire chaudière gaz. Attestation fournie" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Robinetterie", description: "Remplacement mitigeur, robinet thermostatique, douchette" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Pompe à chaleur", description: "Installation, remplacement et dépannage de PAC air-eau. Mise en service" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Climatisation", description: "Pose et entretien de climatisation réversible. Split, multisplit, gainable" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "VMC", description: "Installation et dépannage VMC simple flux, double flux ou hygroréglable" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Rénovation salle de bain", description: "Rénovation complète ou partielle. Plomberie, douche, baignoire, robinetterie" } },
       ],
     },
     contactPoint: {

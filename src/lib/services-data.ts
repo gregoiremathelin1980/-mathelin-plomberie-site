@@ -71,6 +71,30 @@ export const SERVICES = [
     description: "Pose et remplacement de WC. Modèles à poser, suspendus, sortie horizontale ou verticale.",
     icon: "Bath",
   },
+  {
+    slug: "pompe-a-chaleur",
+    title: "Pompe à chaleur",
+    description: "Installation, remplacement et dépannage de pompe à chaleur air-eau. Diagnostic et mise en service.",
+    icon: "Thermometer",
+  },
+  {
+    slug: "climatisation",
+    title: "Climatisation",
+    description: "Pose et entretien de climatisation réversible. Split, multisplit, gainable. Toutes marques.",
+    icon: "Thermometer",
+  },
+  {
+    slug: "vmc",
+    title: "VMC",
+    description: "Installation et dépannage VMC simple flux, double flux ou hygroréglable. Extraction et ventilation.",
+    icon: "Gauge",
+  },
+  {
+    slug: "renovation-salle-de-bain",
+    title: "Rénovation salle de bain",
+    description: "Rénovation complète ou partielle de salle de bain. Plomberie, robinetterie, douche, baignoire.",
+    icon: "Bath",
+  },
 ] as const;
 
 export type ServiceSlug = (typeof SERVICES)[number]["slug"];

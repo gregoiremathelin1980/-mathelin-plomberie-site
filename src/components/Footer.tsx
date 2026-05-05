@@ -12,10 +12,10 @@ const FOOTER_VILLES = [
 const FOOTER_URGENCES = [
   { href: "/urgence/fuite-eau-meximieux", label: "Fuite eau Meximieux" },
   { href: "/urgence/fuite-eau-amberieu", label: "Fuite eau Ambérieu" },
+  { href: "/urgence/fuite-eau-lagnieu", label: "Fuite eau Lagnieu" },
   { href: "/urgence/wc-bouche-meximieux", label: "WC bouché Meximieux" },
   { href: "/urgence/wc-bouche-amberieu", label: "WC bouché Ambérieu" },
-  { href: "/urgence/chauffe-eau-panne-meximieux", label: "Chauffe-eau Meximieux" },
-  { href: "/urgence/chauffe-eau-panne-amberieu", label: "Chauffe-eau Ambérieu" },
+  { href: "/urgence/wc-bouche-lagnieu", label: "WC bouché Lagnieu" },
 ];
 
 export default function Footer() {

@@ -23,6 +23,10 @@ const URGENCES: { slug: string; label: string; desc: string }[] = [
   { slug: "wc-bouche-amberieu", label: "WC bouché à Ambérieu-en-Bugey", desc: "Débouchage professionnel avec matériel haute pression" },
   { slug: "chauffe-eau-panne-amberieu", label: "Chauffe-eau en panne à Ambérieu-en-Bugey", desc: "Dépannage ou remplacement, toutes marques" },
   { slug: "chaudiere-panne-amberieu", label: "Chaudière en panne à Ambérieu-en-Bugey", desc: "Diagnostic complet, réparation ou remplacement" },
+  { slug: "fuite-eau-lagnieu", label: "Fuite d'eau à Lagnieu", desc: "Détection et réparation de fuite, intervention rapide" },
+  { slug: "wc-bouche-lagnieu", label: "WC bouché à Lagnieu", desc: "Débouchage furet ou hydrocurage, résultat immédiat" },
+  { slug: "chauffe-eau-panne-lagnieu", label: "Chauffe-eau en panne à Lagnieu", desc: "Diagnostic, détartrage ou remplacement ballon" },
+  { slug: "chaudiere-panne-lagnieu", label: "Chaudière en panne à Lagnieu", desc: "Dépannage toutes marques, entretien annuel" },
 ];
 
 export default function ZonesInterventionPage() {

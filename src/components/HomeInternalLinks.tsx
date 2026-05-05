@@ -4,15 +4,19 @@ import { SERVICES } from "@/lib/services-data";
 const ZONES = [
   { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
   { href: "/plombier-amberieu", label: "Plombier à Ambérieu-en-Bugey" },
-  { href: "/depannage/fuite-chauffe-eau-amberieu", label: "Fuite chauffe-eau Ambérieu" },
+  { href: "/zones-intervention", label: "Toutes les zones" },
   { href: "/urgence/fuite-eau-meximieux", label: "Fuite d'eau Meximieux" },
   { href: "/urgence/fuite-eau-amberieu", label: "Fuite d'eau Ambérieu" },
+  { href: "/urgence/fuite-eau-lagnieu", label: "Fuite d'eau Lagnieu" },
   { href: "/urgence/wc-bouche-meximieux", label: "WC bouché Meximieux" },
   { href: "/urgence/wc-bouche-amberieu", label: "WC bouché Ambérieu" },
+  { href: "/urgence/wc-bouche-lagnieu", label: "WC bouché Lagnieu" },
   { href: "/urgence/chauffe-eau-panne-meximieux", label: "Chauffe-eau panne Meximieux" },
   { href: "/urgence/chauffe-eau-panne-amberieu", label: "Chauffe-eau panne Ambérieu" },
+  { href: "/urgence/chauffe-eau-panne-lagnieu", label: "Chauffe-eau panne Lagnieu" },
   { href: "/urgence/chaudiere-panne-meximieux", label: "Chaudière panne Meximieux" },
   { href: "/urgence/chaudiere-panne-amberieu", label: "Chaudière panne Ambérieu" },
+  { href: "/urgence/chaudiere-panne-lagnieu", label: "Chaudière panne Lagnieu" },
 ];
 
 const TOP_CONSEILS = [
