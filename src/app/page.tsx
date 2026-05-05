@@ -23,6 +23,7 @@ import { pickRotatingReviews } from "@/lib/reviewsRotation";
 import { allowHomeReviewsSiteDataFallback, allowSiteDataHomeReviews } from "@/lib/reviewsHomePolicy";
 import type { ReviewEntry } from "@/lib/site-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import HomeInternalLinks from "@/components/HomeInternalLinks";
 
 const EstimateForm = dynamic(() => import("@/components/EstimateForm"), {
   ssr: true,
@@ -310,6 +311,7 @@ export default async function HomePage() {
         </section>
         <ProjectGallery realisations={realisations} />
         {ds.showAdvice && <AdvicePreview conseils={conseilsForPreview} />}
+        <HomeInternalLinks />
         <ContactForm />
       </>
     );
@@ -403,6 +405,7 @@ export default async function HomePage() {
       </section>
       <ProjectGallery realisations={realisations} />
       {ds.showAdvice && <AdvicePreview conseils={randomConseils} />}
+      <HomeInternalLinks />
       <ContactForm />
     </>
   );
