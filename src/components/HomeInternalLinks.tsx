@@ -5,6 +5,14 @@ const ZONES = [
   { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
   { href: "/plombier-amberieu", label: "Plombier à Ambérieu-en-Bugey" },
   { href: "/depannage/fuite-chauffe-eau-amberieu", label: "Fuite chauffe-eau Ambérieu" },
+  { href: "/urgence/fuite-eau-meximieux", label: "Fuite d'eau Meximieux" },
+  { href: "/urgence/fuite-eau-amberieu", label: "Fuite d'eau Ambérieu" },
+  { href: "/urgence/wc-bouche-meximieux", label: "WC bouché Meximieux" },
+  { href: "/urgence/wc-bouche-amberieu", label: "WC bouché Ambérieu" },
+  { href: "/urgence/chauffe-eau-panne-meximieux", label: "Chauffe-eau panne Meximieux" },
+  { href: "/urgence/chauffe-eau-panne-amberieu", label: "Chauffe-eau panne Ambérieu" },
+  { href: "/urgence/chaudiere-panne-meximieux", label: "Chaudière panne Meximieux" },
+  { href: "/urgence/chaudiere-panne-amberieu", label: "Chaudière panne Ambérieu" },
 ];
 
 const TOP_CONSEILS = [
@@ -50,8 +58,9 @@ export default function HomeInternalLinks() {
         <h2 className="mb-8 font-heading text-xl font-bold text-primary sm:text-2xl">
           Nos interventions dans l&apos;Ain
         </h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <LinkGroup title="Zones d'intervention" links={ZONES} />
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <LinkGroup title="Zones d'intervention" links={ZONES.slice(0, 3)} />
+          <LinkGroup title="Urgences par ville" links={ZONES.slice(3)} />
           <LinkGroup title="Services" links={serviceLinks} />
           <LinkGroup title="Conseils pratiques" links={TOP_CONSEILS} />
           <LinkGroup

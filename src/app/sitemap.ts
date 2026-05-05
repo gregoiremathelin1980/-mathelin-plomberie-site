@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/config";
 import { getRealisations, getBlogPosts, getConseils } from "@/lib/content";
 import { getDepannageSlugs } from "@/lib/site-data";
 import { SERVICES } from "@/lib/services-data";
+import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
 import { getCachedGeocomptaPPageSlugs, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
 
 export const revalidate = 3600;
@@ -125,10 +126,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
+  const urgenceRoutes: MetadataRoute.Sitemap = URGENCE_PAGES.map((p) => ({
+    url: `${SITE_URL}/urgence/${p.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticRoutes,
     ...depannageRoutes,
     ...serviceRoutes,
+    ...urgenceRoutes,
     ...realisationRoutes,
     ...blogRoutes,
     ...conseilsRoutes,
