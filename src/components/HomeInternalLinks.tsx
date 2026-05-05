@@ -66,6 +66,7 @@ export default function HomeInternalLinks() {
           <LinkGroup
             title="En savoir plus"
             links={[
+              { href: "/zones-intervention", label: "Zones d'intervention" },
               { href: "/blog", label: "Blog" },
               { href: "/realisations", label: "Nos réalisations" },
               { href: "/contact", label: "Nous contacter" },

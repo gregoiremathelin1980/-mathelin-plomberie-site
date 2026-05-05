@@ -8,6 +8,8 @@ import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestim
 import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
 import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
 import FAQSchema from "@/components/FAQSchema";
+import RelatedLocalLinks from "@/components/RelatedLocalLinks";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
 import {
   getGmbUrlForSatellitePages,
@@ -60,6 +62,11 @@ export default async function PlombierAmberieu() {
     <>
       <SatellitePlumbingJsonLd variant="amberieu" settings={settings} googleBusinessProfile={googleBusinessProfile} />
       <FAQSchema faq={FAQ_AMBERIEU} />
+      <BreadcrumbSchema items={[
+        { name: "Accueil", path: "/" },
+        { name: "Zones d'intervention", path: "/zones-intervention" },
+        { name: "Plombier Ambérieu", path: "/plombier-amberieu" },
+      ]} />
 
       {/* Hero — structure différente de Meximieux */}
       <section className="bg-gradient-to-b from-primary to-primary/90 px-4 py-12 text-white sm:px-6 sm:py-16">
@@ -227,6 +234,19 @@ export default async function PlombierAmberieu() {
           </div>
         </div>
       </main>
+
+      <RelatedLocalLinks
+        villesProches={[
+          { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
+          { href: "/zones-intervention", label: "Plombier à Lagnieu & Saint-Vulbas" },
+          { href: "/zones-intervention", label: "Plombier à Château-Gaillard & Douvres" },
+        ]}
+        problemesFrequents={[
+          { href: "/urgence/fuite-eau-amberieu", label: "Fuite d'eau à Ambérieu" },
+          { href: "/urgence/chaudiere-panne-amberieu", label: "Chaudière en panne Ambérieu" },
+        ]}
+        urgence={{ href: "/urgence-depannage", label: "Urgence plomberie 7j/7" }}
+      />
 
       <SatelliteTestimonialsSection
         title="Avis clients – secteur Ambérieu"

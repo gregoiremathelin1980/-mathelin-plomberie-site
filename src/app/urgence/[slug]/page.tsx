@@ -5,8 +5,32 @@ import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 import FAQSchema from "@/components/FAQSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
 import { phoneToTelHref } from "@/lib/satelliteLandings";
+
+function getRelatedLinks(currentSlug: string) {
+  const isMeximieux = currentSlug.includes("meximieux");
+  return {
+    villesProches: isMeximieux
+      ? [
+          { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
+          { href: "/plombier-amberieu", label: "Plombier à Ambérieu" },
+          { href: "/zones-intervention", label: "Toutes les villes" },
+        ]
+      : [
+          { href: "/plombier-amberieu", label: "Plombier à Ambérieu" },
+          { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
+          { href: "/zones-intervention", label: "Toutes les villes" },
+        ],
+    problemesFrequents: URGENCE_PAGES
+      .filter((p) => p.slug !== currentSlug)
+      .slice(0, 2)
+      .map((p) => ({ href: `/urgence/${p.slug}`, label: p.title })),
+    urgence: { href: "/urgence-depannage", label: "Toutes les urgences plomberie" },
+  };
+}
 
 export function generateStaticParams() {
   return URGENCE_PAGES.map((p) => ({ slug: p.slug }));
@@ -39,9 +63,16 @@ export default async function UrgencePage({
   const settings = getSiteSettings();
   const telHref = phoneToTelHref(settings.phone);
 
+  const related = getRelatedLinks(slug);
+
   return (
     <>
       <FAQSchema faq={page.faq} />
+      <BreadcrumbSchema items={[
+        { name: "Accueil", path: "/" },
+        { name: "Urgences", path: "/urgence-depannage" },
+        { name: page.title, path: `/urgence/${page.slug}` },
+      ]} />
 
       <section className="bg-primary px-4 py-10 text-white sm:px-6 sm:py-12">
         <div className="mx-auto max-w-2xl text-center">
@@ -127,6 +158,12 @@ export default async function UrgencePage({
           </div>
         </article>
       </main>
+
+      <RelatedLocalLinks
+        villesProches={related.villesProches}
+        problemesFrequents={related.problemesFrequents}
+        urgence={related.urgence}
+      />
     </>
   );
 }

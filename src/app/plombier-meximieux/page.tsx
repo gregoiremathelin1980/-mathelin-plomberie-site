@@ -8,6 +8,8 @@ import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestim
 import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
 import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
 import FAQSchema from "@/components/FAQSchema";
+import RelatedLocalLinks from "@/components/RelatedLocalLinks";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
 import {
   getGmbUrlForSatellitePages,
@@ -60,6 +62,11 @@ export default async function PlombierMeximieux() {
     <>
       <SatellitePlumbingJsonLd variant="meximieux" settings={settings} googleBusinessProfile={googleBusinessProfile} />
       <FAQSchema faq={FAQ_MEXIMIEUX} />
+      <BreadcrumbSchema items={[
+        { name: "Accueil", path: "/" },
+        { name: "Zones d'intervention", path: "/zones-intervention" },
+        { name: "Plombier Meximieux", path: "/plombier-meximieux" },
+      ]} />
 
       {/* Hero */}
       <section className="bg-primary px-4 py-12 text-white sm:px-6 sm:py-14">
@@ -228,6 +235,19 @@ export default async function PlombierMeximieux() {
           </div>
         </div>
       </main>
+
+      <RelatedLocalLinks
+        villesProches={[
+          { href: "/plombier-amberieu", label: "Plombier à Ambérieu-en-Bugey" },
+          { href: "/zones-intervention", label: "Plombier à Pérouges & Villieu" },
+          { href: "/zones-intervention", label: "Plombier à Lagnieu & Saint-Vulbas" },
+        ]}
+        problemesFrequents={[
+          { href: "/urgence/fuite-eau-meximieux", label: "Fuite d'eau à Meximieux" },
+          { href: "/urgence/wc-bouche-meximieux", label: "WC bouché à Meximieux" },
+        ]}
+        urgence={{ href: "/urgence-depannage", label: "Urgence plomberie 7j/7" }}
+      />
 
       <SatelliteTestimonialsSection
         title="Ce que disent nos clients à Meximieux"

@@ -4,6 +4,7 @@ import { getRealisations, getBlogPosts, getConseils } from "@/lib/content";
 import { getDepannageSlugs } from "@/lib/site-data";
 import { SERVICES } from "@/lib/services-data";
 import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
+import { INTERVENTIONS } from "@/lib/interventions-data";
 import { getCachedGeocomptaPPageSlugs, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
 
 export const revalidate = 3600;
@@ -25,26 +26,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: SITE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/devis`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: SITE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
+    { url: `${SITE_URL}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/devis`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/depannage`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/urgence-depannage`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
-    { url: `${SITE_URL}/realisations`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/conseils`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/urgence-depannage`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE_URL}/realisations`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/conseils`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/zones-intervention`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     {
       url: `${SITE_URL}/plombier-amberieu`,
       lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
     },
     {
       url: `${SITE_URL}/plombier-meximieux`,
       lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
     },
   ];
 
@@ -60,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${SITE_URL}/services/${s.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.7 as const,
   }));
 
   const realisationLastMod = new Map<string, Date>();
@@ -129,8 +131,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const urgenceRoutes: MetadataRoute.Sitemap = URGENCE_PAGES.map((p) => ({
     url: `${SITE_URL}/urgence/${p.slug}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
+    changeFrequency: "daily" as const,
+    priority: 0.8,
+  }));
+
+  const interventionRoutes: MetadataRoute.Sitemap = INTERVENTIONS.map((i) => ({
+    url: `${SITE_URL}/interventions/${i.slug}`,
+    lastModified: new Date(i.date),
+    changeFrequency: "daily" as const,
+    priority: 0.6,
   }));
 
   return [
@@ -138,6 +147,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...depannageRoutes,
     ...serviceRoutes,
     ...urgenceRoutes,
+    ...interventionRoutes,
     ...realisationRoutes,
     ...blogRoutes,
     ...conseilsRoutes,

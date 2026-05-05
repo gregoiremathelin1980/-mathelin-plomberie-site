@@ -21,14 +21,10 @@ const SAME_AS = [
 ];
 /** Fallback si settings.cities vide ; doit inclure Ambérieu-en-Bugey et Saint-Vulbas pour SEO local */
 const AREA_SERVED = [
-  "Ambérieu-en-Bugey",
-  "Meximieux",
-  "Lagnieu",
-  "Pérouges",
-  "Saint-Vulbas",
-  "Villieu-Loyes-Mollon",
-  "Blyes",
-  "Leyment",
+  "Pérouges", "Meximieux", "Ambérieu-en-Bugey", "Lagnieu", "Saint-Vulbas",
+  "Villieu-Loyes-Mollon", "Rignieux-le-Franc", "Béligneux", "Le Montellier",
+  "Saint-Jean-de-Niost", "Château-Gaillard", "Douvres", "Pont-d'Ain",
+  "Saint-Denis-en-Bugey", "Blyes", "Leyment",
 ];
 
 function phoneToInternational(phone: string): string {
@@ -97,6 +93,46 @@ export default function LocalBusinessSchema({
       reviewCount: "51",
       bestRating: 5,
       worstRating: 1,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "07:00",
+        closes: "19:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Saturday"],
+        opens: "08:00",
+        closes: "17:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Sunday"],
+        opens: "08:00",
+        closes: "12:00",
+        description: "Urgences uniquement",
+      },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Services plomberie et chauffage",
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Dépannage fuite d'eau", description: "Recherche et réparation de fuite, intervention urgence 7j/7" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Débouchage canalisation", description: "Débouchage WC, évier, douche. Furet mécanique et hydrocurage" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Installation et remplacement chauffe-eau", description: "Pose chauffe-eau électrique, gaz ou thermodynamique. Détartrage" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Dépannage chauffage", description: "Radiateur froid, chaudière en panne, purge, désembouage" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entretien chaudière", description: "Entretien annuel obligatoire chaudière gaz. Attestation fournie" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Robinetterie", description: "Remplacement mitigeur, robinet thermostatique, douchette" } },
+      ],
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: phoneToInternational(settings.phone),
+      contactType: "customer service",
+      areaServed: "FR",
+      availableLanguage: "French",
     },
     ...(settings.service_radius && {
       serviceArea: {
