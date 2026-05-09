@@ -14,7 +14,7 @@ const TRUST_ITEMS = [
 const HERO_PHOTOS = [
   {
     src: "/images/hero-hands-pipes.jpg",
-    alt: "Plombier en bleu réparant un tuyau avec une clé",
+    alt: "Artisan travaillant près d'un radiateur avec une règle",
   },
   {
     src: "/images/hero-boiler-maintenance.jpg",
