@@ -14,7 +14,7 @@ const TRUST_ITEMS = [
 const HERO_PHOTOS = [
   {
     src: "/images/hero-hands-pipes.jpg",
-    alt: "Mains de plombier ajustant un tuyau sous évier de cuisine",
+    alt: "Plombier en bleu réparant un tuyau avec une clé",
   },
   {
     src: "/images/hero-boiler-maintenance.jpg",

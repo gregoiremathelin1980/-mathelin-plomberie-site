@@ -74,9 +74,10 @@ function HomeHeroTrustIntro() {
           Grégoire Mathelin — artisan plombier à Pérouges
         </h2>
         <p className="text-justify text-base leading-relaxed sm:text-lg">
-          Grégoire Mathelin, votre artisan plombier-chauffagiste à Pérouges. Fort de plus de 50 avis clients 5
-          étoiles, j&apos;interviens rapidement pour vos dépannages, installations de pompes à chaleur et rénovations
-          dans la Plaine de l&apos;Ain.
+          Grégoire Mathelin, votre artisan plombier-chauffagiste à Pérouges.
+          J&apos;interviens rapidement dans la Plaine de l&apos;Ain et le Bugey
+          pour tous vos travaux de plomberie, chauffage et climatisation
+          — installation, rénovation ou dépannage.
         </p>
       </div>
     </section>
