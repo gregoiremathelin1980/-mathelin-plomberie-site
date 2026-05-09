@@ -14,7 +14,7 @@ const TRUST_ITEMS = [
 const HERO_PHOTOS = [
   {
     src: "/images/hero-hands-pipes.jpg",
-    alt: "Mains de plombier installant des tuyaux en acier",
+    alt: "Mains de plombier ajustant un tuyau sous évier de cuisine",
   },
   {
     src: "/images/hero-boiler-maintenance.jpg",
@@ -30,8 +30,17 @@ export default function Hero() {
   const phoneRaw = usePhoneRaw();
 
   return (
-    <section className="relative overflow-hidden bg-[#1e293b]">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:py-16 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-20">
+    <section className="relative overflow-hidden bg-primary">
+      {/* Filigrane — ancienne photo hero en fond semi-transparent */}
+      <Image
+        src="/images/hero-plombier.webp"
+        alt=""
+        fill
+        className="object-cover opacity-15 mix-blend-luminosity"
+        sizes="100vw"
+        aria-hidden="true"
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:py-16 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-20">
         {/* Left — text & CTAs */}
         <div className="text-center text-white lg:text-left">
           <h1 className="font-heading text-3xl font-bold leading-tight drop-shadow sm:text-4xl md:text-5xl">
