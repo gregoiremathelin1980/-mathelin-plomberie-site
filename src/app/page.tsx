@@ -63,53 +63,23 @@ export const metadata = buildPageMetadata({
 
 const HOME_SERVICES = SERVICES.slice(0, 3);
 
-function HomeHeroTrustIntro() {
+function HomeArtisanPresentation() {
   return (
     <section
-      className="border-b border-gray-100 bg-white px-4 py-8 text-gray-text sm:px-6 sm:py-10"
-      aria-labelledby="home-trust-intro-heading"
+      className="border-b border-gray-100 bg-white px-4 py-10 sm:px-6 sm:py-14"
+      aria-labelledby="home-artisan-heading"
     >
-      <div className="mx-auto max-w-3xl">
-        <h2 id="home-trust-intro-heading" className="sr-only">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 id="home-artisan-heading" className="sr-only">
           Grégoire Mathelin — artisan plombier à Pérouges
         </h2>
-        <p className="text-justify text-base leading-relaxed sm:text-lg">
+        <p className="text-lg leading-relaxed text-gray-text sm:text-xl">
           Grégoire Mathelin, votre artisan plombier-chauffagiste à Pérouges.
           J&apos;interviens rapidement dans la Plaine de l&apos;Ain et le Bugey
           pour tous vos travaux de plomberie, chauffage et climatisation
           — installation, rénovation ou dépannage.
+          Travail soigné, réactivité et devis transparents.
         </p>
-      </div>
-    </section>
-  );
-}
-
-function HomeArtisanPresentation() {
-  return (
-    <section
-      className="border-b border-gray-100 bg-white px-4 py-14 sm:px-6 sm:py-16"
-      aria-labelledby="home-artisan-heading"
-    >
-      <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-8 md:flex-row md:items-center md:gap-10">
-        <div className="w-full max-w-[min(100%,400px)] shrink-0">
-          <Image
-            src="/images/installation-plomberie-ain.webp"
-            alt="Installation plomberie et chauffe-eau dans l'Ain"
-            width={400}
-            height={300}
-            className="mx-auto h-auto w-full rounded-xl object-cover shadow-md md:mx-0"
-            sizes="(max-width: 768px) 90vw, 400px"
-          />
-        </div>
-        <div className="max-w-xl text-center">
-          <h2 id="home-artisan-heading" className="sr-only">
-            Présentation
-          </h2>
-          <p className="text-lg leading-relaxed text-gray-text sm:text-xl">
-            Artisan plombier-chauffagiste diplômé à Pérouges, j&apos;interviens dans toute la Plaine de l&apos;Ain pour
-            vos dépannages et installations. Travail soigné, réactivité et devis transparents.
-          </p>
-        </div>
       </div>
     </section>
   );
@@ -223,7 +193,6 @@ export default async function HomePage() {
       <>
         {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
         <Hero />
-        <HomeHeroTrustIntro />
         <HomeArtisanPresentation />
         {ds.showRecentInterventions && interventions.length > 0 && (
           <HomeRecentInterventions interventions={interventions} />
@@ -348,7 +317,6 @@ export default async function HomePage() {
     <>
       {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
       <Hero />
-      <HomeHeroTrustIntro />
       <HomeArtisanPresentation />
       {ds.showRecentInterventions && recentInterventions.length > 0 && (
         <HomeRecentInterventions interventions={recentInterventions} maxItems={5} />
