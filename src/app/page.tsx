@@ -13,7 +13,6 @@ import { getPhotoUrl, isNextImageRemoteHostAllowed } from "@/lib/config";
 import { SERVICES } from "@/lib/services-data";
 import { buttonVariants } from "@/components/ui/button";
 import GoogleReviewsBlock from "@/components/GoogleReviewsBlock";
-import ReviewsSchema from "@/components/ReviewsSchema";
 import { isGeocomptaConfigured } from "@/lib/api/geocomptaClient";
 import {
   getCachedGeocomptaHomepage,
@@ -191,7 +190,6 @@ export default async function HomePage() {
 
     return (
       <>
-        {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
         <Hero />
         <HomeArtisanPresentation />
         {ds.showRecentInterventions && interventions.length > 0 && (
@@ -315,7 +313,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {ds.showReviews && reviews.length > 0 && <ReviewsSchema reviews={reviews} />}
       <Hero />
       <HomeArtisanPresentation />
       {ds.showRecentInterventions && recentInterventions.length > 0 && (
