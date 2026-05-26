@@ -1,13 +1,17 @@
 import { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/config";
+import { headers } from "next/headers";
+import { getSiteUrlFromHost } from "@/lib/config";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const h = await headers();
+  const { url } = getSiteUrlFromHost(h.get("host"));
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
       disallow: ["/admin", "/api/"],
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: `${url}/sitemap.xml`,
   };
 }

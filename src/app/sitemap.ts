@@ -1,13 +1,12 @@
 import { MetadataRoute } from "next";
-import { SITE_URL, IS_SATELLITE } from "@/lib/config";
+import { SITE_URL, getSiteUrlFromHost } from "@/lib/config";
+import { headers } from "next/headers";
 import { getRealisations, getBlogPosts, getConseils } from "@/lib/content";
 import { getDepannageSlugs } from "@/lib/site-data";
 import { SERVICES } from "@/lib/services-data";
 import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
 import { INTERVENTIONS } from "@/lib/interventions-data";
 import { getCachedGeocomptaPPageSlugs, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
-
-export const revalidate = 3600;
 
 /** lastmod cohérent avec la date de contenu quand elle est au format ISO ou lisible par Date.parse */
 function lastModifiedFromContentDate(date?: string | null): Date {
@@ -17,9 +16,12 @@ function lastModifiedFromContentDate(date?: string | null): Date {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  if (IS_SATELLITE) {
+  const h = await headers();
+  const { url: hostUrl, isSatellite } = getSiteUrlFromHost(h.get("host"));
+
+  if (isSatellite) {
     return [
-      { url: SITE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+      { url: hostUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     ];
   }
   const [realisations, posts, conseils, pSlugs, geoSitemap] = await Promise.all([

@@ -3,11 +3,21 @@ export const SITE_PHONE_RAW = "0474000000";
 export const MAIN_SITE_URL = "https://www.mathelin-plomberie.fr";
 export const SITE_URL = process.env.SITE_URL || MAIN_SITE_URL;
 
-const SATELLITE_DOMAINS = [
-  "https://www.plombier-amberieu.fr",
-  "https://www.plombier-meximieux.fr",
-];
-export const IS_SATELLITE = SATELLITE_DOMAINS.includes(SITE_URL);
+const SATELLITE_HOST_MAP: Record<string, string> = {
+  "www.plombier-amberieu.fr": "https://www.plombier-amberieu.fr",
+  "plombier-amberieu.fr": "https://www.plombier-amberieu.fr",
+  "www.plombier-meximieux.fr": "https://www.plombier-meximieux.fr",
+  "plombier-meximieux.fr": "https://www.plombier-meximieux.fr",
+};
+
+/** Détecte l'URL du site à partir du header Host (pour robots/sitemap dynamiques). */
+export function getSiteUrlFromHost(host: string | null): { url: string; isSatellite: boolean } {
+  if (host) {
+    const sat = SATELLITE_HOST_MAP[host];
+    if (sat) return { url: sat, isSatellite: true };
+  }
+  return { url: MAIN_SITE_URL, isSatellite: false };
+}
 
 /** Base URL des photos chantiers (NAS). Les images sont servies par cette URL, pas stockées localement. */
 export const PHOTO_BASE_URL =
