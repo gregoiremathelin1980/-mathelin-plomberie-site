@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/config";
+import { SITE_URL, IS_SATELLITE } from "@/lib/config";
 import { getRealisations, getBlogPosts, getConseils } from "@/lib/content";
 import { getDepannageSlugs } from "@/lib/site-data";
 import { SERVICES } from "@/lib/services-data";
@@ -17,6 +17,11 @@ function lastModifiedFromContentDate(date?: string | null): Date {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (IS_SATELLITE) {
+    return [
+      { url: SITE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+    ];
+  }
   const [realisations, posts, conseils, pSlugs, geoSitemap] = await Promise.all([
     getRealisations(),
     getBlogPosts(),
