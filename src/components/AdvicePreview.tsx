@@ -2,12 +2,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { ConseilsItem } from "@/lib/content";
 import { getPhotoUrl } from "@/lib/config";
-import { getAdviceImage } from "@/lib/getAdviceImage";
+import { resolveConseilCoverImage } from "@/lib/conseilsMerged";
 import BlogCard from "./BlogCard";
 
 export type AdvicePreviewConseil = ConseilsItem & {
-  /** Image de couverture (URL absolue ou chemin NAS) — prioritaire sur getAdviceImage */
+  /** Image de couverture (URL absolue ou chemin NAS) — prioritaire */
   heroImage?: string | null;
+  image?: string | null;
 };
 
 interface AdvicePreviewProps {
@@ -36,7 +37,7 @@ export default function AdvicePreview({ conseils }: AdvicePreviewProps) {
     date: c.date,
     slug: c.slug,
     category: c.category,
-    image: c.heroImage?.trim() ? (getPhotoUrl(c.heroImage) ?? getAdviceImage(c.slug)) : getAdviceImage(c.slug),
+    image: resolveConseilCoverImage(c.heroImage ?? c.image),
   }));
 
   return (

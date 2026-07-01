@@ -1,8 +1,9 @@
 import { Lightbulb } from "lucide-react";
 import ConseilsList from "@/components/ConseilsList";
-import { getConseils } from "@/lib/content";
-import { getAdviceImage } from "@/lib/getAdviceImage";
+import { getMergedConseilsForDisplay } from "@/lib/conseilsMerged";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+
+export const revalidate = 3600;
 
 export const metadata = buildPageMetadata({
   title: "Conseils plomberie & chauffage | Mathelin Plomberie Chauffage",
@@ -12,7 +13,7 @@ export const metadata = buildPageMetadata({
 });
 
 export default async function ConseilsPage() {
-  const conseils = getConseils();
+  const conseils = await getMergedConseilsForDisplay();
   const posts = conseils.map((c) => ({
     id: c.slug,
     title: c.title,
@@ -21,7 +22,7 @@ export default async function ConseilsPage() {
     date: c.date,
     slug: c.slug,
     category: c.category,
-    image: getAdviceImage(c.slug),
+    image: c.image,
   }));
 
   return (

@@ -5,5 +5,12 @@
   "email": "",
   "zone": "",
   "messageUrgence": "Intervention rapide plomberie et chauffage dans le Bugey et la Côtière.",
-  "showAdviceImages": true
+  "showAdviceImages": false,
+  "displaySettings": {
+    "showReviews": true,
+    "showAdvice": true,
+    "showAdviceImages": false,
+    "showEstimator": true,
+    "showRecentInterventions": true
+  }
 }

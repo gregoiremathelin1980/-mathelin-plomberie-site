@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { getConseilBySlug, getConseils } from "@/lib/content";
 import { getRecentInterventions } from "@/lib/site-data";
-import { getAdviceImage, getAdviceImageAlt } from "@/lib/getAdviceImage";
-import { getPhotoUrl } from "@/lib/config";
+import { resolveConseilCoverImage } from "@/lib/conseilsMerged";
 import ArticleTemplate from "@/templates/ArticleTemplate";
 import GeocomptaRelatedSection from "@/components/GeocomptaRelatedSection";
 import { tryGetCachedGeocomptaConseil, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
@@ -56,8 +55,7 @@ export default async function ConseilDetailPage({
   const api = await tryGetCachedGeocomptaConseil(slug);
 
   if (api) {
-    const imageUrl = getPhotoUrl(api.image ?? undefined) ?? getAdviceImage(slug);
-    const imageAlt = getAdviceImageAlt(slug, api.title);
+    const imageUrl = resolveConseilCoverImage(api.image);
     const recentInterventions = getRecentInterventions();
 
     return (
@@ -69,7 +67,7 @@ export default async function ConseilDetailPage({
           backHref="/conseils"
           backLabel="Retour aux conseils"
           imageUrl={imageUrl}
-          imageAlt={imageAlt}
+          imageAlt={api.title}
           recentInterventions={recentInterventions}
         >
           {renderPublicSeoContent(api.content)}
@@ -90,8 +88,6 @@ export default async function ConseilDetailPage({
   const conseil = getConseilBySlug(slug);
   if (!conseil) notFound();
 
-  const imageUrl = getAdviceImage(slug);
-  const imageAlt = getAdviceImageAlt(slug, conseil.title);
   const recentInterventions = getRecentInterventions();
 
   return (
@@ -101,8 +97,6 @@ export default async function ConseilDetailPage({
       city={conseil.city}
       backHref="/conseils"
       backLabel="Retour aux conseils"
-      imageUrl={imageUrl}
-      imageAlt={imageAlt}
       recentInterventions={recentInterventions}
     >
       {conseil.content ? (

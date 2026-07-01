@@ -1,15 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { formatDateFR } from "@/lib/date";
 import { ADVICE_IMAGE_FALLBACK } from "@/lib/advice-images";
 import { useSettings } from "@/contexts/SettingsContext";
 import Image from "next/image";
-
-/** Fallback for advice cards when no image URL or when local image fails to load (e.g. not yet added). */
-const CONSEILS_IMAGE_FALLBACK_LOCAL = "/images/conseils/plomberie/plomberie.jpg";
 
 export interface BlogCardData {
   id: string;
@@ -39,27 +35,21 @@ export default function BlogCard({ post, baseHref = "/blog" }: BlogCardProps) {
   const altText = post.imageAlt ?? post.title;
   const isConseils = baseHref === "/conseils";
   const showAdviceImages = settings?.show_advice_images !== false;
-  const [imageError, setImageError] = useState(false);
-
-  const conseilsImageSrc =
-    isConseils && imageError
-      ? ADVICE_IMAGE_FALLBACK
-      : post.image || CONSEILS_IMAGE_FALLBACK_LOCAL;
+  const showConseilImage = isConseils && showAdviceImages && Boolean(post.image?.trim());
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
-      {isConseils && !showAdviceImages ? null : isConseils ? (
+      {showConseilImage ? (
         <div className="relative aspect-video w-full shrink-0 bg-gray-100">
           <Image
-            src={conseilsImageSrc}
+            src={post.image!}
             alt={altText}
             fill
             className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            onError={() => setImageError(true)}
           />
         </div>
-      ) : (
+      ) : !isConseils ? (
         <div className="relative aspect-video w-full shrink-0 bg-gray-100">
           <Image
             src={post.image ?? ADVICE_IMAGE_FALLBACK}
@@ -69,7 +59,7 @@ export default function BlogCard({ post, baseHref = "/blog" }: BlogCardProps) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
-      )}
+      ) : null}
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-heading font-semibold text-primary">{post.title}</h3>
         {(displayDate || post.city) && (

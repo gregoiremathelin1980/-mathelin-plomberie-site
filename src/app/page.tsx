@@ -186,6 +186,7 @@ export default async function HomePage() {
       draft: false as const,
       content: "",
       heroImage: a.image,
+      image: a.image,
     }));
 
     return (

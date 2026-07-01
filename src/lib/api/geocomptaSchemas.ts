@@ -19,16 +19,27 @@ export const GeocomptaFeaturedRealisationSchema = z.object({
   images: z.array(z.string()).optional(),
 });
 
-export const GeocomptaFeaturedAdviceSchema = z.object({
-  slug: z.string(),
-  title: z.string(),
-  excerpt: z.string().optional(),
-  category: z.string().optional(),
-  city: z.string().optional(),
-  date: z.string().optional(),
-  /** Image de couverture (URL absolue ou chemin relatif NAS) */
-  image: z.string().nullable().optional(),
-});
+export const GeocomptaFeaturedAdviceSchema = z
+  .object({
+    slug: z.string(),
+    title: z.string(),
+    excerpt: z.string().optional(),
+    summary: z.string().optional(),
+    category: z.string().optional(),
+    city: z.string().optional(),
+    date: z.string().optional(),
+    /** Image de couverture (URL absolue ou chemin relatif NAS) */
+    image: z.string().nullable().optional(),
+  })
+  .transform((o) => ({
+    slug: o.slug,
+    title: o.title,
+    excerpt: o.excerpt ?? o.summary,
+    category: o.category,
+    city: o.city,
+    date: o.date,
+    image: o.image,
+  }));
 
 /** Champs bruts possibles côté GéoComptaAE / sync GMB (alias + types JSON laxistes). */
 const GeocomptaFeaturedReviewRawSchema = z.object({
