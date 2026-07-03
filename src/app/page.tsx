@@ -24,6 +24,7 @@ import type { ReviewEntry } from "@/lib/site-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 import HomeInternalLinks from "@/components/HomeInternalLinks";
 import HomeRecentCases from "@/components/HomeRecentCases";
+import HomeAggregateRatingSchema from "@/components/SEO/HomeAggregateRatingSchema";
 
 const EstimateForm = dynamic(() => import("@/components/EstimateForm"), {
   ssr: true,
@@ -191,6 +192,7 @@ export default async function HomePage() {
 
     return (
       <>
+        <HomeAggregateRatingSchema />
         <Hero />
         <HomeArtisanPresentation />
         {ds.showRecentInterventions && interventions.length > 0 && (
@@ -314,6 +316,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <HomeAggregateRatingSchema />
       <Hero />
       <HomeArtisanPresentation />
       {ds.showRecentInterventions && recentInterventions.length > 0 && (

@@ -95,13 +95,6 @@ export default function LocalBusinessSchema({
       "VMC double flux",
       "Rénovation salle de bain",
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5.0",
-      reviewCount: "51",
-      bestRating: 5,
-      worstRating: 1,
-    },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
