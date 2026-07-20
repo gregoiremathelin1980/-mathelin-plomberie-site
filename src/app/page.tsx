@@ -186,8 +186,8 @@ export default async function HomePage() {
       date: a.date,
       draft: false as const,
       content: "",
-      heroImage: a.image,
-      image: a.image,
+      heroImage: a.image ?? undefined,
+      image: a.image ?? undefined,
     }));
 
     return (

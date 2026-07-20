@@ -4,7 +4,7 @@ import type { ConseilsItem } from "@/lib/content";
 import { resolveConseilImage } from "@/lib/conseilsMerged";
 import BlogCard from "./BlogCard";
 
-export type AdvicePreviewConseil = ConseilsItem & {
+export type AdvicePreviewConseil = Omit<ConseilsItem, "image"> & {
   /** Image de couverture (URL absolue ou chemin NAS) — prioritaire */
   heroImage?: string | null;
   image?: string | null;

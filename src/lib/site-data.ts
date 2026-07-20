@@ -290,6 +290,7 @@ export interface SiteDataConseilFrontmatter {
   date?: string;
   excerpt?: string;
   draft?: boolean;
+  image?: string;
 }
 
 export interface SiteDataConseilItem {
@@ -300,6 +301,7 @@ export interface SiteDataConseilItem {
   date?: string;
   excerpt?: string;
   content?: string;
+  image?: string;
 }
 
 function parseConseilsFromDir(dir: string): SiteDataConseilItem[] {
@@ -325,6 +327,7 @@ function parseConseilsFromDir(dir: string): SiteDataConseilItem[] {
       date: front.date,
       excerpt: front.excerpt ?? content.trim().slice(0, 160),
       content: content.trim(),
+      image: front.image,
     });
   }
   items.sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
@@ -350,6 +353,7 @@ export function getConseilBySlugFromSiteData(slug: string): SiteDataConseilItem 
     date: front.date,
     excerpt: front.excerpt ?? content.trim().slice(0, 160),
     content: content.trim(),
+    image: front.image,
   };
 }
 
