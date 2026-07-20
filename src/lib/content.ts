@@ -99,6 +99,8 @@ export interface ConseilsFrontmatter {
   date?: string;
   excerpt?: string;
   draft?: boolean;
+  /** Photo : `/images/conseils/{slug}/cover.webp` ou chemin NAS (via PHOTO_BASE_URL). */
+  image?: string;
 }
 
 export interface ConseilsItem {
@@ -110,6 +112,7 @@ export interface ConseilsItem {
   excerpt?: string;
   draft?: boolean;
   content?: string;
+  image?: string;
 }
 
 function readSiteSettingsPath(): string {
@@ -347,6 +350,7 @@ function parseConseils(dir: string, includeDrafts: boolean): ConseilsItem[] {
       excerpt: front.excerpt ?? content.trim().slice(0, 160),
       draft: isDraft,
       content: content.trim(),
+      image: front.image,
     });
   }
   items.sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
@@ -369,6 +373,7 @@ export function getConseils(): ConseilsItem[] {
       excerpt: c.excerpt,
       draft: false,
       content: c.content,
+      image: c.image,
     });
   }
   return Array.from(bySlug.values()).sort((a, b) =>
@@ -393,6 +398,7 @@ export function getConseilBySlug(slug: string): ConseilsItem | null {
       excerpt: fromSiteData.excerpt,
       draft: false,
       content: fromSiteData.content,
+      image: fromSiteData.image,
     };
   const filePath = path.join(CONTENT_DIR, "conseils", `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
@@ -408,6 +414,7 @@ export function getConseilBySlug(slug: string): ConseilsItem | null {
     date: front.date,
     excerpt: front.excerpt ?? content.trim().slice(0, 160),
     content: content.trim(),
+    image: front.image,
   };
 }
 

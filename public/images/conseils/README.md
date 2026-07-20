@@ -1,31 +1,66 @@
-# Images des articles conseils
+# Photos des conseils (terrain uniquement)
 
-Chaque sous-dossier correspond à une **catégorie** détectée à partir du slug de l’article. Une image est choisie **aléatoirement** dans le dossier de la catégorie.
+**Une photo par conseil**, liée au slug de l’article.
 
-**Ordre de priorité** (détection) : chauffe-eau → radiateur → chauffage → evier → robinet → canalisation → … → plomberie.
+## Emplacement
 
-## Dossiers (catégories)
+```
+public/images/conseils/{slug}/cover.webp
+```
 
-- **chauffe-eau** — ex. chauffe-eau-panne, pas-eau-chaude, detartrage-chauffe-eau
-- **radiateur** — ex. bruit-radiateur, radiateur-froid, purge-radiateur
-- **chauffage** — ex. desembouage-chauffage, equilibrage-radiateurs, panne-chauffage
-- **evier** — ex. evier-bouche, eviter-evier-bouche, evacuation-lente
-- **robinet** — ex. fuite-robinet, mousseur-robinet
-- **canalisation** — ex. canalisation bouchée, pression-eau-faible, debouchage, tuyaux
-- **plomberie** — fallback si aucune catégorie ne correspond
-- **toilette-suspendue** — ex. toilettes-bouchees
-- **douche** — ex. douche-bouchee
-- **chaudiere**, **climatisation**, **plancher-chauffant**
+Exemple : `public/images/conseils/toilettes-bouchees/cover.jpg`
 
-## Qualité
+Formats acceptés pour `cover.*` : `.webp`, `.jpg`, `.jpeg`, `.png` (≥ 600 px de large recommandé).
 
-Seules les images d’**au moins 600 px de large** sont utilisées (les plus petites sont ignorées).
+## Alternative
 
-## Fallback
+Dans le frontmatter du `.md` :
 
-Si un dossier est vide ou absent, le site utilise **plomberie**.  
-**Pour afficher vos propres photos** : placez au moins une image (ex. `plomberie.jpg`) dans le dossier **plomberie**. Tant qu’aucun fichier n’est présent, une image de secours s’affiche pour éviter les zones grises.
+```yaml
+image: /images/conseils/toilettes-bouchees/cover.webp
+```
 
-## Formats
+Ou chemin NAS (servi via `PHOTO_BASE_URL`) :
 
-Fichiers acceptés : `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`
+```yaml
+image: /CHANTIERS/2026/.../photo.jpg
+```
+
+## Affichage
+
+Activer **« Afficher les images dans les conseils »** dans `/admin/site-settings` (`showAdviceImages: true`).
+
+Sans photo réelle → pas d’image (politique zéro stock / Unsplash).
+
+## Liste des 30 conseils (ordre de traitement)
+
+1. adoucisseur-co2-sel
+2. bruit-chauffe-eau
+3. bruit-radiateur
+4. desembouage-chauffage
+5. detartrage-chauffe-eau
+6. douche-bouchee
+7. entretien-chauffe-eau
+8. entretien-plomberie
+9. equilibrage-radiateurs
+10. evacuation-lente
+11. eviter-evier-bouche
+12. eviter-evier-bouche-meximieux
+13. fuite-cachee
+14. fuite-robinet
+15. groupe-securite
+16. isolation-tuyaux
+17. mousseur-robinet
+18. pas-eau-chaude
+19. pression-eau-faible
+20. protection-gel
+21. purge-radiateur
+22. radiateur-chauffe-mal-amberieu
+23. radiateur-froid
+24. recherche-fuite
+25. remplacement-resistance
+26. robinet-thermostatique
+27. tartre-calcaire
+28. toilettes-bouchees
+29. tuyaux-qui-claquent
+30. vidange-chauffe-eau

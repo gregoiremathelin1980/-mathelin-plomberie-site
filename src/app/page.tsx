@@ -212,6 +212,7 @@ export default async function HomePage() {
         )}
         <HomeRecentCases />
         <UrgencyBlock />
+        <ContactForm />
         {hp.featuredPhotos.length > 0 && (
           <section className="border-y border-primary/10 bg-gray-50/80 px-4 py-10 sm:px-6" aria-label="Photos">
             <div className="mx-auto max-w-6xl">
@@ -285,7 +286,6 @@ export default async function HomePage() {
         <ProjectGallery realisations={realisations} />
         {ds.showAdvice && <AdvicePreview conseils={conseilsForPreview} />}
         <HomeInternalLinks />
-        <ContactForm />
       </>
     );
   }
@@ -336,6 +336,7 @@ export default async function HomePage() {
       )}
       <HomeRecentCases />
       <UrgencyBlock />
+      <ContactForm />
       {ds.showEstimator && (
         <>
           <EstimateForm pricing={pricing} simulateur={simulateur} />
@@ -379,7 +380,6 @@ export default async function HomePage() {
       <ProjectGallery realisations={realisations} />
       {ds.showAdvice && <AdvicePreview conseils={randomConseils} />}
       <HomeInternalLinks />
-      <ContactForm />
     </>
   );
 }

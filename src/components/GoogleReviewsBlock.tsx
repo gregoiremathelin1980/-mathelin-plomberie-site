@@ -17,6 +17,20 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+/** Affichage auteur : prénom + initiale si fourni, sinon « Client » (jamais la source à la place du nom). */
+function reviewAuthorLabel(author?: string): string {
+  const a = author?.trim();
+  return a && a.length > 0 ? a : "Client";
+}
+
+/** Badge source lisible (google → Google). */
+function reviewSourceLabel(source?: string): string | null {
+  const s = source?.trim();
+  if (!s) return null;
+  if (/^google$/i.test(s)) return "Google";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 function ReviewCard({
   review,
   highlighted,
@@ -24,6 +38,9 @@ function ReviewCard({
   review: ReviewEntry;
   highlighted?: boolean;
 }) {
+  const authorLabel = reviewAuthorLabel(review.author);
+  const sourceLabel = reviewSourceLabel(review.source);
+
   return (
     <blockquote
       className={`rounded-2xl border bg-white p-5 ${
@@ -36,14 +53,14 @@ function ReviewCard({
       <p className="mt-2 text-gray-700 text-sm leading-relaxed">
         &ldquo;{review.text}&rdquo;
       </p>
-      {(review.author || review.source) && (
-        <footer className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-500">
-          {review.author ? <span>— {review.author}</span> : null}
-          {review.source ? (
-            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">{review.source}</span>
-          ) : null}
-        </footer>
-      )}
+      <footer className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-500">
+        <span>— {authorLabel}</span>
+        {sourceLabel ? (
+          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+            via {sourceLabel}
+          </span>
+        ) : null}
+      </footer>
     </blockquote>
   );
 }

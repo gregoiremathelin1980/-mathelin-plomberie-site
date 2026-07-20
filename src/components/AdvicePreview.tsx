@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { ConseilsItem } from "@/lib/content";
-import { getPhotoUrl } from "@/lib/config";
-import { resolveConseilCoverImage } from "@/lib/conseilsMerged";
+import { resolveConseilImage } from "@/lib/conseilsMerged";
 import BlogCard from "./BlogCard";
 
 export type AdvicePreviewConseil = ConseilsItem & {
@@ -37,7 +36,7 @@ export default function AdvicePreview({ conseils }: AdvicePreviewProps) {
     date: c.date,
     slug: c.slug,
     category: c.category,
-    image: resolveConseilCoverImage(c.heroImage ?? c.image),
+    image: resolveConseilImage(c.slug, c.heroImage ?? c.image),
   }));
 
   return (

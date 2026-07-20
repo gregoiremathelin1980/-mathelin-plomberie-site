@@ -60,6 +60,8 @@ const GeocomptaFeaturedReviewRawSchema = z.object({
     .passthrough()
     .optional(),
   date: z.union([z.string(), z.null()]).optional(),
+  /** Format GéoCompta actuel (ISO UTC) — mappé vers `date` YYYY-MM-DD. */
+  publishedAt: z.union([z.string(), z.null()]).optional(),
   source: z.string().nullable().optional(),
 });
 
@@ -89,12 +91,11 @@ export const GeocomptaFeaturedReviewSchema = GeocomptaFeaturedReviewRawSchema.tr
     r.authorName,
     r.reviewer?.displayName ?? undefined
   );
-  const date =
-    r.date != null && typeof r.date === "string" && /^\d{4}-\d{2}-\d{2}/.test(r.date)
-      ? r.date.slice(0, 10)
-      : r.date != null && typeof r.date === "string" && r.date.trim()
-        ? r.date.trim()
-        : undefined;
+  const dateRaw =
+    (typeof r.date === "string" && r.date.trim()) ||
+    (typeof r.publishedAt === "string" && r.publishedAt.trim()) ||
+    "";
+  const date = /^\d{4}-\d{2}-\d{2}/.test(dateRaw) ? dateRaw.slice(0, 10) : dateRaw || undefined;
   const source =
     typeof r.source === "string" && r.source.trim().length > 0 ? r.source.trim() : undefined;
   return {
