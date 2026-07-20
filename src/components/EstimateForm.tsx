@@ -109,6 +109,8 @@ interface EstimateFormProps {
   pricing?: PricingJSON | null;
   /** Options du sélecteur de problème (site-data/simulateur.json). Si absent, valeurs par défaut. */
   simulateur?: SimulateurJSON | null;
+  /** Sur `/devis` : h1. Sur l’accueil : h2. */
+  headingLevel?: "h1" | "h2";
 }
 
 function getEstimateLabel(
@@ -128,7 +130,12 @@ function getEstimateLabel(
   return step1.label;
 }
 
-export default function EstimateForm({ prix: prixFromServer, pricing, simulateur }: EstimateFormProps) {
+export default function EstimateForm({
+  prix: prixFromServer,
+  pricing,
+  simulateur,
+  headingLevel = "h2",
+}: EstimateFormProps) {
   const settings = useSettings();
   const phoneRaw = settings.phone.replace(/\s/g, "");
   const cities = [...settings.cities, "Autre commune"];
@@ -186,9 +193,15 @@ export default function EstimateForm({ prix: prixFromServer, pricing, simulateur
             <Calculator className="h-6 w-6" />
           </span>
           <div>
-            <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
-              Estimer le prix d&apos;une intervention
-            </h2>
+            {headingLevel === "h1" ? (
+              <h1 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
+                Estimer le prix d&apos;une intervention
+              </h1>
+            ) : (
+              <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
+                Estimer le prix d&apos;une intervention
+              </h2>
+            )}
             <p className="mt-0.5 text-sm text-gray-text">
               Répondez en 4 étapes pour une fourchette indicative.
             </p>

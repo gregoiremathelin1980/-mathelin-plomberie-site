@@ -25,7 +25,7 @@ export default function DevisPage() {
 
   return (
     <div className="pb-16 pt-4">
-      <EstimateForm pricing={pricing} />
+      <EstimateForm pricing={pricing} headingLevel="h1" />
     </div>
   );
 }

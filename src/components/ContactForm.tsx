@@ -12,7 +12,12 @@ const CONTACT_SUBJECTS = [
   { value: "urgence", label: "Urgence plomberie" },
 ] as const;
 
-export default function ContactForm() {
+interface ContactFormProps {
+  /** Sur `/contact` : h1. Sur l’accueil (section) : h2 pour éviter un 2ᵉ h1. */
+  headingLevel?: "h1" | "h2";
+}
+
+export default function ContactForm({ headingLevel = "h2" }: ContactFormProps) {
   const [subject, setSubject] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -95,9 +100,15 @@ export default function ContactForm() {
       <section id="contact" className="px-4 py-16 sm:px-6">
       <div className="mx-auto max-w-4xl">
         <div className="mb-8">
-          <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
-            Contact
-          </h2>
+          {headingLevel === "h1" ? (
+            <h1 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
+              Contact
+            </h1>
+          ) : (
+            <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
+              Contact
+            </h2>
+          )}
           <p className="mt-2 text-gray-text">
             Une question ou besoin d&apos;un devis ? Contactez-nous.
           </p>

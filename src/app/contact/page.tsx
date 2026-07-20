@@ -11,7 +11,7 @@ export const metadata = buildPageMetadata({
 export default function ContactPage() {
   return (
     <div className="pb-16">
-      <ContactForm />
+      <ContactForm headingLevel="h1" />
     </div>
   );
 }

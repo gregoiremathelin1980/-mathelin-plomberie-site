@@ -20,7 +20,7 @@ import {
 import { getSatelliteTestimonialsFromGeocomptaOrFallback } from "@/lib/satelliteReviews";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Ambérieu-en-Bugey – Urgence plomberie & chauffage | Mathelin",
+  title: "Plombier Ambérieu-en-Bugey – Urgence plomberie & chauffage",
   description:
     "Plombier chauffagiste à Ambérieu-en-Bugey : dépannage fuite, chaudière, chauffe-eau, débouchage. Artisan basé à Pérouges, 51 avis 5★. Intervention rapide Bugey & Plaine de l'Ain.",
   path: "/plombier-amberieu",
