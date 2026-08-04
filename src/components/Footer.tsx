@@ -102,7 +102,21 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t border-blue-800 pt-8 text-center text-sm text-white/85">
-          © {currentYear} {settings.company}. Tous droits réservés.
+          <p>© {currentYear} {settings.company}. Tous droits réservés.</p>
+          <nav
+            className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-white/80"
+            aria-label="Informations légales"
+          >
+            <Link href="/mentions-legales" className="transition hover:text-white">
+              Mentions légales
+            </Link>
+            <Link href="/cgv" className="transition hover:text-white">
+              CGV
+            </Link>
+            <Link href="/mentions-legales#mediation" className="transition hover:text-white">
+              Médiation de la consommation (CM2C)
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>

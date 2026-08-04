@@ -22,6 +22,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (isSatellite) {
     return [
       { url: hostUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+      { url: `${hostUrl}/mentions-legales`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
+      { url: `${hostUrl}/cgv`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
     ];
   }
   const [realisations, posts, conseils, pSlugs, geoSitemap] = await Promise.all([
@@ -42,6 +44,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/conseils`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/mentions-legales`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/cgv`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/zones-intervention`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     {
       url: `${SITE_URL}/plombier-amberieu`,

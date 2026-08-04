@@ -52,6 +52,23 @@ export default function SatelliteLocalFooter({
           </Link>{" "}
           — plombier à Pérouges, site principal.
         </p>
+        <nav
+          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-gray-500"
+          aria-label="Informations légales"
+        >
+          <Link href="/mentions-legales" className="underline-offset-2 hover:text-primary hover:underline">
+            Mentions légales
+          </Link>
+          <Link href="/cgv" className="underline-offset-2 hover:text-primary hover:underline">
+            CGV
+          </Link>
+          <Link
+            href="/mentions-legales#mediation"
+            className="underline-offset-2 hover:text-primary hover:underline"
+          >
+            Médiation CM2C
+          </Link>
+        </nav>
       </div>
     </footer>
   );
