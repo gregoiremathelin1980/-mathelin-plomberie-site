@@ -44,7 +44,7 @@ export default function Hero() {
         {/* Left — text & CTAs */}
         <div className="text-center text-white lg:text-left">
           <h1 className="font-heading text-3xl font-bold leading-tight drop-shadow sm:text-4xl md:text-5xl">
-            Plombier chauffagiste à Pérouges
+            Maître Artisan Plombier Chauffagiste à Pérouges
           </h1>
           <p className="mt-4 max-w-lg text-base text-white/90 sm:text-lg lg:mx-0 mx-auto">
             Urgence plomberie &amp; chauffage — Plaine de l&apos;Ain &amp;
