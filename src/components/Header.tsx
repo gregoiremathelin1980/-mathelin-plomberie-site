@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
@@ -22,15 +23,32 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-4 sm:px-6 md:justify-between">
+      <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 sm:px-6 md:justify-between md:py-3.5">
         <div className="w-10 shrink-0 md:hidden" aria-hidden />
 
-        <div className="min-w-0 flex-1 text-center md:flex-none md:text-left">
-          {settings.owner_name && (
-            <p className="text-sm font-medium text-gray-600">{settings.owner_name}</p>
-          )}
-          <Link href="/" className="font-heading text-xl font-bold text-primary sm:text-2xl">
-            {settings.company}
+        <div className="min-w-0 flex-1 md:flex-none">
+          <Link
+            href="/"
+            className="inline-flex max-w-full items-center justify-center gap-2.5 md:justify-start"
+          >
+            <Image
+              src="/images/logo-maitre-artisan-header.png"
+              alt="Maître Artisan"
+              width={70}
+              height={46}
+              className="h-10 w-auto shrink-0 sm:h-11"
+              priority
+            />
+            <span className="min-w-0 text-left">
+              {settings.owner_name && (
+                <span className="block text-sm font-medium text-gray-600">
+                  {settings.owner_name}
+                </span>
+              )}
+              <span className="font-heading block text-lg font-bold leading-tight text-primary sm:text-xl md:text-2xl">
+                {settings.company}
+              </span>
+            </span>
           </Link>
         </div>
 
