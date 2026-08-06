@@ -19,6 +19,7 @@ export default function MentionsLegalesPage() {
         <h2>Éditeur du site</h2>
         <p className="font-semibold text-primary">{LEGAL.tradeName}</p>
         <p>{LEGAL.legalName}</p>
+        <p>Titre : {LEGAL.title}</p>
         <p>SIRET : {LEGAL.siret}</p>
         <p>Code APE : {LEGAL.ape}</p>
         <p>N° TVA intracommunautaire : {LEGAL.tva}</p>

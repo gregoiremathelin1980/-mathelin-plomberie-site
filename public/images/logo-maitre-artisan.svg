@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" role="img" aria-label="Logo Maître Artisan">
+  <title>Maître Artisan</title>
+  <g fill="#E30613">
+    <!-- Point du « a » -->
+    <circle cx="32" cy="22" r="13"/>
+    <!-- Lettre « a » stylisée -->
+    <path d="
+      M48 16
+      c22 0 38 16 38 40
+      v42 H70 V56
+      c0-12-9-20-20-20
+      s-18 7-18 18
+      v44 H16 V52
+      C16 30 30 16 48 16z
+      M16 98 h72 v8 H16z"/>
+    <!-- Losange (filet) -->
+    <path fill="none" stroke="#E30613" stroke-width="2"
+      d="M50 112 L92 126 L50 140 L8 126 Z" transform="translate(0,-6)"/>
+    <!-- Fond clair intérieur losange pour le texte -->
+    <path fill="#fff"
+      d="M50 114.2 L88.5 126 L50 137.8 L11.5 126 Z" transform="translate(0,-6)"/>
+  </g>
+  <text x="50" y="123" text-anchor="middle" fill="#E30613"
+    font-family="Arial Narrow, Arial, Helvetica, sans-serif"
+    font-size="7.5" font-weight="700" letter-spacing="0.8">MAÎTRE</text>
+  <text x="50" y="132" text-anchor="middle" fill="#E30613"
+    font-family="Arial Narrow, Arial, Helvetica, sans-serif"
+    font-size="7.5" font-weight="700" letter-spacing="0.8">ARTISAN</text>
+</svg>

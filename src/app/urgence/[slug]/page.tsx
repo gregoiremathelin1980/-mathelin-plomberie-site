@@ -144,7 +144,7 @@ export default async function UrgencePage({
 
           <div className="text-center">
             <p className="mb-4 text-sm text-gray-text">
-              Grégoire Mathelin — artisan plombier-chauffagiste diplômé (BP Génie Climatique), basé à Pérouges (01800).
+              Grégoire Mathelin — Maître Artisan Plombier Chauffagiste (BP Génie Climatique), basé à Pérouges (01800).
             </p>
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a href={telHref} className={buttonVariants({ variant: "accent" })}>

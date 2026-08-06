@@ -220,7 +220,7 @@ export default async function PlombierAmberieu() {
           {/* CTA final */}
           <div className="text-center">
             <p className="mb-4 text-sm font-medium text-primary">
-              Grégoire Mathelin — artisan plombier-chauffagiste diplômé, à votre service depuis 2013.
+              Grégoire Mathelin — Maître Artisan Plombier Chauffagiste, à votre service depuis 2013.
             </p>
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a href={telHref} className={buttonVariants({ variant: "accent", size: "lg" })}>

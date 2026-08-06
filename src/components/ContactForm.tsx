@@ -241,7 +241,7 @@ export default function ContactForm({ headingLevel = "h2" }: ContactFormProps) {
           </div>
         </div>
         <p className="mt-6 text-center text-sm font-medium text-primary">
-          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+          Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
         </p>
       </div>
     </section>

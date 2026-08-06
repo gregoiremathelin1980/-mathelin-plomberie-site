@@ -2,6 +2,7 @@
 export const LEGAL = {
   tradeName: "Mathelin Plomberie Chauffage",
   legalName: "EI Grégoire Mathelin — Entrepreneur Individuel",
+  title: "Maître Artisan Plombier Chauffagiste",
   siret: "79006016400023",
   ape: "4322A",
   tva: "FR54790060164",

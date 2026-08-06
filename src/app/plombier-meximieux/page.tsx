@@ -124,7 +124,7 @@ export default async function PlombierMeximieux() {
             <p className="text-center leading-relaxed text-gray-text">
               Vous habitez <strong>Meximieux</strong>, le <strong>quartier de la gare</strong>, les{" "}
               <strong>lotissements des Allagniers</strong> ou le <strong>centre-ville près de la Place de la Grenette</strong>&nbsp;?
-              Grégoire Mathelin, artisan plombier-chauffagiste diplômé (BP Génie Climatique), intervient
+              Grégoire Mathelin, Maître Artisan Plombier Chauffagiste (BP Génie Climatique), intervient
               rapidement depuis sa base de <strong>Pérouges (01800)</strong>. Maisons individuelles,
               appartements en copropriété ou pavillons de lotissement&nbsp;: chaque habitat de la Côtière a ses spécificités.
             </p>
@@ -221,7 +221,7 @@ export default async function PlombierMeximieux() {
           {/* CTA final */}
           <div className="text-center">
             <p className="mb-4 text-sm font-medium text-primary">
-              Artisan plombier-chauffagiste diplômé (BP Génie Climatique) — depuis 2013.
+              Maître Artisan Plombier Chauffagiste (BP Génie Climatique) — depuis 2013.
             </p>
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a href={telHref} className={buttonVariants({ variant: "accent", size: "lg" })}>

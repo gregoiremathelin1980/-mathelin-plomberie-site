@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 const ITEMS = [
   {
     icon: GraduationCap,
-    label: "Maître Artisan (en cours) & BP Génie Climatique",
+    label: "Maître Artisan & BP Génie Climatique",
   },
   {
     icon: Calendar,

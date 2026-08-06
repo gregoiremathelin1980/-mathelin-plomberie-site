@@ -416,7 +416,7 @@ export default function EstimateForm({
           )}
         </div>
         <p className="mt-6 text-center text-sm font-medium text-gray-700">
-          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+          Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
         </p>
       </div>
     </section>

@@ -139,7 +139,7 @@ export default function RealisationTemplate({
         )}
 
         <p className="mt-10 text-sm font-medium text-primary">
-          Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+          Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
         </p>
 
         <Card className="mt-6">

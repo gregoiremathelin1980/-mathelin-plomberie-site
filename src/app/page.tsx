@@ -254,7 +254,7 @@ export default async function HomePage() {
               bouchée), contactez directement votre plombier local.
             </p>
             <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm font-medium text-primary">
-              Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+              Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
             </p>
           </>
         )}
@@ -348,7 +348,7 @@ export default async function HomePage() {
             bouchée), contactez directement votre plombier local.
           </p>
           <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm font-medium text-primary">
-            Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+            Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
           </p>
         </>
       )}

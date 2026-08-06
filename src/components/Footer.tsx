@@ -32,7 +32,7 @@ export default function Footer() {
               {settings.company}
             </h3>
             <p className="text-sm font-medium text-white">
-              Artisan plombier-chauffagiste diplômé (BP Génie Climatique) à votre service depuis 2013.
+              Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
             </p>
             <p className="mt-3 text-sm text-white/90">
               {settings.address}
