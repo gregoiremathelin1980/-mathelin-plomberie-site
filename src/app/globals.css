@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --primary: #1e40af;
-  --primary-light: #3b82f6;
-  --accent: #f97316;
-  --gray-text: #6b7280;
+  /* Palette claire / bleu-gris — sans orange daté */
+  --primary: #3a4f63;
+  --primary-light: #5b7390;
+  --accent: #4f6f87;
+  --gray-text: #5c6570;
 }
 
 body {
@@ -15,13 +16,13 @@ body {
 
 /* Évite le flash "texte qui disparaît puis revient" au refresh : couleur de base dès le premier paint */
 main {
-  color: #111827;
+  color: #15181c;
 }
 main .text-primary {
-  color: #1e40af;
+  color: #3a4f63;
 }
 main .text-gray-text {
-  color: #6b7280;
+  color: #5c6570;
 }
 
 h1, h2, h3, h4, h5, h6 {

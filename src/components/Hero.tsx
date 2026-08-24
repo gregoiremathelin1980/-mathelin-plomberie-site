@@ -58,7 +58,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
             <a
               href={`tel:${phoneRaw}`}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 text-lg font-semibold text-white shadow-lg ring-2 ring-white/30 transition hover:bg-orange-600 sm:w-auto sm:min-w-[220px]"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 text-lg font-semibold text-white shadow-lg ring-2 ring-white/30 transition hover:bg-primary sm:w-auto sm:min-w-[220px]"
             >
               <Phone className="h-5 w-5" />
               Appeler maintenant

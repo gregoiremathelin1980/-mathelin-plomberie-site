@@ -64,7 +64,7 @@ export default function Header() {
           ))}
           <a
             href={`tel:${phoneRaw}`}
-            className="ml-2 flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600"
+            className="ml-2 flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary"
           >
             <Phone className="h-4 w-4" />
             Appeler
@@ -98,7 +98,7 @@ export default function Header() {
           <div className="mt-4 flex justify-center">
             <a
               href={`tel:${phoneRaw}`}
-              className="inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-base font-semibold text-white shadow hover:bg-orange-600"
+              className="inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-base font-semibold text-white shadow hover:bg-primary"
               onClick={() => setMobileOpen(false)}
             >
               <Phone className="h-5 w-5" aria-hidden />

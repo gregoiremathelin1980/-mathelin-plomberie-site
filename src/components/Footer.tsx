@@ -39,7 +39,7 @@ export default function Footer() {
             </p>
             <a
               href={`tel:${phoneRaw}`}
-              className="mt-3 inline-block text-lg font-semibold text-accent transition hover:text-orange-300"
+              className="mt-3 inline-block text-lg font-semibold text-accent transition hover:text-primary-light"
             >
               {settings.phone}
             </a>

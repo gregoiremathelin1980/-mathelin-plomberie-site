@@ -233,7 +233,7 @@ export default function ContactForm({ headingLevel = "h2" }: ContactFormProps) {
             </p>
             <a
               href={`tel:${phoneRaw}`}
-              className="mt-4 flex items-center gap-2 rounded-xl bg-accent px-6 py-3.5 font-semibold text-white transition hover:bg-orange-600"
+              className="mt-4 flex items-center gap-2 rounded-xl bg-accent px-6 py-3.5 font-semibold text-white transition hover:bg-primary"
             >
               <Phone className="h-5 w-5" />
               {settings.phone}
