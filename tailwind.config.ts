@@ -10,10 +10,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#1A6FAF",
-        "primary-light": "#3B8FC7",
-        accent: "#0E5A8F",
-        "gray-text": "#5C6570",
+        primary: "#6BA3D4",
+        "primary-light": "#8BB8E0",
+        accent: "#5A96C7",
+        "gray-text": "#64748B",
       },
       fontFamily: {
         heading: ["var(--font-poppins)", "sans-serif"],

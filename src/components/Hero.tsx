@@ -30,20 +30,20 @@ export default function Hero() {
   const phoneRaw = usePhoneRaw();
 
   return (
-    <section className="relative overflow-hidden bg-[#f3f8fc]">
-      {/* Filigrane discret — fond clair, plus de bandeau sombre massif */}
+    <section className="relative overflow-hidden bg-[#fafcfe]">
+      {/* Filigrane très discret */}
       <Image
         src="/images/hero-plombier.webp"
         alt=""
         fill
-        className="object-cover opacity-[0.07] mix-blend-luminosity"
+        className="object-cover opacity-[0.05] mix-blend-luminosity"
         sizes="100vw"
         aria-hidden="true"
       />
       <div className="relative mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:py-16 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-20">
         {/* Left — text & CTAs */}
         <div className="text-center lg:text-left">
-          <h1 className="font-heading text-3xl font-bold leading-tight text-primary sm:text-4xl md:text-5xl">
+          <h1 className="font-heading text-3xl font-bold leading-tight text-slate-700 sm:text-4xl md:text-5xl">
             Maître Artisan Plombier Chauffagiste à Pérouges
           </h1>
           <p className="mt-4 max-w-lg text-base text-gray-text sm:text-lg lg:mx-0 mx-auto">
@@ -58,14 +58,14 @@ export default function Hero() {
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
             <a
               href={`tel:${phoneRaw}`}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-accent sm:w-auto sm:min-w-[220px]"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-white shadow-md transition hover:bg-accent sm:w-auto sm:min-w-[220px]"
             >
               <Phone className="h-5 w-5" />
               Appeler maintenant
             </a>
             <Link
               href="/devis"
-              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-primary bg-white px-6 py-3 text-base font-semibold text-primary transition hover:bg-primary/5 sm:w-auto"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-primary/40 bg-white px-6 py-3 text-base font-semibold text-slate-700 transition hover:border-primary hover:bg-primary/5 sm:w-auto"
             >
               <FileText className="h-5 w-5" />
               Demander un devis
@@ -75,10 +75,10 @@ export default function Hero() {
           <ul className="mt-8 flex flex-wrap justify-center gap-6 sm:gap-10 lg:justify-start">
             {TRUST_ITEMS.map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-2 text-gray-text">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
                   <Icon className="h-5 w-5" />
                 </span>
-                <span className="font-medium text-primary">{label}</span>
+                <span className="font-medium text-slate-700">{label}</span>
               </li>
             ))}
           </ul>
