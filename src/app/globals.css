@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  /* Palette claire / bleu-gris — sans orange daté */
-  --primary: #3a4f63;
-  --primary-light: #5b7390;
-  --accent: #4f6f87;
+  /* Bleu clair réel (pas ardoise grise), sans orange */
+  --primary: #1a6faf;
+  --primary-light: #3b8fc7;
+  --accent: #0e5a8f;
   --gray-text: #5c6570;
 }
 
@@ -19,7 +19,7 @@ main {
   color: #15181c;
 }
 main .text-primary {
-  color: #3a4f63;
+  color: #1a6faf;
 }
 main .text-gray-text {
   color: #5c6570;
