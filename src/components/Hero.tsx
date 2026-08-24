@@ -119,11 +119,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Photo credits (Pexels license) */}
-      <p className="pb-2 text-center text-[10px] text-gray-text/40">
-        Photos : Pexels
-      </p>
     </section>
   );
 }
