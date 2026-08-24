@@ -11,6 +11,7 @@ import FAQSchema from "@/components/FAQSchema";
 import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
+import { MAIN_SITE_URL } from "@/lib/config";
 import {
   getGmbUrlForSatellitePages,
   getSatelliteLandingsData,
@@ -19,12 +20,15 @@ import {
 } from "@/lib/satelliteLandings";
 import { getSatelliteTestimonialsFromGeocomptaOrFallback } from "@/lib/satelliteReviews";
 
+const SATELLITE_URL = "https://www.plombier-meximieux.fr";
+const AMBERIEU_URL = "https://www.plombier-amberieu.fr";
+
 export const metadata = buildPageMetadata({
   title: "Plombier Meximieux – Dépannage rapide 7j/7 | Mathelin Plomberie Chauffage",
   description:
     "Plombier à Meximieux : fuite d'eau, débouchage, chauffe-eau, chauffage. Artisan local basé à Pérouges, intervention rapide sur la Côtière de l'Ain. Devis gratuit.",
   path: "/plombier-meximieux",
-  canonicalAbsolute: "https://www.plombier-meximieux.fr/",
+  canonicalAbsolute: `${SATELLITE_URL}/`,
 });
 
 const FAQ_MEXIMIEUX = [
@@ -62,13 +66,15 @@ export default async function PlombierMeximieux() {
     <>
       <SatellitePlumbingJsonLd variant="meximieux" settings={settings} googleBusinessProfile={googleBusinessProfile} />
       <FAQSchema faq={FAQ_MEXIMIEUX} />
-      <BreadcrumbSchema items={[
-        { name: "Accueil", path: "/" },
-        { name: "Zones d'intervention", path: "/zones-intervention" },
-        { name: "Plombier Meximieux", path: "/plombier-meximieux" },
-      ]} />
+      <BreadcrumbSchema
+        baseUrl={SATELLITE_URL}
+        items={[
+          { name: "Accueil", path: `${SATELLITE_URL}/` },
+          { name: "Zones d'intervention", path: `${MAIN_SITE_URL}/zones-intervention` },
+          { name: "Plombier Meximieux", path: `${SATELLITE_URL}/` },
+        ]}
+      />
 
-      {/* Hero */}
       <section className="bg-primary px-4 py-12 text-white sm:px-6 sm:py-14">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
@@ -92,7 +98,7 @@ export default async function PlombierMeximieux() {
               Appeler maintenant
             </a>
             <Link
-              href="/devis"
+              href={`${MAIN_SITE_URL}/devis`}
               className={buttonVariants({
                 variant: "outline",
                 size: "lg",
@@ -107,7 +113,6 @@ export default async function PlombierMeximieux() {
         </div>
       </section>
 
-      {/* Réassurance rapide */}
       <section className="border-b border-gray-200 bg-white px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-6 text-sm text-gray-700">
           <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention sous 1&nbsp;h</span>
@@ -116,21 +121,18 @@ export default async function PlombierMeximieux() {
         </div>
       </section>
 
-      <main className="px-4 py-12 sm:px-6 sm:py-14">
+      <div className="px-4 py-12 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-2xl space-y-12">
-
-          {/* Intro locale */}
           <section>
             <p className="text-center leading-relaxed text-gray-text">
               Vous habitez <strong>Meximieux</strong>, le <strong>quartier de la gare</strong>, les{" "}
               <strong>lotissements des Allagniers</strong> ou le <strong>centre-ville près de la Place de la Grenette</strong>&nbsp;?
               Grégoire Mathelin, Maître Artisan Plombier Chauffagiste (BP Génie Climatique), intervient
-              rapidement depuis sa base de <strong>Pérouges (01800)</strong>. Maisons individuelles,
-              appartements en copropriété ou pavillons de lotissement&nbsp;: chaque habitat de la Côtière a ses spécificités.
+              rapidement depuis sa base de <strong>Pérouges (01800)</strong>, 57 impasse des Verchères.
+              Maisons individuelles, appartements en copropriété ou pavillons de lotissement&nbsp;: chaque habitat de la Côtière a ses spécificités.
             </p>
           </section>
 
-          {/* Intervention récente */}
           <section>
             <h2 className="text-xl font-semibold text-primary">Intervention récente à Meximieux</h2>
             <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-5">
@@ -145,7 +147,6 @@ export default async function PlombierMeximieux() {
             </div>
           </section>
 
-          {/* Services spécifiques */}
           <section>
             <h2 className="text-xl font-semibold text-primary">Nos interventions sur la Côtière</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -168,7 +169,6 @@ export default async function PlombierMeximieux() {
             </div>
           </section>
 
-          {/* Pourquoi local */}
           <section>
             <h2 className="text-xl font-semibold text-primary">Pourquoi choisir un plombier local à Meximieux&nbsp;?</h2>
             <ul className="mt-4 space-y-3 text-gray-text">
@@ -191,7 +191,6 @@ export default async function PlombierMeximieux() {
             </ul>
           </section>
 
-          {/* Zones desservies */}
           <section>
             <h2 className="text-xl font-semibold text-primary">Communes voisines desservies</h2>
             <p className="mt-3 text-gray-text leading-relaxed">
@@ -199,13 +198,24 @@ export default async function PlombierMeximieux() {
               <strong>Pérouges</strong>, <strong>Villieu-Loyes-Mollon</strong>, <strong>Rignieux-le-Franc</strong>,{" "}
               <strong>Le Montellier</strong>, <strong>Béligneux</strong> et <strong>Saint-Jean-de-Niost</strong>.
               Pour le secteur <strong>Ambérieu-en-Bugey</strong> et le Bugey, consultez la page{" "}
-              <a href="https://www.plombier-amberieu.fr/" className="font-medium text-primary underline-offset-2 hover:underline">
+              <a href={`${AMBERIEU_URL}/`} className="font-medium text-primary underline-offset-2 hover:underline">
                 plombier Ambérieu
               </a>.
             </p>
           </section>
 
-          {/* FAQ */}
+          <section className="rounded-xl border-2 border-accent/30 bg-accent/5 p-6 text-center">
+            <h2 className="text-lg font-bold text-accent">Urgence plomberie à Meximieux&nbsp;?</h2>
+            <p className="mt-2 text-sm text-gray-text">
+              Fuite importante, dégât des eaux, canalisation percée&nbsp;: ne perdez pas de temps.
+              Coupez l&apos;arrivée d&apos;eau au compteur et appelez immédiatement.
+            </p>
+            <a href={telHref} className={buttonVariants({ variant: "accent", className: "mt-4 inline-flex items-center gap-2" })}>
+              <Phone className="h-5 w-5" aria-hidden />
+              Appeler en urgence
+            </a>
+          </section>
+
           <section>
             <h2 className="text-xl font-semibold text-primary">Questions fréquentes – Plombier Meximieux</h2>
             <dl className="mt-4 space-y-4">
@@ -218,7 +228,6 @@ export default async function PlombierMeximieux() {
             </dl>
           </section>
 
-          {/* CTA final */}
           <div className="text-center">
             <p className="mb-4 text-sm font-medium text-primary">
               Maître Artisan Plombier Chauffagiste (BP Génie Climatique) — depuis 2013.
@@ -228,25 +237,27 @@ export default async function PlombierMeximieux() {
                 <Phone className="mr-2 h-5 w-5" aria-hidden />
                 Appeler
               </a>
-              <Link href="/contact" className={buttonVariants({ variant: "outline" })}>
+              <Link href={`${MAIN_SITE_URL}/contact`} className={buttonVariants({ variant: "outline" })}>
                 Demander un devis
               </Link>
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       <RelatedLocalLinks
         villesProches={[
-          { href: "/plombier-amberieu", label: "Plombier à Ambérieu-en-Bugey" },
-          { href: "/zones-intervention", label: "Plombier à Pérouges & Villieu" },
-          { href: "/zones-intervention", label: "Plombier à Lagnieu & Saint-Vulbas" },
+          { href: `${AMBERIEU_URL}/`, label: "Plombier à Ambérieu-en-Bugey" },
+          { href: `${MAIN_SITE_URL}/zones-intervention`, label: "Plombier à Pérouges & Villieu" },
+          { href: `${MAIN_SITE_URL}/zones-intervention`, label: "Plombier à Lagnieu & Saint-Vulbas" },
         ]}
         problemesFrequents={[
-          { href: "/urgence/fuite-eau-meximieux", label: "Fuite d'eau à Meximieux" },
-          { href: "/urgence/wc-bouche-meximieux", label: "WC bouché à Meximieux" },
+          { href: `${MAIN_SITE_URL}/urgence/fuite-eau-meximieux`, label: "Fuite d'eau à Meximieux" },
+          { href: `${MAIN_SITE_URL}/urgence/wc-bouche-meximieux`, label: "WC bouché à Meximieux" },
+          { href: `${MAIN_SITE_URL}/urgence/chauffe-eau-panne-meximieux`, label: "Chauffe-eau en panne Meximieux" },
+          { href: `${MAIN_SITE_URL}/urgence/chaudiere-panne-meximieux`, label: "Chaudière en panne Meximieux" },
         ]}
-        urgence={{ href: "/urgence-depannage", label: "Urgence plomberie 7j/7" }}
+        urgence={{ href: `${MAIN_SITE_URL}/urgence-depannage`, label: "Urgence plomberie 7j/7" }}
       />
 
       <SatelliteTestimonialsSection

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Poppins, Inter } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import LocalBusinessSchema from "@/components/SEO/LocalBusinessSchema";
 import DeferredAnalytics from "@/components/DeferredAnalytics";
 import { SettingsProvider } from "@/contexts/SettingsContext";
 import { getSiteSettings } from "@/lib/content";
-import { SITE_URL } from "@/lib/config";
+import { SITE_URL, getSiteUrlFromHost } from "@/lib/config";
 
 // Import dynamique pour réduire la taille du chunk layout et éviter ChunkLoadError (timeout)
 const Header = nextDynamic(() => import("@/components/Header"), { ssr: true });
@@ -64,10 +65,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const settings = getSiteSettings();
+  const host = (await headers()).get("host");
+  const { isSatellite } = getSiteUrlFromHost(host);
   return (
     <html lang="fr" className={`${poppins.variable} ${inter.variable}`}>
       <head>
-        <LocalBusinessSchema settings={settings} />
+        {!isSatellite && <LocalBusinessSchema settings={settings} />}
       </head>
       <body className="min-h-screen bg-white text-gray-900 antialiased">
         <SettingsProvider initialSettings={settings}>

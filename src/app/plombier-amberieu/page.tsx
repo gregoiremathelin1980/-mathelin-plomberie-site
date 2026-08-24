@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, FileText, Wrench, ThermometerSun, Droplets } from "lucide-react";
+import { Phone, FileText, Wrench, ThermometerSun, Droplets, Clock, MapPin, Shield } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
@@ -11,6 +11,7 @@ import FAQSchema from "@/components/FAQSchema";
 import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
+import { MAIN_SITE_URL } from "@/lib/config";
 import {
   getGmbUrlForSatellitePages,
   getSatelliteLandingsData,
@@ -19,12 +20,15 @@ import {
 } from "@/lib/satelliteLandings";
 import { getSatelliteTestimonialsFromGeocomptaOrFallback } from "@/lib/satelliteReviews";
 
+const SATELLITE_URL = "https://www.plombier-amberieu.fr";
+const MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
+
 export const metadata = buildPageMetadata({
-  title: "Plombier Ambérieu-en-Bugey – Urgence plomberie & chauffage",
+  title: "Plombier Ambérieu-en-Bugey – Dépannage rapide 7j/7 | Mathelin",
   description:
     "Plombier chauffagiste à Ambérieu-en-Bugey : dépannage fuite, chaudière, chauffe-eau, débouchage. Artisan basé à Pérouges, 51 avis 5★. Intervention rapide Bugey & Plaine de l'Ain.",
   path: "/plombier-amberieu",
-  canonicalAbsolute: "https://www.plombier-amberieu.fr/",
+  canonicalAbsolute: `${SATELLITE_URL}/`,
 });
 
 const FAQ_AMBERIEU = [
@@ -62,17 +66,20 @@ export default async function PlombierAmberieu() {
     <>
       <SatellitePlumbingJsonLd variant="amberieu" settings={settings} googleBusinessProfile={googleBusinessProfile} />
       <FAQSchema faq={FAQ_AMBERIEU} />
-      <BreadcrumbSchema items={[
-        { name: "Accueil", path: "/" },
-        { name: "Zones d'intervention", path: "/zones-intervention" },
-        { name: "Plombier Ambérieu", path: "/plombier-amberieu" },
-      ]} />
+      <BreadcrumbSchema
+        baseUrl={SATELLITE_URL}
+        items={[
+          { name: "Accueil", path: `${SATELLITE_URL}/` },
+          { name: "Zones d'intervention", path: `${MAIN_SITE_URL}/zones-intervention` },
+          { name: "Plombier Ambérieu", path: `${SATELLITE_URL}/` },
+        ]}
+      />
 
       {/* Hero — structure différente de Meximieux */}
       <section className="bg-gradient-to-b from-primary to-primary/90 px-4 py-12 text-white sm:px-6 sm:py-16">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-            Votre plombier à Ambérieu-en-Bugey
+            Plombier Ambérieu-en-Bugey – Dépannage rapide 7j/7
           </h1>
           <p className="mx-auto mt-5 max-w-lg text-lg text-white/90">
             Urgence plomberie ou chauffage dans le Bugey&nbsp;?
@@ -92,7 +99,7 @@ export default async function PlombierAmberieu() {
               Appeler
             </a>
             <Link
-              href="/devis"
+              href={`${MAIN_SITE_URL}/devis`}
               className={buttonVariants({
                 variant: "outline",
                 size: "lg",
@@ -104,6 +111,14 @@ export default async function PlombierAmberieu() {
               Devis gratuit
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-gray-200 bg-white px-4 py-6 sm:px-6">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-6 text-sm text-gray-700">
+          <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention sous 1&nbsp;h</span>
+          <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" aria-hidden />Basé à 15&nbsp;min</span>
+          <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" aria-hidden />Devis avant travaux</span>
         </div>
       </section>
 
@@ -185,7 +200,7 @@ export default async function PlombierAmberieu() {
               <strong>Château-Gaillard</strong>, <strong>Douvres</strong>, <strong>Pont-d&apos;Ain</strong> et{" "}
               <strong>Saint-Denis-en-Bugey</strong>.
               Pour la <strong>Côtière</strong> (Meximieux, Villieu, Pérouges), consultez{" "}
-              <a href="https://www.plombier-meximieux.fr/" className="font-medium text-primary underline-offset-2 hover:underline">
+              <a href={`${MEXIMIEUX_URL}/`} className="font-medium text-primary underline-offset-2 hover:underline">
                 plombier Meximieux
               </a>.
             </p>
@@ -227,7 +242,7 @@ export default async function PlombierAmberieu() {
                 <Phone className="mr-2 h-5 w-5" aria-hidden />
                 Appeler
               </a>
-              <Link href="/contact" className={buttonVariants({ variant: "outline" })}>
+              <Link href={`${MAIN_SITE_URL}/contact`} className={buttonVariants({ variant: "outline" })}>
                 Demander un devis
               </Link>
             </div>
@@ -237,15 +252,17 @@ export default async function PlombierAmberieu() {
 
       <RelatedLocalLinks
         villesProches={[
-          { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
-          { href: "/zones-intervention", label: "Plombier à Lagnieu & Saint-Vulbas" },
-          { href: "/zones-intervention", label: "Plombier à Château-Gaillard & Douvres" },
+          { href: `${MEXIMIEUX_URL}/`, label: "Plombier à Meximieux" },
+          { href: `${MAIN_SITE_URL}/zones-intervention`, label: "Plombier à Lagnieu & Saint-Vulbas" },
+          { href: `${MAIN_SITE_URL}/zones-intervention`, label: "Plombier à Château-Gaillard & Douvres" },
         ]}
         problemesFrequents={[
-          { href: "/urgence/fuite-eau-amberieu", label: "Fuite d'eau à Ambérieu" },
-          { href: "/urgence/chaudiere-panne-amberieu", label: "Chaudière en panne Ambérieu" },
+          { href: `${MAIN_SITE_URL}/urgence/fuite-eau-amberieu`, label: "Fuite d'eau à Ambérieu" },
+          { href: `${MAIN_SITE_URL}/urgence/wc-bouche-amberieu`, label: "WC bouché à Ambérieu" },
+          { href: `${MAIN_SITE_URL}/urgence/chauffe-eau-panne-amberieu`, label: "Chauffe-eau en panne Ambérieu" },
+          { href: `${MAIN_SITE_URL}/urgence/chaudiere-panne-amberieu`, label: "Chaudière en panne Ambérieu" },
         ]}
-        urgence={{ href: "/urgence-depannage", label: "Urgence plomberie 7j/7" }}
+        urgence={{ href: `${MAIN_SITE_URL}/urgence-depannage`, label: "Urgence plomberie 7j/7" }}
       />
 
       <SatelliteTestimonialsSection

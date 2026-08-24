@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MAIN_SITE_URL } from "@/lib/config";
 
 interface RelatedLink {
   href: string;
@@ -9,9 +10,16 @@ interface RelatedLocalLinksProps {
   villesProches: RelatedLink[];
   problemesFrequents: RelatedLink[];
   urgence: RelatedLink;
+  /** Lien « toutes les zones » (défaut : site principal) */
+  zonesHref?: string;
 }
 
-export default function RelatedLocalLinks({ villesProches, problemesFrequents, urgence }: RelatedLocalLinksProps) {
+export default function RelatedLocalLinks({
+  villesProches,
+  problemesFrequents,
+  urgence,
+  zonesHref = `${MAIN_SITE_URL}/zones-intervention`,
+}: RelatedLocalLinksProps) {
   return (
     <section className="border-t border-gray-200 bg-gray-50 px-4 py-10 sm:px-6">
       <div className="mx-auto max-w-2xl">
@@ -23,7 +31,7 @@ export default function RelatedLocalLinks({ villesProches, problemesFrequents, u
             <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Villes proches</h3>
             <ul className="space-y-1.5">
               {villesProches.map((v) => (
-                <li key={v.href}>
+                <li key={`${v.label}-${v.href}`}>
                   <Link href={v.href} className="text-sm text-gray-600 underline-offset-2 hover:text-primary hover:underline">
                     {v.label}
                   </Link>
@@ -35,7 +43,7 @@ export default function RelatedLocalLinks({ villesProches, problemesFrequents, u
             <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Problèmes fréquents</h3>
             <ul className="space-y-1.5">
               {problemesFrequents.map((p) => (
-                <li key={p.href}>
+                <li key={`${p.label}-${p.href}`}>
                   <Link href={p.href} className="text-sm text-gray-600 underline-offset-2 hover:text-primary hover:underline">
                     {p.label}
                   </Link>
@@ -49,7 +57,7 @@ export default function RelatedLocalLinks({ villesProches, problemesFrequents, u
               {urgence.label}
             </Link>
             <p className="mt-2 text-xs text-gray-500">
-              <Link href="/zones-intervention" className="underline-offset-2 hover:underline">
+              <Link href={zonesHref} className="underline-offset-2 hover:underline">
                 Voir toutes les zones d&apos;intervention →
               </Link>
             </p>

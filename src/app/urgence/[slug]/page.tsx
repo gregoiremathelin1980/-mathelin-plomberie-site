@@ -9,26 +9,30 @@ import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
 import { phoneToTelHref } from "@/lib/satelliteLandings";
+import { MAIN_SITE_URL } from "@/lib/config";
+
+const MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
+const AMBERIEU_URL = "https://www.plombier-amberieu.fr";
 
 function getRelatedLinks(currentSlug: string) {
   const isMeximieux = currentSlug.includes("meximieux");
   return {
     villesProches: isMeximieux
       ? [
-          { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
-          { href: "/plombier-amberieu", label: "Plombier à Ambérieu" },
-          { href: "/zones-intervention", label: "Toutes les villes" },
+          { href: `${MEXIMIEUX_URL}/`, label: "Plombier à Meximieux" },
+          { href: `${AMBERIEU_URL}/`, label: "Plombier à Ambérieu" },
+          { href: `${MAIN_SITE_URL}/zones-intervention`, label: "Toutes les villes" },
         ]
       : [
-          { href: "/plombier-amberieu", label: "Plombier à Ambérieu" },
-          { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
-          { href: "/zones-intervention", label: "Toutes les villes" },
+          { href: `${AMBERIEU_URL}/`, label: "Plombier à Ambérieu" },
+          { href: `${MEXIMIEUX_URL}/`, label: "Plombier à Meximieux" },
+          { href: `${MAIN_SITE_URL}/zones-intervention`, label: "Toutes les villes" },
         ],
     problemesFrequents: URGENCE_PAGES
       .filter((p) => p.slug !== currentSlug)
       .slice(0, 2)
-      .map((p) => ({ href: `/urgence/${p.slug}`, label: p.title })),
-    urgence: { href: "/urgence-depannage", label: "Toutes les urgences plomberie" },
+      .map((p) => ({ href: `${MAIN_SITE_URL}/urgence/${p.slug}`, label: p.title })),
+    urgence: { href: `${MAIN_SITE_URL}/urgence-depannage`, label: "Toutes les urgences plomberie" },
   };
 }
 

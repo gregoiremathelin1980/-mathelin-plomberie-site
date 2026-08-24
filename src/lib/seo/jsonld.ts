@@ -1,6 +1,6 @@
 import { SITE_URL } from "@/lib/config";
 
-/** Élément de fil d'Ariane */
+/** Élément de fil d'Ariane — `path` peut être relatif (`/services`) ou URL absolue. */
 export interface BreadcrumbItem {
   name: string;
   path: string;
@@ -8,19 +8,26 @@ export interface BreadcrumbItem {
 
 /**
  * Génère le schéma JSON-LD BreadcrumbList pour une page.
- * pathItems : [{ name: "Accueil", path: "/" }, { name: "Services", path: "/services" }, { name: "Installation radiateurs", path: "/services/installation-radiateurs" }]
+ * pathItems : [{ name: "Accueil", path: "/" }, { name: "Services", path: "/services" }, …]
+ * baseUrl : origine pour les chemins relatifs (défaut = site principal).
  */
-export function buildBreadcrumbSchema(pathItems: BreadcrumbItem[]): object {
+export function buildBreadcrumbSchema(pathItems: BreadcrumbItem[], baseUrl: string = SITE_URL): object {
   if (!pathItems.length) return {};
+  const origin = baseUrl.replace(/\/$/, "");
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: pathItems.map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: item.name,
-      item: `${SITE_URL}${item.path.startsWith("/") ? item.path : `/${item.path}`}`,
-    })),
+    itemListElement: pathItems.map((item, i) => {
+      const itemUrl = item.path.startsWith("http")
+        ? item.path
+        : `${origin}${item.path.startsWith("/") ? item.path : `/${item.path}`}`;
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+        item: itemUrl,
+      };
+    }),
   };
 }
 
