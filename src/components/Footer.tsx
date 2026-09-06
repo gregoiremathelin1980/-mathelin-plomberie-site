@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useSettings, usePhoneRaw } from "@/contexts/SettingsContext";
+import { SATELLITE_AMBERIEU_URL, SATELLITE_MEXIMIEUX_URL } from "@/lib/config";
 
 const FOOTER_VILLES = [
-  { href: "/plombier-meximieux", label: "Plombier Meximieux" },
-  { href: "/plombier-amberieu", label: "Plombier Ambérieu" },
+  { href: `${SATELLITE_MEXIMIEUX_URL}/`, label: "Plombier Meximieux" },
+  { href: `${SATELLITE_AMBERIEU_URL}/`, label: "Plombier Ambérieu" },
   { href: "/zones-intervention", label: "Toutes nos zones" },
 ];
 

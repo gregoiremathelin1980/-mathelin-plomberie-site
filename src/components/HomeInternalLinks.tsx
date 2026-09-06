@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SERVICES } from "@/lib/services-data";
+import { SATELLITE_AMBERIEU_URL, SATELLITE_MEXIMIEUX_URL } from "@/lib/config";
 
 const ZONES = [
-  { href: "/plombier-meximieux", label: "Plombier à Meximieux" },
-  { href: "/plombier-amberieu", label: "Plombier à Ambérieu-en-Bugey" },
+  { href: `${SATELLITE_MEXIMIEUX_URL}/`, label: "Plombier à Meximieux" },
+  { href: `${SATELLITE_AMBERIEU_URL}/`, label: "Plombier à Ambérieu-en-Bugey" },
   { href: "/zones-intervention", label: "Toutes les zones" },
   { href: "/urgence/fuite-eau-meximieux", label: "Fuite d'eau Meximieux" },
   { href: "/urgence/fuite-eau-amberieu", label: "Fuite d'eau Ambérieu" },

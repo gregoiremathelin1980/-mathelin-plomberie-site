@@ -24,7 +24,7 @@ const SATELLITE_URL = "https://www.plombier-amberieu.fr";
 const MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Ambérieu-en-Bugey – Dépannage rapide 7j/7 | Mathelin",
+  title: "Plombier Ambérieu-en-Bugey – Dépannage rapide 7j/7",
   description:
     "Plombier chauffagiste à Ambérieu-en-Bugey : dépannage fuite, chaudière, chauffe-eau, débouchage. Artisan basé à Pérouges, 51 avis 5★. Intervention rapide Bugey & Plaine de l'Ain.",
   path: "/plombier-amberieu",

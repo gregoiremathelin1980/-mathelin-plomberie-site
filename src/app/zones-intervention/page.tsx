@@ -6,6 +6,7 @@ import { Phone } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
 import { buttonVariants } from "@/components/ui/button";
 import { phoneToTelHref } from "@/lib/satelliteLandings";
+import { SATELLITE_AMBERIEU_URL, SATELLITE_MEXIMIEUX_URL } from "@/lib/config";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Zones d'intervention plombier dans l'Ain | Mathelin Plomberie Chauffage",
@@ -107,7 +108,7 @@ export default function ZonesInterventionPage() {
             </p>
             <p className="text-sm text-gray-text">
               <Link
-                href="/plombier-meximieux"
+                href={`${SATELLITE_MEXIMIEUX_URL}/`}
                 className="font-medium text-primary underline hover:text-primary/80"
               >
                 Voir notre page plombier à Meximieux →
@@ -143,7 +144,7 @@ export default function ZonesInterventionPage() {
             </p>
             <p className="text-sm text-gray-text">
               <Link
-                href="/plombier-amberieu"
+                href={`${SATELLITE_AMBERIEU_URL}/`}
                 className="font-medium text-primary underline hover:text-primary/80"
               >
                 Voir notre page plombier à Ambérieu-en-Bugey →

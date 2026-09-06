@@ -2,6 +2,9 @@ export const SITE_PHONE = "04 74 00 00 00";
 export const SITE_PHONE_RAW = "0474000000";
 export const MAIN_SITE_URL = "https://www.mathelin-plomberie.fr";
 export const SITE_URL = process.env.SITE_URL || MAIN_SITE_URL;
+/** Landings satellites — URL canonique (évite cannibalisation avec /plombier-* sur le domaine principal). */
+export const SATELLITE_MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
+export const SATELLITE_AMBERIEU_URL = "https://www.plombier-amberieu.fr";
 
 const SATELLITE_HOST_MAP: Record<string, string> = {
   "www.plombier-amberieu.fr": "https://www.plombier-amberieu.fr",
