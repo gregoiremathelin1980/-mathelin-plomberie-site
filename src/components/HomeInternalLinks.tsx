@@ -26,9 +26,11 @@ const TOP_CONSEILS = [
   { href: "/conseils/pression-eau-faible", label: "Pression d'eau faible" },
   { href: "/conseils/radiateur-froid", label: "Radiateur froid" },
   { href: "/conseils/pas-eau-chaude", label: "Plus d'eau chaude" },
-  { href: "/conseils/bruit-radiateur", label: "Bruit de radiateur" },
   { href: "/conseils/detartrage-chauffe-eau", label: "Détartrage chauffe-eau" },
-  { href: "/conseils/evacuation-lente", label: "Évacuation lente" },
+  { href: "/conseils/recherche-fuite", label: "Recherche de fuite" },
+  { href: "/conseils/douche-bouchee", label: "Douche bouchée" },
+  { href: "/conseils/radiateur-chauffe-mal-amberieu", label: "Radiateur Ambérieu" },
+  { href: "/conseils/eviter-evier-bouche-meximieux", label: "Évier Meximieux" },
 ];
 
 function LinkGroup({ title, links }: { title: string; links: { href: string; label: string }[] }) {

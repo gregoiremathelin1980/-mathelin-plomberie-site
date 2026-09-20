@@ -24,9 +24,9 @@ const SATELLITE_URL = "https://www.plombier-meximieux.fr";
 const AMBERIEU_URL = "https://www.plombier-amberieu.fr";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Meximieux – Dépannage rapide 7j/7 | Mathelin Plomberie Chauffage",
+  title: "Plombier Meximieux – Dépannage 7j/7",
   description:
-    "Plombier à Meximieux : fuite d'eau, débouchage, chauffe-eau, chauffage. Artisan local basé à Pérouges, intervention rapide sur la Côtière de l'Ain. Devis gratuit.",
+    "Plombier à Meximieux : fuite, débouchage, chauffe-eau, chauffage. Artisan à Pérouges (8 min), devis gratuit. Intervention rapide Côtière de l'Ain.",
   path: "/plombier-meximieux",
   canonicalAbsolute: `${SATELLITE_URL}/`,
 });

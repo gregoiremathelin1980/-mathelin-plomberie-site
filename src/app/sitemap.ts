@@ -7,6 +7,7 @@ import { SERVICES } from "@/lib/services-data";
 import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
 import { INTERVENTIONS } from "@/lib/interventions-data";
 import { getCachedGeocomptaPPageSlugs, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
+import { isConseilIndexable } from "@/lib/seo/conseilsIndexPolicy";
 
 /** lastmod cohérent avec la date de contenu quand elle est au format ISO ou lisible par Date.parse */
 function lastModifiedFromContentDate(date?: string | null): Date {
@@ -118,12 +119,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!prev || (Number.isFinite(d.getTime()) && d > prev)) conseilLastMod.set(item.slug, d);
     }
   }
-  const conseilsRoutes: MetadataRoute.Sitemap = Array.from(conseilLastMod.entries()).map(([slug, lastModified]) => ({
-    url: `${SITE_URL}/conseils/${encodeURIComponent(slug)}`,
-    lastModified,
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  }));
+  const conseilsRoutes: MetadataRoute.Sitemap = Array.from(conseilLastMod.entries())
+    .filter(([slug]) => {
+      const local = conseils.find((c) => c.slug === slug);
+      return isConseilIndexable(slug, local?.content);
+    })
+    .map(([slug, lastModified]) => ({
+      url: `${SITE_URL}/conseils/${encodeURIComponent(slug)}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
 
   const pLastMod = new Map<string, Date>();
   if (geoSitemap) {

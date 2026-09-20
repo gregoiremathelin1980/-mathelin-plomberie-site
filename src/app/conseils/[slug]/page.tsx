@@ -6,8 +6,9 @@ import { getAdviceImageAlt } from "@/lib/getAdviceImage";
 import ArticleTemplate from "@/templates/ArticleTemplate";
 import GeocomptaRelatedSection from "@/components/GeocomptaRelatedSection";
 import { tryGetCachedGeocomptaConseil, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
-import { renderPublicSeoContent } from "@/lib/renderPublicSeoContent";
+import { renderConseilMarkdown, renderPublicSeoContent } from "@/lib/renderPublicSeoContent";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import { isConseilIndexable } from "@/lib/seo/conseilsIndexPolicy";
 
 export const revalidate = 86400;
 
@@ -29,21 +30,33 @@ export async function generateMetadata({
   if (api) {
     const baseTitle =
       api.seoTitle ?? api.metaTitle ?? `${api.title}${api.city ? ` à ${api.city}` : ""}`;
+    const body =
+      typeof api.content === "string"
+        ? api.content
+        : api.content && typeof api.content === "object"
+          ? Object.values(api.content as Record<string, unknown>)
+              .filter((v) => typeof v === "string")
+              .join(" ")
+          : "";
+    const indexable = isConseilIndexable(slug, body || api.excerpt);
     return buildPageMetadata({
       title: baseTitle,
       description: api.seoDescription ?? api.metaDescription ?? api.excerpt ?? api.title,
       path: `/conseils/${slug}`,
       type: "article",
+      robots: indexable ? "index, follow" : "noindex, follow",
     });
   }
   const conseil = getConseilBySlug(slug);
   if (!conseil) return {};
   const cityPart = conseil.city ? ` à ${conseil.city}` : "";
+  const indexable = isConseilIndexable(slug, conseil.content);
   return buildPageMetadata({
     title: `${conseil.title}${cityPart}`,
     description: conseil.excerpt ?? conseil.title,
     path: `/conseils/${slug}`,
     type: "article",
+    robots: indexable ? "index, follow" : "noindex, follow",
   });
 }
 
@@ -103,9 +116,7 @@ export default async function ConseilDetailPage({
       imageAlt={getAdviceImageAlt(slug, conseil.title)}
       recentInterventions={recentInterventions}
     >
-      {conseil.content ? (
-        <div className="whitespace-pre-wrap text-gray-text">{conseil.content}</div>
-      ) : null}
+      {conseil.content ? renderConseilMarkdown(conseil.content) : null}
     </ArticleTemplate>
   );
 }

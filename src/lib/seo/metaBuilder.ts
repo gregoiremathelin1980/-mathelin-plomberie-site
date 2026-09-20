@@ -14,6 +14,8 @@ export interface PageMetaInput {
   image?: string | null;
   /** Type de page pour og:type */
   type?: "website" | "article";
+  /** Override robots (ex. noindex sur contenus trop fins) */
+  robots?: Metadata["robots"];
 }
 
 /**
@@ -21,7 +23,15 @@ export interface PageMetaInput {
  * à partir des données de la page / frontmatter.
  */
 export function buildPageMetadata(input: PageMetaInput): Metadata {
-  const { title, description, path = "", canonicalAbsolute, image, type = "website" } = input;
+  const {
+    title,
+    description,
+    path = "",
+    canonicalAbsolute,
+    image,
+    type = "website",
+    robots = "index, follow",
+  } = input;
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
   const desc = description?.trim() || fullTitle;
   const fromPath = path ? `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}` : SITE_URL;
@@ -48,6 +58,6 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       description: desc,
       ...(ogImage && { images: [ogImage] }),
     },
-    robots: "index, follow",
+    robots,
   };
 }

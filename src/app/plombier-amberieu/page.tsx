@@ -24,9 +24,9 @@ const SATELLITE_URL = "https://www.plombier-amberieu.fr";
 const MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Ambérieu-en-Bugey – Dépannage rapide 7j/7",
+  title: "Plombier Ambérieu-en-Bugey – Dépannage 7j/7",
   description:
-    "Plombier chauffagiste à Ambérieu-en-Bugey : dépannage fuite, chaudière, chauffe-eau, débouchage. Artisan basé à Pérouges, 51 avis 5★. Intervention rapide Bugey & Plaine de l'Ain.",
+    "Plombier à Ambérieu-en-Bugey : fuite, chaudière, chauffe-eau, débouchage. Artisan à Pérouges, 15 min, 51 avis 5★. Intervention rapide Bugey.",
   path: "/plombier-amberieu",
   canonicalAbsolute: `${SATELLITE_URL}/`,
 });
@@ -51,6 +51,16 @@ const FAQ_AMBERIEU = [
     question: "Faites-vous l'entretien de chaudière gaz à Ambérieu ?",
     answer:
       "Oui, l'entretien annuel de chaudière gaz est obligatoire. Je réalise le contrôle, le nettoyage du brûleur, la vérification des sécurités et vous remets l'attestation d'entretien. Rendez-vous sous 48 h.",
+  },
+  {
+    question: "Êtes-vous moins cher qu'une plateforme nationale d'urgence ?",
+    answer:
+      "En général oui sur le secteur : pas d'intermédiaire, devis avant travaux, pièces courantes en véhicule. Les plateformes facturent souvent un forfait urgence élevé + déplacement. Ici vous parlez directement à l'artisan qui intervient.",
+  },
+  {
+    question: "Intervenez-vous sur Tiret, Saint-Germain et le centre d'Ambérieu ?",
+    answer:
+      "Oui, sur tout Ambérieu-en-Bugey : centre (rue Alexandre Bérard), Tiret, Saint-Germain, ainsi que Saint-Denis-en-Bugey. Le trajet depuis Pérouges via la D1084 reste court.",
   },
 ];
 
@@ -172,6 +182,61 @@ export default async function PlombierAmberieu() {
                 Résultat&nbsp;: eau chaude retrouvée le jour même, plus de fuite. Intervention complète en 2&nbsp;h, 280&nbsp;€ TTC pièces comprises.
               </p>
             </div>
+            <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-5">
+              <p className="leading-relaxed text-gray-text">
+                <strong>Radiateur froid</strong> dans une maison de Tiret&nbsp;: circuit déséquilibré après un
+                remplacement partiel de radiateurs. Purge, contrôle de pression et rééquilibrage des vannes.
+              </p>
+              <p className="mt-2 text-sm font-medium text-primary">
+                Résultat&nbsp;: chauffage homogène dès le soir même, sans remplacement inutile de chaudière.
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-primary">Tarifs indicatifs à Ambérieu</h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-text">
+              Ordres de grandeur TTC, confirmés sur devis après diagnostic&nbsp;:
+            </p>
+            <ul className="mt-3 space-y-2 text-sm text-gray-text">
+              <li>• Diagnostic / petite réparation (joint, raccord)&nbsp;: à partir de 60–90&nbsp;€</li>
+              <li>• Débouchage WC ou évier&nbsp;: 80–150&nbsp;€ selon accès et profondeur</li>
+              <li>• Recherche de fuite&nbsp;: 150–350&nbsp;€ selon détection</li>
+              <li>• Remplacement chauffe-eau pose incluse&nbsp;: 600–1&nbsp;500&nbsp;€ selon modèle</li>
+            </ul>
+            <p className="mt-3 text-sm text-gray-text">
+              Pas de surprise&nbsp;: le devis est présenté avant les travaux. Pour une urgence,{" "}
+              <Link href={`${MAIN_SITE_URL}/urgence-depannage`} className="font-medium text-primary underline-offset-2 hover:underline">
+                page urgence dépannage
+              </Link>
+              .
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-primary">Urgences fréquentes à Ambérieu</h2>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              <li>
+                <Link href={`${MAIN_SITE_URL}/urgence/fuite-eau-amberieu`} className="text-sm font-medium text-primary underline-offset-2 hover:underline">
+                  Fuite d&apos;eau à Ambérieu
+                </Link>
+              </li>
+              <li>
+                <Link href={`${MAIN_SITE_URL}/urgence/wc-bouche-amberieu`} className="text-sm font-medium text-primary underline-offset-2 hover:underline">
+                  WC bouché à Ambérieu
+                </Link>
+              </li>
+              <li>
+                <Link href={`${MAIN_SITE_URL}/urgence/chauffe-eau-panne-amberieu`} className="text-sm font-medium text-primary underline-offset-2 hover:underline">
+                  Chauffe-eau en panne
+                </Link>
+              </li>
+              <li>
+                <Link href={`${MAIN_SITE_URL}/urgence/chaudiere-panne-amberieu`} className="text-sm font-medium text-primary underline-offset-2 hover:underline">
+                  Chaudière en panne
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* Pourquoi local — arguments différents */}
