@@ -22,7 +22,7 @@ Si le radiateur rechauffe puis retombe tiède en quelques jours, une fuite d’a
 
 ## Prévention
 
-Purgez tous les radiateurs en octobre, avant les premières gelées du plateau du Bugey. Faites contrôler la chaudière et la pression du circuit lors de l’entretien annuel obligatoire. Prévoyez un désembouage tous les cinq à dix ans, plus tôt si l’eau du circuit est visiblement rouillée ou noire à la purge. Ne retirez pas les têtes thermostatiques en été « pour forcer l’ouverture » : elles se réinstallent mal et fuient. Isolez les tuyaux en cave ou garage : les déperditions sur le réseau avant les radiateurs donnent l’impression que « la chaudière ne suffit plus ».
+Purgez tous les radiateurs en octobre, avant les premières gelées du plateau du Bugey. Vérifiez la pression du circuit (entre 1 et 1,5 bar à froid) avant la reprise du chauffage. Prévoyez un désembouage tous les cinq à dix ans, plus tôt si l’eau du circuit est visiblement rouillée ou noire à la purge. Ne retirez pas les têtes thermostatiques en été « pour forcer l’ouverture » : elles se réinstallent mal et fuient. Isolez les tuyaux en cave ou garage : les déperditions sur le réseau avant les radiateurs donnent l’impression que « la chaudière ne suffit plus ».
 
 Les maisons des années 1960-1980 du secteur nord d’Ambérieu, avec radiateurs en fonte et tuyauterie acier, chauffent encore très bien une fois le circuit purgé et équilibré — inutile de changer les corps de chauffe sans diagnostic.
 

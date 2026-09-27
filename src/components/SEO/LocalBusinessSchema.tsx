@@ -50,7 +50,7 @@ export default function LocalBusinessSchema({
     logo: LOGO_IMAGE_URL,
     foundingDate: FOUNDING_DATE,
     description:
-      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Dépannage urgence 7j/7, entretien chaudière et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Dépannage urgence 7j/7, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
     url: MAIN_URL,
     sameAs,
     telephone: phoneToInternational(settings.phone),
@@ -124,7 +124,6 @@ export default function LocalBusinessSchema({
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Débouchage canalisation", description: "Débouchage WC, évier, douche. Furet mécanique et hydrocurage" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Installation et remplacement chauffe-eau", description: "Pose chauffe-eau électrique, gaz ou thermodynamique. Détartrage" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Dépannage chauffage", description: "Radiateur froid, chaudière en panne, purge, désembouage" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entretien chaudière", description: "Entretien annuel obligatoire chaudière gaz. Attestation fournie" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Robinetterie", description: "Remplacement mitigeur, robinet thermostatique, douchette" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Pompe à chaleur", description: "Installation, remplacement et dépannage de PAC air-eau. Mise en service" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Climatisation", description: "Pose et entretien de climatisation réversible. Split, multisplit, gainable" } },

@@ -27,7 +27,7 @@ const URGENCES: { slug: string; label: string; desc: string }[] = [
   { slug: "fuite-eau-lagnieu", label: "Fuite d'eau à Lagnieu", desc: "Détection et réparation de fuite, intervention rapide" },
   { slug: "wc-bouche-lagnieu", label: "WC bouché à Lagnieu", desc: "Débouchage furet ou hydrocurage, résultat immédiat" },
   { slug: "chauffe-eau-panne-lagnieu", label: "Chauffe-eau en panne à Lagnieu", desc: "Diagnostic, détartrage ou remplacement ballon" },
-  { slug: "chaudiere-panne-lagnieu", label: "Chaudière en panne à Lagnieu", desc: "Dépannage toutes marques, entretien annuel" },
+  { slug: "chaudiere-panne-lagnieu", label: "Chaudière en panne à Lagnieu", desc: "Dépannage toutes marques" },
 ];
 
 export default function ZonesInterventionPage() {

@@ -48,9 +48,9 @@ const FAQ_AMBERIEU = [
       "Absolument. J'interviens sur tout le secteur : Ambérieu, Lagnieu, Saint-Vulbas, Château-Gaillard, Douvres, Saint-Denis-en-Bugey. Les trajets sont maîtrisés, les frais de déplacement restent raisonnables.",
   },
   {
-    question: "Faites-vous l'entretien de chaudière gaz à Ambérieu ?",
+    question: "Réparez-vous les chaudières gaz en panne à Ambérieu ?",
     answer:
-      "Oui, l'entretien annuel de chaudière gaz est obligatoire. Je réalise le contrôle, le nettoyage du brûleur, la vérification des sécurités et vous remets l'attestation d'entretien. Rendez-vous sous 48 h.",
+      "Oui, je dépanne les chaudières gaz toutes marques : lecture du code erreur, contrôle de la pression, vérification des sécurités et remplacement des pièces courantes. Je ne réalise pas l'entretien annuel obligatoire.",
   },
   {
     question: "Êtes-vous moins cher qu'une plateforme nationale d'urgence ?",
@@ -159,7 +159,7 @@ export default async function PlombierAmberieu() {
               <div className="flex flex-col items-center rounded-xl border p-5 text-center">
                 <ThermometerSun className="h-8 w-8 text-primary" aria-hidden />
                 <h3 className="mt-3 font-semibold">Chauffage</h3>
-                <p className="mt-1 text-sm text-gray-text">Radiateur froid, désembouage, purge, entretien chaudière gaz.</p>
+                <p className="mt-1 text-sm text-gray-text">Radiateur froid, désembouage, purge, dépannage chaudière gaz.</p>
               </div>
               <div className="flex flex-col items-center rounded-xl border p-5 text-center">
                 <Wrench className="h-8 w-8 text-primary" aria-hidden />

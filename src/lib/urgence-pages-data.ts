@@ -141,14 +141,14 @@ export const URGENCE_PAGES: UrgencePageData[] = [
           "Notez le code erreur affiché et appelez-moi. Certains codes sont simples (pression basse = remettre de l'eau dans le circuit). D'autres nécessitent un diagnostic professionnel. Ne réinitialisez pas plus de 2 fois de suite.",
       },
       {
-        question: "L'entretien annuel de chaudière est-il obligatoire ?",
+        question: "Faites-vous l'entretien annuel de chaudière ?",
         answer:
-          "Oui, l'entretien annuel est obligatoire pour les chaudières gaz, fioul et bois (décret 2009-649). Il permet de prévenir les pannes et d'assurer votre sécurité. Attestation fournie après intervention.",
+          "Non, je n'assure pas l'entretien annuel. J'interviens en dépannage : chaudière en panne, perte de pression, code erreur, radiateurs froids.",
       },
       {
         question: "Combien coûte un dépannage chaudière à Meximieux ?",
         answer:
-          "Un diagnostic démarre à 80 € TTC. La réparation dépend de la pièce à remplacer. L'entretien annuel complet : 90-130 € TTC. Devis toujours fourni avant intervention.",
+          "Un diagnostic démarre à 80 € TTC. La réparation dépend de la pièce à remplacer. Devis toujours fourni avant intervention.",
       },
     ],
   },
@@ -273,7 +273,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       "Panne aggravée par une tentative de réparation non qualifiée",
     ],
     solution:
-      "Diagnostic complet avec lecture du code erreur, contrôle de la pression, vérification du brûleur et des sécurités. Pièces courantes en stock (pressostat, sonde, vanne 3 voies). Mise en sécurité immédiate en cas de risque CO. Attestation d'entretien fournie.",
+      "Diagnostic complet avec lecture du code erreur, contrôle de la pression, vérification du brûleur et des sécurités. Pièces courantes en stock (pressostat, sonde, vanne 3 voies). Mise en sécurité immédiate en cas de risque CO.",
     cta: "Chaudière en panne en plein hiver ? Chaque heure compte — appelez maintenant.",
     faq: [
       {
@@ -284,7 +284,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Faites-vous l'entretien de chaudière à Ambérieu ?",
         answer:
-          "Oui. Entretien annuel obligatoire : nettoyage du brûleur, vérification du tirage, contrôle des sécurités, mesure de CO. Attestation remise en fin d'intervention. Tarif : 90-130 € TTC.",
+          "Non, je n'assure pas l'entretien annuel. J'interviens en dépannage : lecture du code erreur, contrôle de la pression, vérification des sécurités, remplacement des pièces courantes.",
       },
       {
         question: "Chaudière ou pompe à chaleur : que me conseillez-vous ?",
@@ -404,7 +404,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Chaudière en panne à Lagnieu",
     h1: "Chaudière en panne à Lagnieu – Chauffagiste en urgence",
     metaDescription:
-      "Chaudière en panne à Lagnieu ? Chauffagiste qualifié (BP Génie Climatique), dépannage rapide toutes marques. Diagnostic, réparation, entretien. Mathelin Plomberie.",
+      "Chaudière en panne à Lagnieu ? Chauffagiste qualifié (BP Génie Climatique), dépannage rapide toutes marques. Diagnostic, réparation. Mathelin Plomberie.",
     intro:
       "Une chaudière en panne à Lagnieu en plein hiver, c'est une urgence. Que ce soit une chaudière gaz murale Saunier Duval ou une chaudière au sol Frisquet, le diagnostic doit être rapide et fiable. Nous rencontrons fréquemment des pannes liées à la pression, au thermostat ou au brûleur dans les maisons du secteur.",
     risques: [
@@ -414,7 +414,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       "Facture de réparation plus élevée si la panne s'aggrave",
     ],
     solution:
-      "Diagnostic complet : lecture du code erreur, contrôle pression circuit, vérification brûleur et sécurités. Pièces courantes en stock (pressostat, sonde, vanne 3 voies, circulateur). Mise en sécurité immédiate si risque CO. Attestation d'entretien fournie si entretien annuel réalisé.",
+      "Diagnostic complet : lecture du code erreur, contrôle pression circuit, vérification brûleur et sécurités. Pièces courantes en stock (pressostat, sonde, vanne 3 voies, circulateur). Mise en sécurité immédiate si risque CO.",
     cta: "Chaudière en panne à Lagnieu ? N'attendez pas le grand froid — appelez maintenant.",
     faq: [
       {
@@ -430,7 +430,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Faites-vous l'entretien annuel de chaudière à Lagnieu ?",
         answer:
-          "Oui. Entretien annuel obligatoire : nettoyage brûleur, vérification tirage, contrôle sécurités, mesure CO. Attestation conforme remise à la fin. Tarif : 90-130 € TTC selon le modèle.",
+          "Non, je n'assure pas l'entretien annuel. J'interviens en dépannage : chaudière en panne, perte de pression, code erreur, radiateurs froids.",
       },
     ],
   },
