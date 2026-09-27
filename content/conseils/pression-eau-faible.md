@@ -2,7 +2,7 @@
 title: Pression d'eau faible — causes possibles
 category: Plomberie
 date: 2025-01-07
-excerpt: Débit faible au robinet ou partout : causes locales, réseau et réglages à vérifier avant remplacement.
+excerpt: "Débit faible au robinet ou partout : causes locales, réseau et réglages à vérifier avant remplacement."
 ---
 
 Un jet d’eau qui faiblit transforme la douche en corvée et rallonge le remplissage de la casserole. Pourtant, « pression faible » ne veut pas toujours dire « canalisation à remplacer » : la cause peut être aussi simple qu’un mousseur entartré ou un flexible écrasé derrière l’évier. La première question à trancher : est-ce un seul point d’eau concerné, ou toute la maison ?

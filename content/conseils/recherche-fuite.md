@@ -2,7 +2,7 @@
 title: Comment détecter une fuite d'eau ?
 category: Fuite
 date: 2025-01-05
-excerpt: Fuite visible ou cachée : signes concrets, tests simples et méthodes pro pour localiser sans tout casser.
+excerpt: "Fuite visible ou cachée : signes concrets, tests simples et méthodes pro pour localiser sans tout casser."
 ---
 
 Une fuite d’eau n’annonce pas toujours son arrivée par un jet visible. Souvent, elle se cache derrière un carrelage, sous un plancher, dans une cloison ou sous le jardin, et ce sont la facture, une tache d’humidité ou une odeur de moisi qui alertent en premier. Savoir lire les signes et réagir tôt limite les dégâts structurels et le gaspillage — dans l’Ain, où beaucoup de maisons reposent sur des réseaux enterrés ou des dalles anciennes, la rapidité du diagnostic compte.

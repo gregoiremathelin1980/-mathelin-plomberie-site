@@ -2,7 +2,7 @@
 title: Fuite au robinet — joint ou cartouche ?
 category: Robinetterie
 date: 2024-12-27
-excerpt: Robinet qui goutte : identifier joint, cartouche ou clapet, et savoir quand réparer plutôt que remplacer.
+excerpt: "Robinet qui goutte : identifier joint, cartouche ou clapet, et savoir quand réparer plutôt que remplacer."
 ---
 
 Une goutte qui tombe toutes les dix secondes, ce n’est pas qu’une nuisance sonore : sur un mois, cela peut représenter plusieurs dizaines de litres d’eau perdus, et une facture qui grimpe sans raison apparente. La bonne nouvelle, c’est qu’un robinet qui fuit au bec ou à la base se répare le plus souvent en changeant une pièce d’usure, sans remplacer tout le corps de robinet.

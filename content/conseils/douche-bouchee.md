@@ -2,7 +2,7 @@
 title: Douche ou baignoire bouchée — que faire ?
 category: Canalisation
 date: 2024-12-17
-excerpt: Douche ou baignoire qui s’écoule mal : causes fréquentes, gestes sûrs et limites du débouchage maison.
+excerpt: "Douche ou baignoire qui s’écoule mal : causes fréquentes, gestes sûrs et limites du débouchage maison."
 ---
 
 L’eau qui stagne autour des pieds sous la douche ou qui met plusieurs minutes à s’évacuer de la baignoire : presque tout le monde connaît. Contrairement aux WC, le coupable est rarement un objet tombé par mégarde — ce sont les cheveux, le savon solidifié et les résidus de shampoing qui forment un tampon dans le siphon ou la canalisation horizontale. Agir tôt évite le débordement et les odeurs de stagnation.

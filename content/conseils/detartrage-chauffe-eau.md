@@ -2,7 +2,7 @@
 title: Détartrer son chauffe-eau pour prolonger sa durée de vie
 category: Chauffe-eau
 date: 2025-01-12
-excerpt: Détartrage chauffe-eau dans l’Ain calcaire : fréquence, bénéfices concrets et signes que l’entretien est urgent.
+excerpt: "Détartrage chauffe-eau dans l’Ain calcaire : fréquence, bénéfices concrets et signes que l’entretien est urgent."
 ---
 
 Le tartre n’est pas qu’une tache blanche sur le robinet : à l’intérieur du ballon, il forme une couche isolante qui force la résistance à surchauffer pour atteindre la même température d’eau. Résultat : facture électrique plus élevée, eau moins chaude, bruits de bouillonnement et panne prématurée. Dans l’Ain, l’eau est souvent modérément à fortement calcaire selon les communes — Pérouges, Meximieux, Ambérieu-en-Bugey inclus — et un chauffe-eau non entretenu perd vite en efficacité.

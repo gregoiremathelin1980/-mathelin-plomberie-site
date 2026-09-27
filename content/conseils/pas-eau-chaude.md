@@ -2,7 +2,7 @@
 title: Plus d'eau chaude — causes possibles
 category: Chauffe-eau
 date: 2024-12-28
-excerpt: Chauffe-eau sans eau chaude : vérifications simples, causes courantes et quand faire intervenir un pro.
+excerpt: "Chauffe-eau sans eau chaude : vérifications simples, causes courantes et quand faire intervenir un pro."
 ---
 
 Ouvrir le robinet et n’avoir que de l’eau froide, alors que le ballon semble alimenté : c’est une situation stressante, surtout en hiver ou avec des enfants à la maison. Avant d’envisager le remplacement complet du chauffe-eau, plusieurs causes courantes — souvent réparables — méritent d’être écartées. L’eau de l’Ain, assez calcaire dans de nombreuses communes, accélère l’encrassement des résistances et des thermostats si l’entretien a été repoussé.

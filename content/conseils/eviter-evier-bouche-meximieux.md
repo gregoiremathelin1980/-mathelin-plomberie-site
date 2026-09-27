@@ -3,7 +3,7 @@ title: Comment éviter un évier bouché à Meximieux
 category: Canalisation
 city: Meximieux
 date: 2025-01-18
-excerpt: Évier bouché à Meximieux : prévention des graisses, gestes utiles et débouchage pro sur la Côtière.
+excerpt: "Évier bouché à Meximieux : prévention des graisses, gestes utiles et débouchage pro sur la Côtière."
 ---
 
 Un évier de cuisine qui s’écoule lentement ou se bloque un dimanche soir, c’est souvent le résultat de semaines de petites négligences : graisses de poêle, marc de café, pelures finement hachées par le broyeur. À Meximieux et sur la Côtière de l’Ain, les maisons de village comme les lotissements récents partagent le même ennemi — la graisse qui solidifie dans le siphon quand l’eau refroidit. Comprendre comment le bouchon se forme permet de l’éviter bien avant l’urgence.

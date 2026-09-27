@@ -2,7 +2,7 @@
 title: Radiateur froid — que faire ?
 category: Radiateurs
 date: 2025-01-01
-excerpt: Radiateur froid en haut ou en partie : purge, air dans le circuit et signes d’embouage à ne pas ignorer.
+excerpt: "Radiateur froid en haut ou en partie : purge, air dans le circuit et signes d’embouage à ne pas ignorer."
 ---
 
 Un radiateur qui reste froid alors que la chaudière tourne, c’est souvent la première plainte quand les premières nuits fraîches arrivent dans l’Ain. Avant de penser au remplacement, la cause est fréquemment bénigne : de l’air piégé en haut du corps de chauffe, un robinet fermé, ou un déséquilibre du circuit. Comprendre si le radiateur est froid partout ou seulement en partie haute oriente directement la solution.

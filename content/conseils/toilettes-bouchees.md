@@ -2,7 +2,7 @@
 title: Toilettes bouchées — prévention et solutions
 category: Canalisation
 date: 2024-12-26
-excerpt: WC bouchés : ventouse, erreurs à éviter et signes qu’il faut un débouchage pro sur Pérouges, Meximieux et l’Ain.
+excerpt: "WC bouchés : ventouse, erreurs à éviter et signes qu’il faut un débouchage pro sur Pérouges, Meximieux et l’Ain."
 ---
 
 Un WC qui ne se vide plus, qui monte trop haut ou qui gargouille au moment de la chasse : c’est le signe le plus courant d’un bouchon dans la colonne ou dans la sortie des toilettes. Avant de paniquer, il faut distinguer un blocage local (souvent récupérable) d’un problème plus profond dans l’évacuation. Dans les maisons anciennes du secteur de Pérouges ou de la plaine de l’Ain, les canalisations en fonte ou en PVC vieillissantes réagissent mal aux mauvais réflexes.

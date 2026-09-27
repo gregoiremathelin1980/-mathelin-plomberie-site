@@ -3,7 +3,7 @@ title: Pourquoi un radiateur chauffe mal à Ambérieu ?
 category: Radiateurs
 city: Ambérieu-en-Bugey
 date: 2025-01-17
-excerpt: Radiateur tiède à Ambérieu-en-Bugey : air, boue, réglage — diagnostic avant remplacement inutile.
+excerpt: "Radiateur tiède à Ambérieu-en-Bugey : air, boue, réglage — diagnostic avant remplacement inutile."
 ---
 
 À Ambérieu-en-Bugey et dans les quartiers pavillonnaires du Bugey, la plainte revient chaque automne : un radiateur — parfois deux — chauffe à peine alors que la chaudière semble tourner normalement. Avant d’investir dans un remplacement, la plupart des cas se résolvent par de l’entretien ciblé : purge d’air, équilibrage du circuit ou désembouage. Le climat du Bugey, avec des hivers plus marqués qu’en plaine, pousse les installations à bout si elles n’ont pas été préparées en amont de la saison.
