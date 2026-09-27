@@ -98,23 +98,17 @@ export default function LocalBusinessSchema({
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "07:00",
-        closes: "19:00",
+        dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
+        opens: "07:30",
+        closes: "17:30",
       },
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Saturday"],
-        opens: "08:00",
-        closes: "17:00",
+        dayOfWeek: ["Wednesday"],
+        opens: "07:30",
+        closes: "18:00",
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Sunday"],
-        opens: "08:00",
-        closes: "12:00",
-        description: "Urgences uniquement",
-      },
+      // Week-end fermé (urgences seulement), aligné sur la fiche Google Business
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
