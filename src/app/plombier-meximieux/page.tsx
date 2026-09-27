@@ -23,19 +23,23 @@ import { getSatelliteTestimonialsFromGeocomptaOrFallback } from "@/lib/satellite
 const SATELLITE_URL = "https://www.plombier-meximieux.fr";
 const AMBERIEU_URL = "https://www.plombier-amberieu.fr";
 
-export const metadata = buildPageMetadata({
-  title: "Plombier Meximieux – Intervention rapide",
-  description:
-    "Plombier à Meximieux : fuite, débouchage, chauffe-eau, chauffage. Artisan à Pérouges (8 min), devis gratuit. Intervention rapide Côtière de l'Ain.",
-  path: "/plombier-meximieux",
-  canonicalAbsolute: `${SATELLITE_URL}/`,
-});
+export const metadata = {
+  ...buildPageMetadata({
+    title: "Plombier Meximieux – Intervention rapide",
+    description:
+      "Plombier à Meximieux : fuite, débouchage, chauffe-eau, chauffage. Artisan à Pérouges (8 min), devis gratuit. Intervention rapide Côtière de l'Ain.",
+    path: "/plombier-meximieux",
+    canonicalAbsolute: `${SATELLITE_URL}/`,
+  }),
+  // Vérification Bing Webmaster Tools
+  verification: { other: { "msvalidate.01": "9472921A5C7E7CC011555F1EB9851796" } },
+};
 
 const FAQ_MEXIMIEUX = [
   {
     question: "Quel est le délai d'intervention pour un plombier à Meximieux ?",
     answer:
-      "Basé à Pérouges, à moins de 10 minutes de Meximieux, j'interviens généralement dans l'heure pour les urgences (fuite, WC bouché, panne de chauffe-eau). Pour les travaux planifiés, un rendez-vous est fixé sous 24 à 48 h.",
+      "Basé à Pérouges, à moins de 10 minutes de Meximieux, j'interviens rapidement, selon le degré d'urgence (fuite, WC bouché, panne de chauffe-eau). Pour les travaux planifiés, un rendez-vous est fixé sous 24 à 48 h.",
   },
   {
     question: "Combien coûte un dépannage plomberie à Meximieux ?",

@@ -189,7 +189,7 @@ export default function ZonesInterventionPage() {
             </h2>
             <p className="mx-auto mt-2 max-w-md text-gray-text">
               Appelez directement pour une intervention rapide ou demandez un
-              devis gratuit en ligne. Réponse sous 2&nbsp;h en semaine.
+              devis gratuit en ligne. Réponse sous 48&nbsp;h.
             </p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
