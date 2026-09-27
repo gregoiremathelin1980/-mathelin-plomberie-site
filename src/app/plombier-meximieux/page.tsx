@@ -32,7 +32,7 @@ export const metadata = {
     canonicalAbsolute: `${SATELLITE_URL}/`,
   }),
   // Vérification Bing Webmaster Tools
-  verification: { other: { "msvalidate.01": "9472921A5C7E7CC011555F1EB9851796" } },
+  verification: { google: "R_D2PA0M0As_t7IEYX3cuJeiwN6U1KLXuWrlHeQaG80", other: { "msvalidate.01": "9472921A5C7E7CC011555F1EB9851796" } },
 };
 
 const FAQ_MEXIMIEUX = [
