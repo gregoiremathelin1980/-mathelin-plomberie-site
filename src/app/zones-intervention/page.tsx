@@ -16,7 +16,7 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 const URGENCES: { slug: string; label: string; desc: string }[] = [
-  { slug: "fuite-eau-meximieux", label: "Fuite d'eau à Meximieux", desc: "Recherche et réparation de fuite, intervention sous 1 h" },
+  { slug: "fuite-eau-meximieux", label: "Fuite d'eau à Meximieux", desc: "Recherche et réparation de fuite, intervention rapide" },
   { slug: "wc-bouche-meximieux", label: "WC bouché à Meximieux", desc: "Débouchage mécanique rapide, ventouse et furet" },
   { slug: "chauffe-eau-panne-meximieux", label: "Chauffe-eau en panne à Meximieux", desc: "Diagnostic et remplacement résistance ou groupe de sécurité" },
   { slug: "chaudiere-panne-meximieux", label: "Chaudière en panne à Meximieux", desc: "Remise en route, purge, pièce détachée en stock" },

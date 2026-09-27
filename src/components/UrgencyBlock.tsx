@@ -16,7 +16,7 @@ export default function UrgencyBlock() {
           Fuite d&apos;eau, chauffe-eau en panne, radiateur qui ne chauffe plus ou canalisation bouchée : intervention rapide autour de Meximieux, Ambérieu, Lagnieu et Pérouges.
         </p>
         <p className="mt-2 text-sm text-white/90">
-          Urgences selon disponibilité.
+          Intervention rapide, selon le degré d&apos;urgence.
         </p>
         <a
           href={`tel:${phoneRaw}`}

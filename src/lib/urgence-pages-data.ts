@@ -17,7 +17,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Fuite d'eau à Meximieux",
     h1: "Fuite d'eau à Meximieux – Intervention en urgence",
     metaDescription:
-      "Fuite d'eau à Meximieux ? Plombier local basé à Pérouges, intervention sous 1h. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie.",
+      "Fuite d'eau à Meximieux ? Plombier local basé à Pérouges, intervention rapide. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie.",
     intro:
       "Une fuite d'eau à Meximieux peut survenir à tout moment : joint usé sous l'évier, tuyau percé dans la salle de bain, canalisation enterrée qui suinte. Dans les maisons des lotissements des Allagniers ou les appartements du centre-ville, une fuite non traitée cause rapidement des dégâts importants.",
     risques: [
@@ -27,7 +27,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       "Risque électrique si l'eau atteint une prise ou un tableau",
     ],
     solution:
-      "J'arrive sous 1 heure à Meximieux depuis ma base de Pérouges. Diagnostic visuel et détection (écoute, caméra si nécessaire), réparation immédiate si possible, ou mise en sécurité + devis pour les travaux plus importants. Pièces courantes en stock dans le véhicule.",
+      "J'interviens rapidement à Meximieux depuis ma base de Pérouges, selon le degré d'urgence. Diagnostic visuel et détection (écoute, caméra si nécessaire), réparation immédiate si possible, ou mise en sécurité + devis pour les travaux plus importants. Pièces courantes en stock dans le véhicule.",
     cta: "Fuite en cours ? Coupez l'eau au compteur et appelez immédiatement.",
     faq: [
       {
@@ -43,7 +43,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Intervenez-vous pour une fuite le dimanche à Meximieux ?",
         answer:
-          "Oui, j'assure les urgences 7j/7 sur Meximieux et les communes voisines. Appelez directement pour vérifier ma disponibilité.",
+          "J'interviens rapidement, selon le degré d'urgence, sur Meximieux et les communes voisines. Appelez directement pour être pris en charge au plus vite.",
       },
     ],
   },
@@ -168,7 +168,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       "Affaiblissement des fondations en cas de fuite enterrée",
     ],
     solution:
-      "Intervention sous 1 h depuis Pérouges via la D1084. Recherche de fuite par écoute, gaz traceur ou caméra thermique selon le cas. Réparation immédiate des fuites accessibles, devis pour les réparations encastrées. Mise en sécurité systématique.",
+      "Intervention rapide depuis Pérouges via la D1084, selon le degré d'urgence. Recherche de fuite par écoute, gaz traceur ou caméra thermique selon le cas. Réparation immédiate des fuites accessibles, devis pour les réparations encastrées. Mise en sécurité systématique.",
     cta: "Fuite à Ambérieu ? Fermez le robinet d'arrêt général et appelez.",
     faq: [
       {
@@ -219,7 +219,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Intervenez-vous le soir pour un WC bouché à Ambérieu ?",
         answer:
-          "Oui, les urgences sanitaires n'attendent pas. J'interviens en soirée et le week-end selon disponibilité. Appelez pour une prise en charge rapide.",
+          "Les urgences sanitaires n'attendent pas : intervention rapide, selon le degré d'urgence. Appelez pour une prise en charge au plus vite.",
       },
     ],
   },
@@ -355,7 +355,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Intervenez-vous le week-end à Lagnieu ?",
         answer:
-          "Oui, j'interviens 7 jours sur 7, y compris samedi et dimanche matin. Les urgences sont traitées en priorité.",
+          "Intervention rapide, selon le degré d'urgence. Appelez directement pour être pris en charge au plus vite.",
       },
       {
         question: "Mon WC se bouche régulièrement à Lagnieu, pourquoi ?",

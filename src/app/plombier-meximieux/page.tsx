@@ -24,7 +24,7 @@ const SATELLITE_URL = "https://www.plombier-meximieux.fr";
 const AMBERIEU_URL = "https://www.plombier-amberieu.fr";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Meximieux – Dépannage 7j/7",
+  title: "Plombier Meximieux – Intervention rapide",
   description:
     "Plombier à Meximieux : fuite, débouchage, chauffe-eau, chauffage. Artisan à Pérouges (8 min), devis gratuit. Intervention rapide Côtière de l'Ain.",
   path: "/plombier-meximieux",
@@ -45,7 +45,7 @@ const FAQ_MEXIMIEUX = [
   {
     question: "Intervenez-vous le week-end et les jours fériés à Meximieux ?",
     answer:
-      "Oui, j'assure un service de dépannage d'urgence 7 jours sur 7 sur Meximieux et les communes voisines (Pérouges, Villieu, Rignieux-le-Franc). Appelez directement pour vérifier ma disponibilité.",
+      "J'interviens rapidement, selon le degré d'urgence, sur Meximieux et les communes voisines (Pérouges, Villieu, Rignieux-le-Franc). Appelez directement pour être pris en charge au plus vite.",
   },
   {
     question: "Quels quartiers de Meximieux desservez-vous ?",
@@ -78,7 +78,7 @@ export default async function PlombierMeximieux() {
       <section className="bg-primary px-4 py-12 text-white sm:px-6 sm:py-14">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-            Plombier à Meximieux – Dépannage rapide 7j/7
+            Plombier à Meximieux – Dépannage rapide
           </h1>
           <p className="mx-auto mt-4 max-w-md text-white/90">
             Artisan local basé à Pérouges, à 8&nbsp;min de Meximieux.
@@ -115,7 +115,7 @@ export default async function PlombierMeximieux() {
 
       <section className="border-b border-gray-200 bg-white px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-6 text-sm text-gray-700">
-          <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention sous 1&nbsp;h</span>
+          <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention rapide</span>
           <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" aria-hidden />Basé à 8&nbsp;min</span>
           <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" aria-hidden />Devis avant travaux</span>
         </div>
@@ -182,7 +182,7 @@ export default async function PlombierMeximieux() {
               </li>
               <li className="flex gap-2">
                 <span className="mt-1 shrink-0 text-primary">✓</span>
-                <span><strong>Réactivité</strong>&nbsp;: disponible 7j/7, intervention sous 1h en urgence, devis transparent avant toute réparation.</span>
+                <span><strong>Réactivité</strong>&nbsp;: intervention rapide, selon le degré d&apos;urgence, devis transparent avant toute réparation.</span>
               </li>
               <li className="flex gap-2">
                 <span className="mt-1 shrink-0 text-primary">✓</span>
@@ -257,7 +257,7 @@ export default async function PlombierMeximieux() {
           { href: `${MAIN_SITE_URL}/urgence/chauffe-eau-panne-meximieux`, label: "Chauffe-eau en panne Meximieux" },
           { href: `${MAIN_SITE_URL}/urgence/chaudiere-panne-meximieux`, label: "Chaudière en panne Meximieux" },
         ]}
-        urgence={{ href: `${MAIN_SITE_URL}/urgence-depannage`, label: "Urgence plomberie 7j/7" }}
+        urgence={{ href: `${MAIN_SITE_URL}/urgence-depannage`, label: "Urgence plomberie" }}
       />
 
       <SatelliteTestimonialsSection

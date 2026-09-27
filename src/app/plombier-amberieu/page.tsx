@@ -24,7 +24,7 @@ const SATELLITE_URL = "https://www.plombier-amberieu.fr";
 const MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
 
 export const metadata = buildPageMetadata({
-  title: "Plombier Ambérieu-en-Bugey – Dépannage 7j/7",
+  title: "Plombier Ambérieu-en-Bugey – Intervention rapide",
   description:
     "Plombier à Ambérieu-en-Bugey : fuite, chaudière, chauffe-eau, débouchage. Artisan à Pérouges, 15 min, 51 avis 5★. Intervention rapide Bugey.",
   path: "/plombier-amberieu",
@@ -35,7 +35,7 @@ const FAQ_AMBERIEU = [
   {
     question: "Intervenez-vous en urgence à Ambérieu-en-Bugey le soir et le week-end ?",
     answer:
-      "Oui. Basé à Pérouges à 15 minutes d'Ambérieu, j'assure les dépannages urgents 7j/7 : fuite d'eau, canalisation bouchée, panne de chauffage. Appelez directement pour une intervention rapide.",
+      "Basé à Pérouges à 15 minutes d'Ambérieu, j'interviens rapidement, selon le degré d'urgence : fuite d'eau, canalisation bouchée, panne de chauffage. Appelez directement pour une intervention rapide.",
   },
   {
     question: "Quel est le prix d'un remplacement de chauffe-eau à Ambérieu ?",
@@ -89,7 +89,7 @@ export default async function PlombierAmberieu() {
       <section className="bg-gradient-to-b from-primary to-primary/90 px-4 py-12 text-white sm:px-6 sm:py-16">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-            Plombier Ambérieu-en-Bugey – Dépannage rapide 7j/7
+            Plombier Ambérieu-en-Bugey – Dépannage rapide
           </h1>
           <p className="mx-auto mt-5 max-w-lg text-lg text-white/90">
             Urgence plomberie ou chauffage dans le Bugey&nbsp;?
@@ -126,7 +126,7 @@ export default async function PlombierAmberieu() {
 
       <section className="border-b border-gray-200 bg-white px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-6 text-sm text-gray-700">
-          <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention sous 1&nbsp;h</span>
+          <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention rapide</span>
           <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" aria-hidden />Basé à 15&nbsp;min</span>
           <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" aria-hidden />Devis avant travaux</span>
         </div>
@@ -327,7 +327,7 @@ export default async function PlombierAmberieu() {
           { href: `${MAIN_SITE_URL}/urgence/chauffe-eau-panne-amberieu`, label: "Chauffe-eau en panne Ambérieu" },
           { href: `${MAIN_SITE_URL}/urgence/chaudiere-panne-amberieu`, label: "Chaudière en panne Ambérieu" },
         ]}
-        urgence={{ href: `${MAIN_SITE_URL}/urgence-depannage`, label: "Urgence plomberie 7j/7" }}
+        urgence={{ href: `${MAIN_SITE_URL}/urgence-depannage`, label: "Urgence plomberie" }}
       />
 
       <SatelliteTestimonialsSection

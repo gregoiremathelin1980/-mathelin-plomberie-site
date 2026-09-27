@@ -7,9 +7,9 @@ import { SATELLITE_AMBERIEU_URL, SATELLITE_MEXIMIEUX_URL } from "@/lib/config";
 import FAQSchema from "@/components/FAQSchema";
 
 export const metadata = buildPageMetadata({
-  title: "Urgence plomberie Ain – Intervention sous 2h",
+  title: "Urgence plomberie Ain – Intervention rapide",
   description:
-    "Urgence plomberie à Ambérieu, Meximieux et Pérouges : fuite, WC bouché, chauffe-eau en panne. Artisan local, intervention sous 2h. Appelez Mathelin Plomberie.",
+    "Urgence plomberie à Ambérieu, Meximieux et Pérouges : fuite, WC bouché, chauffe-eau en panne. Artisan local, intervention rapide selon le degré d'urgence. Appelez Mathelin Plomberie.",
   path: "/urgence-depannage",
 });
 
@@ -17,7 +17,7 @@ const FAQ_URGENCE = [
   {
     question: "Dans quel délai intervenez-vous en urgence ?",
     answer:
-      "Sur Ambérieu-en-Bugey, Meximieux et Pérouges, l’objectif est une intervention sous 2 heures selon la disponibilité. Appelez directement : le délai réel dépend de votre adresse et des interventions déjà en cours.",
+      "Sur Ambérieu-en-Bugey, Meximieux et Pérouges, l’objectif est une intervention rapide, selon le degré d’urgence. Appelez directement : le délai réel dépend de votre adresse et des interventions déjà en cours.",
   },
   {
     question: "Quelles urgences prenez-vous en charge ?",
@@ -27,7 +27,7 @@ const FAQ_URGENCE = [
   {
     question: "Intervenez-vous le week-end et les jours fériés ?",
     answer:
-      "Oui, le dépannage d’urgence est assuré 7 jours sur 7 sur le secteur. Pour une intervention sous 2h, le téléphone reste le canal le plus rapide.",
+      "Intervention rapide sur le secteur, selon le degré d’urgence. Pour être pris en charge au plus vite, le téléphone reste le canal le plus rapide.",
   },
 ];
 
@@ -61,7 +61,7 @@ export default async function UrgenceDepannagePage() {
           <strong>Pérouges</strong>, intervient en urgence sur{" "}
           <strong>Ambérieu-en-Bugey</strong>, <strong>Meximieux</strong>,{" "}
           <strong>Lagnieu</strong> et la plaine de l&apos;Ain.{" "}
-          <strong className="text-primary">Objectif&nbsp;: sous 2&nbsp;h</strong> selon disponibilité.
+          <strong className="text-primary">Intervention rapide</strong>, selon le degré d&apos;urgence.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
@@ -139,7 +139,7 @@ export default async function UrgenceDepannagePage() {
         </section>
 
         <p className="mt-10 text-sm text-gray-text">
-          Les urgences sont traitées selon disponibilité. Pour une intervention sous 2&nbsp;h, appelez
+          Intervention rapide, selon le degré d&apos;urgence. Pour être pris en charge au plus vite, appelez
           directement le {settings.phone}.
         </p>
       </div>

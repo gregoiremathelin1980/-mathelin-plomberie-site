@@ -52,7 +52,7 @@ const AdvicePreview = dynamic(() => import("@/components/AdvicePreview"), {
 });
 
 const HOME_META_DESCRIPTION =
-  "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Dépannage urgence 7j/7, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.";
+  "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.";
 
 export const metadata = buildPageMetadata({
   title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",

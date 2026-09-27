@@ -91,7 +91,7 @@ export default function Footer() {
               Plaine de l&apos;Ain, Côtière, Bugey.
             </p>
             <p className="mt-3 text-sm text-white/90">
-              Intervention rapide 7j/7
+              Intervention rapide, selon le degré d&apos;urgence
             </p>
             <a
               href={`tel:${phoneRaw}`}
