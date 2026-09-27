@@ -1,5 +1,6 @@
 import type { GeocomptaGoogleBusinessProfile } from "@/lib/api/geocomptaSchemas";
 import type { SiteSettings } from "@/lib/content";
+import { MAIN_SITE_URL, SATELLITE_AMBERIEU_URL, SATELLITE_MEXIMIEUX_URL } from "@/lib/config";
 import { GMB_SHARE_URL, resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
 import {
   getGmbUrlForSatellitePages,
@@ -27,15 +28,19 @@ function buildSchema(
       ? "Plombier chauffagiste sur la Côtière et autour de Pérouges : dépannage, fuites, débouchage, chauffe-eau."
       : "Plombier chauffagiste sur la Plaine de l'Ain et le Bugey : dépannage, fuites, débouchage, chauffage.";
 
+  const satelliteUrl =
+    variant === "meximieux" ? `${SATELLITE_MEXIMIEUX_URL}/` : `${SATELLITE_AMBERIEU_URL}/`;
+
+  // Même entité que le LocalBusiness du site principal (@id partagé) : les IA et Google
+  // voient une seule entreprise présente sur trois domaines, pas trois homonymes.
   const base: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "PlumbingService",
+    "@id": `${MAIN_SITE_URL}/#localbusiness`,
+    "@type": ["LocalBusiness", "Plumber"],
     name: settings.company,
     description,
-    url:
-      variant === "meximieux"
-        ? "https://www.plombier-meximieux.fr/"
-        : "https://www.plombier-amberieu.fr/",
+    url: `${MAIN_SITE_URL}/`,
+    mainEntityOfPage: satelliteUrl,
     telephone: phoneToInternationalSchema(settings.phone),
     address: {
       "@type": "PostalAddress",

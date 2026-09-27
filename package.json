@@ -11,7 +11,8 @@
     "validate": "tsx scripts/validateContent.ts",
     "generate-sitemap": "tsx scripts/generateSitemap.ts",
     "fetch-advice-images": "tsx scripts/fetch-advice-images.ts",
-    "optimize-images": "node scripts/optimize-home-images.mjs"
+    "optimize-images": "node scripts/optimize-home-images.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
