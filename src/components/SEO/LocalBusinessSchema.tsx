@@ -95,6 +95,16 @@ export default function LocalBusinessSchema({
       "VMC double flux",
       "Rénovation salle de bain",
     ],
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      name: "Maître Artisan",
+      credentialCategory: "Titre de Maître Artisan",
+      recognizedBy: {
+        "@type": "Organization",
+        name: "Chambre de Métiers et de l'Artisanat",
+        url: "https://www.artisanat.fr/",
+      },
+    },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
