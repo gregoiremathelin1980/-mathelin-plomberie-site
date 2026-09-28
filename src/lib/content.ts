@@ -122,7 +122,7 @@ function readSiteSettingsPath(): string {
 let siteSettingsCache: SiteSettings | null = null;
 
 const defaultSiteSettings: SiteSettings = {
-  company: "Mathelin Plomberie",
+  company: "Mathelin Plomberie Chauffage",
   phone: "04 74 00 00 00",
   email: "contact@mathelin-plomberie.fr",
   address: "57 impasse des Verchères, 01800 Pérouges, France",

@@ -52,7 +52,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "WC bouché à Meximieux",
     h1: "WC bouché à Meximieux – Débouchage rapide",
     metaDescription:
-      "WC bouché à Meximieux ? Débouchage professionnel par plombier local. Intervention rapide, matériel pro. Mathelin Plomberie – Pérouges.",
+      "WC bouché à Meximieux ? Débouchage professionnel par plombier local. Intervention rapide, matériel pro. Mathelin Plomberie Chauffage – Pérouges.",
     intro:
       "Un WC bouché à Meximieux, c'est le quotidien perturbé pour toute la famille. Que ce soit dans un pavillon du quartier de la gare ou un appartement près de la Place de la Grenette, le problème nécessite souvent un débouchage mécanique professionnel quand la ventouse ne suffit plus.",
     risques: [
@@ -299,7 +299,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Fuite d'eau à Lagnieu",
     h1: "Fuite d'eau à Lagnieu – Plombier en urgence",
     metaDescription:
-      "Fuite d'eau à Lagnieu ? Artisan plombier basé à Pérouges, intervention rapide. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie.",
+      "Fuite d'eau à Lagnieu ? Artisan plombier basé à Pérouges, intervention rapide. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie Chauffage.",
     intro:
       "À Lagnieu, les fuites d'eau touchent aussi bien les maisons de la route de Lyon que les appartements du centre bourg. Tuyaux en cuivre vieillissants, raccords PER mal serrés ou canalisations enterrées abîmées par les racines : chaque situation nécessite un diagnostic précis avant réparation.",
     risques: [
@@ -334,7 +334,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "WC bouché à Lagnieu",
     h1: "WC bouché à Lagnieu – Débouchage rapide",
     metaDescription:
-      "WC bouché à Lagnieu ? Débouchage professionnel par plombier local. Furet, hydrocurage, intervention rapide. Mathelin Plomberie – Devis gratuit.",
+      "WC bouché à Lagnieu ? Débouchage professionnel par plombier local. Furet, hydrocurage, intervention rapide. Mathelin Plomberie Chauffage – Devis gratuit.",
     intro:
       "Un WC bouché à Lagnieu, c'est une situation courante que nous rencontrons régulièrement, aussi bien dans les pavillons le long de la route de Lyon que dans les logements du centre bourg. Lingettes, calcaire ou défaut de pente : les causes sont variées mais la solution est toujours rapide avec le bon matériel.",
     risques: [

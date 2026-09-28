@@ -9,7 +9,7 @@ import { phoneToTelHref } from "@/lib/satelliteLandings";
 import { SATELLITE_AMBERIEU_URL, SATELLITE_MEXIMIEUX_URL } from "@/lib/config";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Zones d'intervention plombier dans l'Ain | Mathelin Plomberie",
+  title: "Zones d'intervention plombier dans l'Ain | Mathelin Plomberie Chauffage",
   description:
     "Plombier chauffagiste intervenant à Pérouges, Meximieux, Ambérieu-en-Bugey, Lagnieu, Saint-Vulbas et 15 communes de l'Ain. Dépannage rapide, devis gratuit.",
   path: "/zones-intervention",

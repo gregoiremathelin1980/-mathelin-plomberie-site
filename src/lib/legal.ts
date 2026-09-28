@@ -1,6 +1,6 @@
 /** Identité légale EI Grégoire Mathelin — utilisée pages CGV / mentions légales. */
 export const LEGAL = {
-  tradeName: "Mathelin Plomberie",
+  tradeName: "Mathelin Plomberie Chauffage",
   legalName: "EI Grégoire Mathelin — Entrepreneur Individuel",
   title: "Maître Artisan Plombier Chauffagiste",
   siret: "79006016400023",

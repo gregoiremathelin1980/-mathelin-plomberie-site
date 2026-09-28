@@ -36,9 +36,9 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Mathelin Plomberie | Plombier à Pérouges",
+  title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
   description:
-    "Mathelin Plomberie : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+    "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
   keywords: [
     "plombier Pérouges",
     "plombier Meximieux",
@@ -49,11 +49,11 @@ export const metadata: Metadata = {
     "dépannage plomberie",
   ],
   openGraph: {
-    title: "Mathelin Plomberie | Plombier à Pérouges",
+    title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
     description:
-      "Mathelin Plomberie : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
     type: "website",
-    siteName: "Mathelin Plomberie",
+    siteName: "Mathelin Plomberie Chauffage",
     url: "https://www.mathelin-plomberie.fr/",
   },
   robots: "index, follow",

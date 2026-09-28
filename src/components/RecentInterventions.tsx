@@ -16,7 +16,7 @@ export default function RecentInterventions({ realisations }: RecentIntervention
           Interventions récentes
         </h2>
         <p className="mt-2 text-gray-text">
-          Dernières interventions réalisées par Mathelin Plomberie.
+          Dernières interventions réalisées par Mathelin Plomberie Chauffage.
         </p>
         <ul className="mt-6 space-y-3">
           {realisations.slice(0, 6).map((r) => (

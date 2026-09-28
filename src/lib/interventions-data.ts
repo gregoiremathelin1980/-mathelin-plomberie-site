@@ -161,7 +161,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Fuite WC à Saint-Denis-en-Bugey – Réparation rapide",
     h1: "Réparation fuite WC à Saint-Denis-en-Bugey",
     metaDescription:
-      "Fuite au pied du WC à Saint-Denis-en-Bugey. Remplacement du joint de sortie et fixation. Intervention rapide – Mathelin Plomberie.",
+      "Fuite au pied du WC à Saint-Denis-en-Bugey. Remplacement du joint de sortie et fixation. Intervention rapide – Mathelin Plomberie Chauffage.",
     ville: "Saint-Denis-en-Bugey",
     quartier: "route d'Ambérieu",
     probleme:
@@ -209,7 +209,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Débouchage évier à Rignieux-le-Franc",
     h1: "Débouchage évier bouché à Rignieux-le-Franc",
     metaDescription:
-      "Évier de cuisine bouché à Rignieux-le-Franc. Débouchage au furet et nettoyage du siphon par plombier local – Mathelin Plomberie.",
+      "Évier de cuisine bouché à Rignieux-le-Franc. Débouchage au furet et nettoyage du siphon par plombier local – Mathelin Plomberie Chauffage.",
     ville: "Rignieux-le-Franc",
     quartier: "chemin des Granges",
     probleme:
@@ -225,7 +225,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Purge radiateurs à Douvres – Chauffage optimisé",
     h1: "Purge et équilibrage des radiateurs à Douvres",
     metaDescription:
-      "Purge complète et équilibrage de 8 radiateurs à Douvres. Chauffage homogène retrouvé par chauffagiste local – Mathelin Plomberie.",
+      "Purge complète et équilibrage de 8 radiateurs à Douvres. Chauffage homogène retrouvé par chauffagiste local – Mathelin Plomberie Chauffage.",
     ville: "Douvres",
     quartier: "hameau de l'église",
     probleme:
@@ -241,7 +241,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Remplacement groupe sécurité à Béligneux",
     h1: "Groupe de sécurité remplacé à Béligneux",
     metaDescription:
-      "Remplacement d'un groupe de sécurité qui fuit en continu à Béligneux. Intervention rapide par plombier local – Mathelin Plomberie.",
+      "Remplacement d'un groupe de sécurité qui fuit en continu à Béligneux. Intervention rapide par plombier local – Mathelin Plomberie Chauffage.",
     ville: "Béligneux",
     quartier: "route de Pérouges",
     probleme:

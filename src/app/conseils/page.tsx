@@ -6,7 +6,7 @@ import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 export const revalidate = 3600;
 
 export const metadata = buildPageMetadata({
-  title: "Conseils plomberie & chauffage | Mathelin Plomberie",
+  title: "Conseils plomberie & chauffage | Mathelin Plomberie Chauffage",
   description:
     "Conseils d'entretien et bonnes pratiques. Privilégier la maintenance et la réparation avant le remplacement. Pérouges, Meximieux, Ambérieu, Lagnieu.",
   path: "/conseils",

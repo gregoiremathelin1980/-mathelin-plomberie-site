@@ -8,9 +8,9 @@ import { GMB_SHARE_URL } from "@/lib/gmbSeoDefaults";
 import { getGmbSameAsUrl } from "@/lib/satelliteLandings";
 
 const FOUNDING_DATE = "2013-02-01";
-/** Nom commercial (enseigne INPI, PagesJaunes, Facebook) ; la fiche Google garde LEGAL_ALTERNATE_NAME */
-const BRAND_NAME = "Mathelin Plomberie";
-const LEGAL_ALTERNATE_NAME = "Mathelin Grégoire - Plomberie Chauffage";
+/** Nom exact de la fiche Google Business (choix du client : distinctif, avec le prénom) */
+const BRAND_NAME = "Mathelin Grégoire - Plomberie Chauffage";
+const ALTERNATE_NAMES = ["Mathelin Plomberie Chauffage", "Mathelin Plomberie"];
 const MAIN_URL = SITE_URL;
 const LOGO_IMAGE_URL = `${MAIN_URL}/images/carte-visite.webp`;
 const DEFAULT_CITY = "Pérouges";
@@ -45,12 +45,12 @@ export default function LocalBusinessSchema({
     "@id": `${MAIN_URL}/#localbusiness`,
     "@type": ["LocalBusiness", "Plumber", "HomeAndConstructionBusiness"],
     name: BRAND_NAME,
-    alternateName: Array.from(new Set([LEGAL_ALTERNATE_NAME, "Mathelin Plomberie Chauffage", settings.company].filter((n): n is string => Boolean(n) && n !== BRAND_NAME))),
+    alternateName: Array.from(new Set([...ALTERNATE_NAMES, settings.company].filter((n): n is string => Boolean(n) && n !== BRAND_NAME))),
     image: LOGO_IMAGE_URL,
     logo: LOGO_IMAGE_URL,
     foundingDate: FOUNDING_DATE,
     description:
-      "Mathelin Plomberie : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
     url: MAIN_URL,
     sameAs,
     telephone: phoneToInternational(settings.phone),

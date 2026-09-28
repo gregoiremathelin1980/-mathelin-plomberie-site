@@ -13,7 +13,7 @@ export default function ServiceSchema({
   description,
   serviceType,
   areaServed,
-  provider = "Mathelin Plomberie",
+  provider = "Mathelin Plomberie Chauffage",
 }: ServiceSchemaProps) {
   const schema = {
     "@context": "https://schema.org",

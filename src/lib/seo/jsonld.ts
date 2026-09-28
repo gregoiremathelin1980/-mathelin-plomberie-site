@@ -41,7 +41,7 @@ export function buildServiceSchema(params: {
   areaServed: string[];
   provider?: string;
 }): object {
-  const { name, description, serviceType, areaServed, provider = "Mathelin Plomberie" } = params;
+  const { name, description, serviceType, areaServed, provider = "Mathelin Plomberie Chauffage" } = params;
   return {
     "@context": "https://schema.org",
     "@type": "Service",
