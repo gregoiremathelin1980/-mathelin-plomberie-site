@@ -130,7 +130,7 @@ export default function LocalBusinessSchema({
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Dépannage chauffage", description: "Radiateur froid, chaudière en panne, purge, désembouage" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Robinetterie", description: "Remplacement mitigeur, robinet thermostatique, douchette" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Pompe à chaleur", description: "Installation, remplacement et dépannage de PAC air-eau. Mise en service" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Climatisation", description: "Pose et entretien de climatisation réversible. Split, multisplit, gainable" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Climatisation", description: "Pose de climatisation réversible. Split, multisplit, gainable" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "VMC", description: "Installation et dépannage VMC simple flux, double flux ou hygroréglable" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Rénovation salle de bain", description: "Rénovation complète ou partielle. Plomberie, douche, baignoire, robinetterie" } },
       ],

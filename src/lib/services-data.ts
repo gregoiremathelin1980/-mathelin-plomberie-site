@@ -80,7 +80,7 @@ export const SERVICES = [
   {
     slug: "climatisation",
     title: "Climatisation",
-    description: "Pose et entretien de climatisation réversible. Split, multisplit, gainable. Toutes marques.",
+    description: "Pose de climatisation réversible. Split, multisplit, gainable. Toutes marques.",
     icon: "Thermometer",
   },
   {
