@@ -17,7 +17,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Fuite sous évier à Ambérieu – Intervention rapide",
     h1: "Fuite sous évier réparée à Ambérieu-en-Bugey",
     metaDescription:
-      "Intervention rapide pour une fuite sous évier rue Alexandre Bérard à Ambérieu-en-Bugey. Remplacement siphon et raccords par Mathelin Plomberie.",
+      "Intervention rapide pour une fuite sous évier rue Alexandre Bérard à Ambérieu-en-Bugey. Remplacement siphon et raccords par Mathelin Plomberie Chauffage.",
     ville: "Ambérieu-en-Bugey",
     quartier: "rue Alexandre Bérard",
     probleme:
@@ -33,7 +33,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "WC bouché à Meximieux – Débouchage lotissement des Allagniers",
     h1: "Débouchage WC au lotissement des Allagniers, Meximieux",
     metaDescription:
-      "WC bouché au lotissement des Allagniers à Meximieux. Débouchage mécanique au furet par plombier local. Résultat immédiat – Mathelin Plomberie.",
+      "WC bouché au lotissement des Allagniers à Meximieux. Débouchage mécanique au furet par plombier local. Résultat immédiat – Mathelin Plomberie Chauffage.",
     ville: "Meximieux",
     quartier: "lotissement des Allagniers",
     probleme:
@@ -49,7 +49,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Remplacement chauffe-eau 200L à Lagnieu",
     h1: "Remplacement chauffe-eau 200L à Lagnieu centre",
     metaDescription:
-      "Remplacement d'un chauffe-eau électrique 200L en fin de vie à Lagnieu. Pose neuf Atlantic en demi-journée. Devis gratuit – Mathelin Plomberie.",
+      "Remplacement d'un chauffe-eau électrique 200L en fin de vie à Lagnieu. Pose neuf Atlantic en demi-journée. Devis gratuit – Mathelin Plomberie Chauffage.",
     ville: "Lagnieu",
     quartier: "centre-ville",
     probleme:
@@ -65,7 +65,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Débouchage douche à Pérouges – Maison ancienne",
     h1: "Débouchage douche dans une maison ancienne à Pérouges",
     metaDescription:
-      "Douche bouchée dans une maison ancienne à Pérouges. Débouchage professionnel et nettoyage du siphon. Intervention rapide – Mathelin Plomberie.",
+      "Douche bouchée dans une maison ancienne à Pérouges. Débouchage professionnel et nettoyage du siphon. Intervention rapide – Mathelin Plomberie Chauffage.",
     ville: "Pérouges",
     quartier: "cité médiévale",
     probleme:
@@ -81,7 +81,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Radiateur froid à Saint-Vulbas – Diagnostic chauffage",
     h1: "Radiateur froid réparé en résidence à Saint-Vulbas",
     metaDescription:
-      "Radiateur froid en partie basse dans une résidence à Saint-Vulbas. Purge et désembouage partiel par chauffagiste local – Mathelin Plomberie.",
+      "Radiateur froid en partie basse dans une résidence à Saint-Vulbas. Purge et désembouage partiel par chauffagiste local – Mathelin Plomberie Chauffage.",
     ville: "Saint-Vulbas",
     quartier: "résidence Les Genêts",
     probleme:
@@ -97,7 +97,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Fuite groupe sécurité à Villieu-Loyes-Mollon",
     h1: "Remplacement groupe de sécurité à Villieu-Loyes-Mollon",
     metaDescription:
-      "Fuite permanente au groupe de sécurité d'un chauffe-eau à Villieu-Loyes-Mollon. Remplacement rapide par plombier local – Mathelin Plomberie.",
+      "Fuite permanente au groupe de sécurité d'un chauffe-eau à Villieu-Loyes-Mollon. Remplacement rapide par plombier local – Mathelin Plomberie Chauffage.",
     ville: "Villieu-Loyes-Mollon",
     quartier: "quartier de la mairie",
     probleme:
@@ -113,7 +113,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Perte de pression chaudière à Ambérieu – Quartier Tiret",
     h1: "Perte de pression chaudière résolue – Quartier Tiret, Ambérieu",
     metaDescription:
-      "Chaudière gaz en perte de pression récurrente au quartier Tiret à Ambérieu. Diagnostic et réparation du vase d'expansion – Mathelin Plomberie.",
+      "Chaudière gaz en perte de pression récurrente au quartier Tiret à Ambérieu. Diagnostic et réparation du vase d'expansion – Mathelin Plomberie Chauffage.",
     ville: "Ambérieu-en-Bugey",
     quartier: "quartier Tiret",
     probleme:
@@ -129,7 +129,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Remplacement mitigeur cuisine à Meximieux centre",
     h1: "Remplacement mitigeur cuisine au centre-ville de Meximieux",
     metaDescription:
-      "Mitigeur de cuisine qui fuit remplacé au centre-ville de Meximieux. Pose d'un mitigeur Grohe neuf par plombier local – Mathelin Plomberie.",
+      "Mitigeur de cuisine qui fuit remplacé au centre-ville de Meximieux. Pose d'un mitigeur Grohe neuf par plombier local – Mathelin Plomberie Chauffage.",
     ville: "Meximieux",
     quartier: "centre-ville",
     probleme:
@@ -145,7 +145,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Canalisation principale bouchée à Lagnieu",
     h1: "Débouchage canalisation principale à Lagnieu",
     metaDescription:
-      "Canalisation principale bouchée à Lagnieu. Hydrocurage haute pression et inspection caméra par plombier professionnel – Mathelin Plomberie.",
+      "Canalisation principale bouchée à Lagnieu. Hydrocurage haute pression et inspection caméra par plombier professionnel – Mathelin Plomberie Chauffage.",
     ville: "Lagnieu",
     quartier: "route de Lyon",
     probleme:
@@ -177,7 +177,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Détartrage ballon eau chaude à Château-Gaillard",
     h1: "Détartrage ballon eau chaude à Château-Gaillard",
     metaDescription:
-      "Détartrage d'un ballon d'eau chaude électrique à Château-Gaillard. Nettoyage résistance et cuve, remplacement anode – Mathelin Plomberie.",
+      "Détartrage d'un ballon d'eau chaude électrique à Château-Gaillard. Nettoyage résistance et cuve, remplacement anode – Mathelin Plomberie Chauffage.",
     ville: "Château-Gaillard",
     quartier: "lotissement des Tilleuls",
     probleme:
@@ -193,7 +193,7 @@ export const INTERVENTIONS: InterventionData[] = [
     title: "Thermostat chaudière défaillant à Pont-d'Ain",
     h1: "Remplacement thermostat chaudière à Pont-d'Ain",
     metaDescription:
-      "Thermostat de chaudière défaillant à Pont-d'Ain. Diagnostic et remplacement par chauffagiste qualifié. Confort retrouvé – Mathelin Plomberie.",
+      "Thermostat de chaudière défaillant à Pont-d'Ain. Diagnostic et remplacement par chauffagiste qualifié. Confort retrouvé – Mathelin Plomberie Chauffage.",
     ville: "Pont-d'Ain",
     quartier: "centre bourg",
     probleme:

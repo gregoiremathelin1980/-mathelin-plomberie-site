@@ -25,9 +25,9 @@ const AMBERIEU_URL = "https://www.plombier-amberieu.fr";
 
 export const metadata = {
   ...buildPageMetadata({
-    title: "Plombier Meximieux – Intervention rapide",
+    title: "Plombier Meximieux – Dépannage plomberie rapide",
     description:
-      "Plombier à Meximieux : fuite, débouchage, chauffe-eau, chauffage. Artisan à Pérouges (8 min), devis gratuit. Intervention rapide Côtière de l'Ain.",
+      "Dépannage plomberie à Meximieux : fuite, débouchage, chauffe-eau, chauffage. Artisan à Pérouges (8 min), devis gratuit. Intervention rapide Côtière de l'Ain.",
     path: "/plombier-meximieux",
     canonicalAbsolute: `${SATELLITE_URL}/`,
   }),

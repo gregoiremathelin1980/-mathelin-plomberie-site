@@ -4,7 +4,7 @@ import { LEGAL } from "@/lib/legal";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
-  title: "Conditions Générales de Vente | Mathelin Plomberie",
+  title: "Conditions Générales de Vente | Mathelin Plomberie Chauffage",
   description:
     "Conditions générales de vente d’EI Grégoire Mathelin — plomberie et chauffage. Médiation de la consommation CM2C.",
   path: "/cgv",

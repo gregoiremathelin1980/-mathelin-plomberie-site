@@ -28,7 +28,7 @@ export function getSeoImageFilename(typeTravaux: string, ville: string, ext = "j
 
 /**
  * Génère une balise alt SEO pour une image réalisation.
- * Ex. "Dépannage fuite à Ambérieu - Mathelin Plomberie"
+ * Ex. "Dépannage fuite à Ambérieu - Mathelin Plomberie Chauffage"
  */
 export function getSeoImageAlt(title: string, city?: string): string {
   const base = title?.trim() || "Réalisation plomberie";
@@ -37,9 +37,9 @@ export function getSeoImageAlt(title: string, city?: string): string {
     const lower = base.toLowerCase();
     const cityLower = c.toLowerCase();
     if (lower.includes(cityLower) || lower.includes(`à ${cityLower}`)) {
-      return `${base} - Mathelin Plomberie`;
+      return `${base} - Mathelin Plomberie Chauffage`;
     }
-    return `${base} à ${c} - Mathelin Plomberie`;
+    return `${base} à ${c} - Mathelin Plomberie Chauffage`;
   }
-  return `${base} - Mathelin Plomberie`;
+  return `${base} - Mathelin Plomberie Chauffage`;
 }

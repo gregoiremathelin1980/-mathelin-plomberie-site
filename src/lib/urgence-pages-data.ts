@@ -17,7 +17,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Fuite d'eau à Meximieux",
     h1: "Fuite d'eau à Meximieux – Intervention en urgence",
     metaDescription:
-      "Fuite d'eau à Meximieux ? Plombier local basé à Pérouges, intervention rapide. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie.",
+      "Fuite d'eau à Meximieux ? Plombier local basé à Pérouges, intervention rapide. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie Chauffage.",
     intro:
       "Une fuite d'eau à Meximieux peut survenir à tout moment : joint usé sous l'évier, tuyau percé dans la salle de bain, canalisation enterrée qui suinte. Dans les maisons des lotissements des Allagniers ou les appartements du centre-ville, une fuite non traitée cause rapidement des dégâts importants.",
     risques: [
@@ -87,7 +87,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Chauffe-eau en panne à Meximieux",
     h1: "Chauffe-eau en panne à Meximieux – Dépannage express",
     metaDescription:
-      "Chauffe-eau en panne à Meximieux ? Diagnostic et réparation rapide par artisan local. Remplacement si nécessaire. Devis gratuit – Mathelin Plomberie.",
+      "Chauffe-eau en panne à Meximieux ? Diagnostic et réparation rapide par artisan local. Remplacement si nécessaire. Devis gratuit – Mathelin Plomberie Chauffage.",
     intro:
       "Plus d'eau chaude dans votre maison à Meximieux ? Que ce soit un ballon électrique dans un pavillon de Villieu-Loyes-Mollon ou un chauffe-eau thermodynamique dans une construction récente des Allagniers, la panne de chauffe-eau est une urgence du quotidien – surtout en hiver.",
     risques: [
@@ -122,7 +122,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Chaudière en panne à Meximieux",
     h1: "Chaudière en panne à Meximieux – Dépannage chauffage",
     metaDescription:
-      "Chaudière en panne à Meximieux ? Dépannage rapide par chauffagiste local (BP Génie Climatique). Radiateur froid, pression basse, bruit. Mathelin Plomberie.",
+      "Chaudière en panne à Meximieux ? Dépannage rapide par chauffagiste local (BP Génie Climatique). Radiateur froid, pression basse, bruit. Mathelin Plomberie Chauffage.",
     intro:
       "Votre chaudière ne démarre plus à Meximieux ? En plein hiver sur la Côtière de l'Ain, une panne de chauffage est une vraie urgence. Que ce soit une chaudière gaz murale dans un lotissement ou une chaudière au sol dans une maison ancienne de Pérouges, le diagnostic doit être rapide.",
     risques: [
@@ -193,7 +193,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "WC bouché à Ambérieu-en-Bugey",
     h1: "WC bouché à Ambérieu – Débouchage professionnel",
     metaDescription:
-      "WC bouché à Ambérieu-en-Bugey ? Débouchage au furet ou hydrocurage par plombier local. Intervention rapide, tarif transparent. Mathelin Plomberie.",
+      "WC bouché à Ambérieu-en-Bugey ? Débouchage au furet ou hydrocurage par plombier local. Intervention rapide, tarif transparent. Mathelin Plomberie Chauffage.",
     intro:
       "Un WC bouché à Ambérieu-en-Bugey perturbe toute la maisonnée. Dans les logements du centre-ville ou les maisons de Château-Gaillard, les canalisations anciennes à faible pente sont souvent la cause de bouchons récurrents. Le problème peut venir du WC lui-même ou d'un engorgement plus profond dans la canalisation principale.",
     risques: [
@@ -228,7 +228,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Chauffe-eau en panne à Ambérieu-en-Bugey",
     h1: "Panne de chauffe-eau à Ambérieu – Diagnostic rapide",
     metaDescription:
-      "Chauffe-eau en panne à Ambérieu ? Diagnostic, réparation ou remplacement par artisan chauffagiste local. Devis gratuit, intervention rapide. Mathelin Plomberie.",
+      "Chauffe-eau en panne à Ambérieu ? Diagnostic, réparation ou remplacement par artisan chauffagiste local. Devis gratuit, intervention rapide. Mathelin Plomberie Chauffage.",
     intro:
       "Plus d'eau chaude à Ambérieu-en-Bugey ? Dans les résidences du quartier Saint-Germain comme dans les maisons anciennes de Lagnieu, la panne de chauffe-eau est fréquente — surtout quand le ballon a plus de 10 ans. L'eau calcaire du réseau d'Ambérieu accélère l'entartrage et réduit la durée de vie des résistances.",
     risques: [
@@ -263,7 +263,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Chaudière en panne à Ambérieu-en-Bugey",
     h1: "Chaudière en panne à Ambérieu – Chauffagiste en urgence",
     metaDescription:
-      "Chaudière en panne à Ambérieu-en-Bugey ? Chauffagiste diplômé (BP Génie Climatique), dépannage rapide. Radiateur froid, code erreur, pression. Mathelin Plomberie.",
+      "Chaudière en panne à Ambérieu-en-Bugey ? Chauffagiste diplômé (BP Génie Climatique), dépannage rapide. Radiateur froid, code erreur, pression. Mathelin Plomberie Chauffage.",
     intro:
       "En hiver, une chaudière en panne à Ambérieu-en-Bugey, c'est le froid qui s'installe rapidement — surtout dans les maisons en altitude de Saint-Denis-en-Bugey exposées au vent du Bugey. Chaudière gaz murale ou au sol, le diagnostic doit être confié à un chauffagiste qualifié.",
     risques: [
@@ -369,7 +369,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Chauffe-eau en panne à Lagnieu",
     h1: "Chauffe-eau en panne à Lagnieu – Dépannage rapide",
     metaDescription:
-      "Chauffe-eau en panne à Lagnieu ? Dépannage ou remplacement par plombier local. Ballon électrique, gaz, thermodynamique. Mathelin Plomberie – Intervention rapide.",
+      "Chauffe-eau en panne à Lagnieu ? Dépannage ou remplacement par plombier local. Ballon électrique, gaz, thermodynamique. Mathelin Plomberie Chauffage – Intervention rapide.",
     intro:
       "Plus d'eau chaude à Lagnieu ? C'est un cas fréquent que nous rencontrons dans les maisons des années 80-90 de la route de Lyon, où les ballons électriques d'origine arrivent en fin de vie. Résistance entartrée, thermostat HS ou cuve percée : un diagnostic rapide permet de décider entre réparation et remplacement.",
     risques: [
@@ -404,7 +404,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     title: "Chaudière en panne à Lagnieu",
     h1: "Chaudière en panne à Lagnieu – Chauffagiste en urgence",
     metaDescription:
-      "Chaudière en panne à Lagnieu ? Chauffagiste qualifié (BP Génie Climatique), dépannage rapide toutes marques. Diagnostic, réparation. Mathelin Plomberie.",
+      "Chaudière en panne à Lagnieu ? Chauffagiste qualifié (BP Génie Climatique), dépannage rapide toutes marques. Diagnostic, réparation. Mathelin Plomberie Chauffage.",
     intro:
       "Une chaudière en panne à Lagnieu en plein hiver, c'est une urgence. Que ce soit une chaudière gaz murale Saunier Duval ou une chaudière au sol Frisquet, le diagnostic doit être rapide et fiable. Nous rencontrons fréquemment des pannes liées à la pression, au thermostat ou au brûleur dans les maisons du secteur.",
     risques: [

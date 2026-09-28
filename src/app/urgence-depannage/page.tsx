@@ -9,7 +9,7 @@ import FAQSchema from "@/components/FAQSchema";
 export const metadata = buildPageMetadata({
   title: "Urgence plomberie Ain – Intervention rapide",
   description:
-    "Urgence plomberie à Ambérieu, Meximieux et Pérouges : fuite, WC bouché, chauffe-eau en panne. Artisan local, intervention rapide selon le degré d'urgence. Appelez Mathelin Plomberie.",
+    "Urgence plomberie à Ambérieu, Meximieux et Pérouges : fuite, WC bouché, chauffe-eau en panne. Artisan local, intervention rapide selon le degré d'urgence. Appelez Mathelin Plomberie Chauffage.",
   path: "/urgence-depannage",
 });
 
