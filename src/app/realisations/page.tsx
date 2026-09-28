@@ -6,7 +6,7 @@ import { getPhotoUrl } from "@/lib/config";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
-  title: "Réalisations | Mathelin Plomberie Chauffage",
+  title: "Réalisations | Mathelin Plomberie",
   description:
     "Découvrez nos réalisations en plomberie et chauffage à Pérouges, Meximieux, Ambérieu, Lagnieu.",
   path: "/realisations",

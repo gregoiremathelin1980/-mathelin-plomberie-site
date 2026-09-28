@@ -4,7 +4,7 @@ import { getBlogPosts } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
-  title: "Blog | Mathelin Plomberie Chauffage",
+  title: "Blog | Mathelin Plomberie",
   description:
     "Conseils plomberie, chauffage et actualités. Artisan local à Pérouges, Meximieux, Ambérieu, Lagnieu.",
   path: "/blog",

@@ -5,7 +5,7 @@ import { SERVICES } from "@/lib/services-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
-  title: "Services | Mathelin Plomberie Chauffage",
+  title: "Services | Mathelin Plomberie",
   description:
     "Débouchage canalisation, réparation fuite, robinetterie, chauffe-eau, radiateurs, plancher chauffant, chaudière, WC. Plombier à Pérouges, Meximieux, Ambérieu.",
   path: "/services",

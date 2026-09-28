@@ -3,7 +3,7 @@ import AdminGuard from "./AdminGuard";
 
 export const metadata: Metadata = {
   robots: "noindex, nofollow",
-  title: "Admin | Mathelin Plomberie Chauffage",
+  title: "Admin | Mathelin Plomberie",
 };
 
 export default function AdminLayout({

@@ -3,7 +3,7 @@ import { getPricing, getSiteSettings } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
-  title: "Devis | Mathelin Plomberie Chauffage",
+  title: "Devis | Mathelin Plomberie",
   description:
     "Demandez une estimation pour votre intervention plomberie ou chauffage. Pérouges, Meximieux, Ambérieu, Saint-Vulbas, Lagnieu.",
   path: "/devis",

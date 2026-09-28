@@ -31,7 +31,7 @@ export function useSettings(): SiteSettings {
   };
   if (!ctx) {
     return {
-      company: "Mathelin Plomberie Chauffage",
+      company: "Mathelin Plomberie",
       phone: "04 74 00 00 00",
       email: "contact@mathelin-plomberie.fr",
       address: "57 impasse des Verchères, 01800 Pérouges, France",

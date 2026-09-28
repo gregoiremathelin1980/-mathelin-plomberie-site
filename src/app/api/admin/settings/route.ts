@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const existing = getSiteSettings();
     const settings: SiteSettings = {
-      company: body.company ?? existing.company ?? "Mathelin Plomberie Chauffage",
+      company: body.company ?? existing.company ?? "Mathelin Plomberie",
       phone: body.phone ?? existing.phone ?? "",
       email: body.email ?? existing.email ?? "",
       address: body.address ?? existing.address ?? "",

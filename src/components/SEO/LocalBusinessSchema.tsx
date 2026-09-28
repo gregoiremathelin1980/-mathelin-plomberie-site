@@ -8,8 +8,8 @@ import { GMB_SHARE_URL } from "@/lib/gmbSeoDefaults";
 import { getGmbSameAsUrl } from "@/lib/satelliteLandings";
 
 const FOUNDING_DATE = "2013-02-01";
-/** Nom aligné fiche Google Business / balises titre & Open Graph */
-const BRAND_NAME = "Mathelin Plomberie Chauffage";
+/** Nom commercial (enseigne INPI, PagesJaunes, Facebook) ; la fiche Google garde LEGAL_ALTERNATE_NAME */
+const BRAND_NAME = "Mathelin Plomberie";
 const LEGAL_ALTERNATE_NAME = "Mathelin Grégoire - Plomberie Chauffage";
 const MAIN_URL = SITE_URL;
 const LOGO_IMAGE_URL = `${MAIN_URL}/images/carte-visite.webp`;
@@ -45,12 +45,12 @@ export default function LocalBusinessSchema({
     "@id": `${MAIN_URL}/#localbusiness`,
     "@type": ["LocalBusiness", "Plumber", "HomeAndConstructionBusiness"],
     name: BRAND_NAME,
-    alternateName: [LEGAL_ALTERNATE_NAME, settings.company].filter(Boolean),
+    alternateName: Array.from(new Set([LEGAL_ALTERNATE_NAME, "Mathelin Plomberie Chauffage", settings.company].filter((n): n is string => Boolean(n) && n !== BRAND_NAME))),
     image: LOGO_IMAGE_URL,
     logo: LOGO_IMAGE_URL,
     foundingDate: FOUNDING_DATE,
     description:
-      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+      "Mathelin Plomberie : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
     url: MAIN_URL,
     sameAs,
     telephone: phoneToInternational(settings.phone),

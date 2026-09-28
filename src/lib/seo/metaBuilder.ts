@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/config";
 
-const SITE_NAME = "Mathelin Plomberie Chauffage";
+const SITE_NAME = "Mathelin Plomberie";
 
 export interface PageMetaInput {
   title: string;

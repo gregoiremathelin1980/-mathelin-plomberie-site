@@ -131,7 +131,7 @@ export default function SiteSettingsPage() {
               setSettings((s) => ({ ...s, entreprise: e.target.value }))
             }
             className="mt-2"
-            placeholder="Mathelin Plomberie Chauffage"
+            placeholder="Mathelin Plomberie"
           />
         </div>
         <div>

@@ -48,7 +48,7 @@ export default function SatelliteLocalFooter({
             href="https://www.mathelin-plomberie.fr/"
             className="font-medium text-primary underline-offset-2 hover:underline"
           >
-            Mathelin Plomberie Chauffage
+            Mathelin Plomberie
           </Link>{" "}
           — plombier à Pérouges, site principal.
         </p>

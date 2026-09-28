@@ -252,7 +252,7 @@ export default async function PlombierAmberieu() {
                 <li>→ Un <strong>temps de trajet court</strong> (Pérouges → Ambérieu en 15&nbsp;min via la D1084)</li>
                 <li>→ Une <strong>connaissance du bâti local</strong>&nbsp;: maisons de village en pierre, lotissements années 80, résidences récentes</li>
                 <li>→ Un <strong>interlocuteur unique</strong>&nbsp;: c&apos;est moi qui diagnostique, répare et facture</li>
-                <li>→ Des <strong>51 avis 5&nbsp;étoiles</strong> sur Google, vérifiables sur la fiche Mathelin Plomberie Chauffage</li>
+                <li>→ Des <strong>51 avis 5&nbsp;étoiles</strong> sur Google, vérifiables sur la fiche Mathelin Plomberie</li>
               </ul>
             </div>
           </section>

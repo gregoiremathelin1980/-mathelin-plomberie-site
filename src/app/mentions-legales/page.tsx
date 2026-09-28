@@ -4,9 +4,9 @@ import { LEGAL } from "@/lib/legal";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
-  title: "Mentions légales | Mathelin Plomberie Chauffage",
+  title: "Mentions légales | Mathelin Plomberie",
   description:
-    "Mentions légales d’EI Grégoire Mathelin — Mathelin Plomberie Chauffage. Médiation de la consommation CM2C.",
+    "Mentions légales d’EI Grégoire Mathelin — Mathelin Plomberie. Médiation de la consommation CM2C.",
   path: "/mentions-legales",
 });
 
