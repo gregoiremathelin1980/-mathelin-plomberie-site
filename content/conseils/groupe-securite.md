@@ -7,4 +7,4 @@ excerpt: Le groupe de sécurité protège le ballon contre la surpression. Un é
 
 Le groupe de sécurité (au-dessus du ballon) assure la sécurité en cas de surpression et permet la vidange. Un léger écoulement d’eau lors du chauffage est normal (dilatation). En revanche, un écoulement continu en dehors du chauffage signe souvent un groupe défaillant ou une surpression.
 
-**À faire :** Faire remplacer le groupe de sécurité par un professionnel (pièce peu coûteuse). Ne pas le boucher : c’est un organe de sécurité. Si la pression du réseau est trop forte, un réducteur de pression en amont peut être nécessaire.
+**À faire :** Faire remplacer le groupe de sécurité par un professionnel (pièce peu coûteuse). Ne pas le boucher : c’est un organe de sécurité. Si la pression du réseau est trop forte, un réducteur de pression en amont peut être nécessaire (voir [pression d'eau trop forte](/conseils/pression-eau-trop-forte)).
