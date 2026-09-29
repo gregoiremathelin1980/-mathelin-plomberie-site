@@ -44,6 +44,7 @@ export async function generateMetadata({
       description: api.seoDescription ?? api.metaDescription ?? api.excerpt ?? api.title,
       path: `/conseils/${slug}`,
       type: "article",
+      image: resolveConseilImage(slug, api.image),
       robots: indexable ? "index, follow" : "noindex, follow",
     });
   }
@@ -56,6 +57,7 @@ export async function generateMetadata({
     description: conseil.excerpt ?? conseil.title,
     path: `/conseils/${slug}`,
     type: "article",
+    image: resolveConseilImage(slug, conseil.image),
     robots: indexable ? "index, follow" : "noindex, follow",
   });
 }
