@@ -49,7 +49,7 @@ Sans photo réelle → pas d’image (politique zéro stock / Unsplash).
 13. fuite-cachee
 14. fuite-robinet
 15. groupe-securite
-16. isolation-tuyaux
+16. isolation-tuyaux (fusionné dans protection-gel)
 17. mousseur-robinet
 18. pas-eau-chaude
 19. pression-eau-faible

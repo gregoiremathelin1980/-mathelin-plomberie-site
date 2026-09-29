@@ -18,6 +18,7 @@ const nextConfig = {
     return [
       { source: "/estimate", destination: "/devis", permanent: true },
       { source: "/projects", destination: "/realisations", permanent: true },
+      { source: "/conseils/isolation-tuyaux", destination: "/conseils/protection-gel", permanent: true },
     ];
   },
   images: {
