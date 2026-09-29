@@ -5,11 +5,11 @@
   "email": "contact@mathelin-plomberie.fr",
   "zone": "",
   "messageUrgence": "Intervention rapide plomberie et chauffage dans le Bugey et la Côtière.",
-  "showAdviceImages": false,
+  "showAdviceImages": true,
   "displaySettings": {
     "showReviews": true,
     "showAdvice": true,
-    "showAdviceImages": false,
+    "showAdviceImages": true,
     "showEstimator": true,
     "showRecentInterventions": true
   }
