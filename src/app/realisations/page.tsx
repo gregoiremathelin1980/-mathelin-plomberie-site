@@ -1,5 +1,5 @@
 import { FolderOpen } from "lucide-react";
-import ProjectGallery from "@/components/ProjectGallery";
+import ShuffledProjectGallery from "@/components/ShuffledProjectGallery";
 import { getRealisations } from "@/lib/content";
 import { getRealisationsFromSiteData } from "@/lib/site-data";
 import { getPhotoUrl } from "@/lib/config";
@@ -46,7 +46,7 @@ export default function RealisationsPage() {
             </p>
           </div>
         </div>
-        <ProjectGallery realisations={realisations} standalone />
+        <ShuffledProjectGallery realisations={realisations} standalone />
       </div>
     </div>
   );
