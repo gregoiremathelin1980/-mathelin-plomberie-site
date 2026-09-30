@@ -53,6 +53,7 @@ export function isNextImageRemoteHostAllowed(absoluteUrl: string): boolean {
       .filter(Boolean);
     const allowed = new Set<string>([
       "photos.mathelin-plomberie.fr",
+      "www.mathelin-plomberie.fr",
       "images.unsplash.com",
       ...geocomptaHosts,
     ]);
