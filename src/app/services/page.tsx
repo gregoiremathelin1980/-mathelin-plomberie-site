@@ -24,7 +24,7 @@ export default function ServicesPage() {
               Nos services
             </h1>
             <p className="mt-1 text-gray-text">
-              Plomberie et chauffage : dépannage, installation et entretien dans l’Ain.
+              Plomberie et chauffage : dépannage et installation dans l’Ain.
             </p>
           </div>
         </div>

@@ -32,7 +32,7 @@ export const SERVICES = [
   {
     slug: "depannage-chauffe-eau",
     title: "Dépannage chauffe-eau",
-    description: "Dépannage et entretien de chauffe-eau. Pas d'eau chaude, fuite, diagnostic.",
+    description: "Dépannage et détartrage de chauffe-eau. Pas d'eau chaude, fuite, diagnostic.",
     icon: "Flame",
   },
   {

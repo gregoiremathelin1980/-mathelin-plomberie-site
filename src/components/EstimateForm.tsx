@@ -42,7 +42,7 @@ const STEP2_BY_TYPE: Record<string, { value: string; label: string }[]> = {
     { value: "froid", label: "Radiateur froid" },
     { value: "bruit", label: "Bruit / coups" },
     { value: "fuite", label: "Fuite radiateur" },
-    { value: "purge", label: "Purge / désembouage" },
+    { value: "purge", label: "Purge de radiateur" },
     { value: "autre", label: "Autre" },
   ],
   robinet: [
