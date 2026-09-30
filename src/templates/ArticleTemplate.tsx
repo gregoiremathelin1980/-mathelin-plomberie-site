@@ -3,7 +3,6 @@ import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { formatDateFR } from "@/lib/date";
 import RandomConseilImage from "@/components/RandomConseilImage";
 import LocalProofBlock from "@/components/LocalProofBlock";
 import type { RecentInterventionEntry } from "@/lib/site-data";
@@ -77,7 +76,7 @@ export default function ArticleTemplate({
           </h1>
           {(date || city) && (
             <p className="mt-2 text-sm text-gray-text">
-              {[date ? formatDateFR(date) : "", city].filter(Boolean).join(" · ")}
+              {[city].filter(Boolean).join(" · ")}
             </p>
           )}
         </header>

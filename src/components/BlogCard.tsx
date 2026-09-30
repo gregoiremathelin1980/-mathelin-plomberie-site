@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { formatDateFR } from "@/lib/date";
 import { ADVICE_IMAGE_FALLBACK } from "@/lib/advice-images";
 import { useSettings } from "@/contexts/SettingsContext";
 import Image from "next/image";
@@ -31,7 +30,7 @@ export default function BlogCard({ post, baseHref = "/blog" }: BlogCardProps) {
   const settings = useSettings();
   const excerpt = post.excerpt ?? post.shortDescription;
   const href = post.slug ? `${baseHref}/${post.slug}` : undefined;
-  const displayDate = post.date ? formatDateFR(post.date) : undefined;
+  const displayDate: string | undefined = undefined; // pas de date affichée (choix éditorial)
   const altText = post.imageAlt ?? post.title;
   const isConseils = baseHref === "/conseils";
   const showAdviceImages = settings?.show_advice_images !== false;
