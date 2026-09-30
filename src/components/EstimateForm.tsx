@@ -43,6 +43,7 @@ const STEP2_BY_TYPE: Record<string, { value: string; label: string }[]> = {
     { value: "bruit", label: "Bruit / coups" },
     { value: "fuite", label: "Fuite radiateur" },
     { value: "purge", label: "Purge de radiateur" },
+    { value: "desembouage", label: "Désembouage du chauffage" },
     { value: "autre", label: "Autre" },
   ],
   robinet: [
@@ -79,6 +80,7 @@ const PRICE_RANGES: Record<string, { min: number; max: number; label?: string }>
   "radiateur-bruit": { min: 90, max: 180, label: "Purge ou réglage radiateur" },
   "radiateur-fuite": { min: 90, max: 200, label: "Fuite robinet / fuite simple" },
   "radiateur-purge": { min: 90, max: 180, label: "Purge ou réglage radiateur" },
+  "radiateur-desembouage": { min: 300, max: 900, label: "Désembouage du chauffage" },
   "radiateur-autre": { min: 300, max: 900, label: "Désembouage chauffage" },
   "robinet-fuite": { min: 90, max: 200, label: "Fuite robinet / fuite simple" },
   "robinet-pression": { min: 90, max: 180, label: "Problème de pression" },
@@ -156,6 +158,8 @@ export default function EstimateForm({
 
   const dynamicEstimate = useMemo(() => {
     if (!pricing || isOther || !problemType) return null;
+    // Désembouage : fourchette fixe (prix selon le nombre de radiateurs), pas de calcul dynamique
+    if (priceKey === "radiateur-desembouage") return null;
     const hasDetail = detailOptions.length <= 1 || problemDetail;
     return estimatePrice(pricing, {
       type_intervention: problemType,
@@ -163,7 +167,7 @@ export default function EstimateForm({
       situation: step >= 3 ? situation : "",
       ville: step >= 4 ? city : "",
     });
-  }, [pricing, isOther, problemType, problemDetail, situation, city, step, detailOptions.length]);
+  }, [pricing, isOther, problemType, problemDetail, priceKey, situation, city, step, detailOptions.length]);
 
   const canGoNext =
     (step === 1 && problemType && !isOther) ||

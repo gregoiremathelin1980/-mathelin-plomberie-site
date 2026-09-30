@@ -17,6 +17,7 @@
   "radiateur-bruit": { "min": 120, "max": 200, "label": "Bruit radiateur / purge" },
   "radiateur-fuite": { "min": 120, "max": 210, "label": "Fuite radiateur" },
   "radiateur-purge": { "min": 120, "max": 220, "label": "Purge de radiateur" },
+  "radiateur-desembouage": { "min": 300, "max": 900, "label": "Désembouage du chauffage" },
   "radiateur-autre": { "min": 120, "max": 240, "label": "Radiateur" },
   "robinet-fuite": { "min": 120, "max": 210, "label": "Réparation robinet" },
   "robinet-pression": { "min": 120, "max": 200, "label": "Problème de pression" },
