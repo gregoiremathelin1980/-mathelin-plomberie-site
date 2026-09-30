@@ -12,6 +12,7 @@
     "generate-sitemap": "tsx scripts/generateSitemap.ts",
     "fetch-advice-images": "tsx scripts/fetch-advice-images.ts",
     "optimize-images": "node scripts/optimize-home-images.mjs",
+    "carte-visite": "node scripts/generate-carte-visite.mjs",
     "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {

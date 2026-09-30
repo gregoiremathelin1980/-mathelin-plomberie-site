@@ -36,3 +36,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Fichiers de travail locaux (maquettes, carte de visite, notes, logs)
+/debug.log
+/visu-greg.jpg
+/public/maquette*.html
+/public/design/
+/public/images/carte-visite-*
+/docs/PROMPT_REPRISE_*
+/.claude/
