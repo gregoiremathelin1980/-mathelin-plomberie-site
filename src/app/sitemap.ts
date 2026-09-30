@@ -4,8 +4,8 @@ import { headers } from "next/headers";
 import { getRealisations, getBlogPosts, getConseils } from "@/lib/content";
 import { getDepannageSlugs } from "@/lib/site-data";
 import { SERVICES } from "@/lib/services-data";
+import { COMMUNES } from "@/lib/communes";
 import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
-import { INTERVENTIONS } from "@/lib/interventions-data";
 import { getCachedGeocomptaPPageSlugs, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
 import { isConseilIndexable } from "@/lib/seo/conseilsIndexPolicy";
 
@@ -68,6 +68,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.6,
+  }));
+
+  const communeRoutes: MetadataRoute.Sitemap = COMMUNES.map((c) => ({
+    url: `${SITE_URL}/plombier/${c.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
   }));
 
   const serviceRoutes: MetadataRoute.Sitemap = SERVICES.map((s) => ({
@@ -152,19 +159,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const interventionRoutes: MetadataRoute.Sitemap = INTERVENTIONS.map((i) => ({
-    url: `${SITE_URL}/interventions/${i.slug}`,
-    lastModified: new Date(i.date),
-    changeFrequency: "daily" as const,
-    priority: 0.6,
-  }));
-
   return [
     ...staticRoutes,
     ...depannageRoutes,
+    ...communeRoutes,
     ...serviceRoutes,
     ...urgenceRoutes,
-    ...interventionRoutes,
     ...realisationRoutes,
     ...blogRoutes,
     ...conseilsRoutes,

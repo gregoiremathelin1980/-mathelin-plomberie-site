@@ -8,6 +8,8 @@ import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestim
 import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
 import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
 import FAQSchema from "@/components/FAQSchema";
+import LocalRealisations from "@/components/LocalRealisations";
+import { getRealisationsForCities } from "@/lib/communes";
 import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
@@ -44,7 +46,7 @@ const FAQ_MEXIMIEUX = [
   {
     question: "Combien coûte un dépannage plomberie à Meximieux ?",
     answer:
-      "Le tarif dépend de la nature de l'intervention. Un diagnostic de fuite démarre à 60 € TTC. Chaque intervention fait l'objet d'un devis clair avant travaux — pas de surprise sur la facture.",
+      "Le tarif dépend de la nature de l'intervention. Un diagnostic de fuite démarre à partir de 120 € TTC (prix indicatif, variable selon la configuration). Chaque intervention fait l'objet d'un devis clair avant travaux — pas de surprise sur la facture.",
   },
   {
     question: "Intervenez-vous le week-end et les jours fériés à Meximieux ?",
@@ -52,9 +54,9 @@ const FAQ_MEXIMIEUX = [
       "J'interviens rapidement, selon le degré d'urgence, sur Meximieux et les communes voisines (Pérouges, Villieu, Rignieux-le-Franc). Appelez directement pour être pris en charge au plus vite.",
   },
   {
-    question: "Quels quartiers de Meximieux desservez-vous ?",
+    question: "Desservez-vous tout Meximieux ?",
     answer:
-      "J'interviens sur tout Meximieux : centre-ville (Place de la Grenette, rue de Genève), lotissements des Allagniers, quartier de la gare, et les hameaux environnants vers Villieu-Loyes-Mollon et Pérouges.",
+      "J'interviens sur tout Meximieux : centre-ville, lotissements, et les hameaux environnants vers Villieu-Loyes-Mollon et Pérouges.",
   },
 ];
 
@@ -129,27 +131,17 @@ export default async function PlombierMeximieux() {
         <div className="mx-auto max-w-2xl space-y-12">
           <section>
             <p className="text-center leading-relaxed text-gray-text">
-              Vous habitez <strong>Meximieux</strong>, le <strong>quartier de la gare</strong>, les{" "}
-              <strong>lotissements des Allagniers</strong> ou le <strong>centre-ville près de la Place de la Grenette</strong>&nbsp;?
+              Vous habitez <strong>Meximieux</strong>, en <strong>centre-ville</strong> ou en <strong>lotissement</strong>&nbsp;?
               Grégoire Mathelin, Maître Artisan Plombier Chauffagiste (BP Génie Climatique), intervient
               rapidement depuis sa base de <strong>Pérouges (01800)</strong>, 57 impasse des Verchères.
               Maisons individuelles, appartements en copropriété ou pavillons de lotissement&nbsp;: chaque habitat de la Côtière a ses spécificités.
             </p>
           </section>
 
-          <section>
-            <h2 className="text-xl font-semibold text-primary">Intervention récente à Meximieux</h2>
-            <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-5">
-              <p className="leading-relaxed text-gray-text">
-                <strong>Fuite sous évier</strong> dans un pavillon du quartier des Allagniers.
-                Le joint du siphon était fissuré, provoquant une infiltration sous le meuble de cuisine.
-                Diagnostic en 15&nbsp;minutes, remplacement du siphon complet et test d&apos;étanchéité.
-              </p>
-              <p className="mt-2 text-sm font-medium text-primary">
-                Résultat&nbsp;: fuite stoppée, sol séché, facture de 85&nbsp;€ TTC — le client a pu reprendre sa soirée tranquille.
-              </p>
-            </div>
-          </section>
+          <LocalRealisations
+            title="Nos réalisations à Meximieux et alentours"
+            items={getRealisationsForCities(["Meximieux", "Pérouges", "Béligneux", "Rignieux-le-Franc"])}
+          />
 
           <section>
             <h2 className="text-xl font-semibold text-primary">Nos interventions sur la Côtière</h2>

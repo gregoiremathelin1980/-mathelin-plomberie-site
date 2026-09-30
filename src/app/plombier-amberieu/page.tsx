@@ -8,6 +8,8 @@ import SatelliteTestimonialsSection from "@/components/satellite/SatelliteTestim
 import SatelliteStickyCall from "@/components/satellite/SatelliteStickyCall";
 import SatelliteLocalFooter from "@/components/satellite/SatelliteLocalFooter";
 import FAQSchema from "@/components/FAQSchema";
+import LocalRealisations from "@/components/LocalRealisations";
+import { getRealisationsForCities } from "@/lib/communes";
 import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
@@ -40,7 +42,7 @@ const FAQ_AMBERIEU = [
   {
     question: "Quel est le prix d'un remplacement de chauffe-eau à Ambérieu ?",
     answer:
-      "Le tarif varie selon le type (électrique, thermodynamique) et la capacité. Comptez entre 600 et 1 500 € TTC pose incluse. Un devis détaillé est systématiquement fourni avant intervention — sans engagement.",
+      "Le tarif varie selon le type (électrique, thermodynamique) et la capacité. Comptez entre 800 et 1 500 € TTC pose incluse, selon le modèle et la configuration. Un devis détaillé est systématiquement fourni avant intervention — sans engagement.",
   },
   {
     question: "Desservez-vous Lagnieu et Saint-Vulbas depuis Ambérieu ?",
@@ -58,9 +60,9 @@ const FAQ_AMBERIEU = [
       "En général oui sur le secteur : pas d'intermédiaire, devis avant travaux, pièces courantes en véhicule. Les plateformes facturent souvent un forfait urgence élevé + déplacement. Ici vous parlez directement à l'artisan qui intervient.",
   },
   {
-    question: "Intervenez-vous sur Tiret, Saint-Germain et le centre d'Ambérieu ?",
+    question: "Intervenez-vous sur tout Ambérieu-en-Bugey ?",
     answer:
-      "Oui, sur tout Ambérieu-en-Bugey : centre (rue Alexandre Bérard), Tiret, Saint-Germain, ainsi que Saint-Denis-en-Bugey. Le trajet depuis Pérouges via la D1084 reste court.",
+      "Oui, sur tout Ambérieu-en-Bugey, du centre-ville aux quartiers résidentiels, ainsi que Saint-Denis-en-Bugey. Le trajet depuis Pérouges via la D1084 reste court.",
   },
 ];
 
@@ -139,9 +141,7 @@ export default async function PlombierAmberieu() {
           <section>
             <p className="text-center leading-relaxed text-gray-text">
               <strong>Ambérieu-en-Bugey</strong>, entre la <strong>Plaine de l&apos;Ain</strong> et les premiers reliefs du{" "}
-              <strong>Bugey</strong>, concentre un parc immobilier varié&nbsp;: immeubles du centre-ville autour de la{" "}
-              <strong>rue Alexandre Bérard</strong>, pavillons des quartiers résidentiels de <strong>Tiret</strong> et{" "}
-              <strong>Saint-Germain</strong>, maisons anciennes de <strong>Saint-Denis-en-Bugey</strong>.
+              <strong>Bugey</strong>, concentre un parc immobilier varié&nbsp;: immeubles du centre-ville, pavillons des quartiers résidentiels, maisons anciennes de <strong>Saint-Denis-en-Bugey</strong>.
               Chaque type d&apos;habitat a ses problématiques plomberie&nbsp;: tuyaux en plomb dans l&apos;ancien,
               pression réseau variable en altitude, gel hivernal sur les canalisations exposées.
             </p>
@@ -169,40 +169,22 @@ export default async function PlombierAmberieu() {
             </div>
           </section>
 
-          {/* Cas réel — différent de celui de Meximieux */}
-          <section>
-            <h2 className="text-xl font-semibold text-primary">Dernière intervention à Ambérieu</h2>
-            <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-5">
-              <p className="leading-relaxed text-gray-text">
-                <strong>Chauffe-eau en panne</strong> dans un appartement du centre-ville, rue Alexandre Bérard.
-                Le groupe de sécurité fuyait depuis plusieurs jours, provoquant une surconsommation d&apos;eau.
-                Remplacement du groupe, détartrage du ballon 200&nbsp;L et vérification de l&apos;anode.
-              </p>
-              <p className="mt-2 text-sm font-medium text-primary">
-                Résultat&nbsp;: eau chaude retrouvée le jour même, plus de fuite. Intervention complète en 2&nbsp;h, 280&nbsp;€ TTC pièces comprises.
-              </p>
-            </div>
-            <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-5">
-              <p className="leading-relaxed text-gray-text">
-                <strong>Radiateur froid</strong> dans une maison de Tiret&nbsp;: circuit déséquilibré après un
-                remplacement partiel de radiateurs. Purge, contrôle de pression et rééquilibrage des vannes.
-              </p>
-              <p className="mt-2 text-sm font-medium text-primary">
-                Résultat&nbsp;: chauffage homogène dès le soir même, sans remplacement inutile de chaudière.
-              </p>
-            </div>
-          </section>
+          <LocalRealisations
+            title="Nos réalisations à Ambérieu et alentours"
+            items={getRealisationsForCities(["Ambérieu-en-Bugey", "Saint-Denis-en-Bugey", "Lagnieu", "Saint-Vulbas"])}
+          />
 
           <section>
             <h2 className="text-xl font-semibold text-primary">Tarifs indicatifs à Ambérieu</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-text">
-              Ordres de grandeur TTC, confirmés sur devis après diagnostic&nbsp;:
+              Prix indicatifs TTC, variables selon la configuration et les appareils, confirmés sur devis après diagnostic&nbsp;:
             </p>
             <ul className="mt-3 space-y-2 text-sm text-gray-text">
-              <li>• Diagnostic / petite réparation (joint, raccord)&nbsp;: à partir de 60–90&nbsp;€</li>
-              <li>• Débouchage WC ou évier&nbsp;: 80–150&nbsp;€ selon accès et profondeur</li>
+              <li>• Diagnostic / petite réparation (joint, raccord)&nbsp;: à partir de 120&nbsp;€</li>
+              <li>• Débouchage manuel (WC, évier)&nbsp;: 100–150&nbsp;€ selon accès et profondeur</li>
+              <li>• Hydrocurage de canalisation&nbsp;: 250–450&nbsp;€</li>
               <li>• Recherche de fuite&nbsp;: 150–350&nbsp;€ selon détection</li>
-              <li>• Remplacement chauffe-eau pose incluse&nbsp;: 600–1&nbsp;500&nbsp;€ selon modèle</li>
+              <li>• Remplacement chauffe-eau pose incluse&nbsp;: 800–1&nbsp;500&nbsp;€ selon modèle</li>
             </ul>
             <p className="mt-3 text-sm text-gray-text">
               Pas de surprise&nbsp;: le devis est présenté avant les travaux. Pour une urgence,{" "}

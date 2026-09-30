@@ -19,7 +19,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     metaDescription:
       "Fuite d'eau à Meximieux ? Plombier local basé à Pérouges, intervention rapide. Recherche de fuite, réparation, devis gratuit. Appelez Mathelin Plomberie Chauffage.",
     intro:
-      "Une fuite d'eau à Meximieux peut survenir à tout moment : joint usé sous l'évier, tuyau percé dans la salle de bain, canalisation enterrée qui suinte. Dans les maisons des lotissements des Allagniers ou les appartements du centre-ville, une fuite non traitée cause rapidement des dégâts importants.",
+      "Une fuite d'eau à Meximieux peut survenir à tout moment : joint usé sous l'évier, tuyau percé dans la salle de bain, canalisation enterrée qui suinte. Dans les maisons de lotissement comme dans les appartements du centre-ville, une fuite non traitée cause rapidement des dégâts importants.",
     risques: [
       "Dégât des eaux avec infiltration chez le voisin (copropriété)",
       "Moisissures et détérioration des murs et plafonds",
@@ -38,7 +38,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Combien coûte une réparation de fuite à Meximieux ?",
         answer:
-          "Une réparation simple (joint, raccord) démarre à 60-90 € TTC. Une recherche de fuite encastrée avec détection peut aller de 150 à 350 € selon la complexité. Devis systématique avant travaux.",
+          "Une réparation simple (joint, raccord) démarre à partir de 120 € TTC. Une recherche de fuite encastrée avec détection peut aller de 150 à 350 € selon la complexité. Devis systématique avant travaux. Prix indicatifs, variables selon la configuration et les appareils.",
       },
       {
         question: "Intervenez-vous pour une fuite le dimanche à Meximieux ?",
@@ -54,7 +54,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     metaDescription:
       "WC bouché à Meximieux ? Débouchage professionnel par plombier local. Intervention rapide, matériel pro. Mathelin Plomberie Chauffage – Pérouges.",
     intro:
-      "Un WC bouché à Meximieux, c'est le quotidien perturbé pour toute la famille. Que ce soit dans un pavillon du quartier de la gare ou un appartement près de la Place de la Grenette, le problème nécessite souvent un débouchage mécanique professionnel quand la ventouse ne suffit plus.",
+      "Un WC bouché à Meximieux, c'est le quotidien perturbé pour toute la famille. Que ce soit dans un pavillon ou dans un appartement, le problème nécessite souvent un débouchage mécanique professionnel quand la ventouse ne suffit plus.",
     risques: [
       "Débordement et risque sanitaire",
       "Odeurs persistantes dans toute la maison",
@@ -73,7 +73,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Combien coûte un débouchage de WC à Meximieux ?",
         answer:
-          "Un débouchage simple au furet : 80-120 € TTC. Un hydrocurage de canalisation principale : 150-250 € TTC. Tarif communiqué par téléphone avant déplacement.",
+          "Un débouchage manuel : 100-150 € TTC. Un hydrocurage de canalisation principale : 250-450 € TTC. Tarif communiqué par téléphone avant déplacement. Prix indicatifs, variables selon la configuration et les appareils.",
       },
       {
         question: "Le débouchage est-il garanti ?",
@@ -89,7 +89,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     metaDescription:
       "Chauffe-eau en panne à Meximieux ? Diagnostic et réparation rapide par artisan local. Remplacement si nécessaire. Devis gratuit – Mathelin Plomberie Chauffage.",
     intro:
-      "Plus d'eau chaude dans votre maison à Meximieux ? Que ce soit un ballon électrique dans un pavillon de Villieu-Loyes-Mollon ou un chauffe-eau thermodynamique dans une construction récente des Allagniers, la panne de chauffe-eau est une urgence du quotidien – surtout en hiver.",
+      "Plus d'eau chaude dans votre maison à Meximieux ? Que ce soit un ballon électrique dans un pavillon de Villieu-Loyes-Mollon ou un chauffe-eau thermodynamique dans une construction récente, la panne de chauffe-eau est une urgence du quotidien – surtout en hiver.",
     risques: [
       "Plus d'eau chaude pour la douche et la vaisselle",
       "Fuite au niveau du groupe de sécurité (dégât des eaux possible)",
@@ -148,7 +148,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Combien coûte un dépannage chaudière à Meximieux ?",
         answer:
-          "Un diagnostic démarre à 80 € TTC. La réparation dépend de la pièce à remplacer. Devis toujours fourni avant intervention.",
+          "Un diagnostic démarre à 120 € TTC. La réparation dépend de la pièce à remplacer. Devis toujours fourni avant intervention. Prix indicatifs, variables selon la configuration et les appareils.",
       },
     ],
   },
@@ -160,7 +160,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     metaDescription:
       "Fuite d'eau à Ambérieu-en-Bugey ? Artisan plombier local, intervention rapide depuis Pérouges. Recherche de fuite, réparation, devis gratuit.",
     intro:
-      "Une fuite d'eau à Ambérieu-en-Bugey nécessite une réaction rapide. Dans les immeubles anciens de la rue Alexandre Bérard, les canalisations en cuivre ou en plomb vieillissantes sont sujettes aux fuites. Dans les maisons de Saint-Denis-en-Bugey ou les pavillons du quartier Tiret, ce sont souvent les raccords ou les joints qui lâchent.",
+      "Une fuite d'eau à Ambérieu-en-Bugey nécessite une réaction rapide. Dans les immeubles anciens du centre-ville, les canalisations en cuivre ou en plomb vieillissantes sont sujettes aux fuites. Dans les maisons de Saint-Denis-en-Bugey ou les pavillons, ce sont souvent les raccords ou les joints qui lâchent.",
     risques: [
       "Infiltration dans les murs en pierre (fréquent dans le bâti ancien du Bugey)",
       "Dégât des eaux avec impact sur l'assurance habitation",
@@ -230,7 +230,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
     metaDescription:
       "Chauffe-eau en panne à Ambérieu ? Diagnostic, réparation ou remplacement par artisan chauffagiste local. Devis gratuit, intervention rapide. Mathelin Plomberie Chauffage.",
     intro:
-      "Plus d'eau chaude à Ambérieu-en-Bugey ? Dans les résidences du quartier Saint-Germain comme dans les maisons anciennes de Lagnieu, la panne de chauffe-eau est fréquente — surtout quand le ballon a plus de 10 ans. L'eau calcaire du réseau d'Ambérieu accélère l'entartrage et réduit la durée de vie des résistances.",
+      "Plus d'eau chaude à Ambérieu-en-Bugey ? Dans les résidences comme dans les maisons anciennes de Lagnieu, la panne de chauffe-eau est fréquente — surtout quand le ballon a plus de 10 ans. L'eau calcaire du réseau d'Ambérieu accélère l'entartrage et réduit la durée de vie des résistances.",
     risques: [
       "Absence totale d'eau chaude (douche, vaisselle, ménage)",
       "Fuite au groupe de sécurité avec dégât des eaux",
@@ -325,7 +325,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Recherche de fuite à Lagnieu : quel tarif ?",
         answer:
-          "Le déplacement + diagnostic visuel est inclus dans l'intervention (à partir de 80 € TTC). Si une détection par caméra ou gaz traceur est nécessaire, un devis complémentaire est établi avant.",
+          "Le déplacement + diagnostic visuel est inclus dans l'intervention (à partir de 120 € TTC). Si une détection par caméra ou gaz traceur est nécessaire, un devis complémentaire est établi avant.",
       },
     ],
   },
@@ -350,7 +350,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Combien coûte un débouchage WC à Lagnieu ?",
         answer:
-          "Un débouchage classique au furet coûte entre 100 et 150 € TTC. Si un hydrocurage est nécessaire (bouchon profond), comptez 200-300 € TTC. Devis gratuit par téléphone.",
+          "Un débouchage manuel coûte entre 100 et 150 € TTC. Si un hydrocurage est nécessaire (bouchon profond), comptez 250-450 € TTC. Devis gratuit par téléphone. Prix indicatifs, variables selon la configuration et les appareils.",
       },
       {
         question: "Intervenez-vous le week-end à Lagnieu ?",
@@ -385,7 +385,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Combien coûte le remplacement d'un chauffe-eau à Lagnieu ?",
         answer:
-          "Pour un ballon électrique 200L (le plus courant), comptez 550-750 € TTC fourni posé, incluant le remplacement du groupe de sécurité et l'évacuation de l'ancien. Devis gratuit et précis avant intervention.",
+          "Pour un ballon électrique 200L (le plus courant), comptez 800-1 500 € TTC fourni posé, incluant le remplacement du groupe de sécurité et l'évacuation de l'ancien. Devis gratuit et précis avant intervention. Prix indicatifs, variables selon la configuration et les appareils.",
       },
       {
         question: "Chauffe-eau électrique ou thermodynamique à Lagnieu ?",
@@ -395,7 +395,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Mon chauffe-eau fait du bruit à Lagnieu, c'est normal ?",
         answer:
-          "Des claquements ou sifflements pendant la chauffe signalent un entartrage de la résistance. Un détartrage (150-180 € TTC) résout le problème et prolonge la durée de vie du ballon de plusieurs années.",
+          "Des claquements ou sifflements pendant la chauffe signalent un entartrage de la résistance. Un détartrage (200-300 € TTC, prix indicatif) résout le problème et prolonge la durée de vie du ballon de plusieurs années.",
       },
     ],
   },
@@ -425,7 +425,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Quel est le tarif d'un dépannage chaudière à Lagnieu ?",
         answer:
-          "Un diagnostic + réparation courante (remplacement pressostat, purge, remise en pression) coûte entre 120 et 250 € TTC. Les pièces spécifiques font l'objet d'un devis séparé avant commande.",
+          "Un diagnostic + réparation courante (remplacement pressostat, purge, remise en pression) coûte entre 150 et 300 € TTC. Les pièces spécifiques font l'objet d'un devis séparé avant commande.",
       },
       {
         question: "Faites-vous l'entretien annuel de chaudière à Lagnieu ?",

@@ -1,11 +1,11 @@
 {
   "base": {
-    "debouchage": 90,
-    "fuite": 110,
+    "debouchage": 100,
+    "fuite": 120,
     "chauffe_eau": 130,
     "radiateur": 120,
-    "robinetterie": 115,
-    "autre": 110
+    "robinetterie": 120,
+    "autre": 120
   },
   "precision": {
     "pas_eau_chaude": 0,

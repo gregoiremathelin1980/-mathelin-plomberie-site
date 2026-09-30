@@ -81,8 +81,11 @@ function cityToDistanceKey(ville: string): string {
  * Objectif commercial : fourchette basse attractive, prix haut = prix typique.
  * prix_typique = base + precision + urgence + distance
  * min = base + distance  (attractif)
- * max = prix_typique    (réaliste)
+ * max = prix_typique + marge haute fixe (MARGE_HAUTE)
  */
+/** Marge haute fixe ajoutée à la fourchette (décision Grégoire, 30/09/2026). */
+const MARGE_HAUTE = 30;
+
 export function estimatePrice(
   pricing: PricingJSON,
   params: EstimateParams
@@ -107,7 +110,7 @@ export function estimatePrice(
 
   const prixTypique = Math.round(base + precisionVal + urgenceVal + distanceVal);
   const min = Math.round(base + distanceVal);
-  const max = prixTypique;
+  const max = prixTypique + MARGE_HAUTE;
 
   return { min: Math.max(0, min), max, estimate: max };
 }
