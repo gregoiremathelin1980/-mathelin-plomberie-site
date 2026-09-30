@@ -325,7 +325,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Recherche de fuite à Lagnieu : quel tarif ?",
         answer:
-          "Le déplacement + diagnostic visuel est inclus dans l'intervention (à partir de 120 € TTC). Si une détection par caméra ou gaz traceur est nécessaire, un devis complémentaire est établi avant.",
+          "Le déplacement + diagnostic visuel est inclus dans l'intervention (à partir de 120 € TTC). Si une détection par caméra ou gaz traceur est nécessaire, un devis complémentaire est établi avant. Prix indicatifs, variables selon la configuration et les appareils.",
       },
     ],
   },
@@ -390,7 +390,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Chauffe-eau électrique ou thermodynamique à Lagnieu ?",
         answer:
-          "Le ballon classique reste le plus abordable. Le thermodynamique coûte plus cher à l'achat (1 500-2 500 €) mais divise la facture électrique par 3. Je vous conseille en fonction de votre configuration et de votre budget.",
+          "Le ballon classique reste le plus abordable. Le thermodynamique coûte plus cher à l'achat (1 500-2 500 €) mais divise la facture électrique par 3. Je vous conseille en fonction de votre configuration et de votre budget. Prix indicatifs, variables selon la configuration et les appareils.",
       },
       {
         question: "Mon chauffe-eau fait du bruit à Lagnieu, c'est normal ?",
@@ -425,7 +425,7 @@ export const URGENCE_PAGES: UrgencePageData[] = [
       {
         question: "Quel est le tarif d'un dépannage chaudière à Lagnieu ?",
         answer:
-          "Un diagnostic + réparation courante (remplacement pressostat, purge, remise en pression) coûte entre 150 et 300 € TTC. Les pièces spécifiques font l'objet d'un devis séparé avant commande.",
+          "Un diagnostic + réparation courante (remplacement pressostat, purge, remise en pression) coûte entre 150 et 300 € TTC. Les pièces spécifiques font l'objet d'un devis séparé avant commande. Prix indicatifs, variables selon la configuration et les appareils.",
       },
       {
         question: "Faites-vous l'entretien annuel de chaudière à Lagnieu ?",

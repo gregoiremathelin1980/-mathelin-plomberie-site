@@ -42,7 +42,7 @@ const FAQ_AMBERIEU = [
   {
     question: "Quel est le prix d'un remplacement de chauffe-eau à Ambérieu ?",
     answer:
-      "Le tarif varie selon le type (électrique, thermodynamique) et la capacité. Comptez entre 800 et 1 500 € TTC pose incluse, selon le modèle et la configuration. Un devis détaillé est systématiquement fourni avant intervention — sans engagement.",
+      "Le tarif varie selon le type (électrique, thermodynamique) et la capacité. Comptez entre 800 et 1 500 € TTC pose incluse, selon le modèle et la configuration. Un devis détaillé est systématiquement fourni avant intervention — sans engagement. Prix indicatifs, variables selon la configuration et les appareils.",
   },
   {
     question: "Desservez-vous Lagnieu et Saint-Vulbas depuis Ambérieu ?",
