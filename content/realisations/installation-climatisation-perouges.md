@@ -7,7 +7,7 @@ images:
   - https://www.mathelin-plomberie.fr/images/realisations/climatisation-perouges/exterieur.webp
 ---
 
-Installation d'une climatisation split de marque Midea (gamme Solstice) chez un particulier à Pérouges : unité intérieure murale dans le séjour, unité extérieure fixée en façade.
+Installation d'une climatisation monosplit de marque Midea (gamme Solstice) chez un particulier à Pérouges : unité intérieure murale dans le séjour, unité extérieure fixée en façade.
 
 ## Ce qui a été fait
 
