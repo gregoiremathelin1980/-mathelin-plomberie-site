@@ -33,11 +33,6 @@ const nextConfig = {
         hostname: "www.mathelin-plomberie.fr",
         pathname: "/images/**",
       },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
-      },
       ...geocomptaRemotePatterns,
     ],
   },
