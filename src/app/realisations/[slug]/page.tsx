@@ -150,7 +150,7 @@ export default async function RealisationDetailPage({
       title={realisation.title}
       city={realisation.city}
       image={resolvedImages?.[0]}
-      images={resolvedImages}
+      images={resolvedImages?.slice(1)}
       showChantierPhotos={settings.show_chantier_photos !== false}
       description={realisation.description ?? realisation.content}
       serviceExplanation={"service" in realisation ? realisation.service : undefined}
