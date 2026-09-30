@@ -1,0 +1,30 @@
+{
+  "slug": "climatisation",
+  "title": "Climatisation",
+  "description": "Pose et installation de climatisation réversible : split system et gainable, avec zoning selon vos besoins. Daikin, Panasonic, Midea.",
+  "problems": [
+    "Rafraîchir et chauffer une ou plusieurs pièces avec une climatisation réversible",
+    "Installer un split system dans une maison ou un appartement",
+    "Équiper un logement d'une climatisation gainable",
+    "Régler la température pièce par pièce grâce au zoning"
+  ],
+  "intervention": "Nous posons et installons votre climatisation réversible : split system ou gainable, avec zoning selon vos besoins. Nous travaillons avec les marques Daikin, Panasonic et Midea, et avec les systèmes de zoning Altech ou Koolnova. L'installation est complète, de l'alimentation électrique jusqu'à l'explication du fonctionnement au client.",
+  "faq": [
+    {
+      "question": "Quels types de climatisation installez-vous ?",
+      "answer": "Nous installons des climatisations réversibles de type split system et gainable, avec un zoning selon vos besoins. Les marques proposées sont Daikin, Panasonic et Midea."
+    },
+    {
+      "question": "Qu'est-ce que le zoning ?",
+      "answer": "Le zoning permet de gérer la température de plusieurs zones du logement séparément, pour ne rafraîchir ou chauffer que les pièces utilisées. Nous utilisons les systèmes Altech ou Koolnova, selon votre projet."
+    },
+    {
+      "question": "Que comprend l'installation ?",
+      "answer": "Une installation complète, de l'alimentation électrique jusqu'à l'explication du fonctionnement de votre climatisation."
+    },
+    {
+      "question": "Combien coûte l'installation d'une climatisation ?",
+      "answer": "Le prix dépend du type d'installation (split ou gainable), du nombre de pièces et du zoning. Nous vous donnons un devis après description de votre projet."
+    }
+  ]
+}

@@ -80,7 +80,7 @@ export const SERVICES = [
   {
     slug: "climatisation",
     title: "Climatisation",
-    description: "Pose de climatisation réversible. Split, multisplit, gainable. Toutes marques.",
+    description: "Pose de climatisation réversible. Split system et gainable, avec zoning. Daikin, Panasonic, Midea.",
     icon: "Thermometer",
   },
   {

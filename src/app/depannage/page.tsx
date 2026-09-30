@@ -1,21 +1,18 @@
 import Link from "next/link";
 import { Wrench } from "lucide-react";
-import { getDepannageSlugs, getDepannageBySlug } from "@/lib/site-data";
+import EstimateForm from "@/components/EstimateForm";
+import { getPricing } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
 export const metadata = buildPageMetadata({
   title: "Dépannage plomberie | Mathelin Plomberie Chauffage",
   description:
-    "Pages dépannage par problème et ville. Fuite chauffe-eau, débouchage, réparation. Pérouges, Meximieux, Ambérieu, Lagnieu.",
+    "Dépannage plomberie et chauffage : fuite, débouchage, chauffe-eau. Pérouges, Meximieux, Ambérieu, Lagnieu et la Côtière. Estimation en ligne.",
   path: "/depannage",
 });
 
-export default function DepannageListPage() {
-  const slugs = getDepannageSlugs();
-  const items = slugs
-    .map((slug) => getDepannageBySlug(slug))
-    .filter(Boolean)
-    .map((d) => ({ slug: d!.slug, title: d!.title, city: d!.city }));
+export default function DepannagePage() {
+  const pricing = getPricing();
 
   return (
     <div className="px-4 py-16 sm:px-6">
@@ -26,7 +23,7 @@ export default function DepannageListPage() {
           </span>
           <div>
             <h1 className="font-heading text-3xl font-bold text-primary">
-              Dépannage par problème et ville
+              Dépannage plomberie
             </h1>
             <p className="mt-1 text-gray-text">
               Explications et interventions typiques pour chaque type de dépannage.
@@ -35,31 +32,11 @@ export default function DepannageListPage() {
         </div>
         <p className="mb-8 text-gray-text">
           <Link href="/urgence-depannage" className="font-medium text-primary underline hover:no-underline">
-            Urgence plomberie à Ambérieu, Meximieux, Pérouges — intervention rapide, selon le degré d&apos;urgence
+            Urgence plomberie à Pérouges, Meximieux, Ambérieu et dans toute la Côtière — intervention rapide, selon le degré d&apos;urgence
           </Link>
         </p>
-        {items.length === 0 ? (
-          <p className="text-gray-text">Aucune page dépannage pour le moment.</p>
-        ) : (
-          <ul className="space-y-2">
-            {items.map((item) => (
-              <li key={item.slug}>
-                <Link
-                  href={`/depannage/${item.slug}`}
-                  className="block rounded-xl border border-gray-200 bg-white px-4 py-3 font-medium text-primary transition hover:border-primary/30 hover:bg-primary/5"
-                >
-                  {item.title}
-                  {item.city && (
-                    <span className="ml-2 text-sm font-normal text-gray-text">
-                      — {item.city}
-                    </span>
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
+      <EstimateForm pricing={pricing} headingLevel="h2" />
     </div>
   );
 }
