@@ -38,7 +38,7 @@ export const SERVICES = [
   {
     slug: "installation-radiateurs",
     title: "Installation radiateurs",
-    description: "Pose et raccordement de radiateurs. Eau chaude ou électrique.",
+    description: "Installation de radiateurs à eau chaude ou électriques à Pérouges, Meximieux et dans l'Ain : pose et raccordement. Devis gratuit.",
     icon: "Thermometer",
   },
   {

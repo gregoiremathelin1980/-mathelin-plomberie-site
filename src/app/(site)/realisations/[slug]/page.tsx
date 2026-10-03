@@ -10,7 +10,7 @@ import { getPhotoUrl } from "@/lib/config";
 import RealisationTemplate from "@/templates/RealisationTemplate";
 import GeocomptaRelatedSection from "@/components/GeocomptaRelatedSection";
 import { tryGetCachedGeocomptaRealisation, getCachedGeocomptaRealisationSlugs } from "@/lib/api/geocomptaCached";
-import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import { buildPageMetadata, appendCity } from "@/lib/seo/metaBuilder";
 
 function findServiceSlugForTitle(serviceTitle?: string): { slug: string; title: string } | null {
   if (!serviceTitle) return null;
@@ -34,7 +34,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const api = await tryGetCachedGeocomptaRealisation(slug);
   if (api) {
-    const baseTitle = api.seoTitle ?? `${api.title}${api.city ? ` à ${api.city}` : ""}`;
+    const baseTitle = api.seoTitle ?? appendCity(api.title, api.city);
     return buildPageMetadata({
       title: baseTitle,
       description: api.seoDescription ?? api.description ?? api.content?.slice(0, 160) ?? api.title,
@@ -43,9 +43,8 @@ export async function generateMetadata({
   }
   const realisation = getRealisationBySlugFromSiteData(slug) ?? getRealisationBySlug(slug);
   if (!realisation) return {};
-  const cityPart = realisation.city ? ` à ${realisation.city}` : "";
   return buildPageMetadata({
-    title: `${realisation.title}${cityPart}`,
+    title: appendCity(realisation.title, realisation.city),
     description: realisation.description ?? realisation.title,
     path: `/realisations/${slug}`,
   });
@@ -152,7 +151,7 @@ export default async function RealisationDetailPage({
       image={resolvedImages?.[0]}
       images={resolvedImages?.slice(1)}
       showChantierPhotos={settings.show_chantier_photos !== false}
-      description={realisation.description ?? realisation.content}
+      description={realisation.content ?? realisation.description}
       serviceExplanation={"service" in realisation ? realisation.service : undefined}
       conseils={conseils}
       serviceSlug={serviceLink?.slug}

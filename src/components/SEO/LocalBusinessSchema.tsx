@@ -50,7 +50,7 @@ export default function LocalBusinessSchema({
     logo: LOGO_IMAGE_URL,
     foundingDate: FOUNDING_DATE,
     description:
-      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+      "Artisan plombier chauffagiste à Pérouges : dépannage, chauffe-eau, chauffage et rénovation dans l'Ain. Intervention rapide, devis gratuit au 06 61 42 24 07.",
     url: MAIN_URL,
     sameAs,
     telephone: phoneToInternational(settings.phone),
@@ -61,7 +61,7 @@ export default function LocalBusinessSchema({
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress: settings.address,
+      streetAddress: settings.address.split(",")[0]!.trim(),
       addressLocality: DEFAULT_CITY,
       postalCode: "01800",
       addressRegion: "Ain",

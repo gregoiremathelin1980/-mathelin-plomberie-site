@@ -9,6 +9,7 @@
  */
 
 import fs from "node:fs";
+import { makeExcerpt } from "@/lib/seo/excerpt";
 import path from "node:path";
 import matter from "gray-matter";
 import { loadMarkdown, logMarkdownWarnings } from "@/lib/contentLoader";
@@ -225,7 +226,7 @@ function parseRealisationsFromDir(dir: string): SiteDataRealisationItem[] {
       date: front.date,
       images,
       conseils: front.conseils,
-      description: content.trim().slice(0, 200),
+      description: makeExcerpt(content),
       content: content.trim(),
     });
   }
@@ -255,7 +256,7 @@ export function getRealisationBySlugFromSiteData(slug: string): SiteDataRealisat
     date: front.date,
     images,
     conseils: front.conseils,
-    description: content.trim().slice(0, 200),
+    description: makeExcerpt(content),
     content: content.trim(),
   };
 }

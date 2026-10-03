@@ -9,11 +9,11 @@ import { URGENCE_PAGES } from "@/lib/urgence-pages-data";
 import { getCachedGeocomptaPPageSlugs, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
 import { isConseilIndexable } from "@/lib/seo/conseilsIndexPolicy";
 
-/** lastmod cohérent avec la date de contenu quand elle est au format ISO ou lisible par Date.parse */
-function lastModifiedFromContentDate(date?: string | null): Date {
-  if (typeof date !== "string" || !date.trim()) return new Date();
+/** lastmod = date réelle du contenu si elle est lisible ; sinon omis (jamais la date de la requête) */
+function lastModifiedFromContentDate(date?: string | null): Date | undefined {
+  if (typeof date !== "string" || !date.trim()) return undefined;
   const t = Date.parse(date);
-  return Number.isFinite(t) ? new Date(t) : new Date();
+  return Number.isFinite(t) ? new Date(t) : undefined;
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -21,11 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { url: hostUrl, isSatellite } = getSiteUrlFromHost(h.get("host"));
 
   if (isSatellite) {
-    return [
-      { url: hostUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-      { url: `${hostUrl}/mentions-legales`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-      { url: `${hostUrl}/cgv`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    ];
+    return [{ url: hostUrl, changeFrequency: "weekly", priority: 1 }];
   }
   const [realisations, posts, conseils, pSlugs, geoSitemap] = await Promise.all([
     getRealisations(),
@@ -36,28 +32,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: SITE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
-    { url: `${SITE_URL}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/devis`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/depannage`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/urgence-depannage`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
-    { url: `${SITE_URL}/realisations`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
-    { url: `${SITE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
-    { url: `${SITE_URL}/conseils`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
-    { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/mentions-legales`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/cgv`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/zones-intervention`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: SITE_URL, changeFrequency: "daily", priority: 1 },
+    { url: `${SITE_URL}/services`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/devis`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/depannage`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/urgence-depannage`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE_URL}/realisations`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/conseils`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/mentions-legales`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/cgv`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/zones-intervention`, changeFrequency: "weekly", priority: 0.85 },
     {
       url: "https://www.plombier-amberieu.fr/",
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
+        changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
       url: "https://www.plombier-meximieux.fr/",
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
+        changeFrequency: "weekly" as const,
       priority: 0.9,
     },
   ];
@@ -65,26 +59,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const depannageSlugs = getDepannageSlugs();
   const depannageRoutes: MetadataRoute.Sitemap = depannageSlugs.map((slug) => ({
     url: `${SITE_URL}/depannage/${slug}`,
-    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.6,
   }));
 
   const communeRoutes: MetadataRoute.Sitemap = COMMUNES.map((c) => ({
     url: `${SITE_URL}/plombier/${c.slug}`,
-    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
 
   const serviceRoutes: MetadataRoute.Sitemap = SERVICES.map((s) => ({
     url: `${SITE_URL}/services/${s.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7 as const,
   }));
 
-  const realisationLastMod = new Map<string, Date>();
+  const realisationLastMod = new Map<string, Date | undefined>();
   for (const r of realisations) {
     if (r.slug) realisationLastMod.set(r.slug, lastModifiedFromContentDate(r.date));
   }
@@ -93,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!item.slug) continue;
       const d = new Date(item.updatedAt);
       const prev = realisationLastMod.get(item.slug);
-      if (!prev || (Number.isFinite(d.getTime()) && d > prev)) realisationLastMod.set(item.slug, d);
+      if (Number.isFinite(d.getTime()) && (!prev || d > prev)) realisationLastMod.set(item.slug, d);
     }
   }
   const realisationRoutes: MetadataRoute.Sitemap = Array.from(realisationLastMod.entries()).map(
@@ -114,7 +105,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-  const conseilLastMod = new Map<string, Date>();
+  const conseilLastMod = new Map<string, Date | undefined>();
   for (const c of conseils) {
     if (c.slug) conseilLastMod.set(c.slug, lastModifiedFromContentDate(c.date));
   }
@@ -123,7 +114,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!item.slug) continue;
       const d = new Date(item.updatedAt);
       const prev = conseilLastMod.get(item.slug);
-      if (!prev || (Number.isFinite(d.getTime()) && d > prev)) conseilLastMod.set(item.slug, d);
+      if (Number.isFinite(d.getTime()) && (!prev || d > prev)) conseilLastMod.set(item.slug, d);
     }
   }
   const conseilsRoutes: MetadataRoute.Sitemap = Array.from(conseilLastMod.entries())
@@ -138,7 +129,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-  const pLastMod = new Map<string, Date>();
+  const pLastMod = new Map<string, Date | undefined>();
   if (geoSitemap) {
     for (const item of geoSitemap.pages) {
       if (!item.slug) continue;
@@ -147,14 +138,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   const geocomptaPRoutes: MetadataRoute.Sitemap = pSlugs.map((slug) => ({
     url: `${SITE_URL}/p/${encodeURIComponent(slug)}`,
-    lastModified: pLastMod.get(slug) ?? new Date(),
+    lastModified: pLastMod.get(slug),
     changeFrequency: "weekly" as const,
     priority: 0.65,
   }));
 
   const urgenceRoutes: MetadataRoute.Sitemap = URGENCE_PAGES.map((p) => ({
     url: `${SITE_URL}/urgence/${p.slug}`,
-    lastModified: new Date(),
     changeFrequency: "daily" as const,
     priority: 0.8,
   }));

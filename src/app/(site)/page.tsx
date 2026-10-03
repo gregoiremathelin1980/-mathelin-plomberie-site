@@ -24,7 +24,6 @@ import type { ReviewEntry } from "@/lib/site-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 import HomeInternalLinks from "@/components/HomeInternalLinks";
 import HomeRecentCases from "@/components/HomeRecentCases";
-import HomeAggregateRatingSchema from "@/components/SEO/HomeAggregateRatingSchema";
 
 const EstimateForm = dynamic(() => import("@/components/EstimateForm"), {
   ssr: true,
@@ -52,7 +51,7 @@ const AdvicePreview = dynamic(() => import("@/components/AdvicePreview"), {
 });
 
 const HOME_META_DESCRIPTION =
-  "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.";
+  "Artisan plombier chauffagiste à Pérouges : dépannage, chauffe-eau, chauffage et rénovation dans l'Ain. Intervention rapide, devis gratuit au 06 61 42 24 07.";
 
 export const metadata = buildPageMetadata({
   title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
@@ -104,8 +103,8 @@ function dedupeReviewEntriesForHome(items: ReviewEntry[]): ReviewEntry[] {
   return out;
 }
 
-/** Rendu dynamique : rotation des avis différente à chaque visite. Le circuit-breaker GéoCompta garantit un TTFB court. */
-export const revalidate = 0;
+/** ISR : page mise en cache (en-têtes CDN, x-vercel-cache HIT) ; la rotation des avis change à chaque régénération horaire. */
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const geo = isGeocomptaConfigured();
@@ -192,7 +191,6 @@ export default async function HomePage() {
 
     return (
       <>
-        <HomeAggregateRatingSchema />
         <Hero />
         <HomeArtisanPresentation />
         {ds.showRecentInterventions && interventions.length > 0 && (
@@ -211,6 +209,31 @@ export default async function HomePage() {
           />
         )}
         <HomeRecentCases />
+        <section id="services" className="px-4 py-14 sm:px-6 sm:py-16">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">Nos services</h2>
+            <p className="mt-2 text-gray-text">
+              Dépannage plomberie et chauffage autour de Meximieux et Ambérieu : fuite d&apos;eau, canalisation
+              bouchée, chauffe-eau en panne, radiateur froid.
+            </p>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {HOME_SERVICES.map((s) => (
+                <ServiceCard
+                  key={s.slug}
+                  slug={s.slug}
+                  title={s.title}
+                  description={s.description}
+                  iconKey={s.icon}
+                />
+              ))}
+            </div>
+            <div className="mt-8 flex justify-center">
+              <Link href="/services" className={buttonVariants({ variant: "outline" })}>
+                Voir tous les services
+              </Link>
+            </div>
+          </div>
+        </section>
         <UrgencyBlock />
         <ContactForm />
         {hp.featuredPhotos.length > 0 && (
@@ -258,31 +281,6 @@ export default async function HomePage() {
             </p>
           </>
         )}
-        <section id="services" className="px-4 py-14 sm:px-6 sm:py-16">
-          <div className="mx-auto max-w-6xl">
-            <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">Nos services</h2>
-            <p className="mt-2 text-gray-text">
-              Dépannage plomberie et chauffage autour de Meximieux et Ambérieu : fuite d&apos;eau, canalisation
-              bouchée, chauffe-eau en panne, radiateur froid.
-            </p>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {HOME_SERVICES.map((s) => (
-                <ServiceCard
-                  key={s.slug}
-                  slug={s.slug}
-                  title={s.title}
-                  description={s.description}
-                  iconKey={s.icon}
-                />
-              ))}
-            </div>
-            <div className="mt-8 flex justify-center">
-              <Link href="/services" className={buttonVariants({ variant: "outline" })}>
-                Voir tous les services
-              </Link>
-            </div>
-          </div>
-        </section>
         <ProjectGallery realisations={realisations} />
         {ds.showAdvice && <AdvicePreview conseils={conseilsForPreview} />}
         <HomeInternalLinks />
@@ -316,7 +314,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <HomeAggregateRatingSchema />
       <Hero />
       <HomeArtisanPresentation />
       {ds.showRecentInterventions && recentInterventions.length > 0 && (
@@ -335,23 +332,6 @@ export default async function HomePage() {
         />
       )}
       <HomeRecentCases />
-      <UrgencyBlock />
-      <ContactForm />
-      {ds.showEstimator && (
-        <>
-          <EstimateForm pricing={pricing} simulateur={simulateur} />
-          <p className="mx-auto max-w-2xl px-4 pb-8 text-center text-sm text-gray-600">
-            Diagnostic sur place et devis clair avant toute intervention.
-          </p>
-          <p className="mx-auto max-w-2xl px-4 pb-4 text-center text-sm text-gray-600">
-            Pour les situations urgentes (fuite d&apos;eau, chauffe-eau en panne, radiateur froid, canalisation
-            bouchée), contactez directement votre plombier local.
-          </p>
-          <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm font-medium text-primary">
-            Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
-          </p>
-        </>
-      )}
       <section id="services" className="px-4 py-14 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">Nos services</h2>
@@ -377,6 +357,23 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+      <UrgencyBlock />
+      <ContactForm />
+      {ds.showEstimator && (
+        <>
+          <EstimateForm pricing={pricing} simulateur={simulateur} />
+          <p className="mx-auto max-w-2xl px-4 pb-8 text-center text-sm text-gray-600">
+            Diagnostic sur place et devis clair avant toute intervention.
+          </p>
+          <p className="mx-auto max-w-2xl px-4 pb-4 text-center text-sm text-gray-600">
+            Pour les situations urgentes (fuite d&apos;eau, chauffe-eau en panne, radiateur froid, canalisation
+            bouchée), contactez directement votre plombier local.
+          </p>
+          <p className="mx-auto max-w-2xl px-4 pb-12 text-center text-sm font-medium text-primary">
+            Maître Artisan Plombier Chauffagiste (BP Génie Climatique) à votre service depuis 2013.
+          </p>
+        </>
+      )}
       <ProjectGallery realisations={realisations} />
       {ds.showAdvice && <AdvicePreview conseils={randomConseils} />}
       <HomeInternalLinks />

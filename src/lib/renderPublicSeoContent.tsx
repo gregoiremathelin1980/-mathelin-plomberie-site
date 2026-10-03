@@ -34,6 +34,18 @@ export function renderConseilMarkdown(content: string): ReactNode {
       continue;
     }
 
+    const lines = block.split("\n").map((l) => l.trim());
+    if (lines.every((l) => /^[-*]\s+/.test(l))) {
+      nodes.push(
+        <ul key={`ul-${i}`} className="mt-3 list-disc space-y-1 pl-6 leading-relaxed text-gray-text first:mt-0">
+          {lines.map((l, j) => (
+            <li key={j}>{l.replace(/^[-*]\s+/, "")}</li>
+          ))}
+        </ul>
+      );
+      continue;
+    }
+
     nodes.push(
       <p key={`p-${i}`} className="mt-3 leading-relaxed text-gray-text first:mt-0 whitespace-pre-wrap">
         {block}

@@ -19,6 +19,10 @@ const nextConfig = {
       { source: "/estimate", destination: "/devis", permanent: true },
       { source: "/projects", destination: "/realisations", permanent: true },
       { source: "/conseils/isolation-tuyaux", destination: "/conseils/protection-gel", permanent: true },
+      // Pages retirées du contenu → page la plus proche
+      { source: "/realisations/debouchage-canalisation-meximieux", destination: "/services/debouchage-canalisation", permanent: true },
+      { source: "/realisations/reparation-fuite-perouges", destination: "/services/reparation-fuite", permanent: true },
+      { source: "/conseils/desembouage-a-meximieux-2026-06-26", destination: "/conseils/desembouage-chauffage", permanent: true },
       // Fiches d'interventions supprimées (cas non réels) → page locale la plus proche
       { source: "/interventions/fuite-sous-evier-amberieu", destination: "https://www.plombier-amberieu.fr/", permanent: true },
       { source: "/interventions/wc-bouche-meximieux-allagniers", destination: "https://www.plombier-meximieux.fr/", permanent: true },

@@ -31,10 +31,12 @@ const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 /**
  * Sanitize une chaîne pour affichage sûr : limite la longueur et retire les caractères de contrôle.
  * Ne fait pas d'échappement HTML (React échappe par défaut).
+ * `keepLineBreaks` : conserve les retours à la ligne et tabulations (corps markdown).
  */
-function sanitizeString(value: unknown, maxLength: number): string {
+function sanitizeString(value: unknown, maxLength: number, keepLineBreaks = false): string {
   if (value == null) return "";
-  const s = String(value).replace(/[\x00-\x1F\x7F]/g, "").trim();
+  const controlChars = keepLineBreaks ? /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g : /[\x00-\x1F\x7F]/g;
+  const s = String(value).replace(controlChars, "").trim();
   return s.length > maxLength ? s.slice(0, maxLength) : s;
 }
 
@@ -96,7 +98,7 @@ export function loadMarkdown<T = Record<string, unknown>>(
     (data as Record<string, unknown>).slug = sanitizeString(data.slug, 200);
   }
 
-  const sanitizedContent = sanitizeString(content, sanitizeContentMaxLength);
+  const sanitizedContent = sanitizeString(content, sanitizeContentMaxLength, true);
   if (sanitizedContent.length === 0 && content.length > 0) {
     warnings.push(`[${fileHint}] contenu vide après sanitization`);
   }

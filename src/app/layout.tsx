@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Poppins, Inter } from "next/font/google";
-import { headers } from "next/headers";
 import "./globals.css";
-import LocalBusinessSchema from "@/components/SEO/LocalBusinessSchema";
-import DeferredAnalytics from "@/components/DeferredAnalytics";
+import { Analytics } from "@vercel/analytics/next";
 import { SettingsProvider } from "@/contexts/SettingsContext";
 import { getSiteSettings } from "@/lib/content";
-import { SITE_URL, getSiteUrlFromHost } from "@/lib/config";
+import { SITE_URL } from "@/lib/config";
 
 // Import dynamique pour réduire la taille du chunk layout et éviter ChunkLoadError (timeout)
 const Header = nextDynamic(() => import("@/components/Header"), { ssr: true });
@@ -38,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
   description:
-    "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+    "Artisan plombier chauffagiste à Pérouges : dépannage, chauffe-eau, chauffage et rénovation dans l'Ain. Intervention rapide, devis gratuit au 06 61 42 24 07.",
   keywords: [
     "plombier Pérouges",
     "plombier Meximieux",
@@ -51,27 +49,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mathelin Plomberie Chauffage | Plombier à Pérouges",
     description:
-      "Mathelin Plomberie Chauffage : artisan plombier à Pérouges. Intervention rapide selon le degré d'urgence, chauffage et rénovation dans l'Ain. Devis gratuit au 06 61 42 24 07.",
+      "Artisan plombier chauffagiste à Pérouges : dépannage, chauffe-eau, chauffage et rénovation dans l'Ain. Intervention rapide, devis gratuit au 06 61 42 24 07.",
     type: "website",
     siteName: "Mathelin Plomberie Chauffage",
     url: "https://www.mathelin-plomberie.fr/",
+    images: [{ url: "/images/og-mathelin.jpg", width: 1200, height: 630 }],
   },
+  twitter: { card: "summary_large_image", images: ["/images/og-mathelin.jpg"] },
   robots: "index, follow",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const settings = getSiteSettings();
-  const host = (await headers()).get("host");
-  const { isSatellite } = getSiteUrlFromHost(host);
   return (
     <html lang="fr" className={`${poppins.variable} ${inter.variable}`}>
-      <head>
-        {!isSatellite && <LocalBusinessSchema settings={settings} />}
-      </head>
       <body className="min-h-screen bg-white text-gray-900 antialiased">
         <SettingsProvider initialSettings={settings}>
           <ChunkLoadErrorHandler />
@@ -79,7 +74,7 @@ export default async function RootLayout({
           <main className="pb-20 md:pb-0">{children}</main>
           <Footer />
           <MobileCallButton />
-          <DeferredAnalytics />
+          <Analytics />
         </SettingsProvider>
       </body>
     </html>

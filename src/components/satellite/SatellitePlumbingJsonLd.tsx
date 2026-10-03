@@ -53,14 +53,6 @@ function buildSchema(
     areaServed: areas.map((name) => ({ "@type": "City", name })),
   };
 
-  base.aggregateRating = {
-    "@type": "AggregateRating",
-    ratingValue: String(gbp.averageRating),
-    reviewCount: String(Math.floor(gbp.totalReviewCount)),
-    bestRating: "5",
-    worstRating: "1",
-  };
-
   if (sameAsList.length > 0) {
     base.sameAs = sameAsList;
   }

@@ -12,7 +12,7 @@ import LocalRealisations from "@/components/LocalRealisations";
 import { getRealisationsForCities } from "@/lib/communes";
 import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
+import { GMB_FALLBACK_PROFILE, resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
 import { MAIN_SITE_URL } from "@/lib/config";
 import {
   getGmbUrlForSatellitePages,
@@ -109,7 +109,7 @@ export default async function PlombierMeximieux() {
                 variant: "outline",
                 size: "lg",
                 className:
-                  "inline-flex items-center justify-center gap-2 border-white bg-white/10 text-white hover:bg-white/20",
+                  "inline-flex items-center justify-center gap-2 border-white bg-white text-slate-800 hover:bg-white/90",
               })}
             >
               <FileText className="h-5 w-5" aria-hidden />
@@ -122,7 +122,7 @@ export default async function PlombierMeximieux() {
       <section className="border-b border-gray-200 bg-white px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-6 text-sm text-gray-700">
           <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention rapide</span>
-          <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" aria-hidden />Basé à 8&nbsp;min</span>
+          <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" aria-hidden />À 8&nbsp;min de Meximieux</span>
           <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" aria-hidden />Devis avant travaux</span>
         </div>
       </section>
@@ -182,7 +182,7 @@ export default async function PlombierMeximieux() {
               </li>
               <li className="flex gap-2">
                 <span className="mt-1 shrink-0 text-primary">✓</span>
-                <span><strong>Avis clients</strong>&nbsp;: plus de 50 avis 5 étoiles sur Google. Artisan recommandé sur la Plaine de l&apos;Ain.</span>
+                <span><strong>Avis clients</strong>&nbsp;: {GMB_FALLBACK_PROFILE.totalReviewCount} avis 5&nbsp;étoiles sur Google. Artisan recommandé sur la Plaine de l&apos;Ain.</span>
               </li>
             </ul>
           </section>

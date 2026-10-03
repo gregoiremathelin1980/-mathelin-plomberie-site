@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { getSeoImageAlt } from "@/lib/seoImage";
 import LocalProofBlock from "@/components/LocalProofBlock";
+import { renderPublicSeoContent } from "@/lib/renderPublicSeoContent";
 import type { RecentInterventionEntry } from "@/lib/site-data";
 
 interface RealisationTemplateProps {
@@ -47,7 +48,7 @@ export default function RealisationTemplate({
       <div className="mx-auto max-w-3xl">
         <Link
           href="/realisations"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          className="mb-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline"
         >
           <ArrowLeft className="h-4 w-4" />
           Retour aux réalisations
@@ -78,10 +79,16 @@ export default function RealisationTemplate({
         )}
         {description && (
           <div className="mt-8">
-            <h2 className="font-heading text-lg font-semibold text-primary">
-              Intervention
-            </h2>
-            <p className="mt-2 text-gray-text">{description}</p>
+            {/^##\s/m.test(description) ? (
+              renderPublicSeoContent(description)
+            ) : (
+              <>
+                <h2 className="font-heading text-lg font-semibold text-primary">
+                  Intervention
+                </h2>
+                <p className="mt-2 text-gray-text">{description}</p>
+              </>
+            )}
           </div>
         )}
         {serviceExplanation && (
@@ -98,7 +105,7 @@ export default function RealisationTemplate({
           {serviceSlug && (
             <Link
               href={`/services/${serviceSlug}`}
-              className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
+              className="inline-flex min-h-11 items-center gap-1.5 font-medium text-primary hover:underline"
             >
               <Wrench className="h-4 w-4" />
               {serviceTitle ?? "Voir ce service"}
@@ -107,7 +114,7 @@ export default function RealisationTemplate({
           {city && (
             <Link
               href="/realisations"
-              className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
+              className="inline-flex min-h-11 items-center gap-1.5 font-medium text-primary hover:underline"
             >
               <MapPin className="h-4 w-4" />
               Interventions à {city}
@@ -123,7 +130,7 @@ export default function RealisationTemplate({
             <ul className="mt-2 space-y-1">
               {conseils.map((c) => (
                 <li key={c.slug}>
-                  <Link href={`/conseils/${c.slug}`} className="text-primary hover:underline">
+                  <Link href={`/conseils/${c.slug}`} className="inline-block py-2 text-primary hover:underline">
                     {c.title}
                   </Link>
                 </li>

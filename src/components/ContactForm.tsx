@@ -115,6 +115,7 @@ export default function ContactForm({ headingLevel = "h2" }: ContactFormProps) {
         </div>
         <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:flex sm:gap-8 sm:p-8">
           <form
+            method="post"
             className="flex-1 space-y-4"
             onSubmit={handleSubmit}
             data-form-type="contact"

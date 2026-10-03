@@ -49,13 +49,13 @@ export default function Footer() {
           <div>
             <h3 className="font-heading mb-3 text-lg font-semibold">Navigation</h3>
             <ul className="space-y-2 text-sm text-white/90">
-              <li><Link href="/services" className="transition hover:text-white">Services</Link></li>
-              <li><Link href="/depannage" className="transition hover:text-white">Dépannage</Link></li>
-              <li><Link href="/realisations" className="transition hover:text-white">Réalisations</Link></li>
-              <li><Link href="/devis" className="transition hover:text-white">Devis gratuit</Link></li>
-              <li><Link href="/blog" className="transition hover:text-white">Blog</Link></li>
-              <li><Link href="/conseils" className="transition hover:text-white">Conseils</Link></li>
-              <li><Link href="/contact" className="transition hover:text-white">Contact</Link></li>
+              <li><Link href="/services" className="inline-block py-2 transition hover:text-white">Services</Link></li>
+              <li><Link href="/depannage" className="inline-block py-2 transition hover:text-white">Dépannage</Link></li>
+              <li><Link href="/realisations" className="inline-block py-2 transition hover:text-white">Réalisations</Link></li>
+              <li><Link href="/devis" className="inline-block py-2 transition hover:text-white">Devis gratuit</Link></li>
+              <li><Link href="/blog" className="inline-block py-2 transition hover:text-white">Blog</Link></li>
+              <li><Link href="/conseils" className="inline-block py-2 transition hover:text-white">Conseils</Link></li>
+              <li><Link href="/contact" className="inline-block py-2 transition hover:text-white">Contact</Link></li>
             </ul>
           </div>
 
@@ -64,7 +64,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-white/90">
               {FOOTER_VILLES.map((v) => (
                 <li key={v.href}>
-                  <Link href={v.href} className="transition hover:text-white">{v.label}</Link>
+                  <Link href={v.href} className="inline-block py-2 transition hover:text-white">{v.label}</Link>
                 </li>
               ))}
             </ul>
@@ -78,7 +78,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-white/90">
               {FOOTER_URGENCES.map((u) => (
                 <li key={u.href}>
-                  <Link href={u.href} className="transition hover:text-white">{u.label}</Link>
+                  <Link href={u.href} className="inline-block py-2 transition hover:text-white">{u.label}</Link>
                 </li>
               ))}
             </ul>
@@ -108,13 +108,13 @@ export default function Footer() {
             className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-white/80"
             aria-label="Informations légales"
           >
-            <Link href="/mentions-legales" className="transition hover:text-white">
+            <Link href="/mentions-legales" className="inline-block py-2 transition hover:text-white">
               Mentions légales
             </Link>
-            <Link href="/cgv" className="transition hover:text-white">
+            <Link href="/cgv" className="inline-block py-2 transition hover:text-white">
               CGV
             </Link>
-            <Link href="/mentions-legales#mediation" className="transition hover:text-white">
+            <Link href="/mentions-legales#mediation" className="inline-block py-2 transition hover:text-white">
               Médiation de la consommation (CM2C)
             </Link>
           </nav>

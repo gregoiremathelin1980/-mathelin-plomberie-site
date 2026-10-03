@@ -20,6 +20,18 @@ const PATH_TO_SATELLITE: Record<string, string> = {
 /** Pages avec formulaire : on redirige les satellites vers le site principal (un seul domaine pour Formspree). */
 const FORM_PAGES = ["/contact", "/devis"];
 
+function isSatelliteAssetPath(pathname: string): boolean {
+  return (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/images") ||
+    pathname.startsWith("/api") ||
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml" ||
+    pathname === "/llms.txt" ||
+    /\.[a-z0-9]+$/i.test(pathname)
+  );
+}
+
 function hostnameOnly(host: string): string {
   return host.split(":")[0]?.toLowerCase() ?? "";
 }
@@ -35,6 +47,12 @@ export function middleware(request: NextRequest) {
 
   if (isSatellite && FORM_PAGES.includes(pathname)) {
     return NextResponse.redirect(`${MAIN_SITE_URL}${pathname}`, 302);
+  }
+
+  // Satellites : seule l'accueil est propre ; toute autre page est une copie → 301 vers le site principal.
+  // Exceptions : assets (_next, images, fichiers avec extension), API et fichiers SEO du domaine.
+  if (isSatellite && pathname !== "/" && !isSatelliteAssetPath(pathname)) {
+    return NextResponse.redirect(`${MAIN_SITE_URL}${pathname}${request.nextUrl.search}`, 301);
   }
 
   // Accueil satellite → rewrite vers la landing (inchangé)

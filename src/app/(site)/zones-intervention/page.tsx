@@ -4,6 +4,7 @@ import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { getSiteSettings } from "@/lib/content";
+import { GMB_FALLBACK_PROFILE } from "@/lib/gmbSeoDefaults";
 import { buttonVariants } from "@/components/ui/button";
 import { phoneToTelHref } from "@/lib/satelliteLandings";
 import { SATELLITE_AMBERIEU_URL, SATELLITE_MEXIMIEUX_URL } from "@/lib/config";
@@ -68,7 +69,7 @@ export default function ZonesInterventionPage() {
               du simple dépannage à la rénovation complète.
             </p>
             <p>
-              Avec <strong>51 avis 5&nbsp;étoiles</strong> sur Google et un
+              Avec <strong>{GMB_FALLBACK_PROFILE.totalReviewCount} avis 5&nbsp;étoiles</strong> sur Google et un
               véhicule atelier équipé des pièces les plus courantes, il garantit
               une intervention rapide et soignée sur un rayon de 15&nbsp;km
               autour de Pérouges. Que vous habitiez une maison individuelle dans

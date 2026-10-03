@@ -12,7 +12,7 @@ import LocalRealisations from "@/components/LocalRealisations";
 import { getRealisationsForCities } from "@/lib/communes";
 import RelatedLocalLinks from "@/components/RelatedLocalLinks";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import { resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
+import { GMB_FALLBACK_PROFILE, resolveGmbProfileForStructuredData } from "@/lib/gmbSeoDefaults";
 import { MAIN_SITE_URL } from "@/lib/config";
 import {
   getGmbUrlForSatellitePages,
@@ -28,7 +28,7 @@ const MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
 export const metadata = buildPageMetadata({
   title: "Plombier Ambérieu-en-Bugey – Intervention rapide",
   description:
-    "Plombier à Ambérieu-en-Bugey : fuite, chaudière, chauffe-eau, débouchage. Artisan à Pérouges, 15 min, 51 avis 5★. Intervention rapide Bugey.",
+    `Plombier à Ambérieu-en-Bugey : fuite, chaudière, chauffe-eau, débouchage. Artisan à Pérouges, 15 min, ${GMB_FALLBACK_PROFILE.totalReviewCount} avis 5★. Intervention rapide Bugey.`,
   path: "/plombier-amberieu",
   canonicalAbsolute: `${SATELLITE_URL}/`,
 });
@@ -116,7 +116,7 @@ export default async function PlombierAmberieu() {
                 variant: "outline",
                 size: "lg",
                 className:
-                  "inline-flex items-center justify-center gap-2 border-white bg-white/10 text-white hover:bg-white/20",
+                  "inline-flex items-center justify-center gap-2 border-white bg-white text-slate-800 hover:bg-white/90",
               })}
             >
               <FileText className="h-5 w-5" aria-hidden />
@@ -129,7 +129,7 @@ export default async function PlombierAmberieu() {
       <section className="border-b border-gray-200 bg-white px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-6 text-sm text-gray-700">
           <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" aria-hidden />Intervention rapide</span>
-          <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" aria-hidden />Basé à 15&nbsp;min</span>
+          <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" aria-hidden />À 15&nbsp;min d&apos;Ambérieu</span>
           <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" aria-hidden />Devis avant travaux</span>
         </div>
       </section>
@@ -234,7 +234,7 @@ export default async function PlombierAmberieu() {
                 <li>→ Un <strong>temps de trajet court</strong> (Pérouges → Ambérieu en 15&nbsp;min via la D1084)</li>
                 <li>→ Une <strong>connaissance du bâti local</strong>&nbsp;: maisons de village en pierre, lotissements années 80, résidences récentes</li>
                 <li>→ Un <strong>interlocuteur unique</strong>&nbsp;: c&apos;est moi qui diagnostique, répare et facture</li>
-                <li>→ Des <strong>51 avis 5&nbsp;étoiles</strong> sur Google, vérifiables sur la fiche Mathelin Plomberie Chauffage</li>
+                <li>→ <strong>{GMB_FALLBACK_PROFILE.totalReviewCount} avis 5&nbsp;étoiles</strong> sur Google, vérifiables sur la fiche Mathelin Plomberie Chauffage</li>
               </ul>
             </div>
           </section>

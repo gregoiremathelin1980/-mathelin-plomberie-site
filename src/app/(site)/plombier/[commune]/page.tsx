@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ commune: 
   const commune = getCommuneBySlug(slug);
   if (!commune) return {};
   return buildPageMetadata({
-    title: `Plombier ${commune.name} – Dépannage plomberie et chauffage`,
-    description: `Plombier chauffagiste à ${commune.name} : fuite, débouchage, chauffe-eau, chauffage. Maître Artisan basé à Pérouges, devis gratuit, intervention rapide selon le degré d'urgence.`,
+    title: `Plombier ${commune.name} – Dépannage et chauffage`,
+    description: `Plombier chauffagiste à ${commune.name} : fuite, débouchage, chauffe-eau, chauffage. Maître Artisan basé à Pérouges, devis gratuit.`,
     path: `/plombier/${commune.slug}`,
   });
 }

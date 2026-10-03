@@ -7,7 +7,7 @@ import ArticleTemplate from "@/templates/ArticleTemplate";
 import GeocomptaRelatedSection from "@/components/GeocomptaRelatedSection";
 import { tryGetCachedGeocomptaConseil, getCachedGeocomptaSitemapData } from "@/lib/api/geocomptaCached";
 import { renderConseilMarkdown, renderPublicSeoContent } from "@/lib/renderPublicSeoContent";
-import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import { buildPageMetadata, appendCity } from "@/lib/seo/metaBuilder";
 import { isConseilIndexable } from "@/lib/seo/conseilsIndexPolicy";
 
 export const revalidate = 86400;
@@ -29,7 +29,7 @@ export async function generateMetadata({
   const api = await tryGetCachedGeocomptaConseil(slug);
   if (api) {
     const baseTitle =
-      api.seoTitle ?? api.metaTitle ?? `${api.title}${api.city ? ` à ${api.city}` : ""}`;
+      api.seoTitle ?? api.metaTitle ?? appendCity(api.title, api.city);
     const body =
       typeof api.content === "string"
         ? api.content
@@ -50,10 +50,9 @@ export async function generateMetadata({
   }
   const conseil = getConseilBySlug(slug);
   if (!conseil) return {};
-  const cityPart = conseil.city ? ` à ${conseil.city}` : "";
   const indexable = isConseilIndexable(slug, conseil.content);
   return buildPageMetadata({
-    title: `${conseil.title}${cityPart}`,
+    title: appendCity(conseil.title, conseil.city),
     description: conseil.excerpt ?? conseil.title,
     path: `/conseils/${slug}`,
     type: "article",

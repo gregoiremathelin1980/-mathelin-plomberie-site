@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { loadMarkdown, logMarkdownWarnings } from "@/lib/contentLoader";
+import { makeExcerpt } from "@/lib/seo/excerpt";
 import type { PricingJSON } from "@/lib/estimatePrice";
 import {
   getConseilsFromSiteData,
@@ -236,7 +237,7 @@ function parseRealisations(dir: string, includeDrafts: boolean): RealisationItem
       date: front.date,
       images,
       draft: isDraft,
-      description: content.trim().slice(0, 200),
+      description: makeExcerpt(content),
       content: content.trim(),
     });
   }
@@ -269,7 +270,7 @@ export function getRealisationBySlug(slug: string): RealisationItem | null {
     service: front.service,
     date: front.date,
     images,
-    description: content.trim().slice(0, 200),
+    description: makeExcerpt(content),
     content: content.trim(),
   };
 }
