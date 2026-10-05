@@ -6,6 +6,13 @@ export interface Commune {
   name: string;
   /** Code postal tel qu'affiché dans les zones desservies de la fiche Google (absent = non affiché). */
   postalCode?: string;
+  /** Contenu propre à la commune, fourni par l'artisan (rien d'inventé). */
+  local?: {
+    delai: string;
+    secteur: string;
+    realisationSlug?: string;
+    realisationTexte?: string;
+  };
 }
 
 /**
@@ -13,6 +20,19 @@ export interface Commune {
  * qui ont déjà leur page). Une page /plombier/[slug] par entrée.
  */
 export const COMMUNES: Commune[] = [
+  {
+    slug: "amberieu-en-bugey",
+    name: "Ambérieu-en-Bugey",
+    postalCode: "01500",
+    local: {
+      delai:
+        "Je pars de Pérouges : comptez une vingtaine de minutes pour arriver à Ambérieu-en-Bugey, sous réserve d'être disponible. Appelez-moi, je vous confirme le créneau au téléphone.",
+      secteur: "Ambérieu-en-Bugey, Château-Gaillard et les communes voisines.",
+      realisationSlug: "remplacement-wc-amberieu",
+      realisationTexte:
+        "Dernier chantier à Ambérieu-en-Bugey : remplacement d'un WC à poser chez un particulier, avec un pack WC Trinity sans bride et un abattant à frein de chute.",
+    },
+  },
   { slug: "balan", name: "Balan" },
   { slug: "dagneux", name: "Dagneux", postalCode: "01120" },
   { slug: "lagnieu", name: "Lagnieu", postalCode: "01150" },

@@ -14,7 +14,6 @@ import { phoneToTelHref } from "@/lib/satelliteLandings";
 import { MAIN_SITE_URL } from "@/lib/config";
 
 const MEXIMIEUX_URL = "https://www.plombier-meximieux.fr";
-const AMBERIEU_URL = "https://www.plombier-amberieu.fr";
 
 export function generateStaticParams() {
   return COMMUNES.map((c) => ({ commune: c.slug }));
@@ -46,7 +45,9 @@ export default async function PlombierCommunePage({ params }: { params: Promise<
   const faq = [
     {
       question: `Quel est le délai d'intervention pour un plombier à ${name} ?`,
-      answer: `Basé à Pérouges, j'interviens à ${name} rapidement, selon le degré d'urgence (fuite, WC bouché, panne de chauffe-eau). Pour les travaux planifiés, un rendez-vous est fixé avec vous après le devis.`,
+      answer:
+        commune.local?.delai ??
+        `Basé à Pérouges, j'interviens à ${name} rapidement, selon le degré d'urgence (fuite, WC bouché, panne de chauffe-eau). Pour les travaux planifiés, un rendez-vous est fixé avec vous après le devis.`,
     },
     {
       question: `Combien coûte un dépannage plomberie à ${name} ?`,
@@ -127,6 +128,35 @@ export default async function PlombierCommunePage({ params }: { params: Promise<
             </p>
           </section>
 
+          {commune.local ? (
+            <section>
+              <h2 className="text-xl font-semibold text-primary">Intervention à {name}</h2>
+              <p className="mt-3 leading-relaxed text-gray-text">
+                <strong>Secteur&nbsp;:</strong> {commune.local.secteur}
+              </p>
+              <p className="mt-3 leading-relaxed text-gray-text">
+                <strong>Délai&nbsp;:</strong> {commune.local.delai}
+              </p>
+              {commune.local.realisationTexte ? (
+                <p className="mt-3 leading-relaxed text-gray-text">
+                  {commune.local.realisationTexte}
+                  {commune.local.realisationSlug ? (
+                    <>
+                      {" "}
+                      <Link
+                        href={`/realisations/${commune.local.realisationSlug}`}
+                        className="font-medium text-primary underline-offset-2 hover:underline"
+                      >
+                        Voir la réalisation
+                      </Link>
+                      .
+                    </>
+                  ) : null}
+                </p>
+              ) : null}
+            </section>
+          ) : null}
+
           <LocalRealisations title={`Nos réalisations à ${name}`} items={realisations} />
 
           <section>
@@ -194,8 +224,7 @@ export default async function PlombierCommunePage({ params }: { params: Promise<
             <h2 className="text-xl font-semibold text-primary">Autres communes desservies</h2>
             <p className="mt-3 leading-relaxed text-gray-text">
               J&apos;interviens aussi à{" "}
-              <a href={`${MEXIMIEUX_URL}/`} className="font-medium text-primary underline-offset-2 hover:underline">Meximieux</a>,{" "}
-              <a href={`${AMBERIEU_URL}/`} className="font-medium text-primary underline-offset-2 hover:underline">Ambérieu-en-Bugey</a>
+              <a href={`${MEXIMIEUX_URL}/`} className="font-medium text-primary underline-offset-2 hover:underline">Meximieux</a>
               {autres.map((c, i) => (
                 <span key={c.slug}>
                   {i === autres.length - 1 ? " et " : ", "}
@@ -228,7 +257,9 @@ export default async function PlombierCommunePage({ params }: { params: Promise<
       <RelatedLocalLinks
         villesProches={[
           { href: `${MEXIMIEUX_URL}/`, label: "Plombier à Meximieux" },
-          { href: `${AMBERIEU_URL}/`, label: "Plombier à Ambérieu-en-Bugey" },
+          ...(commune.slug === "amberieu-en-bugey"
+            ? []
+            : [{ href: `${MAIN_SITE_URL}/plombier/amberieu-en-bugey`, label: "Plombier à Ambérieu-en-Bugey" }]),
           { href: `${MAIN_SITE_URL}/zones-intervention`, label: "Toutes les zones d'intervention" },
         ]}
         problemesFrequents={URGENCE_PAGES.filter((p) => p.slug.startsWith("fuite-eau-") || p.slug.startsWith("wc-bouche-"))
