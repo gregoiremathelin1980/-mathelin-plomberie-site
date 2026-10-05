@@ -14,6 +14,7 @@ import ServiceSchema from "@/components/ServiceSchema";
 import FAQSchema from "@/components/FAQSchema";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
+import { FRANCE_RENOV_SERVICE_SLUGS } from "@/lib/franceRenov";
 
 export async function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -149,6 +150,7 @@ export default async function ServiceDetailPage({
         faq={faq}
         phone={settings.phone}
         recentInterventions={recentInterventions}
+        showFranceRenov={FRANCE_RENOV_SERVICE_SLUGS.includes(slug)}
       />
     </>
   );

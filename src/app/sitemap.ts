@@ -44,16 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/mentions-legales`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/cgv`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/zones-intervention`, changeFrequency: "weekly", priority: 0.85 },
-    {
-      url: "https://www.plombier-amberieu.fr/",
-        changeFrequency: "weekly" as const,
-      priority: 0.9,
-    },
-    {
-      url: "https://www.plombier-meximieux.fr/",
-        changeFrequency: "weekly" as const,
-      priority: 0.9,
-    },
   ];
 
   const depannageSlugs = getDepannageSlugs();

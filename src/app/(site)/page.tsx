@@ -24,6 +24,7 @@ import type { ReviewEntry } from "@/lib/site-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 import HomeInternalLinks from "@/components/HomeInternalLinks";
 import HomeRecentCases from "@/components/HomeRecentCases";
+import FranceRenovBandeau from "@/components/FranceRenovBandeau";
 
 const EstimateForm = dynamic(() => import("@/components/EstimateForm"), {
   ssr: true,
@@ -216,6 +217,9 @@ export default async function HomePage() {
               Dépannage plomberie et chauffage autour de Meximieux et Ambérieu : fuite d&apos;eau, canalisation
               bouchée, chauffe-eau en panne, radiateur froid.
             </p>
+            <div className="mt-6">
+              <FranceRenovBandeau />
+            </div>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {HOME_SERVICES.map((s) => (
                 <ServiceCard
@@ -339,6 +343,9 @@ export default async function HomePage() {
             Dépannage plomberie et chauffage autour de Meximieux et Ambérieu : fuite d&apos;eau, canalisation
             bouchée, chauffe-eau en panne, radiateur froid.
           </p>
+          <div className="mt-6">
+            <FranceRenovBandeau />
+          </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {HOME_SERVICES.map((s) => (
               <ServiceCard

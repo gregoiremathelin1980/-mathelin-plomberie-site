@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { getSeoImageAlt } from "@/lib/seoImage";
 import LocalProofBlock from "@/components/LocalProofBlock";
+import FranceRenovBandeau from "@/components/FranceRenovBandeau";
 import { renderPublicSeoContent } from "@/lib/renderPublicSeoContent";
 import type { RecentInterventionEntry } from "@/lib/site-data";
 
@@ -25,6 +26,8 @@ interface RealisationTemplateProps {
   serviceTitle?: string;
   /** Interventions récentes (preuve locale) */
   recentInterventions?: RecentInterventionEntry[];
+  /** Travaux de rénovation énergétique : bandeau France Rénov' obligatoire */
+  showFranceRenov?: boolean;
 }
 
 export default function RealisationTemplate({
@@ -39,6 +42,7 @@ export default function RealisationTemplate({
   serviceSlug,
   serviceTitle,
   recentInterventions = [],
+  showFranceRenov = false,
 }: RealisationTemplateProps) {
   const allImages = image ? [image, ...(images ?? [])] : images ?? [];
   const shouldShowImages = showChantierPhotos && allImages.length > 0;
@@ -58,6 +62,11 @@ export default function RealisationTemplate({
         </h1>
         {city && (
           <p className="mt-2 text-gray-text">{city}</p>
+        )}
+        {showFranceRenov && (
+          <div className="mt-6">
+            <FranceRenovBandeau />
+          </div>
         )}
         {shouldShowImages && (
           <div className="mt-6 space-y-4">

@@ -11,6 +11,7 @@ import RealisationTemplate from "@/templates/RealisationTemplate";
 import GeocomptaRelatedSection from "@/components/GeocomptaRelatedSection";
 import { tryGetCachedGeocomptaRealisation, getCachedGeocomptaRealisationSlugs } from "@/lib/api/geocomptaCached";
 import { buildPageMetadata, appendCity } from "@/lib/seo/metaBuilder";
+import { FRANCE_RENOV_REALISATION_SLUGS } from "@/lib/franceRenov";
 
 function findServiceSlugForTitle(serviceTitle?: string): { slug: string; title: string } | null {
   if (!serviceTitle) return null;
@@ -103,6 +104,7 @@ export default async function RealisationDetailPage({
           serviceSlug={serviceLink?.slug}
           serviceTitle={serviceLink?.title}
           recentInterventions={recentInterventions}
+          showFranceRenov={FRANCE_RENOV_REALISATION_SLUGS.includes(slug)}
         />
         <div className="px-4 pb-16 sm:px-6">
           <div className="mx-auto max-w-3xl">
@@ -157,6 +159,7 @@ export default async function RealisationDetailPage({
       serviceSlug={serviceLink?.slug}
       serviceTitle={serviceLink?.title}
       recentInterventions={recentInterventions}
+          showFranceRenov={FRANCE_RENOV_REALISATION_SLUGS.includes(slug)}
     />
   );
 }

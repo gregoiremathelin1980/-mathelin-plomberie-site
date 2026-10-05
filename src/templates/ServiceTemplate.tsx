@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import ProjectCard from "@/components/ProjectCard";
 import LocalProofBlock from "@/components/LocalProofBlock";
+import FranceRenovBandeau from "@/components/FranceRenovBandeau";
 import { getPhotoUrl } from "@/lib/config";
 import type { RealisationItem } from "@/lib/content";
 import type { RecentInterventionEntry } from "@/lib/site-data";
@@ -21,6 +22,8 @@ interface ServiceTemplateProps {
   faq: { question: string; answer: string }[];
   phone: string;
   recentInterventions?: RecentInterventionEntry[];
+  /** Travaux de rénovation énergétique : bandeau France Rénov' obligatoire */
+  showFranceRenov?: boolean;
   children?: React.ReactNode;
 }
 
@@ -36,6 +39,7 @@ export default function ServiceTemplate({
   faq,
   phone,
   recentInterventions = [],
+  showFranceRenov = false,
   children,
 }: ServiceTemplateProps) {
   return (
@@ -57,6 +61,11 @@ export default function ServiceTemplate({
           <p className="mt-3 text-lg text-gray-text">
             {description}
           </p>
+          {showFranceRenov && (
+            <div className="mt-6">
+              <FranceRenovBandeau />
+            </div>
+          )}
           <p className="mt-2 text-sm text-gray-500">
             Intervention dans un rayon de 15 km autour de Pérouges : {cities.slice(0, 4).join(", ")}…
           </p>

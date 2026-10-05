@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Wrench } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
+import FranceRenovBandeau from "@/components/FranceRenovBandeau";
 import { SERVICES } from "@/lib/services-data";
 import { buildPageMetadata } from "@/lib/seo/metaBuilder";
 
@@ -27,6 +28,9 @@ export default function ServicesPage() {
               Plomberie et chauffage : dépannage et installation dans l’Ain.
             </p>
           </div>
+        </div>
+        <div className="mb-10">
+          <FranceRenovBandeau />
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
